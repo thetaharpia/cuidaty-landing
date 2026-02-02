@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import Pain from '../components/sections/Pain.astro';
+import Features from '../components/sections/Features.astro';
+import Personas from '../components/sections/Personas.astro';
+import SocialProof from '../components/sections/SocialProof.astro';
+import CTA from '../components/sections/CTA.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Cuidaty - Tecnologia que cuida da sua rotina"
+  description="Liberte-se da sobrecarga administrativa e recupere o tempo para o que realmente importa: cuidar dos seus pacientes. Sistema completo para gestão de consultórios e clínicas."
+>
+  <Header />
+  <main>
+    <Hero />
+    <SocialProof />
+    <Pain />
+    <Features />
+    <Personas />
+    <CTA />
+  </main>
+  <Footer />
 </Layout>
