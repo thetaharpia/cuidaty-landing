@@ -37,8 +37,7 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Docker
-Dockerfile
+# Docker (exclude from production builds)
 compose.yml
 .dockerignore
 

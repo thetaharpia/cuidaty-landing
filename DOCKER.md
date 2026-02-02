@@ -1,239 +1,134 @@
-# Docker Production Deployment
+# Docker Setup
 
-This project uses Docker for production deployment only. Development is done locally using `pnpm dev`.
+## Overview
 
-## Prerequisites
+- **Dockerfile**: Production build for Coolify deployment
+- **compose.yml**: Development environment (optional, for running dev server in Docker)
 
-- [Docker](https://www.docker.com/get-started) 20.10+
-- [Docker Compose](https://docs.docker.com/compose/install/) v2.0+
+## Production Deployment (Coolify)
 
-## Production Deployment
+Coolify automatically detects and builds the `Dockerfile` for production deployment.
 
-### Quick Start
+### Dockerfile Build Process
 
-Build and run the production container:
+1. **Builder Stage**: Builds the Astro application
+   - Node.js 20 Alpine
+   - pnpm 9
+   - Frozen lockfile installation
+   - Production build output
+
+2. **Production Stage**: Serves with nginx
+   - Nginx Alpine (minimal footprint)
+   - Gzip compression
+   - Security headers
+   - Static asset caching (1 year)
+   - Health check at `/health`
+   - Port 80
+
+Coolify handles:
+- Building the Docker image
+- Port mapping
+- Environment variables
+- Container orchestration
+- Health monitoring
+
+No manual deployment needed - push to repository and Coolify deploys automatically.
+
+## Local Development with Docker (Optional)
+
+If you prefer to run development in Docker instead of locally with `pnpm dev`:
 
 ```bash
-docker compose up -d --build
-```
+# Start development server
+docker compose up
 
-Access the application at: `http://localhost:80`
-
-### Available Commands
-
-```bash
-# Build and start in background
-docker compose up -d --build
-
-# Start without rebuilding
+# Start in background
 docker compose up -d
 
-# Stop the container
-docker compose down
-
 # View logs
-docker compose logs -f
+docker compose logs -f dev
 
-# Follow logs in real-time
-docker compose logs -f app
-
-# Check container status and health
-docker compose ps
-
-# Restart the container
-docker compose restart
-
-# Stop and remove volumes
-docker compose down -v
+# Stop
+docker compose down
 ```
 
-## Build Process
+Access at: `http://localhost:4321`
 
-The Dockerfile uses a two-stage build:
+Features:
+- Hot reload with volume mounting
+- Runs `pnpm dev` inside container
+- No need to install Node.js locally
 
-### 1. Builder Stage
-- Uses Node.js 20 Alpine
-- Installs pnpm 9
-- Installs dependencies with `--frozen-lockfile`
-- Builds the Astro application
-- Outputs optimized static files to `/app/dist`
+**Note**: Most developers prefer running `pnpm dev` directly on their machine for better performance.
 
-### 2. Production Stage
-- Uses nginx:alpine (minimal footprint)
-- Copies built static files from builder
-- Serves files with optimized nginx configuration:
-  - Gzip compression for text and images
-  - Security headers (X-Frame-Options, CSP, etc.)
-  - 1-year caching for static assets
-  - Client-side routing support
-  - Health check endpoint at `/health`
-- Exposes port 80
-- Includes health checks every 30 seconds
+## Local Development (Recommended)
 
-## Health Checks
-
-The container includes automatic health monitoring:
+For the best development experience, run directly on your machine:
 
 ```bash
-# Check health status
-docker compose ps
+# Install dependencies
+pnpm install
 
-# View detailed health information
-docker inspect cuidaty-landing --format='{{json .State.Health}}' | jq
-
-# Test health endpoint directly
-curl http://localhost/health
+# Start dev server
+pnpm dev
 ```
 
-Health check endpoint: `http://localhost/health` (returns "healthy")
+Access at: `http://localhost:4321`
 
-## Nginx Configuration
+## Health Check
 
-The production image includes an optimized nginx setup:
+The production container includes a health endpoint:
 
-- **Gzip Compression**: Reduces bandwidth for text files
-- **Security Headers**:
-  - `X-Frame-Options: SAMEORIGIN`
-  - `X-Content-Type-Options: nosniff`
-  - `X-XSS-Protection: 1; mode=block`
-  - `Referrer-Policy: strict-origin-when-cross-origin`
-- **Static Asset Caching**: 1-year cache for images, fonts, CSS, JS
-- **SPA Routing**: Falls back to `index.html` for client-side routes
-- **Health Endpoint**: `/health` for monitoring
+```
+GET /health
+```
+
+Returns: `healthy`
+
+Coolify uses this for container health monitoring.
 
 ## Port Configuration
 
-By default, the application runs on port 80. To change the port, edit `compose.yml`:
-
-```yaml
-ports:
-  - "8080:80"  # Use port 8080 instead
-```
+- **Development** (compose.yml): Port 4321
+- **Production** (Dockerfile): Port 80 (Coolify handles mapping)
 
 ## Environment Variables
 
-To add environment variables, create a `.env` file:
+For production, configure environment variables in Coolify's dashboard.
+
+For local development with Docker, create `.env`:
 
 ```env
-NODE_ENV=production
+NODE_ENV=development
 ```
-
-Reference it in `compose.yml`:
-
-```yaml
-services:
-  app:
-    env_file:
-      - .env
-```
-
-## Production Deployment Options
-
-### 1. Docker Compose (Recommended for single server)
-```bash
-docker compose up -d --build
-```
-
-### 2. Build and Push to Registry
-```bash
-# Build the image
-docker build -t your-registry/cuidaty-landing:latest .
-
-# Push to registry
-docker push your-registry/cuidaty-landing:latest
-
-# Pull and run on production server
-docker pull your-registry/cuidaty-landing:latest
-docker run -d -p 80:80 --name cuidaty-landing your-registry/cuidaty-landing:latest
-```
-
-### 3. Container Orchestration Platforms
-- **Kubernetes**: Create deployment and service manifests
-- **Docker Swarm**: Use stack deploy
-- **AWS ECS**: Push to ECR and create task definitions
-- **Google Cloud Run**: Deploy directly from Container Registry
-- **Azure Container Instances**: Deploy from ACR
 
 ## Troubleshooting
 
-### Port conflicts
+### Development container issues
+
 ```bash
-# Check what's using port 80
-sudo lsof -i :80
-
-# Change port in compose.yml
-ports:
-  - "8080:80"
-```
-
-### Container won't start
-```bash
-# View logs
-docker compose logs app
-
-# Check container status
-docker compose ps
-```
-
-### Build fails
-```bash
-# Clear build cache
+# Rebuild without cache
 docker compose build --no-cache
 
-# Check available disk space
-df -h
+# Remove volumes and restart
+docker compose down -v
+docker compose up
 ```
 
-### Performance issues
-```bash
-# Check container resources
-docker stats cuidaty-landing
-
-# View nginx access logs
-docker compose logs app | grep "GET"
-```
-
-## Security Notes
-
-- Nginx runs as non-root user
-- Security headers automatically applied
-- Sensitive files excluded via `.dockerignore`
-- Health checks ensure reliability
-- Minimal attack surface (Alpine Linux)
-
-## Monitoring
-
-### View access logs
-```bash
-docker compose logs -f app
-```
-
-### Check resource usage
-```bash
-docker stats cuidaty-landing
-```
-
-### Inspect container
-```bash
-docker inspect cuidaty-landing
-```
-
-## Updating the Application
+### Production build testing locally
 
 ```bash
-# Pull latest code
-git pull origin main
+# Build production image
+docker build -t cuidaty-landing:test .
 
-# Rebuild and restart
-docker compose up -d --build
+# Run locally
+docker run -p 8080:80 cuidaty-landing:test
 
-# Check deployment
-docker compose ps
-curl http://localhost/health
+# Test
+curl http://localhost:8080/health
 ```
 
 ---
 
-For local development, use: `pnpm dev`
-
-For production deployment, use: `docker compose up -d --build`
+**Development**: `pnpm dev` or `docker compose up`
+**Production**: Coolify auto-deploys from Dockerfile
