@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-# Base stage with common dependencies
-FROM node:20-alpine AS base
+# Build stage
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # Install pnpm
@@ -10,34 +10,7 @@ RUN corepack enable && corepack prepare pnpm@9 --activate
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
 
-# Development stage
-FROM base AS development
-ENV NODE_ENV=development
-
-# Install all dependencies (including dev dependencies)
-RUN pnpm install --frozen-lockfile
-
-# Copy source code
-COPY . .
-
-# Expose dev server port
-EXPOSE 4321
-
-# Start development server
-CMD ["pnpm", "dev", "--host", "0.0.0.0"]
-
-# Dependencies stage for production
-FROM base AS dependencies
-ENV NODE_ENV=production
-
-# Install production dependencies
-RUN pnpm install --frozen-lockfile --prod
-
-# Build stage
-FROM base AS builder
-ENV NODE_ENV=production
-
-# Install all dependencies for building
+# Install dependencies
 RUN pnpm install --frozen-lockfile
 
 # Copy source code

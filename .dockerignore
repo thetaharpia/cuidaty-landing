@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-pnpm-lock.yaml
 
 # Build output
 dist/
@@ -46,6 +45,7 @@ compose.yml
 # Documentation
 README.md
 SETUP.md
+DOCKER.md
 LICENSE
 
 # Temporary files

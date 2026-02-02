@@ -1,222 +1,114 @@
-# Docker Setup Guide
+# Docker Production Deployment
 
-This project includes Docker support for both development and production environments using multi-stage builds.
+This project uses Docker for production deployment only. Development is done locally using `pnpm dev`.
 
 ## Prerequisites
 
 - [Docker](https://www.docker.com/get-started) 20.10+
 - [Docker Compose](https://docs.docker.com/compose/install/) v2.0+
 
-## Quick Start
+## Production Deployment
 
-### Development Environment
+### Quick Start
 
-Start the development server with hot reload:
-
-```bash
-docker compose --profile dev up
-```
-
-Or build and run in detached mode:
+Build and run the production container:
 
 ```bash
-docker compose --profile dev up -d --build
-```
-
-Access the application at: `http://localhost:4321`
-
-### Production Environment
-
-Build and run the production image:
-
-```bash
-docker compose --profile prod up -d --build
+docker compose up -d --build
 ```
 
 Access the application at: `http://localhost:80`
 
-## Available Commands
-
-### Development
+### Available Commands
 
 ```bash
-# Start development environment
-docker compose --profile dev up
+# Build and start in background
+docker compose up -d --build
 
-# Start in background
-docker compose --profile dev up -d
+# Start without rebuilding
+docker compose up -d
 
-# Rebuild and start
-docker compose --profile dev up --build
-
-# Stop development environment
-docker compose --profile dev down
+# Stop the container
+docker compose down
 
 # View logs
-docker compose --profile dev logs -f
+docker compose logs -f
 
-# Access container shell
-docker compose --profile dev exec dev sh
+# Follow logs in real-time
+docker compose logs -f app
+
+# Check container status and health
+docker compose ps
+
+# Restart the container
+docker compose restart
+
+# Stop and remove volumes
+docker compose down -v
 ```
 
-### Production
+## Build Process
 
-```bash
-# Start production environment
-docker compose --profile prod up
+The Dockerfile uses a two-stage build:
 
-# Start in background
-docker compose --profile prod up -d
-
-# Rebuild and start
-docker compose --profile prod up --build
-
-# Stop production environment
-docker compose --profile prod down
-
-# View logs
-docker compose --profile prod logs -f
-
-# Check health status
-docker compose --profile prod ps
-```
-
-## Docker Build Stages
-
-The Dockerfile uses multi-stage builds with the following targets:
-
-### 1. Base Stage
-- Sets up Node.js 20 Alpine
+### 1. Builder Stage
+- Uses Node.js 20 Alpine
 - Installs pnpm 9
-- Common dependencies layer
+- Installs dependencies with `--frozen-lockfile`
+- Builds the Astro application
+- Outputs optimized static files to `/app/dist`
 
-### 2. Development Stage
-- Target: `development`
-- Includes all dependencies
-- Runs Astro dev server with hot reload
-- Mounted volumes for live code updates
-- Port: 4321
-
-### 3. Builder Stage
-- Builds the production application
-- Optimizes assets with compression
-
-### 4. Production Stage
-- Target: `production`
-- Uses nginx:alpine for serving static files
-- Includes custom nginx configuration with:
-  - Gzip compression
-  - Security headers
-  - Static asset caching
-  - Health check endpoint
-- Port: 80
-
-## Volume Management
-
-### Development Volumes
-
-- Source code is mounted for hot reload: `.:/app`
-- node_modules uses named volume to avoid conflicts
-
-### Clear volumes
-
-```bash
-docker compose --profile dev down -v
-```
-
-## Building Individual Stages
-
-### Build development image
-```bash
-docker build --target development -t cuidaty-landing:dev .
-```
-
-### Build production image
-```bash
-docker build --target production -t cuidaty-landing:prod .
-```
-
-### Run specific build
-```bash
-# Development
-docker run -p 4321:4321 -v $(pwd):/app cuidaty-landing:dev
-
-# Production
-docker run -p 80:80 cuidaty-landing:prod
-```
+### 2. Production Stage
+- Uses nginx:alpine (minimal footprint)
+- Copies built static files from builder
+- Serves files with optimized nginx configuration:
+  - Gzip compression for text and images
+  - Security headers (X-Frame-Options, CSP, etc.)
+  - 1-year caching for static assets
+  - Client-side routing support
+  - Health check endpoint at `/health`
+- Exposes port 80
+- Includes health checks every 30 seconds
 
 ## Health Checks
 
-The production container includes health checks that run every 30 seconds:
+The container includes automatic health monitoring:
 
 ```bash
 # Check health status
-docker compose --profile prod ps
+docker compose ps
 
-# View health check logs
-docker inspect --format='{{json .State.Health}}' cuidaty-landing-prod | jq
+# View detailed health information
+docker inspect cuidaty-landing --format='{{json .State.Health}}' | jq
+
+# Test health endpoint directly
+curl http://localhost/health
 ```
 
-Health check endpoint: `http://localhost/health`
+Health check endpoint: `http://localhost/health` (returns "healthy")
 
 ## Nginx Configuration
 
-The production image includes an optimized nginx configuration:
+The production image includes an optimized nginx setup:
 
-- **Gzip Compression**: Enabled for text and image files
-- **Security Headers**: X-Frame-Options, X-Content-Type-Options, etc.
+- **Gzip Compression**: Reduces bandwidth for text files
+- **Security Headers**:
+  - `X-Frame-Options: SAMEORIGIN`
+  - `X-Content-Type-Options: nosniff`
+  - `X-XSS-Protection: 1; mode=block`
+  - `Referrer-Policy: strict-origin-when-cross-origin`
 - **Static Asset Caching**: 1-year cache for images, fonts, CSS, JS
-- **Client-side Routing**: Fallback to index.html for SPA routing
-- **Health Endpoint**: `/health` for container health checks
+- **SPA Routing**: Falls back to `index.html` for client-side routes
+- **Health Endpoint**: `/health` for monitoring
 
-## Troubleshooting
+## Port Configuration
 
-### Port conflicts
-If ports 4321 or 80 are already in use, modify the ports in `compose.yml`:
+By default, the application runs on port 80. To change the port, edit `compose.yml`:
 
 ```yaml
 ports:
-  - "8080:4321"  # Development
-  # or
-  - "8080:80"    # Production
+  - "8080:80"  # Use port 8080 instead
 ```
-
-### Hot reload not working
-Ensure your Docker Desktop has file sharing enabled for the project directory.
-
-### Build cache issues
-Clear build cache and rebuild:
-
-```bash
-docker compose --profile dev build --no-cache
-```
-
-### View container logs
-```bash
-docker compose --profile dev logs -f dev
-docker compose --profile prod logs -f prod
-```
-
-## Production Deployment
-
-For production deployment, you can:
-
-1. **Build and push to registry:**
-   ```bash
-   docker build --target production -t your-registry/cuidaty-landing:latest .
-   docker push your-registry/cuidaty-landing:latest
-   ```
-
-2. **Use docker-compose in production:**
-   ```bash
-   docker compose --profile prod up -d
-   ```
-
-3. **Use with orchestration platforms:**
-   - Kubernetes
-   - Docker Swarm
-   - AWS ECS
-   - Google Cloud Run
 
 ## Environment Variables
 
@@ -224,25 +116,124 @@ To add environment variables, create a `.env` file:
 
 ```env
 NODE_ENV=production
-SITE_URL=https://cuidaty.com
 ```
 
-And reference it in `compose.yml`:
+Reference it in `compose.yml`:
 
 ```yaml
 services:
-  prod:
+  app:
     env_file:
       - .env
 ```
 
+## Production Deployment Options
+
+### 1. Docker Compose (Recommended for single server)
+```bash
+docker compose up -d --build
+```
+
+### 2. Build and Push to Registry
+```bash
+# Build the image
+docker build -t your-registry/cuidaty-landing:latest .
+
+# Push to registry
+docker push your-registry/cuidaty-landing:latest
+
+# Pull and run on production server
+docker pull your-registry/cuidaty-landing:latest
+docker run -d -p 80:80 --name cuidaty-landing your-registry/cuidaty-landing:latest
+```
+
+### 3. Container Orchestration Platforms
+- **Kubernetes**: Create deployment and service manifests
+- **Docker Swarm**: Use stack deploy
+- **AWS ECS**: Push to ECR and create task definitions
+- **Google Cloud Run**: Deploy directly from Container Registry
+- **Azure Container Instances**: Deploy from ACR
+
+## Troubleshooting
+
+### Port conflicts
+```bash
+# Check what's using port 80
+sudo lsof -i :80
+
+# Change port in compose.yml
+ports:
+  - "8080:80"
+```
+
+### Container won't start
+```bash
+# View logs
+docker compose logs app
+
+# Check container status
+docker compose ps
+```
+
+### Build fails
+```bash
+# Clear build cache
+docker compose build --no-cache
+
+# Check available disk space
+df -h
+```
+
+### Performance issues
+```bash
+# Check container resources
+docker stats cuidaty-landing
+
+# View nginx access logs
+docker compose logs app | grep "GET"
+```
+
 ## Security Notes
 
-- The production image runs nginx as a non-root user
-- Security headers are automatically added
-- The `.dockerignore` file prevents sensitive files from being copied
-- Health checks ensure container reliability
+- Nginx runs as non-root user
+- Security headers automatically applied
+- Sensitive files excluded via `.dockerignore`
+- Health checks ensure reliability
+- Minimal attack surface (Alpine Linux)
+
+## Monitoring
+
+### View access logs
+```bash
+docker compose logs -f app
+```
+
+### Check resource usage
+```bash
+docker stats cuidaty-landing
+```
+
+### Inspect container
+```bash
+docker inspect cuidaty-landing
+```
+
+## Updating the Application
+
+```bash
+# Pull latest code
+git pull origin main
+
+# Rebuild and restart
+docker compose up -d --build
+
+# Check deployment
+docker compose ps
+curl http://localhost/health
+```
 
 ---
 
-For more information, see the main [README.md](./README.md)
+For local development, use: `pnpm dev`
+
+For production deployment, use: `docker compose up -d --build`
