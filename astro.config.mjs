@@ -15,6 +15,27 @@ export default defineConfig({
     port: 4321,
     host: true,
   },
+  image: {
+    domains: ['cuidaty.com'],
+    remotePatterns: [],
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        limitInputPixels: false,
+      },
+    },
+  },
+  vite: {
+    build: {
+      cssMinify: 'lightningcss',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+        },
+      },
+    },
+  },
   integrations: [
     tailwind(),
     sitemap(),
@@ -23,6 +44,10 @@ export default defineConfig({
       HTML: {
         'html-minifier-terser': {
           removeAttributeQuotes: false,
+          collapseWhitespace: true,
+          removeComments: true,
+          minifyCSS: true,
+          minifyJS: true,
         },
       },
       Image: true,

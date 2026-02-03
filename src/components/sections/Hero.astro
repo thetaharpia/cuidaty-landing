@@ -1,9 +1,21 @@
 ---
+import { Image } from 'astro:assets';
 ---
 
 <section class="relative overflow-hidden bg-background py-20 lg:py-28">
   <div class="absolute inset-0 opacity-5">
-    <img src="/leaves-bg.png" alt="" class="h-full w-full object-cover" />
+    <Image
+      src="/leaves-bg.png"
+      alt=""
+      class="h-full w-full object-cover"
+      width={1920}
+      height={1080}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      quality={80}
+      format="webp"
+    />
   </div>
 
   <div class="container relative mx-auto px-4">
