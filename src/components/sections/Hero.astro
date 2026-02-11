@@ -2,10 +2,11 @@
 import { Image } from 'astro:assets';
 ---
 
-<section class="relative overflow-hidden bg-background py-20 lg:py-28">
-  <div class="absolute inset-0 opacity-5">
+<section class="relative min-h-screen overflow-hidden bg-gradient-to-br from-beige to-white">
+  <!-- Warm background from Figma -->
+  <div class="absolute inset-0">
     <Image
-      src="/leaves-bg.png"
+      src="/background-first-page.jpg"
       alt=""
       class="h-full w-full object-cover"
       width={1920}
@@ -13,44 +14,119 @@ import { Image } from 'astro:assets';
       loading="eager"
       fetchpriority="high"
       decoding="async"
-      quality={80}
+      quality={85}
       format="webp"
     />
   </div>
 
-  <div class="container relative mx-auto px-4">
-    <div class="mx-auto max-w-4xl text-center">
-      <h1 class="mb-6 font-serif text-4xl font-semibold leading-tight text-foreground md:text-5xl lg:text-6xl">
-        Seu paciente sabe quando você está sobrecarregado
-      </h1>
-
-      <p class="mb-8 text-lg leading-relaxed text-foreground/70 md:text-xl lg:text-2xl">
-        Cada minuto perdido com planilhas, confirmações e cobranças é um minuto a menos
-        para o cuidado que só você pode oferecer.
-      </p>
-
-      <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href="#contato"
-          class="btn-primary inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 font-medium text-primary-foreground shadow-md transition-all hover:bg-primary-hover hover:shadow-lg"
-        >
-          Quero Conhecer o Cuidaty
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-
-        <a
-          href="#ver-como-funciona"
-          class="btn-outline inline-flex items-center gap-2 rounded-lg border-2 border-primary bg-transparent px-8 py-4 font-medium text-primary transition-colors hover:bg-primary/5"
-        >
-          Ver Como Funciona
-        </a>
+  <div class="container relative mx-auto px-4 pb-16 pt-24 md:px-6 lg:pt-28">
+    <div class="mx-auto grid max-w-7xl grid-cols-1 items-end gap-8 lg:grid-cols-2 lg:gap-12">
+      <!-- Left: Big Branding Logo and Name - aligned to bottom -->
+      <div class="order-2 flex flex-col items-center justify-end lg:order-1 lg:items-start">
+        <div class="flex flex-col items-center lg:items-start">
+          <Image
+            src="/logo.svg"
+            alt="Cuidaty Logo"
+            width={320}
+            height={320}
+            class="h-44 w-44 drop-shadow-2xl md:h-60 md:w-60 lg:h-80 lg:w-80"
+            loading="eager"
+          />
+          <h1
+            class="font-serif text-7xl font-bold leading-none tracking-tight text-white drop-shadow-2xl md:text-8xl lg:text-[10rem]"
+          >
+            Cuidaty
+          </h1>
+          <p
+            class="max-w-md text-center text-xl font-light text-white/90 drop-shadow-lg md:text-2xl lg:text-left lg:text-3xl"
+          >
+            Mais que um software, um suporte invisível
+          </p>
+        </div>
       </div>
 
-      <p class="mt-6 text-sm text-foreground/50">
-        Usado por centenas de profissionais de saúde mental
-      </p>
+      <!-- Right: Image on top + Content below -->
+      <div class="order-1 flex flex-col items-center space-y-6 lg:order-2 lg:items-end">
+        <!-- Professional image at the top - bigger -->
+        <div class="w-full max-w-md lg:max-w-lg">
+          <div class="animate-float relative">
+            <!-- Card with professional profile -->
+            <div
+              class="relative overflow-hidden rounded-3xl border-2 border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-sm"
+            >
+              <Image
+                src="/psycologist-taking-coffe.jpg"
+                alt="Profissional da saúde trabalhando em seu consultório"
+                class="h-auto w-full rounded-2xl object-cover"
+                width={600}
+                height={750}
+                loading="eager"
+                quality={90}
+                format="webp"
+              />
+              <!-- Decorative glow -->
+              <div class="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/30 blur-3xl">
+              </div>
+            </div>
+            <!-- Floating badge -->
+            <div
+              class="absolute -right-4 -top-4 rounded-2xl border-2 border-white/50 bg-white/90 p-4 shadow-2xl backdrop-blur-md"
+            >
+              <div class="flex items-center gap-2">
+                <div
+                  class="h-3 w-3 animate-pulse rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.6)]"
+                >
+                </div>
+                <span class="text-sm font-bold text-cuidaty-primary">Disponível</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Information below the image -->
+        <div class="w-full max-w-sm space-y-5 text-center lg:max-w-md lg:text-right">
+          <!-- Subtitle -->
+          <p class="text-lg font-light leading-relaxed text-white/95 drop-shadow-md md:text-xl">
+            A tecnologia que devolve o respiro à sua rotina clínica.
+          </p>
+
+          <!-- CTA Button -->
+          <div class="flex justify-center lg:justify-end">
+            <a
+              href="#planos"
+              class="inline-flex items-center justify-center gap-3 rounded-full border-2 border-white/50 bg-white/90 px-8 py-4 font-bold text-cuidaty-primary shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-[0_20px_60px_rgba(255,255,255,0.4)]"
+            >
+              Quero saber mais
+              <svg
+                class="h-5 w-5 transition-transform group-hover:translate-x-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Trust indicator -->
+          <div class="flex justify-center lg:justify-end">
+            <div
+              class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-white/90 shadow-lg backdrop-blur-sm"
+            >
+              <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                ></path>
+              </svg>
+              <p class="text-sm font-semibold">Mais de 500 profissionais confiam no Cuidaty</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

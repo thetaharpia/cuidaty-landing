@@ -11,11 +11,11 @@ interface Props {
 }
 
 const {
-  title = 'Cuidaty - Tecnologia que cuida da sua rotina',
-  description = 'Liberte-se da sobrecarga administrativa e recupere o tempo para o que realmente importa: cuidar dos seus pacientes.',
+  title = 'Cuidaty - Mais que um software, um suporte invisível',
+  description = 'A tecnologia que devolve o respiro à sua rotina clínica. Automação via WhatsApp, agenda online e prontuário eletrônico para profissionais da saúde que querem focar no que realmente importa: cuidar.',
   image = '/screenshot.png',
   noindex = false,
-  keywords = 'software para psicólogos, gestão de consultório, agenda médica, sistema para clínicas, prontuário eletrônico, agendamento online, gestão de pacientes, software médico, telemedicina, consultório online',
+  keywords = 'software para psicólogos, gestão de consultório, suporte invisível, tecnologia que acolhe, automação whatsapp consultório, agenda médica online, sistema para clínicas, prontuário eletrônico, agendamento online, gestão de pacientes, software médico, telemedicina, consultório online, gestão clínica',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -30,21 +30,30 @@ const structuredData = {
   operatingSystem: 'Web',
   offers: {
     '@type': 'Offer',
-    price: '0',
+    price: '80',
     priceCurrency: 'BRL',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
-    ratingCount: '50',
+    ratingCount: '500',
   },
   description: description,
   url: Astro.site,
+  featureList: [
+    'Automação via WhatsApp',
+    'Agenda online personalizada',
+    'Prontuário eletrônico completo',
+    'Gestão financeira integrada',
+    'Redução de 73% em faltas',
+    'Economia de 8 horas por semana',
+  ],
   provider: {
     '@type': 'Organization',
     name: 'Cuidaty',
     url: Astro.site,
     logo: new URL('/logo.svg', Astro.site).toString(),
+    slogan: 'Mais que um software, um suporte invisível',
     contactPoint: {
       '@type': 'ContactPoint',
       contactType: 'Customer Support',
@@ -83,7 +92,7 @@ const structuredData = {
     </noscript>
 
     <!-- Preload hero background image for LCP -->
-    <link rel="preload" href="/leaves-bg.png" as="image" fetchpriority="high" />
+    <link rel="preload" href="/background-first-page.jpg" as="image" fetchpriority="high" />
 
     <!-- Favicons and Icons -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />

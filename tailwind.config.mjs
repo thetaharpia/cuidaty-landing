@@ -13,6 +13,12 @@ export default {
           light: '#ddfdbe',
           gray: '#e2e8f0',
         },
+        beige: {
+          DEFAULT: '#F4F1EA',
+          dark: '#EBE7DD',
+        },
+        'mission-blue': '#0C202F',
+        'teal-light': '#CEEDE8',
         background: '#ffffff',
         foreground: '#1a202c',
         border: '#e2e8f0',
