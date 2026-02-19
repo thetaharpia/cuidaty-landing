@@ -2,13 +2,16 @@
 import { Image } from 'astro:assets';
 ---
 
-<header class="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-sm">
-  <nav class="container mx-auto flex items-center justify-between px-4 py-4">
+<header
+  class="fixed left-0 right-0 top-0 z-50 border-b border-black/5 bg-white/95 shadow-sm backdrop-blur-sm"
+  id="main-header"
+>
+  <nav class="container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
     <a href="/" class="flex items-center gap-2">
       <Image
         src="/logo.svg"
         alt="Cuidaty"
-        class="h-10 w-auto"
+        class="h-8 w-auto"
         width={120}
         height={40}
         loading="eager"
@@ -18,33 +21,111 @@ import { Image } from 'astro:assets';
     </a>
 
     <div class="hidden items-center gap-8 md:flex">
-      <a href="#funcionalidades" class="text-foreground/80 transition-colors hover:text-foreground">
+      <a
+        href="#funcionalidades"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Funcionalidades
       </a>
-      <a href="#planos" class="text-foreground/80 transition-colors hover:text-foreground">
+      <a
+        href="#planos"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Planos
       </a>
-      <a href="#sobre" class="text-foreground/80 transition-colors hover:text-foreground">
+      <a
+        href="#sobre"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Sobre
       </a>
-      <a href="#contato" class="text-foreground/80 transition-colors hover:text-foreground">
+      <a
+        href="#contato"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Contato
       </a>
     </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3">
       <a
-        href="#login"
-        class="hidden text-foreground/80 transition-colors hover:text-foreground sm:block"
+        href="https://app.cuidaty.com"
+        class="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark sm:inline-flex"
       >
         Entrar
       </a>
       <a
         href="#contato"
-        class="rounded-lg bg-primary px-6 py-2.5 font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
+        class="inline-flex items-center gap-2 rounded-lg bg-cuidaty-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-hover"
       >
         Fale Conosco
       </a>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-button"
+        class="p-2 text-cuidaty-dark/80 hover:text-cuidaty-dark md:hidden"
+        aria-label="Toggle mobile menu"
+      >
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden border-t border-border/50 bg-background md:hidden">
+    <div class="container mx-auto flex flex-col gap-4 px-4 py-4">
+      <a
+        href="#funcionalidades"
+        class="py-2 text-foreground/80 transition-colors hover:text-foreground"
+      >
+        Funcionalidades
+      </a>
+      <a href="#planos" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
+        Planos
+      </a>
+      <a href="#sobre" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
+        Sobre
+      </a>
+      <a href="#contato" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
+        Contato
+      </a>
+      <div class="flex flex-col gap-3 border-t border-border/50 pt-4">
+        <a
+          href="https://app.cuidaty.com"
+          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-cuidaty-primary px-5 py-2 font-medium text-cuidaty-primary transition-all hover:bg-cuidaty-primary/5"
+        >
+          Entrar
+        </a>
+        <a
+          href="#contato"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-cuidaty-primary px-6 py-2.5 font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
+        >
+          Fale conosco
+        </a>
+      </div>
+    </div>
+  </div>
 </header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+
+  const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
+  mobileMenuLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
+  });
+</script>

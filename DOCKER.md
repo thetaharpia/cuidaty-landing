@@ -26,6 +26,7 @@ Coolify automatically detects and builds the `Dockerfile` for production deploym
    - Port 80
 
 Coolify handles:
+
 - Building the Docker image
 - Port mapping
 - Environment variables
@@ -55,6 +56,7 @@ docker compose down
 Access at: `http://localhost:4321`
 
 Features:
+
 - Hot reload with volume mounting
 - Runs `pnpm dev` inside container
 - No need to install Node.js locally
