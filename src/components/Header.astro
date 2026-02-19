@@ -34,12 +34,14 @@ import { Image } from 'astro:assets';
 
     <div class="flex items-center gap-3">
       <a
+        id="nav-enter-btn"
         href="https://app.cuidaty.com"
         class="hidden sm:inline-flex items-center gap-2 rounded-full border-2 border-white/50 px-5 py-2 font-semibold text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:border-white/70 drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
       >
         Entrar
       </a>
       <a
+        id="nav-contact-btn"
         href="#contato"
         class="inline-flex items-center gap-2 rounded-full bg-white/30 backdrop-blur-sm px-6 py-2.5 font-semibold text-white border-2 border-white/50 transition-all hover:bg-white/40 hover:shadow-lg drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
       >
@@ -60,30 +62,30 @@ import { Image } from 'astro:assets';
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-border/50 bg-background">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-white/20 bg-white/10 backdrop-blur-md transition-all duration-300">
     <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-      <a href="#funcionalidades" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#funcionalidades" class="text-white transition-colors hover:text-white/80 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         Funcionalidades
       </a>
-      <a href="#planos" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#planos" class="text-white transition-colors hover:text-white/80 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         Planos
       </a>
-      <a href="#sobre" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#sobre" class="text-white transition-colors hover:text-white/80 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         Sobre
       </a>
-      <a href="#contato" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#contato" class="text-white transition-colors hover:text-white/80 py-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
         Contato
       </a>
-      <div class="pt-4 border-t border-border/50 flex flex-col gap-3">
+      <div class="pt-4 border-t border-white/20 flex flex-col gap-3">
         <a
           href="https://app.cuidaty.com"
-          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-cuidaty-primary px-5 py-2 font-medium text-cuidaty-primary transition-all hover:bg-cuidaty-primary/5"
+          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 px-5 py-2 font-medium text-white backdrop-blur-sm transition-all hover:bg-white/20"
         >
           Entrar
         </a>
         <a
           href="#contato"
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-cuidaty-primary px-6 py-2.5 font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-white/30 backdrop-blur-sm border-2 border-white/50 px-6 py-2.5 font-semibold text-white transition-all hover:bg-white/40"
         >
           Fale conosco
         </a>
@@ -116,6 +118,8 @@ import { Image } from 'astro:assets';
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
+    const mobileMenu = document.getElementById('mobile-menu');
+
     if (currentScroll > 100) {
       header?.classList.add('bg-white/95', 'shadow-lg', 'backdrop-blur-md');
       header?.classList.remove('bg-transparent');
@@ -131,8 +135,8 @@ import { Image } from 'astro:assets';
         mobileBtn.classList.add('text-foreground/80');
       }
       // Update CTA buttons for scrolled state
-      const enterBtn = header?.querySelector('a[href="https://app.cuidaty.com"]');
-      const contactBtn = header?.querySelector('a[href="#contato"]:not(#mobile-menu a)');
+      const enterBtn = document.getElementById('nav-enter-btn');
+      const contactBtn = document.getElementById('nav-contact-btn');
       if (enterBtn) {
         enterBtn.classList.remove('border-white/50', 'text-white', 'hover:bg-white/20', 'hover:border-white/70', 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]');
         enterBtn.classList.add('border-cuidaty-primary/30', 'text-cuidaty-primary', 'hover:bg-cuidaty-primary/10', 'hover:border-cuidaty-primary/50', 'drop-shadow-none');
@@ -140,6 +144,30 @@ import { Image } from 'astro:assets';
       if (contactBtn) {
         contactBtn.classList.remove('bg-white/30', 'text-white', 'border-white/50', 'hover:bg-white/40', 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]');
         contactBtn.classList.add('bg-cuidaty-primary', 'text-white', 'border-cuidaty-primary', 'hover:bg-cuidaty-primary-hover', 'drop-shadow-none');
+      }
+      // Update mobile menu for scrolled state (solid background)
+      if (mobileMenu) {
+        mobileMenu.classList.remove('bg-white/10', 'backdrop-blur-md', 'border-white/20');
+        mobileMenu.classList.add('bg-white/95', 'backdrop-blur-md', 'border-border/50');
+        mobileMenu.querySelectorAll(':scope > div > a').forEach(link => {
+          link.classList.remove('text-white', 'hover:text-white/80', 'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]');
+          link.classList.add('text-foreground/80', 'hover:text-foreground', 'drop-shadow-none');
+        });
+        const mobileEnter = mobileMenu.querySelector('a[href="https://app.cuidaty.com"]');
+        const mobileContact = mobileMenu.querySelector('a[href="#contato"]');
+        const mobileDivider = mobileMenu.querySelector('.border-t');
+        if (mobileEnter) {
+          mobileEnter.classList.remove('border-white/50', 'text-white', 'hover:bg-white/20');
+          mobileEnter.classList.add('border-cuidaty-primary', 'text-cuidaty-primary', 'hover:bg-cuidaty-primary/5');
+        }
+        if (mobileContact) {
+          mobileContact.classList.remove('bg-white/30', 'border-white/50', 'text-white', 'hover:bg-white/40');
+          mobileContact.classList.add('bg-cuidaty-primary', 'border-cuidaty-primary', 'text-white', 'hover:bg-cuidaty-primary-hover');
+        }
+        if (mobileDivider) {
+          mobileDivider.classList.remove('border-white/20');
+          mobileDivider.classList.add('border-border/50');
+        }
       }
     } else {
       header?.classList.remove('bg-white/95', 'shadow-lg', 'backdrop-blur-md');
@@ -156,8 +184,8 @@ import { Image } from 'astro:assets';
         mobileBtn.classList.remove('text-foreground/80');
       }
       // Restore CTA buttons for transparent state
-      const enterBtn = header?.querySelector('a[href="https://app.cuidaty.com"]');
-      const contactBtn = header?.querySelector('a[href="#contato"]:not(#mobile-menu a)');
+      const enterBtn = document.getElementById('nav-enter-btn');
+      const contactBtn = document.getElementById('nav-contact-btn');
       if (enterBtn) {
         enterBtn.classList.add('border-white/50', 'text-white', 'hover:bg-white/20', 'hover:border-white/70', 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]');
         enterBtn.classList.remove('border-cuidaty-primary/30', 'text-cuidaty-primary', 'hover:bg-cuidaty-primary/10', 'hover:border-cuidaty-primary/50', 'drop-shadow-none');
@@ -165,6 +193,30 @@ import { Image } from 'astro:assets';
       if (contactBtn) {
         contactBtn.classList.add('bg-white/30', 'text-white', 'border-white/50', 'hover:bg-white/40', 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]');
         contactBtn.classList.remove('bg-cuidaty-primary', 'text-white', 'border-cuidaty-primary', 'hover:bg-cuidaty-primary-hover', 'drop-shadow-none');
+      }
+      // Restore mobile menu for transparent state (frosted glass)
+      if (mobileMenu) {
+        mobileMenu.classList.add('bg-white/10', 'backdrop-blur-md', 'border-white/20');
+        mobileMenu.classList.remove('bg-white/95', 'border-border/50');
+        mobileMenu.querySelectorAll(':scope > div > a').forEach(link => {
+          link.classList.add('text-white', 'hover:text-white/80', 'drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]');
+          link.classList.remove('text-foreground/80', 'hover:text-foreground', 'drop-shadow-none');
+        });
+        const mobileEnter = mobileMenu.querySelector('a[href="https://app.cuidaty.com"]');
+        const mobileContact = mobileMenu.querySelector('a[href="#contato"]');
+        const mobileDivider = mobileMenu.querySelector('.border-t');
+        if (mobileEnter) {
+          mobileEnter.classList.add('border-white/50', 'text-white', 'hover:bg-white/20');
+          mobileEnter.classList.remove('border-cuidaty-primary', 'text-cuidaty-primary', 'hover:bg-cuidaty-primary/5');
+        }
+        if (mobileContact) {
+          mobileContact.classList.add('bg-white/30', 'border-white/50', 'text-white', 'hover:bg-white/40');
+          mobileContact.classList.remove('bg-cuidaty-primary', 'border-cuidaty-primary', 'text-white', 'hover:bg-cuidaty-primary-hover');
+        }
+        if (mobileDivider) {
+          mobileDivider.classList.add('border-white/20');
+          mobileDivider.classList.remove('border-border/50');
+        }
       }
     }
 
