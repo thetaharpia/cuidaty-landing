@@ -5,6 +5,7 @@ This project has been configured with modern web development tools for building 
 ## Installed Tools & Integrations
 
 ### 1. Tailwind CSS (v3.4.19)
+
 - **Purpose**: Utility-first CSS framework for rapid UI development
 - **Configuration**: `tailwind.config.mjs`
 - **Global Styles**: `src/styles/global.css`
@@ -14,17 +15,18 @@ This project has been configured with modern web development tools for building 
   - `@tailwindcss/aspect-ratio` - Aspect ratio utilities
 
 #### Usage Example:
+
 ```astro
-<div class="bg-primary-600 text-white px-4 py-2 rounded-lg">
-  Button
-</div>
+<div class="bg-primary-600 rounded-lg px-4 py-2 text-white">Button</div>
 ```
 
 ### 2. SEO Tools
+
 - **astro-seo**: Comprehensive SEO component
 - **@astrojs/sitemap**: Automatic sitemap generation
 
 #### Features:
+
 - Meta tags (title, description)
 - Open Graph tags (Facebook, LinkedIn)
 - Twitter Cards
@@ -32,30 +34,30 @@ This project has been configured with modern web development tools for building 
 - Automatic sitemap at `/sitemap-index.xml`
 
 #### Usage Example:
+
 ```astro
 ---
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout
-  title="Page Title"
-  description="Page description for SEO"
-  image="/og-image.jpg"
->
+<Layout title="Page Title" description="Page description for SEO" image="/og-image.jpg">
   <!-- Your content -->
 </Layout>
 ```
 
 ### 3. Asset Compression
+
 - **@playform/compress**: Automatic compression of CSS, HTML, JS, Images, and SVG
 - Configured in `astro.config.mjs`
 - Runs automatically during build
 
 ### 4. Code Formatting
+
 - **Prettier**: Code formatter with Astro and Tailwind plugins
 - **Configuration**: `.prettierrc.mjs`
 
 #### Available Scripts:
+
 ```bash
 pnpm format        # Format all files
 pnpm format:check  # Check if files are formatted
@@ -64,20 +66,26 @@ pnpm format:check  # Check if files are formatted
 ## Configuration Files
 
 ### astro.config.mjs
+
 Main Astro configuration with all integrations:
+
 - Site URL: `https://cuidaty.com` (update this to your domain)
 - Tailwind integration
 - Sitemap generation
 - Compress integration
 
 ### tailwind.config.mjs
+
 Tailwind CSS configuration:
+
 - Custom color palette (primary colors)
 - Content paths for file scanning
 - Tailwind plugins
 
 ### .prettierrc.mjs
+
 Prettier formatting rules:
+
 - Single quotes
 - 2-space indentation
 - 100 character line width
@@ -117,16 +125,19 @@ cuidaty-landing/
 ## Development Workflow
 
 1. **Start dev server**:
+
    ```bash
    pnpm dev
    ```
 
 2. **Format code before committing**:
+
    ```bash
    pnpm format
    ```
 
 3. **Build for production**:
+
    ```bash
    pnpm build
    ```
@@ -139,18 +150,24 @@ cuidaty-landing/
 ## Customization
 
 ### Colors
+
 Edit `tailwind.config.mjs` to change the primary color palette:
+
 ```js
-colors: {
-  primary: {
-    // Your custom colors
-  }
-}
+const theme = {
+  colors: {
+    primary: {
+      // Your custom colors
+    },
+  },
+};
 ```
 
 ### SEO Defaults
+
 Edit `src/layouts/Layout.astro` to change default SEO values:
-```astro
+
+```ts
 const {
   title = 'Your Default Title',
   description = 'Your default description',
@@ -159,7 +176,9 @@ const {
 ```
 
 ### Site URL
+
 Update the site URL in `astro.config.mjs`:
+
 ```js
 export default defineConfig({
   site: 'https://yourdomain.com',

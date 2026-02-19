@@ -2,13 +2,15 @@
 import { Image } from 'astro:assets';
 ---
 
-<section class="relative min-h-screen overflow-hidden flex items-center justify-center w-screen max-w-none -mx-[calc(50vw-50%)]">
+<section
+  class="relative -mx-[calc(50vw-50%)] flex min-h-screen w-screen max-w-none items-center justify-center overflow-hidden"
+>
   <!-- Background photo -->
   <div class="absolute inset-0">
     <Image
       src="/background-first-page.jpg"
       alt=""
-      class="h-full w-full object-cover object-center max-h-[100%]"
+      class="h-full max-h-[100%] w-full object-cover object-center"
       width={1400}
       height={1800}
       loading="eager"
@@ -20,23 +22,39 @@ import { Image } from 'astro:assets';
   </div>
 
   <!-- Centered content -->
-  <div class="container relative mx-auto px-4 md:px-6 pt-28 pb-20 flex flex-col items-center text-center">
-
+  <div
+    class="container relative mx-auto flex flex-col items-center px-4 pb-20 pt-28 text-center md:px-6"
+  >
     <!-- Logo -->
-    <div class="flex items-center justify-center gap-3 mb-10">
-      <img src="/assets/head_green.svg" alt="" width="44" height="58" class="h-16 md:h-20 w-auto drop-shadow-lg" loading="eager" />
-      <img src="/assets/cuidaty-green-letters.svg" alt="Cuidaty" width="200" height="53" class="h-14 md:h-16 w-auto drop-shadow-md" loading="eager" />
+    <div class="mb-10 flex items-center justify-center gap-3">
+      <img
+        src="/assets/head_green.svg"
+        alt=""
+        width="44"
+        height="58"
+        class="h-16 w-auto drop-shadow-lg md:h-20"
+        loading="eager"
+      />
+      <img
+        src="/assets/cuidaty-green-letters.svg"
+        alt="Cuidaty"
+        width="200"
+        height="53"
+        class="h-14 w-auto drop-shadow-md md:h-16"
+        loading="eager"
+      />
     </div>
 
     <!-- Headline -->
-    <h1 class="font-serif text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-semibold text-white leading-tight mb-5 max-w-2xl drop-shadow-md">
+    <h1
+      class="mb-5 max-w-2xl font-serif text-3xl font-semibold leading-tight text-white drop-shadow-md sm:text-4xl md:text-[2.75rem] lg:text-5xl"
+    >
       Cuidar de quem cuida: a tecnologia que devolve o respiro à sua rotina clínica.
     </h1>
 
     <!-- Sub -->
-    <p class="text-base md:text-lg text-white/80 max-w-lg mb-10 leading-relaxed">
+    <p class="mb-10 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
       Reduza sua carga mental em até 50% e recupere o tempo que a burocracia te tirou.
     </p>
   </div>
-
 </section>

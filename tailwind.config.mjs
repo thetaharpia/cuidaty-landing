@@ -91,7 +91,16 @@ export default {
           'Segoe UI Symbol',
           'Noto Color Emoji',
         ],
-        serif: ['Lora', 'Arapey', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        serif: [
+          'Lora',
+          'Arapey',
+          'ui-serif',
+          'Georgia',
+          'Cambria',
+          'Times New Roman',
+          'Times',
+          'serif',
+        ],
       },
       borderRadius: {
         sm: '0.25rem',

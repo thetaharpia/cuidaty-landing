@@ -33,17 +33,20 @@ Official landing page for Cuidaty - a comprehensive practice management platform
 ## 🚀 Getting Started
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/thetaharpia/cuidaty-landing.git
    cd cuidaty-landing
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Start the development server**
+
    ```bash
    pnpm dev
    ```
@@ -52,15 +55,15 @@ Official landing page for Cuidaty - a comprehensive practice management platform
 
 ## 📦 Available Commands
 
-| Command              | Action                                              |
-| :------------------- | :-------------------------------------------------- |
-| `pnpm install`       | Install dependencies                                |
-| `pnpm dev`           | Start development server at `localhost:4321`        |
-| `pnpm build`         | Build production site to `./dist/`                  |
-| `pnpm preview`       | Preview production build locally                    |
-| `pnpm format`        | Format code with Prettier                           |
-| `pnpm format:check`  | Check code formatting                               |
-| `pnpm astro ...`     | Run Astro CLI commands                              |
+| Command             | Action                                       |
+| :------------------ | :------------------------------------------- |
+| `pnpm install`      | Install dependencies                         |
+| `pnpm dev`          | Start development server at `localhost:4321` |
+| `pnpm build`        | Build production site to `./dist/`           |
+| `pnpm preview`      | Preview production build locally             |
+| `pnpm format`       | Format code with Prettier                    |
+| `pnpm format:check` | Check code formatting                        |
+| `pnpm astro ...`    | Run Astro CLI commands                       |
 
 ## 📁 Project Structure
 
@@ -93,11 +96,13 @@ Official landing page for Cuidaty - a comprehensive practice management platform
 The project includes automated GitHub Actions workflows:
 
 ### Quality Workflow
+
 - **Formatting**: Validates code formatting with Prettier
 - **Build**: Ensures the project builds successfully
 - **Triggers**: Push to main, pull requests
 
 ### Security Workflow
+
 - **Dependency Audit**: Checks for security vulnerabilities
 - **Triggers**: Push, pull requests, weekly schedule
 

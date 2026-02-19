@@ -2,8 +2,11 @@
 import { Image } from 'astro:assets';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 shadow-sm border-b border-black/5 backdrop-blur-sm" id="main-header">
-  <nav class="container mx-auto flex items-center justify-between px-4 md:px-6 py-3">
+<header
+  class="fixed left-0 right-0 top-0 z-50 border-b border-black/5 bg-white/95 shadow-sm backdrop-blur-sm"
+  id="main-header"
+>
+  <nav class="container mx-auto flex items-center justify-between px-4 py-3 md:px-6">
     <a href="/" class="flex items-center gap-2">
       <Image
         src="/logo.svg"
@@ -18,16 +21,28 @@ import { Image } from 'astro:assets';
     </a>
 
     <div class="hidden items-center gap-8 md:flex">
-      <a href="#funcionalidades" class="text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark font-medium text-sm">
+      <a
+        href="#funcionalidades"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Funcionalidades
       </a>
-      <a href="#planos" class="text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark font-medium text-sm">
+      <a
+        href="#planos"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Planos
       </a>
-      <a href="#sobre" class="text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark font-medium text-sm">
+      <a
+        href="#sobre"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Sobre
       </a>
-      <a href="#contato" class="text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark font-medium text-sm">
+      <a
+        href="#contato"
+        class="text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
+      >
         Contato
       </a>
     </div>
@@ -35,13 +50,13 @@ import { Image } from 'astro:assets';
     <div class="flex items-center gap-3">
       <a
         href="https://app.cuidaty.com"
-        class="hidden sm:inline-flex items-center gap-2 rounded-full px-4 py-2 font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark text-sm"
+        class="hidden items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark sm:inline-flex"
       >
         Entrar
       </a>
       <a
         href="#contato"
-        class="inline-flex items-center gap-2 rounded-lg bg-cuidaty-primary px-4 py-2 font-semibold text-white transition-colors hover:bg-cuidaty-primary-hover text-sm"
+        class="inline-flex items-center gap-2 rounded-lg bg-cuidaty-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-hover"
       >
         Fale Conosco
       </a>
@@ -49,32 +64,39 @@ import { Image } from 'astro:assets';
       <!-- Mobile menu button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden p-2 text-cuidaty-dark/80 hover:text-cuidaty-dark"
+        class="p-2 text-cuidaty-dark/80 hover:text-cuidaty-dark md:hidden"
         aria-label="Toggle mobile menu"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
     </div>
   </nav>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu" class="hidden md:hidden border-t border-border/50 bg-background">
-    <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-      <a href="#funcionalidades" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+  <div id="mobile-menu" class="hidden border-t border-border/50 bg-background md:hidden">
+    <div class="container mx-auto flex flex-col gap-4 px-4 py-4">
+      <a
+        href="#funcionalidades"
+        class="py-2 text-foreground/80 transition-colors hover:text-foreground"
+      >
         Funcionalidades
       </a>
-      <a href="#planos" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#planos" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
         Planos
       </a>
-      <a href="#sobre" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#sobre" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
         Sobre
       </a>
-      <a href="#contato" class="text-foreground/80 transition-colors hover:text-foreground py-2">
+      <a href="#contato" class="py-2 text-foreground/80 transition-colors hover:text-foreground">
         Contato
       </a>
-      <div class="pt-4 border-t border-border/50 flex flex-col gap-3">
+      <div class="flex flex-col gap-3 border-t border-border/50 pt-4">
         <a
           href="https://app.cuidaty.com"
           class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-cuidaty-primary px-5 py-2 font-medium text-cuidaty-primary transition-all hover:bg-cuidaty-primary/5"
@@ -101,7 +123,7 @@ import { Image } from 'astro:assets';
   });
 
   const mobileMenuLinks = mobileMenu?.querySelectorAll('a');
-  mobileMenuLinks?.forEach(link => {
+  mobileMenuLinks?.forEach((link) => {
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
     });

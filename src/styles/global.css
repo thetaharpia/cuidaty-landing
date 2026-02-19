@@ -20,8 +20,8 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-color: #F4F1EA;
+    @apply bg-background font-sans text-foreground antialiased;
+    background-color: #f4f1ea;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
@@ -42,8 +42,8 @@
     width: min(100%, 2560px);
     min-height: 100vh;
     margin-inline: auto;
-    @apply bg-background relative overflow-x-clip;
-    background-color: #F4F1EA;
+    @apply relative overflow-x-clip bg-background;
+    background-color: #f4f1ea;
   }
 
   #main-header {
@@ -53,7 +53,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-cuidaty-primary-hover transition-colors duration-200;
+    @apply bg-primary text-primary-foreground transition-colors duration-200 hover:bg-cuidaty-primary-hover;
   }
 
   .btn-secondary {
@@ -65,23 +65,23 @@
   }
 
   .btn-outline {
-    @apply border-primary text-primary hover:bg-primary/10 border bg-transparent transition-colors duration-200;
+    @apply border border-primary bg-transparent text-primary transition-colors duration-200 hover:bg-primary/10;
   }
 
   .card-elevated {
-    @apply bg-card border-border rounded-xl border shadow-sm;
+    @apply rounded-xl border border-border bg-card shadow-sm;
   }
 
   .badge-success {
-    @apply bg-success/10 text-success border-success/20 border;
+    @apply border border-success/20 bg-success/10 text-success;
   }
 
   .badge-warning {
-    @apply bg-warning/10 text-warning border-warning/20 border;
+    @apply border border-warning/20 bg-warning/10 text-warning;
   }
 
   .badge-destructive {
-    @apply bg-destructive/10 text-destructive border-destructive/20 border;
+    @apply border border-destructive/20 bg-destructive/10 text-destructive;
   }
 }
 
@@ -91,15 +91,16 @@
   }
 
   .focus-ring {
-    @apply focus:ring-ring focus:outline-none focus:ring-2 focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
   }
 
   .text-gradient {
-    @apply from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
   }
 
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0px);
     }
     50% {

@@ -2,22 +2,25 @@
 import { Image } from 'astro:assets';
 ---
 
-<section class="relative bg-cuidaty-primary py-14 md:py-20 overflow-hidden" data-node-id="41:1678">
+<section class="relative overflow-hidden bg-cuidaty-primary py-14 md:py-20" data-node-id="41:1678">
   <div class="container mx-auto px-4 md:px-6">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center max-w-5xl mx-auto">
-
+    <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
       <!-- Left: copy -->
       <div class="space-y-6">
-        <p class="text-sm text-white/85 tracking-wide" data-node-id="40:1423">
+        <p class="text-sm tracking-wide text-white/85" data-node-id="40:1423">
           Para psicólogos e profissionais da saúde
         </p>
-        <h2 class="text-white text-3xl md:text-[40px] font-bold leading-tight max-w-3xl" data-node-id="40:1422">
-          O Cuidaty é o aliado que assume o trabalho administrativo para que o profissional possa focar no que é essencial: o paciente e a si mesmo.
+        <h2
+          class="max-w-3xl text-3xl font-bold leading-tight text-white md:text-[40px]"
+          data-node-id="40:1422"
+        >
+          O Cuidaty é o aliado que assume o trabalho administrativo para que o profissional possa
+          focar no que é essencial: o paciente e a si mesmo.
         </h2>
         <div class="pt-2">
           <a
             href="#contato"
-            class="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white px-6 py-3 rounded-sm font-semibold text-sm transition-colors"
+            class="inline-flex items-center gap-2 rounded-sm bg-secondary px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-secondary/90"
           >
             Experimentar a leveza no meu consultório.
           </a>
@@ -26,11 +29,14 @@ import { Image } from 'astro:assets';
 
       <!-- Right: photo -->
       <div class="flex justify-center lg:justify-end">
-        <div class="rounded-[40px] overflow-hidden max-w-[420px] w-full aspect-[1/1]" data-node-id="40:1453">
+        <div
+          class="aspect-[1/1] w-full max-w-[420px] overflow-hidden rounded-[40px]"
+          data-node-id="40:1453"
+        >
           <Image
             src="/psycologist-taking-coffe.jpg"
             alt="Profissional de saúde"
-            class="w-full h-full object-cover"
+            class="h-full w-full object-cover"
             width={736}
             height={736}
             loading="lazy"

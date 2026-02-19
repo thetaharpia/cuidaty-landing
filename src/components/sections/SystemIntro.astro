@@ -1,59 +1,87 @@
 ---
+
 ---
 
-<section id="sistema" class="bg-[#c8d5de] py-20 md:py-28 relative overflow-hidden">
+<section id="sistema" class="relative overflow-hidden bg-[#c8d5de] py-20 md:py-28">
   <div class="container mx-auto px-4 md:px-6">
-    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-10 md:gap-14">
-
+    <div
+      class="mx-auto flex max-w-4xl flex-col items-start gap-10 md:flex-row md:items-center md:gap-14"
+    >
       <!-- Icon box -->
       <div class="flex-shrink-0">
-        <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-sm">
-          <svg class="w-8 h-8 text-cuidaty-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-sm">
+          <svg
+            class="h-8 w-8 text-cuidaty-primary"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
           </svg>
         </div>
       </div>
 
       <!-- Copy -->
       <div class="flex-1">
-        <p class="text-cuidaty-primary/60 text-xs font-semibold tracking-widest uppercase mb-4">
+        <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-cuidaty-primary/60">
           Um sistema de gestão pensado para facilitar sua vida
         </p>
-        <h2 class="font-serif text-2xl md:text-3xl lg:text-4xl font-semibold text-cuidaty-dark leading-snug">
-          Você cuida dos outros todos os dias. Deixe que a Cuidaty cuide da parte pesada da sua administração.
+        <h2
+          class="font-serif text-2xl font-semibold leading-snug text-cuidaty-dark md:text-3xl lg:text-4xl"
+        >
+          Você cuida dos outros todos os dias. Deixe que a Cuidaty cuide da parte pesada da sua
+          administração.
         </h2>
       </div>
-
     </div>
   </div>
 </section>
-  <!-- Decorative blobs -->
-  <div class="absolute -top-32 -right-32 w-80 h-80 bg-cuidaty-primary/20 rounded-full blur-3xl pointer-events-none"></div>
-  <div class="absolute -bottom-32 -left-32 w-80 h-80 bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Decorative blobs -->
+<div
+  class="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-cuidaty-primary/20 blur-3xl"
+>
+</div>
+<div
+  class="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-secondary/10 blur-3xl"
+>
+</div>
 
-  <div class="container mx-auto px-4 md:px-6 relative z-10">
-    <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-16">
-
-      <!-- Icon -->
-      <div class="flex-shrink-0">
-        <div class="w-28 h-28 md:w-36 md:h-36 bg-white/10 backdrop-blur-sm rounded-3xl flex items-center justify-center border border-white/10">
-          <svg class="w-14 h-14 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-        </div>
+<div class="container relative z-10 mx-auto px-4 md:px-6">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-12 md:flex-row md:gap-16">
+    <!-- Icon -->
+    <div class="flex-shrink-0">
+      <div
+        class="flex h-28 w-28 items-center justify-center rounded-3xl border border-white/10 bg-white/10 backdrop-blur-sm md:h-36 md:w-36"
+      >
+        <svg class="h-14 w-14 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          ></path>
+        </svg>
       </div>
+    </div>
 
-      <!-- Content -->
-      <div class="flex-1 text-center md:text-left">
-        <p class="text-secondary/80 text-sm font-semibold tracking-widest uppercase mb-4">
-          Um sistema pensado para você
-        </p>
-        <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-          Você cuida dos outros todos os dias.<br>
-          <span class="text-secondary">Deixe que a Cuidaty cuide da parte pesada da sua administração.</span>
-        </h2>
-      </div>
-
+    <!-- Content -->
+    <div class="flex-1 text-center md:text-left">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-secondary/80">
+        Um sistema pensado para você
+      </p>
+      <h2
+        class="font-serif text-3xl font-semibold leading-tight text-white md:text-4xl lg:text-5xl"
+      >
+        Você cuida dos outros todos os dias.<br />
+        <span class="text-secondary"
+          >Deixe que a Cuidaty cuide da parte pesada da sua administração.</span
+        >
+      </h2>
     </div>
   </div>
-</section>
+</div>
