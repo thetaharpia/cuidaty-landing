@@ -21,8 +21,10 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-color: #F4F1EA;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   h1,
@@ -36,6 +38,20 @@
 }
 
 @layer components {
+  .site-shell {
+    width: min(100%, 2560px);
+    min-height: 100vh;
+    margin-inline: auto;
+    @apply bg-background relative overflow-x-clip;
+    background-color: #F4F1EA;
+  }
+
+  #main-header {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(100%, 2560px);
+  }
+
   .btn-primary {
     @apply bg-primary text-primary-foreground hover:bg-cuidaty-primary-hover transition-colors duration-200;
   }
