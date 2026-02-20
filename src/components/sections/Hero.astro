@@ -1,20 +1,22 @@
 ---
 import { Image } from 'astro:assets';
+import backgroundImage from '../../assets/background-first-page.jpg';
+import psychologistImage from '../../assets/psycologist-taking-coffe.jpg';
 ---
 
-<section id="hero" class="relative h-[100dvh] min-h-[600px] overflow-hidden bg-gradient-to-br from-beige to-white">
-  <!-- Warm background from Figma -->
+<section id="hero" class="relative h-[100dvh] min-h-[500px] overflow-hidden bg-gradient-to-br from-beige to-white">
+  <!-- Background image with Astro optimization -->
   <div class="absolute inset-0">
     <Image
-      src="/background-first-page.jpg"
+      src={backgroundImage}
       alt=""
       class="h-full w-full object-cover"
-      width={1920}
-      height={1080}
+      widths={[640, 1024, 1920]}
+      sizes="100vw"
       loading="eager"
       fetchpriority="high"
       decoding="async"
-      quality={85}
+      quality={80}
       format="webp"
     />
     <!-- Subtle dark overlay for better text contrast -->
@@ -23,34 +25,38 @@ import { Image } from 'astro:assets';
 
   <!-- Mobile layout: centered branding focus -->
   <div class="container relative mx-auto flex h-full flex-col px-4 md:px-6 lg:hidden">
+    <!-- Spacer for fixed header -->
+    <div class="h-16 flex-shrink-0 sm:h-20"></div>
+
     <!-- Centered branding block - the main focus -->
     <div class="hero-fade hero-fade-up flex flex-1 flex-col items-center justify-center">
-      <Image
+      <img
         src="/assets/logo-written.svg"
         alt="Cuidaty"
-        width={314}
-        height={82}
-        class="mb-4 w-64 drop-shadow-2xl sm:w-80"
+        width="314"
+        height="82"
+        class="mb-3 w-48 drop-shadow-2xl sm:mb-4 sm:w-64 md:w-80"
         loading="eager"
+        decoding="async"
       />
-      <h1 class="sr-only">Cuidaty - Mais que um software, um suporte invisível</h1>
+      <h1 class="sr-only">Cuidaty - Mais que um software, um suporte invisivel</h1>
       <p
-        class="max-w-xs text-center text-base font-light text-white/90 drop-shadow-lg sm:max-w-sm sm:text-lg"
+        class="max-w-xs text-center text-sm font-light text-white/90 drop-shadow-lg sm:max-w-sm sm:text-base md:text-lg"
       >
-        Mais que um software, um suporte invisível
+        Mais que um software, um suporte invisivel
       </p>
     </div>
 
     <!-- Bottom section: CTA + trust -->
-    <div class="hero-fade hero-fade-up flex flex-col items-center gap-4 pb-10 sm:pb-14" style="animation-delay: 0.3s;">
-      <p class="text-sm font-light text-white/95 drop-shadow-md sm:text-base">
-        A tecnologia que devolve o respiro à sua rotina clínica.
+    <div class="hero-fade hero-fade-up flex flex-col items-center gap-3 pb-6 sm:gap-4 sm:pb-10 md:pb-14" style="animation-delay: 0.3s;">
+      <p class="text-xs font-light text-white/95 drop-shadow-md sm:text-sm md:text-base">
+        A tecnologia que devolve o respiro a sua rotina clinica.
       </p>
 
       <!-- CTA Button -->
       <a
         href="#planos"
-        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 bg-white/90 px-6 py-3 text-sm font-bold text-cuidaty-primary shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white sm:gap-3 sm:px-8 sm:py-4 sm:text-base"
+        class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 bg-white/90 px-5 py-2.5 text-sm font-bold text-cuidaty-primary shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white sm:gap-3 sm:px-8 sm:py-4 sm:text-base"
       >
         Quero saber mais
         <svg
@@ -69,9 +75,9 @@ import { Image } from 'astro:assets';
 
       <!-- Trust indicator -->
       <div
-        class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-white/90 shadow-lg backdrop-blur-sm sm:gap-3 sm:px-5 sm:py-2.5"
+        class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-white/90 shadow-lg backdrop-blur-sm sm:gap-3 sm:px-5 sm:py-2.5"
       >
-        <svg class="h-4 w-4 flex-shrink-0 text-white" fill="currentColor" viewBox="0 0 20 20">
+        <svg class="h-3.5 w-3.5 flex-shrink-0 text-white sm:h-4 sm:w-4" fill="currentColor" viewBox="0 0 20 20">
           <path
             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
           ></path>
@@ -82,48 +88,50 @@ import { Image } from 'astro:assets';
   </div>
 
   <!-- Desktop layout: two-column with photo card -->
-  <div class="container relative mx-auto hidden h-full px-4 md:px-6 lg:flex lg:flex-col lg:justify-end lg:pb-20 lg:pt-28">
-    <div class="mx-auto grid w-full max-w-7xl grid-cols-2 items-end gap-12">
+  <div class="container relative mx-auto hidden h-full px-4 md:px-6 lg:flex lg:flex-col lg:justify-end lg:pb-16 lg:pt-24 xl:pb-20 xl:pt-28">
+    <div class="mx-auto grid w-full max-w-7xl grid-cols-2 items-end gap-8 xl:gap-12">
       <!-- Left: Big Branding Logo and Name -->
       <div class="hero-fade hero-fade-left flex flex-col items-start justify-end">
         <div class="flex flex-col items-start">
-          <Image
+          <img
             src="/logo.svg"
             alt="Cuidaty Logo"
-            width={320}
-            height={320}
-            class="h-72 w-72 drop-shadow-2xl xl:h-80 xl:w-80"
+            width="320"
+            height="320"
+            class="h-48 w-48 drop-shadow-2xl lg:h-56 lg:w-56 xl:h-72 xl:w-72 2xl:h-80 2xl:w-80"
             loading="eager"
+            decoding="async"
           />
           <h1
-            class="font-serif text-9xl font-bold leading-none tracking-tight text-white drop-shadow-2xl xl:text-[10rem]"
+            class="font-serif text-7xl font-bold leading-none tracking-tight text-white drop-shadow-2xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]"
           >
             Cuidat<span class="text-cuidaty-secondary">y</span>
           </h1>
           <p
-            class="mt-2 max-w-md text-left text-2xl font-light text-white/90 drop-shadow-lg lg:text-3xl"
+            class="mt-2 max-w-sm text-left text-xl font-light text-white/90 drop-shadow-lg lg:max-w-md lg:text-2xl xl:text-3xl"
           >
-            Mais que um software, um suporte invisível
+            Mais que um software, um suporte invisivel
           </p>
         </div>
       </div>
 
       <!-- Right: Image + Content -->
-      <div class="hero-fade hero-fade-right flex flex-col items-end space-y-6">
+      <div class="hero-fade hero-fade-right flex flex-col items-end space-y-4 xl:space-y-6">
         <!-- Professional image -->
-        <div class="w-full max-w-lg">
+        <div class="w-full max-w-sm lg:max-w-md xl:max-w-lg">
           <div class="animate-float relative">
             <div
               class="relative overflow-hidden rounded-3xl border-2 border-white/20 bg-white/10 p-2 shadow-[0_20px_60px_rgba(0,0,0,0.3)] backdrop-blur-sm"
             >
               <Image
-                src="/psycologist-taking-coffe.jpg"
-                alt="Profissional da saúde trabalhando em seu consultório"
+                src={psychologistImage}
+                alt="Profissional da saude trabalhando em seu consultorio"
                 class="h-auto w-full rounded-2xl object-cover"
                 width={600}
                 height={750}
                 loading="eager"
-                quality={90}
+                decoding="async"
+                quality={85}
                 format="webp"
               />
               <div class="absolute -bottom-8 -right-8 h-40 w-40 rounded-full bg-white/30 blur-3xl">
@@ -131,30 +139,30 @@ import { Image } from 'astro:assets';
             </div>
             <!-- Floating badge -->
             <div
-              class="absolute -right-4 -top-4 rounded-2xl border-2 border-white/50 bg-white/90 p-4 shadow-2xl backdrop-blur-md"
+              class="absolute -right-4 -top-4 rounded-2xl border-2 border-white/50 bg-white/90 p-3 shadow-2xl backdrop-blur-md xl:p-4"
             >
               <div class="flex items-center gap-2">
                 <div
                   class="h-3 w-3 animate-pulse rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.6)]"
                 >
                 </div>
-                <span class="text-sm font-bold text-cuidaty-primary">Disponível</span>
+                <span class="text-xs font-bold text-cuidaty-primary xl:text-sm">Disponivel</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Information below the image -->
-        <div class="hero-fade hero-fade-up w-full max-w-md space-y-5 text-right">
-          <p class="text-lg font-light leading-relaxed text-white/95 drop-shadow-md lg:text-xl">
-            A tecnologia que devolve o respiro à sua rotina clínica.
+        <div class="hero-fade hero-fade-up w-full max-w-sm space-y-4 text-right lg:max-w-md xl:space-y-5">
+          <p class="text-base font-light leading-relaxed text-white/95 drop-shadow-md lg:text-lg xl:text-xl">
+            A tecnologia que devolve o respiro a sua rotina clinica.
           </p>
 
           <!-- CTA Button -->
           <div class="flex justify-end">
             <a
               href="#planos"
-              class="inline-flex items-center justify-center gap-3 rounded-full border-2 border-white/50 bg-white/90 px-8 py-4 font-bold text-cuidaty-primary shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-[0_20px_60px_rgba(255,255,255,0.4)]"
+              class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/50 bg-white/90 px-6 py-3 font-bold text-cuidaty-primary shadow-2xl backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white hover:shadow-[0_20px_60px_rgba(255,255,255,0.4)] xl:gap-3 xl:px-8 xl:py-4"
             >
               Quero saber mais
               <svg
@@ -175,14 +183,14 @@ import { Image } from 'astro:assets';
           <!-- Trust indicator -->
           <div class="flex justify-end">
             <div
-              class="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-white/90 shadow-lg backdrop-blur-sm"
+              class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-white/90 shadow-lg backdrop-blur-sm xl:gap-3 xl:px-5 xl:py-2.5"
             >
-              <svg class="h-5 w-5 flex-shrink-0 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="h-4 w-4 flex-shrink-0 text-white xl:h-5 xl:w-5" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                 ></path>
               </svg>
-              <p class="text-sm font-semibold">Mais de 500 profissionais confiam no Cuidaty</p>
+              <p class="text-xs font-semibold xl:text-sm">Mais de 500 profissionais confiam no Cuidaty</p>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 ---
 // StatsHero - Split layout section with empathy message, stats, and image
 import { Image } from 'astro:assets';
+import psychologistMeetingImage from '../../assets/psycologist-on-meeting.jpg';
 ---
 
 <section class="relative bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20 overflow-hidden">
@@ -71,13 +72,13 @@ import { Image } from 'astro:assets';
       <div class="hidden lg:block">
         <div class="relative rounded-2xl overflow-hidden shadow-2xl">
           <Image
-            src="/psycologist-on-meeting.jpg"
+            src={psychologistMeetingImage}
             alt="Sessão de terapia online via videochamada"
             class="w-full h-auto object-cover"
             width={600}
             height={450}
             loading="lazy"
-            quality={90}
+            quality={85}
             format="webp"
           />
           <!-- Overlay gradient for better text contrast if needed -->
