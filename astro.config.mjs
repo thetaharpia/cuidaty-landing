@@ -38,7 +38,17 @@ export default defineConfig({
   },
   integrations: [
     tailwind(),
-    sitemap(),
+    sitemap({
+      changefreq: 'weekly',
+      priority: 1.0,
+      lastmod: new Date(),
+      i18n: {
+        defaultLocale: 'pt-BR',
+        locales: {
+          'pt-BR': 'pt-BR',
+        },
+      },
+    }),
     compress({
       CSS: true,
       HTML: {

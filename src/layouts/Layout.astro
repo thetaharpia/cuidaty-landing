@@ -11,18 +11,18 @@ interface Props {
 }
 
 const {
-  title = 'Cuidaty - Mais que um software, um suporte invisível',
-  description = 'A tecnologia que devolve o respiro à sua rotina clínica. Automação via WhatsApp, agenda online e prontuário eletrônico para profissionais da saúde que querem focar no que realmente importa: cuidar.',
+  title = 'Cuidaty - Software para Consultórios e Clínicas | Agenda, Prontuário e WhatsApp',
+  description = 'Sistema de gestão para psicólogos, terapeutas e clínicas de saúde. Agenda online, prontuário eletrônico SOAP, automação WhatsApp, controle financeiro e portal de agendamento. Reduza 73% das faltas e economize 8h por semana. Conforme LGPD. A partir de R$80/mês.',
   image = '/screenshot.png',
   noindex = false,
-  keywords = 'software para psicólogos, gestão de consultório, suporte invisível, tecnologia que acolhe, automação whatsapp consultório, agenda médica online, sistema para clínicas, prontuário eletrônico, agendamento online, gestão de pacientes, software médico, telemedicina, consultório online, gestão clínica',
+  keywords = 'software para psicólogos, sistema para consultório de psicologia, agenda online psicólogo, prontuário eletrônico psicologia, automação whatsapp consultório, gestão de consultório, sistema para clínicas, agendamento online pacientes, controle financeiro consultório, software para terapeutas, sistema para nutricionistas, gestão de clínica de saúde, prontuário SOAP, lembrete de consulta whatsapp, confirmação de consulta automática, redução de faltas consultório, portal de agendamento online, software LGPD saúde, gestão de pacientes, sistema para fisioterapeutas, plataforma para profissionais de saúde, software consultório online, teleconsulta, gestão clínica integrada, repasse financeiro clínica',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
 
-// Structured data for better SEO
-const structuredData = {
+// Structured data: SoftwareApplication
+const softwareSchema = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: 'Cuidaty',
@@ -32,11 +32,15 @@ const structuredData = {
     '@type': 'Offer',
     price: '80',
     priceCurrency: 'BRL',
+    priceValidUntil: '2026-12-31',
+    availability: 'https://schema.org/InStock',
   },
   aggregateRating: {
     '@type': 'AggregateRating',
     ratingValue: '4.9',
     ratingCount: '500',
+    bestRating: '5',
+    worstRating: '1',
   },
   description: description,
   url: Astro.site,
@@ -48,6 +52,9 @@ const structuredData = {
     'Redução de 73% em faltas',
     'Economia de 8 horas por semana',
   ],
+  screenshot: fullImageURL,
+  softwareVersion: '2.0',
+  applicationSubCategory: 'HealthcareApplication',
   provider: {
     '@type': 'Organization',
     name: 'Cuidaty',
@@ -61,6 +68,115 @@ const structuredData = {
     },
   },
 };
+
+// Structured data: Organization
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Cuidaty',
+  url: Astro.site?.toString(),
+  logo: new URL('/logo.svg', Astro.site).toString(),
+  image: fullImageURL,
+  description: 'Sistema de gestão completa para consultórios e clínicas de saúde mental e bem-estar.',
+  slogan: 'Mais que um software, um suporte invisível',
+  foundingDate: '2024',
+  areaServed: {
+    '@type': 'Country',
+    name: 'Brazil',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'Customer Support',
+    availableLanguage: ['Portuguese'],
+    url: new URL('/#contato', Astro.site).toString(),
+  },
+  sameAs: [
+    'https://www.instagram.com/thetaharpia',
+    'https://www.linkedin.com/company/thetaharpia',
+    'https://x.com/thetaharpia',
+    'https://www.youtube.com/channel/UCBoprCxMDUrZdcvNDwiOBzg',
+    'https://thetaharpia.com',
+  ],
+  parentOrganization: {
+    '@type': 'Organization',
+    name: 'ThetaHarpia',
+    url: 'https://thetaharpia.com',
+  },
+};
+
+// Structured data: WebSite with SearchAction
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Cuidaty',
+  url: Astro.site?.toString(),
+  description: description,
+  inLanguage: 'pt-BR',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    logo: new URL('/logo.svg', Astro.site).toString(),
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: new URL('/?q={search_term_string}', Astro.site).toString(),
+    },
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+// Structured data: FAQ
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'O que é o Cuidaty?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O Cuidaty é um sistema de gestão completa para consultórios e clínicas de saúde. Oferece automação via WhatsApp, agenda online, prontuário eletrônico e gestão financeira integrada, permitindo que profissionais foquem no que realmente importa: cuidar dos pacientes.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quanto custa o Cuidaty?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O plano individual do Cuidaty custa a partir de R$ 80/mês, incluindo todas as funcionalidades como automação via WhatsApp, agenda online, prontuário eletrônico e gestão financeira. Também oferecemos planos para clínicas e hospitais sob consulta.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O Cuidaty ajuda a reduzir faltas de pacientes?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim! Com o sistema de confirmações e lembretes automáticos via WhatsApp, o Cuidaty reduz em até 73% as faltas dos pacientes, economizando tempo e maximizando a receita do consultório.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O Cuidaty é seguro e está em conformidade com a LGPD?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. O Cuidaty segue todas as regulamentações da LGPD e demais normas profissionais de saúde. Seus dados e de seus pacientes são protegidos com criptografia e práticas de segurança de nível empresarial.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quais profissionais podem usar o Cuidaty?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O Cuidaty é ideal para psicólogos, terapeutas, nutricionistas, fisioterapeutas, médicos e outros profissionais de saúde que trabalham em consultório individual, clínicas com múltiplos profissionais ou grandes operações hospitalares.',
+      },
+    },
+  ],
+};
+
+// Combine all structured data
+const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSchema];
 ---
 
 <!doctype html>
@@ -96,23 +212,45 @@ const structuredData = {
 
     <!-- Favicons and Icons -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-    <link rel="apple-touch-icon" href="/logo.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180x180.png" />
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Theme Color -->
-    <meta name="theme-color" content="#10b981" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#10b981" />
+    <meta name="theme-color" content="#356588" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Cuidaty" />
 
     <!-- Additional Meta Tags -->
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Cuidaty" />
-    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow'} />
+    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'} />
     <meta name="language" content="Portuguese" />
     <meta name="revisit-after" content="7 days" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="BR" />
     <meta name="geo.placename" content="Brasil" />
+
+    <!-- Search Engine Verification (replace with actual values) -->
+    <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" /> -->
+    <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
+
+    <!-- OpenSearch -->
+    <link rel="search" type="application/opensearchdescription+xml" title="Cuidaty" href="/opensearch.xml" />
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+
+    <!-- Alternate / hreflang -->
+    <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
+    <link rel="alternate" hreflang="x-default" href={canonicalURL.toString()} />
 
     <SEO
       title={title}
@@ -137,22 +275,24 @@ const structuredData = {
           type: 'image/png',
           width: 1200,
           height: 630,
-          alt: 'Cuidaty - Sistema de gestão para consultórios e clínicas',
+          alt: 'Cuidaty - Software para psicólogos e clínicas com agenda online, prontuário eletrônico e automação WhatsApp',
         },
       }}
       twitter={{
         card: 'summary_large_image',
-        site: '@cuidaty',
-        creator: '@cuidaty',
+        site: '@thetaharpia',
+        creator: '@thetaharpia',
         title: title,
         description: description,
         image: fullImageURL,
-        imageAlt: 'Cuidaty - Sistema de gestão para consultórios e clínicas',
+        imageAlt: 'Cuidaty - Software para psicólogos e clínicas com agenda online, prontuário eletrônico e automação WhatsApp',
       }}
     />
 
     <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {structuredData.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
 
     <!-- Inline critical CSS for font loading -->
     <style>

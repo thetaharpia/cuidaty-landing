@@ -1,4 +1,17 @@
+# Cuidaty - https://cuidaty.com
+# Robots.txt
+
 User-agent: *
 Allow: /
+Disallow: /_astro/
+Disallow: /api/
 
+# Crawl-delay for polite crawling
+User-agent: Bingbot
+Crawl-delay: 5
+
+User-agent: Yandex
+Crawl-delay: 10
+
+# Sitemaps
 Sitemap: https://cuidaty.com/sitemap-index.xml
