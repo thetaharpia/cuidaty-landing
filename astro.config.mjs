@@ -11,9 +11,13 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  trailingSlash: 'ignore',
   server: {
     port: 4321,
     host: true,
+  },
+  build: {
+    assets: '_astro',
   },
   image: {
     domains: ['cuidaty.com'],
