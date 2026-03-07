@@ -31,7 +31,7 @@ export default defineConfig({
   },
   vite: {
     build: {
-      cssMinify: 'lightningcss',
+      cssMinify: 'esbuild', // Changed from lightningcss for better compatibility
       minify: 'terser',
       terserOptions: {
         compress: {
