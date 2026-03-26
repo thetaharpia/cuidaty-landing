@@ -12,84 +12,55 @@ interface Props {
 
 const {
   title = 'Cuidaty - Software para Consultórios e Clínicas | Agenda, Prontuário e WhatsApp',
-  description = 'Sistema de gestão para psicólogos, terapeutas e clínicas de saúde. Agenda online, prontuário eletrônico SOAP, automação WhatsApp, controle financeiro e portal de agendamento. Reduza 73% das faltas e economize 8h por semana. Conforme LGPD. A partir de R$80/mês.',
+  description = 'Sistema completo de gestão para consultórios, clínicas de saúde mental, hospitais e centros multidisciplinares. Prontuário eletrônico, agenda online com confirmação via WhatsApp, gestão financeira, controle de equipes e conformidade com LGPD, CFM, CFP e padrão TISS. Mais de 500 profissionais economizam 8h por semana. A partir de R$80/mês.',
   image = '/screenshot.png',
   noindex = false,
-  keywords = 'software para psicólogos, sistema para consultório de psicologia, agenda online psicólogo, prontuário eletrônico psicologia, automação whatsapp consultório, gestão de consultório, sistema para clínicas, agendamento online pacientes, controle financeiro consultório, software para terapeutas, sistema para nutricionistas, gestão de clínica de saúde, prontuário SOAP, lembrete de consulta whatsapp, confirmação de consulta automática, redução de faltas consultório, portal de agendamento online, software LGPD saúde, gestão de pacientes, sistema para fisioterapeutas, plataforma para profissionais de saúde, software consultório online, teleconsulta, gestão clínica integrada, repasse financeiro clínica',
+  keywords = 'software para psicólogos, sistema para consultório de psicologia, agenda online psicólogo, prontuário eletrônico psicologia, automação whatsapp consultório, gestão de consultório, sistema para clínicas, agendamento online pacientes, controle financeiro consultório, software para terapeutas, sistema para nutricionistas, gestão de clínica de saúde, prontuário SOAP, lembrete de consulta whatsapp, confirmação de consulta automática, redução de faltas consultório, portal de agendamento online, software LGPD saúde, gestão de pacientes, sistema para fisioterapeutas, plataforma para profissionais de saúde, software consultório online, teleconsulta, gestão clínica integrada, repasse financeiro clínica, conformidade CFM, conformidade CFP, padrão TISS, anamnese digital, prescrição eletrônica, sistema multi-unidade saúde, gestão de filiais clínica, software saúde Brasil, cuidaty',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
+const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
 
-// Structured data: SoftwareApplication
-const softwareSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Cuidaty',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  offers: {
-    '@type': 'Offer',
-    price: '80',
-    priceCurrency: 'BRL',
-    priceValidUntil: '2026-12-31',
-    availability: 'https://schema.org/InStock',
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    ratingCount: '500',
-    bestRating: '5',
-    worstRating: '1',
-  },
-  description: description,
-  url: Astro.site,
-  featureList: [
-    'Automação via WhatsApp',
-    'Agenda online personalizada',
-    'Prontuário eletrônico completo',
-    'Gestão financeira integrada',
-    'Redução de 73% em faltas',
-    'Economia de 8 horas por semana',
-  ],
-  screenshot: fullImageURL,
-  softwareVersion: '2.0',
-  applicationSubCategory: 'HealthcareApplication',
-  provider: {
-    '@type': 'Organization',
-    name: 'Cuidaty',
-    url: Astro.site,
-    logo: new URL('/logo.svg', Astro.site).toString(),
-    slogan: 'Mais que um software, um suporte invisível',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      contactType: 'Customer Support',
-      availableLanguage: ['Portuguese'],
-    },
-  },
-};
-
-// Structured data: Organization
-const organizationSchema = {
+// Organization structured data
+const organizationData = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
+  '@id': `${siteUrl}#organization`,
   name: 'Cuidaty',
-  url: Astro.site?.toString(),
-  logo: new URL('/logo.svg', Astro.site).toString(),
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: new URL('/logo.svg', siteUrl).toString(),
+    width: 120,
+    height: 40,
+  },
   image: fullImageURL,
-  description: 'Sistema de gestão completa para consultórios e clínicas de saúde mental e bem-estar.',
   slogan: 'Mais que um software, um suporte invisível',
-  foundingDate: '2024',
+  description: 'Tecnologia que devolve o respiro à rotina clínica de profissionais da saúde.',
+  email: 'contato@thetaharpia.com',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'contato@thetaharpia.com',
+      availableLanguage: 'Portuguese',
+      areaServed: 'BR',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'contato@thetaharpia.com',
+      availableLanguage: 'Portuguese',
+      areaServed: 'BR',
+    },
+  ],
   areaServed: {
     '@type': 'Country',
     name: 'Brazil',
   },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'Customer Support',
-    availableLanguage: ['Portuguese'],
-    url: new URL('/#contato', Astro.site).toString(),
-  },
+  knowsLanguage: 'pt-BR',
+  foundingDate: '2024',
   sameAs: [
     'https://www.instagram.com/thetaharpia',
     'https://www.linkedin.com/company/thetaharpia',
@@ -104,31 +75,124 @@ const organizationSchema = {
   },
 };
 
-// Structured data: WebSite with SearchAction
-const websiteSchema = {
+// SoftwareApplication structured data
+const softwareData = {
   '@context': 'https://schema.org',
-  '@type': 'WebSite',
+  '@type': 'SoftwareApplication',
   name: 'Cuidaty',
-  url: Astro.site?.toString(),
-  description: description,
-  inLanguage: 'pt-BR',
-  publisher: {
-    '@type': 'Organization',
-    name: 'Cuidaty',
-    logo: new URL('/logo.svg', Astro.site).toString(),
-  },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: new URL('/?q={search_term_string}', Astro.site).toString(),
+  applicationCategory: 'HealthApplication',
+  applicationSubCategory: 'Gestão de Consultórios e Clínicas',
+  operatingSystem: 'Web',
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Plano Individual',
+      price: '80',
+      priceCurrency: 'BRL',
+      priceValidUntil: '2026-12-31',
+      availability: 'https://schema.org/InStock',
+      description: 'Para profissionais individuais com assistente. Inclui agenda compartilhada, portal de agendamento e controle financeiro.',
     },
-    'query-input': 'required name=search_term_string',
+    {
+      '@type': 'Offer',
+      name: 'Plano Profissional',
+      priceCurrency: 'BRL',
+      availability: 'https://schema.org/InStock',
+      description: 'Para clínicas e grupos com até 3 unidades. Gestão de repasses, dashboard consolidado e relatórios gerenciais.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Plano Empresarial',
+      priceCurrency: 'BRL',
+      availability: 'https://schema.org/InStock',
+      description: 'Para hospitais e grandes operações com +3 unidades ou +50 usuários. API para integração, analytics avançado e Business Intelligence.',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '500',
+  },
+  description: description,
+  url: siteUrl,
+  featureList: [
+    'Prontuário eletrônico com anamnese, evolução, prescrição e observação',
+    'Agenda online com agendamentos recorrentes e fluxo de status',
+    'Automação de confirmações e lembretes via WhatsApp',
+    'Importação de pacientes a partir de contatos do WhatsApp',
+    'Cadastro completo de pacientes com dados demográficos, alergias e convênio',
+    'Gestão financeira com contas a receber, fluxo de caixa e faturas com boleto',
+    'Relatórios clínicos com anexos PDF e comentários de equipe',
+    'Controle de equipes com 5 níveis de permissão',
+    'Estrutura multi-unidade: organização, filiais, departamentos e setores',
+    'Conformidade com LGPD, CFM, CFP, ANS e padrão TISS',
+    'Criptografia AES-256 e hospedagem 100% brasileira',
+    'Portal de agendamento profissional para pacientes',
+  ],
+  screenshot: fullImageURL,
+  softwareVersion: '2.0',
+  softwareHelp: {
+    '@type': 'CreativeWork',
+    url: `${siteUrl}#funcionalidades`,
+  },
+  provider: {
+    '@id': `${siteUrl}#organization`,
+  },
+  audience: {
+    '@type': 'HealthAndBeautyBusiness',
+    audienceType: 'Profissionais da saúde, psicólogos, médicos, enfermeiros, terapeutas, gestores de clínicas e hospitais',
   },
 };
 
-// Structured data: FAQ
-const faqSchema = {
+// WebSite structured data (enables sitelinks search box)
+const websiteData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}#website`,
+  name: 'Cuidaty',
+  url: siteUrl,
+  description: description,
+  publisher: {
+    '@id': `${siteUrl}#organization`,
+  },
+  inLanguage: 'pt-BR',
+};
+
+// WebPage structured data
+const webPageData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': canonicalURL.toString(),
+  name: title,
+  description: description,
+  url: canonicalURL.toString(),
+  isPartOf: {
+    '@id': `${siteUrl}#website`,
+  },
+  about: {
+    '@id': `${siteUrl}#organization`,
+  },
+  inLanguage: 'pt-BR',
+};
+
+// BreadcrumbList structured data
+const breadcrumbData = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: siteUrl,
+    },
+  ],
+};
+
+// FAQ structured data
+const faqData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
@@ -137,7 +201,7 @@ const faqSchema = {
       name: 'O que é o Cuidaty?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'O Cuidaty é um sistema de gestão completa para consultórios e clínicas de saúde. Oferece automação via WhatsApp, agenda online, prontuário eletrônico e gestão financeira integrada, permitindo que profissionais foquem no que realmente importa: cuidar dos pacientes.',
+        text: 'O Cuidaty é um sistema completo de gestão para consultórios, clínicas de saúde mental, hospitais, laboratórios e centros multidisciplinares. Inclui prontuário eletrônico, agenda online com confirmação via WhatsApp, gestão financeira, controle de equipes e conformidade com LGPD, CFM, CFP e padrão TISS.',
       },
     },
     {
@@ -145,15 +209,7 @@ const faqSchema = {
       name: 'Quanto custa o Cuidaty?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'O plano individual do Cuidaty custa a partir de R$ 80/mês, incluindo todas as funcionalidades como automação via WhatsApp, agenda online, prontuário eletrônico e gestão financeira. Também oferecemos planos para clínicas e hospitais sob consulta.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'O Cuidaty ajuda a reduzir faltas de pacientes?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim! Com o sistema de confirmações e lembretes automáticos via WhatsApp, o Cuidaty reduz em até 73% as faltas dos pacientes, economizando tempo e maximizando a receita do consultório.',
+        text: 'O plano Individual para profissionais com assistente custa R$ 80/mês. Para clínicas e grupos, oferecemos o plano Profissional com proposta personalizada. Hospitais e grandes operações contam com o plano Empresarial sob consulta.',
       },
     },
     {
@@ -161,22 +217,38 @@ const faqSchema = {
       name: 'O Cuidaty é seguro e está em conformidade com a LGPD?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sim. O Cuidaty segue todas as regulamentações da LGPD e demais normas profissionais de saúde. Seus dados e de seus pacientes são protegidos com criptografia e práticas de segurança de nível empresarial.',
+        text: 'Sim. O Cuidaty atende às exigências da LGPD, Resolução CFM 1.821/2007, CFP, ANS e padrão TISS. Utilizamos criptografia AES-256, hospedagem 100% brasileira com backup redundante e auditoria de segurança semestral.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Quais profissionais podem usar o Cuidaty?',
+      name: 'O Cuidaty integra com WhatsApp?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'O Cuidaty é ideal para psicólogos, terapeutas, nutricionistas, fisioterapeutas, médicos e outros profissionais de saúde que trabalham em consultório individual, clínicas com múltiplos profissionais ou grandes operações hospitalares.',
+        text: 'Sim. O Cuidaty possui integração nativa com WhatsApp para automação de confirmações e lembretes de consultas, gerenciamento de contatos e importação de pacientes diretamente dos contatos do WhatsApp.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'Quais tipos de prontuário o sistema oferece?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'O prontuário eletrônico do Cuidaty suporta 4 tipos de registro: Anamnese, Evolução, Prescrição e Observação. Conta com editor rich text, controle de privacidade (privado ou público para equipe), finalização com trava e trilha completa de auditoria.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'O Cuidaty funciona para clínicas com múltiplas unidades?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Sim. O Cuidaty possui estrutura hierárquica que suporta múltiplas unidades: Organização → Sub-Organização (filial, departamento, setor, ala). O plano Empresarial é ideal para operações com mais de 3 unidades ou 50 usuários, com API para integração e analytics avançado.',
       },
     },
   ],
 };
 
 // Combine all structured data
-const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSchema];
+const structuredData = [organizationData, softwareData, websiteData, webPageData, breadcrumbData, faqData];
 ---
 
 <!doctype html>
@@ -206,6 +278,9 @@ const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSc
 
 
 
+    <!-- OpenSearch -->
+    <link rel="search" type="application/opensearchdescription+xml" title="Cuidaty" href="/opensearch.xml" />
+
     <!-- Favicons and Icons -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -229,6 +304,10 @@ const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSc
     <meta name="revisit-after" content="7 days" />
     <meta name="generator" content={Astro.generator} />
     <meta name="format-detection" content="telephone=no" />
+    <meta name="classification" content="Healthcare Software, Medical Practice Management" />
+    <meta name="category" content="Health" />
+    <meta name="coverage" content="Brasil" />
+    <meta name="target" content="Profissionais da saúde, psicólogos, médicos, terapeutas, gestores de clínicas" />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="BR" />
@@ -244,7 +323,7 @@ const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSc
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <!-- Alternate / hreflang -->
+    <!-- Language alternates -->
     <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
     <link rel="alternate" hreflang="x-default" href={canonicalURL.toString()} />
 
@@ -271,7 +350,7 @@ const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSc
           type: 'image/png',
           width: 1200,
           height: 630,
-          alt: 'Cuidaty - Software para psicólogos e clínicas com agenda online, prontuário eletrônico e automação WhatsApp',
+          alt: 'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
         },
       }}
       twitter={{
@@ -281,7 +360,7 @@ const structuredData = [softwareSchema, organizationSchema, websiteSchema, faqSc
         title: title,
         description: description,
         image: fullImageURL,
-        imageAlt: 'Cuidaty - Software para psicólogos e clínicas com agenda online, prontuário eletrônico e automação WhatsApp',
+        imageAlt: 'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
       }}
     />
 
