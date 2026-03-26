@@ -2,7 +2,8 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
   <ShortName>Cuidaty</ShortName>
   <Description>Cuidaty - Sistema de gestão completa para consultórios e clínicas</Description>
-  <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/png">https://cuidaty.com/favicon-16x16.png</Image>
   <Url type="text/html" template="https://cuidaty.com/?q={searchTerms}" />
+  <Image width="16" height="16" type="image/png">https://cuidaty.com/favicon-16x16.png</Image>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Language>pt-BR</Language>
 </OpenSearchDescription>
