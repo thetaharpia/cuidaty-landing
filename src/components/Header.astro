@@ -5,7 +5,7 @@ import logoWritten from '../assets/logo-written.svg';
 ---
 
 <header
-  class="bg-background/92 fixed left-0 right-0 top-0 z-50 border-b border-border shadow-soft backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-transparent md:bg-transparent md:shadow-none md:backdrop-blur-0"
+  class="bg-background/92 fixed left-0 right-0 top-0 z-50 border-b border-border shadow-soft backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-border/70 md:bg-background/80 md:shadow-soft md:backdrop-blur-md"
   id="main-header"
 >
   <nav class="container mx-auto flex items-center justify-between px-5 py-3 md:px-8 md:py-4">
@@ -159,17 +159,24 @@ import logoWritten from '../assets/logo-written.svg';
         'border-border',
         'shadow-soft'
       );
-      header?.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
+      header?.classList.remove('bg-background/80', 'border-border/70');
       return;
     }
 
     if (isDesktop) {
-      header?.classList.add('bg-transparent', 'border-transparent', 'shadow-none');
+      header?.classList.add(
+        'bg-background/80',
+        'border-border/70',
+        'shadow-soft',
+        'backdrop-blur-md'
+      );
       header?.classList.remove(
         'bg-background/95',
         'backdrop-saturate-150',
         'border-border',
-        'shadow-soft'
+        'bg-transparent',
+        'border-transparent',
+        'shadow-none'
       );
       return;
     }
