@@ -96,6 +96,16 @@ const currentYear = new Date().getFullYear();
           </li>
           <li>
             <a
+              href="https://blog.cuidaty.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Blog
+            </a>
+          </li>
+          <li>
+            <a
               href="/#resultados"
               class="text-foreground/70 transition-colors hover:text-foreground"
             >
@@ -122,7 +132,34 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="mt-12 border-t border-border pt-8 text-center text-sm text-foreground/60">
+    <div class="mt-12 border-t border-border pt-8 flex flex-col items-center gap-4 text-sm text-foreground/60">
+      <div class="flex items-center gap-4">
+        <a
+          href="https://www.instagram.com/cuidaty_com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Cuidaty no Instagram"
+          class="text-foreground/60 transition-colors hover:text-foreground"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+          </svg>
+        </a>
+        <a
+          href="https://blog.cuidaty.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Blog da Cuidaty"
+          class="text-foreground/60 transition-colors hover:text-foreground"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </a>
+      </div>
       <p>&copy; {currentYear} Cuidaty. Todos os direitos reservados.</p>
     </div>
   </div>
