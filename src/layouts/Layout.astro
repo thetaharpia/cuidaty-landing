@@ -1,6 +1,9 @@
 ---
 import { SEO } from 'astro-seo';
 import '../styles/global.css';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import MobileCTABar from '../components/MobileCTABar.astro';
+import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
   title?: string;
@@ -11,16 +14,26 @@ interface Props {
 }
 
 const {
-  title = 'Cuidaty - Software para Consultórios e Clínicas | Agenda, Prontuário e WhatsApp',
-  description = 'Sistema completo de gestão para consultórios, clínicas de saúde mental, hospitais e centros multidisciplinares. Prontuário eletrônico, agenda online com confirmação via WhatsApp, gestão financeira, controle de equipes e conformidade com LGPD, CFM, CFP e padrão TISS. Mais de 500 profissionais economizam 8h por semana. A partir de R$80/mês.',
+  title = homeTitle,
+  description = homeDescription,
   image = '/screenshot.png',
   noindex = false,
-  keywords = 'software para psicólogos, sistema para consultório de psicologia, agenda online psicólogo, prontuário eletrônico psicologia, automação whatsapp consultório, gestão de consultório, sistema para clínicas, agendamento online pacientes, controle financeiro consultório, software para terapeutas, sistema para nutricionistas, gestão de clínica de saúde, prontuário SOAP, lembrete de consulta whatsapp, confirmação de consulta automática, redução de faltas consultório, portal de agendamento online, software LGPD saúde, gestão de pacientes, sistema para fisioterapeutas, plataforma para profissionais de saúde, software consultório online, teleconsulta, gestão clínica integrada, repasse financeiro clínica, conformidade CFM, conformidade CFP, padrão TISS, anamnese digital, prescrição eletrônica, sistema multi-unidade saúde, gestão de filiais clínica, software saúde Brasil, cuidaty',
+  keywords = homeKeywords,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
 const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
+const pathname = Astro.url.pathname;
+const isHomePage = pathname === '/';
+const pathSegments = pathname.split('/').filter(Boolean);
+const pageLabel =
+  pathSegments.length === 0
+    ? 'Home'
+    : pathSegments[pathSegments.length - 1]
+        .split('-')
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
 
 // Organization structured data
 const organizationData = {
@@ -36,21 +49,22 @@ const organizationData = {
     height: 40,
   },
   image: fullImageURL,
-  slogan: 'Mais que um software, um suporte invisível',
+  slogan: 'Menos burocracia. Mais escuta.',
   description: 'Tecnologia que devolve o respiro à rotina clínica de profissionais da saúde.',
-  email: 'contato@thetaharpia.com',
+  email: 'pedro@thetaharpia.com',
   contactPoint: [
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: 'contato@thetaharpia.com',
+      email: 'pedro@thetaharpia.com',
+      telephone: '+55-96-98405-8103',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
     },
     {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'contato@thetaharpia.com',
+      email: 'pedro@thetaharpia.com',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
     },
@@ -91,21 +105,24 @@ const softwareData = {
       priceCurrency: 'BRL',
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
-      description: 'Para profissionais individuais com assistente. Inclui agenda compartilhada, portal de agendamento e controle financeiro.',
+      description:
+        'Para profissionais individuais com assistente. Inclui agenda compartilhada, portal de agendamento e controle financeiro.',
     },
     {
       '@type': 'Offer',
       name: 'Plano Profissional',
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
-      description: 'Para clínicas e grupos com até 3 unidades. Gestão de repasses, dashboard consolidado e relatórios gerenciais.',
+      description:
+        'Para clínicas e grupos com até 3 unidades. Gestão de repasses, dashboard consolidado e relatórios gerenciais.',
     },
     {
       '@type': 'Offer',
       name: 'Plano Empresarial',
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
-      description: 'Para hospitais e grandes operações com +3 unidades ou +50 usuários. API para integração, analytics avançado e Business Intelligence.',
+      description:
+        'Para hospitais e grandes operações com +3 unidades ou +50 usuários. API para integração, analytics avançado e Business Intelligence.',
     },
   ],
   aggregateRating: {
@@ -117,20 +134,7 @@ const softwareData = {
   },
   description: description,
   url: siteUrl,
-  featureList: [
-    'Prontuário eletrônico com anamnese, evolução, prescrição e observação',
-    'Agenda online com agendamentos recorrentes e fluxo de status',
-    'Automação de confirmações e lembretes via WhatsApp',
-    'Importação de pacientes a partir de contatos do WhatsApp',
-    'Cadastro completo de pacientes com dados demográficos, alergias e convênio',
-    'Gestão financeira com contas a receber, fluxo de caixa e faturas com boleto',
-    'Relatórios clínicos com anexos PDF e comentários de equipe',
-    'Controle de equipes com 5 níveis de permissão',
-    'Estrutura multi-unidade: organização, filiais, departamentos e setores',
-    'Conformidade com LGPD, CFM, CFP, ANS e padrão TISS',
-    'Criptografia AES-256 e hospedagem 100% brasileira',
-    'Portal de agendamento profissional para pacientes',
-  ],
+  featureList: healthFeatureList,
   screenshot: fullImageURL,
   softwareVersion: '2.0',
   softwareHelp: {
@@ -142,8 +146,11 @@ const softwareData = {
   },
   audience: {
     '@type': 'HealthAndBeautyBusiness',
-    audienceType: 'Profissionais da saúde, psicólogos, médicos, enfermeiros, terapeutas, gestores de clínicas e hospitais',
+    audienceType:
+      'Profissionais da saúde, psicólogos, médicos, enfermeiros, terapeutas, gestores de clínicas e hospitais',
   },
+  inLanguage: 'pt-BR',
+  keywords,
 };
 
 // WebSite structured data (enables sitelinks search box)
@@ -188,6 +195,16 @@ const breadcrumbData = {
       name: 'Home',
       item: siteUrl,
     },
+    ...(isHomePage
+      ? []
+      : [
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: pageLabel,
+            item: canonicalURL.toString(),
+          },
+        ]),
   ],
 };
 
@@ -195,60 +212,24 @@ const breadcrumbData = {
 const faqData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'O que é o Cuidaty?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'O Cuidaty é um sistema completo de gestão para consultórios, clínicas de saúde mental, hospitais, laboratórios e centros multidisciplinares. Inclui prontuário eletrônico, agenda online com confirmação via WhatsApp, gestão financeira, controle de equipes e conformidade com LGPD, CFM, CFP e padrão TISS.',
-      },
+  mainEntity: homeFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
     },
-    {
-      '@type': 'Question',
-      name: 'Quanto custa o Cuidaty?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'O plano Individual para profissionais com assistente custa R$ 80/mês. Para clínicas e grupos, oferecemos o plano Profissional com proposta personalizada. Hospitais e grandes operações contam com o plano Empresarial sob consulta.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'O Cuidaty é seguro e está em conformidade com a LGPD?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim. O Cuidaty atende às exigências da LGPD, Resolução CFM 1.821/2007, CFP, ANS e padrão TISS. Utilizamos criptografia AES-256, hospedagem 100% brasileira com backup redundante e auditoria de segurança semestral.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'O Cuidaty integra com WhatsApp?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim. O Cuidaty possui integração nativa com WhatsApp para automação de confirmações e lembretes de consultas, gerenciamento de contatos e importação de pacientes diretamente dos contatos do WhatsApp.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Quais tipos de prontuário o sistema oferece?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'O prontuário eletrônico do Cuidaty suporta 4 tipos de registro: Anamnese, Evolução, Prescrição e Observação. Conta com editor rich text, controle de privacidade (privado ou público para equipe), finalização com trava e trilha completa de auditoria.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'O Cuidaty funciona para clínicas com múltiplas unidades?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sim. O Cuidaty possui estrutura hierárquica que suporta múltiplas unidades: Organização → Sub-Organização (filial, departamento, setor, ala). O plano Empresarial é ideal para operações com mais de 3 unidades ou 50 usuários, com API para integração e analytics avançado.',
-      },
-    },
-  ],
+  })),
 };
 
 // Combine all structured data
-const structuredData = [organizationData, softwareData, websiteData, webPageData, breadcrumbData, faqData];
+const structuredData = [
+  organizationData,
+  websiteData,
+  webPageData,
+  breadcrumbData,
+  ...(isHomePage ? [softwareData, faqData] : []),
+];
 ---
 
 <!doctype html>
@@ -265,21 +246,20 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
 
     <!-- Preload Critical Resources -->
     <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-    
+
     <!-- Critical font loading - synchronous for consistency -->
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Arapey:ital@0;1&family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap"
     />
-    
-    <!-- Preload key font files for faster rendering -->
-    <link rel="preload" href="https://fonts.gstatic.com/s/poppins/v21/pxiEyp8kv8JHgFVrJJfecg.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="https://fonts.gstatic.com/s/lora/v33/0QIvMX1D_JOuMwf7I_FMl_GW8g.woff2" as="font" type="font/woff2" crossorigin />
-
-
 
     <!-- OpenSearch -->
-    <link rel="search" type="application/opensearchdescription+xml" title="Cuidaty" href="/opensearch.xml" />
+    <link
+      rel="search"
+      type="application/opensearchdescription+xml"
+      title="Cuidaty"
+      href="/opensearch.xml"
+    />
 
     <!-- Favicons and Icons -->
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
@@ -299,7 +279,12 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
     <!-- Additional Meta Tags -->
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Cuidaty" />
-    <meta name="robots" content={noindex ? 'noindex,nofollow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'} />
+    <meta
+      name="robots"
+      content={noindex
+        ? 'noindex,nofollow'
+        : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}
+    />
     <meta name="language" content="Portuguese" />
     <meta name="revisit-after" content="7 days" />
     <meta name="generator" content={Astro.generator} />
@@ -307,7 +292,10 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
     <meta name="classification" content="Healthcare Software, Medical Practice Management" />
     <meta name="category" content="Health" />
     <meta name="coverage" content="Brasil" />
-    <meta name="target" content="Profissionais da saúde, psicólogos, médicos, terapeutas, gestores de clínicas" />
+    <meta
+      name="target"
+      content="Profissionais da saúde, psicólogos, médicos, terapeutas, gestores de clínicas"
+    />
 
     <!-- Geo Tags -->
     <meta name="geo.region" content="BR" />
@@ -317,11 +305,8 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
     <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" /> -->
     <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
 
-    <!-- OpenSearch -->
-    <link rel="search" type="application/opensearchdescription+xml" title="Cuidaty" href="/opensearch.xml" />
-
     <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- Language alternates -->
     <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
@@ -360,33 +345,20 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
         title: title,
         description: description,
         image: fullImageURL,
-        imageAlt: 'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
+        imageAlt:
+          'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
       }}
     />
 
     <!-- Structured Data (JSON-LD) -->
-    {structuredData.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-    ))}
+    {
+      structuredData.map((schema) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      ))
+    }
 
     <!-- Inline critical CSS for font loading -->
     <style>
-      /* Font loading optimization with fallbacks */
-      @font-face {
-        font-family: 'Poppins';
-        font-style: normal;
-        font-weight: 400;
-        font-display: block;
-        src: local('Poppins');
-      }
-      @font-face {
-        font-family: 'Lora';
-        font-style: normal;
-        font-weight: 400;
-        font-display: block;
-        src: local('Lora');
-      }
-
       /* Prevent layout shift for images */
       img {
         content-visibility: auto;
@@ -401,7 +373,12 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
       body {
         margin: 0;
         padding: 0;
-        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family:
+          'Figtree',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
@@ -455,7 +432,9 @@ const structuredData = [organizationData, softwareData, websiteData, webPageData
       }
     </script>
   </head>
-  <body>
+  <body class="pb-[92px] lg:pb-0">
     <slot />
+    <FloatingWhatsApp />
+    <MobileCTABar />
   </body>
 </html>

@@ -1,0 +1,192 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Termos de Uso - Cuidaty"
+  description="Termos de uso da plataforma Cuidaty. Condições para utilização do sistema de gestão para consultórios, clínicas e profissionais da saúde."
+  keywords="termos de uso Cuidaty, condições de uso, contrato plataforma saúde, termos software consultório"
+>
+  <Header />
+  <main class="pt-24 pb-16 bg-white">
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="max-w-4xl mx-auto text-center text-white">
+          <span class="mb-4 inline-block rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
+            Condições claras e justas
+          </span>
+          <h1 class="mb-4 font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+            Termos de Uso
+          </h1>
+          <p class="text-lg text-white/80 mb-2">
+            Condições claras e justas para usar nossa plataforma
+          </p>
+          <p class="text-sm text-white/70">
+            Última atualização: 15 de julho de 2025
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="container mx-auto px-4 md:px-6 py-12 md:py-16">
+      <div class="max-w-6xl mx-auto">
+
+        <!-- Cards grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+          <!-- Card 1: Nossos Serviços -->
+          <div class="rounded-2xl bg-white p-6 lg:p-8 shadow-lg ring-1 ring-gray-100 hover:shadow-xl transition-shadow">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
+                </svg>
+              </div>
+              <h2 class="font-serif text-xl font-semibold text-cuidaty-dark">Nossos Serviços</h2>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-cuidaty-primary font-bold">•</span> Sistema de gestão completo</li>
+              <li class="flex items-start gap-2"><span class="text-cuidaty-primary font-bold">•</span> Prontuário eletrônico</li>
+              <li class="flex items-start gap-2"><span class="text-cuidaty-primary font-bold">•</span> Agenda de consultas e automação via WhatsApp</li>
+              <li class="flex items-start gap-2"><span class="text-cuidaty-primary font-bold">•</span> Controle financeiro</li>
+              <li class="flex items-start gap-2"><span class="text-cuidaty-primary font-bold">•</span> Relatórios e análises</li>
+            </ul>
+          </div>
+
+          <!-- Card 2: Suas Responsabilidades -->
+          <div class="rounded-2xl bg-white p-6 lg:p-8 shadow-lg ring-1 ring-gray-100 hover:shadow-xl transition-shadow">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                </svg>
+              </div>
+              <h2 class="font-serif text-xl font-semibold text-cuidaty-dark">Suas Responsabilidades</h2>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-secondary font-bold">•</span> Ser profissional de saúde registrado</li>
+              <li class="flex items-start gap-2"><span class="text-secondary font-bold">•</span> Manter dados precisos e atualizados</li>
+              <li class="flex items-start gap-2"><span class="text-secondary font-bold">•</span> Proteger credenciais de acesso</li>
+              <li class="flex items-start gap-2"><span class="text-secondary font-bold">•</span> Cumprir regulamentações da sua área</li>
+              <li class="flex items-start gap-2"><span class="text-secondary font-bold">•</span> Uso apenas para fins profissionais</li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Planos e Pagamento -->
+          <div class="rounded-2xl bg-white p-6 lg:p-8 shadow-lg ring-1 ring-gray-100 hover:shadow-xl transition-shadow">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zM14 6a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2h6zM4 14a2 2 0 002 2h8a2 2 0 002-2v-2H4v2z"/>
+                </svg>
+              </div>
+              <h2 class="font-serif text-xl font-semibold text-cuidaty-dark">Planos e Pagamento</h2>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-amber-500 font-bold">•</span> Cobrança antecipada mensal/anual</li>
+              <li class="flex items-start gap-2"><span class="text-amber-500 font-bold">•</span> Renovação automática</li>
+              <li class="flex items-start gap-2"><span class="text-amber-500 font-bold">•</span> Preços sujeitos a alteração</li>
+              <li class="flex items-start gap-2"><span class="text-amber-500 font-bold">•</span> Cancelamento a qualquer momento</li>
+              <li class="flex items-start gap-2"><span class="text-amber-500 font-bold">•</span> Sem reembolso por cancelamento</li>
+            </ul>
+          </div>
+
+          <!-- Card 4: Limitações -->
+          <div class="rounded-2xl bg-white p-6 lg:p-8 shadow-lg ring-1 ring-gray-100 hover:shadow-xl transition-shadow">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-rose-500 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <h2 class="font-serif text-xl font-semibold text-cuidaty-dark">Limitações</h2>
+            </div>
+            <ul class="space-y-2 text-gray-700">
+              <li class="flex items-start gap-2"><span class="text-rose-500 font-bold">•</span> SLA: 99,5% de disponibilidade</li>
+              <li class="flex items-start gap-2"><span class="text-rose-500 font-bold">•</span> Responsabilidade limitada</li>
+              <li class="flex items-start gap-2"><span class="text-rose-500 font-bold">•</span> Não cobrimos decisões clínicas</li>
+              <li class="flex items-start gap-2"><span class="text-rose-500 font-bold">•</span> Backup adicional recomendado</li>
+              <li class="flex items-start gap-2"><span class="text-rose-500 font-bold">•</span> Suporte durante horário comercial</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- Resumo Legal -->
+        <div class="max-w-4xl mx-auto mb-12 rounded-2xl bg-gradient-to-br from-cuidaty-primary/5 to-secondary/5 p-8 lg:p-10">
+          <h3 class="text-center font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-8">
+            Resumo Legal
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-cuidaty-primary/10">
+                <svg class="h-6 w-6 text-cuidaty-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+              </div>
+              <p class="font-semibold text-cuidaty-dark mb-1">Legislação</p>
+              <p class="text-sm text-gray-600">Regido pela legislação brasileira</p>
+            </div>
+            <div>
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-secondary/10">
+                <svg class="h-6 w-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <p class="font-semibold text-cuidaty-dark mb-1">Propriedade</p>
+              <p class="text-sm text-gray-600">Software e marca protegidos</p>
+            </div>
+            <div>
+              <div class="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-cuidaty-primary/10">
+                <svg class="h-6 w-6 text-cuidaty-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <p class="font-semibold text-cuidaty-dark mb-1">Cancelamento</p>
+              <p class="text-sm text-gray-600">Dados mantidos por 90 dias</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contato -->
+        <div class="max-w-2xl mx-auto text-center">
+          <h3 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-6">
+            Dúvidas sobre os Termos?
+          </h3>
+          <div class="rounded-2xl bg-accent p-6 space-y-3">
+            <p class="text-gray-700">
+              <strong>Jurídico:</strong> <a href="mailto:pedro@thetaharpia.com" class="text-cuidaty-primary hover:underline">pedro@thetaharpia.com</a>
+            </p>
+            <p class="text-gray-700">
+              <strong>Suporte:</strong> <a href="mailto:pedro@thetaharpia.com" class="text-cuidaty-primary hover:underline">pedro@thetaharpia.com</a>
+            </p>
+            <p class="text-gray-700">
+              <strong>WhatsApp:</strong> <a href="https://wa.me/5596984058103" target="_blank" rel="noopener" class="text-cuidaty-primary hover:underline">(96) 98405-8103</a>
+            </p>
+            <p class="text-sm text-gray-500">
+              Resposta em até 48 horas
+            </p>
+          </div>
+        </div>
+
+        <!-- Trust Indicators -->
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 md:gap-8 text-sm text-gray-600 mt-12">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-cuidaty-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Termos Justos
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-cuidaty-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            SLA 99,5%
+          </div>
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-cuidaty-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>
+            Transparente
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

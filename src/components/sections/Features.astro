@@ -1,160 +1,490 @@
 ---
+import { Image } from 'astro:assets';
+
+import acompanheAtendimentoBot from '../../assets/acompanhe-atendimento-do-seu-bot-em-tempo-real.png';
+import agendaSemanal from '../../assets/agenda-semanal.png';
+import aviseAgendamentoWhatsapp from '../../assets/avise-agendamento-no-wahtsapp.png';
+import configureAutomacoesWhatsapp from '../../assets/configure-automacoes-whatsapp.png';
+import gestaoDeEquipe from '../../assets/gestao-de-equipe.png';
+import painelFinanceiro from '../../assets/painel-financeiro-acompanhe-profissionais-destaque.png';
+import prontuario from '../../assets/prontuario.png';
+import relatorios from '../../assets/relatorios.png';
+import useWhatsappNoApp from '../../assets/use-whatsapp-dentro-da-plataforma-integrado-com-sua-rotina-clinica.png';
 ---
 
-<section id="funcionalidades" class="bg-beige py-20 md:py-28 relative overflow-hidden">
-  <!-- Decorative elements -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-white/40 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-
-  <div class="container mx-auto px-4 md:px-6 relative z-10">
-
-    <!-- Section Header -->
-    <div class="max-w-3xl mx-auto text-center mb-16">
-      <h2 class="font-serif text-3xl md:text-4xl lg:text-5xl font-semibold text-cuidaty-dark mb-6">
-        Nossas funcionalidades
+<section id="funcionalidades" class="bg-beige py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto mb-24 max-w-4xl">
+      <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+        Entrega de valor
+      </p>
+      <h2
+        class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
+      >
+        Tecnologia que<br />
+        <span class="italic text-cuidaty-dark/70">acolhe em silêncio.</span>
       </h2>
-      <p class="text-xl text-gray-700 leading-relaxed">
-        <span class="font-semibold text-cuidaty-primary">Tecnologia que acolhe.</span> Transformando recursos técnicos em benefícios emocionais.
+      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70">
+        Quatro capacidades que funcionam em background para que você fique com os pacientes, não com
+        a burocracia.
       </p>
     </div>
 
-    <!-- 3 Main Feature Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-
-      <!-- Feature 1: WhatsApp Automation -->
-      <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
-        <div class="mb-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-2xl font-semibold text-cuidaty-dark mb-4">
-            Automação via WhatsApp
-          </h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Um assistente automatizado de agendamento que fala a língua do seu consultório.
-          </p>
+    <article
+      class="mx-auto mb-32 grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16"
+    >
+      <div>
+        <div class="mb-5 flex items-baseline gap-4">
+          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">01</span>
+          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
         </div>
-
-        <!-- Sub-features -->
-        <ul class="space-y-3 mb-6">
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Confirmações e lembretes automáticos</span>
+        <h3
+          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
+        >
+          Automacao via WhatsApp
+        </h3>
+        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
+          Um assistente automatizado que atende na plataforma e no aplicativo do seu consultorio —
+          configure uma vez, funciona todos os dias.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Fluxos prontos de boas-vindas, confirmacao e lembrete
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Agendamento direto pelo WhatsApp</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Uso do WhatsApp dentro da plataforma e tambem no aplicativo
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Redução de 73% em faltas</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Acompanhamento do bot em tempo real — voce assume quando quiser
+            </span>
           </li>
         </ul>
       </div>
 
-      <!-- Feature 2: Digital Presence & Scheduling -->
-      <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
-        <div class="mb-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-2xl font-semibold text-cuidaty-dark mb-4">
-            Presença Digital e Agenda
-          </h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Um link de agendamento que trabalha por você, 24 horas por dia.
-          </p>
+      <div>
+        <div class="space-y-4 sm:hidden">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={configureAutomacoesWhatsapp}
+              alt="Interface de configuracao das automacoes de WhatsApp no Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={acompanheAtendimentoBot}
+              alt="Acompanhamento de atendimentos do bot em tempo real"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="mx-auto w-[52%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={useWhatsappNoApp}
+              alt="Tela do aplicativo do Cuidaty com atendimento pelo WhatsApp"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
         </div>
 
-        <!-- Sub-features -->
-        <ul class="space-y-3 mb-6">
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Link personalizado de agendamento</span>
+        <div class="relative hidden sm:block sm:pb-24">
+          <figure
+            class="relative z-10 overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={configureAutomacoesWhatsapp}
+              alt="Interface de configuracao das automacoes de WhatsApp no Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="relative z-20 ml-auto mt-[-12%] w-[78%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:mt-[-10%] md:w-[72%]"
+          >
+            <Image
+              src={acompanheAtendimentoBot}
+              alt="Acompanhamento de atendimentos do bot em tempo real"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="absolute bottom-0 left-6 z-30 w-[30%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:w-[28%]"
+          >
+            <Image
+              src={useWhatsappNoApp}
+              alt="Tela do aplicativo do Cuidaty com atendimento pelo WhatsApp"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
+          Configure, acompanhe em tempo real e atenda tambem pelo aplicativo.
+        </figcaption>
+      </div>
+    </article>
+
+    <article
+      class="mx-auto mb-32 grid max-w-6xl gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16"
+    >
+      <div class="lg:order-1">
+        <div class="space-y-4 sm:hidden">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={agendaSemanal}
+              alt="Agenda semanal do Cuidaty com consultas agendadas"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={aviseAgendamentoWhatsapp}
+              alt="Aviso de agendamento enviado automaticamente pelo WhatsApp"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+
+        <div class="relative hidden sm:block">
+          <figure
+            class="relative overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={agendaSemanal}
+              alt="Agenda semanal do Cuidaty com consultas agendadas"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="relative z-10 ml-auto mt-[-14%] w-[68%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:mt-[-10%] md:w-[62%]"
+          >
+            <Image
+              src={aviseAgendamentoWhatsapp}
+              alt="Aviso de agendamento enviado automaticamente pelo WhatsApp"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
+          Cada agendamento na plataforma dispara a notificacao automaticamente.
+        </figcaption>
+      </div>
+
+      <div class="lg:order-2">
+        <div class="mb-5 flex items-baseline gap-4">
+          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">02</span>
+          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
+        </div>
+        <h3
+          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
+        >
+          Agenda e presenca digital
+        </h3>
+        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
+          Uma agenda integrada que trabalha por voce — agendou na plataforma, o paciente recebe a
+          notificacao no WhatsApp.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Visao semanal e mensal, com status por cor
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Sincronização com Google Calendar</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Cada agendamento na plataforma dispara confirmacao e lembrete no WhatsApp
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Gestão de disponibilidade em tempo real</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Link de agendamento proprio — funciona 24 horas
+            </span>
+          </li>
+        </ul>
+      </div>
+    </article>
+
+    <article
+      class="mx-auto mb-32 grid max-w-6xl gap-12 border-t border-cuidaty-dark/10 pt-16 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16"
+    >
+      <div>
+        <div class="mb-5 flex items-baseline gap-4">
+          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">03</span>
+          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
+        </div>
+        <h3
+          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
+        >
+          Financeiro e gestao de equipes
+        </h3>
+        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
+          Tenha visao clara da operacao: acompanhe receita, repasses, status das consultas e a
+          estrutura da sua equipe no mesmo sistema.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Painel financeiro com receita, a receber, cancelamentos e tendencias
+            </span>
+          </li>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Profissionais em destaque, repasses e desempenho acompanhados em tempo real
+            </span>
+          </li>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Gestao de equipes com papeis, hierarquia e visibilidade por profissional
+            </span>
           </li>
         </ul>
       </div>
 
-      <!-- Feature 3: Medical Records & Management -->
-      <div class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1">
-        <div class="mb-6">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-cuidaty-primary to-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-2xl font-semibold text-cuidaty-dark mb-4">
-            Prontuário e Gestão
-          </h3>
-          <p class="text-gray-600 leading-relaxed mb-6">
-            Tudo em um só lugar, seguro e simples. Conforme LGPD e regulamentações profissionais.
-          </p>
+      <div>
+        <div class="space-y-4 sm:hidden">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={painelFinanceiro}
+              alt="Painel financeiro do Cuidaty com receita, repasses e profissionais em destaque"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={gestaoDeEquipe}
+              alt="Tela de gestao de equipes do Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
         </div>
 
-        <!-- Sub-features -->
-        <ul class="space-y-3 mb-6">
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Prontuário eletrônico completo (SOAP)</span>
+        <div class="relative hidden sm:block sm:pb-16">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={painelFinanceiro}
+              alt="Painel financeiro do Cuidaty com receita, repasses e profissionais em destaque"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="absolute bottom-0 right-0 w-[58%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={gestaoDeEquipe}
+              alt="Tela de gestao de equipes do Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
+          Resultado financeiro e equipe organizados no mesmo painel de gestao.
+        </figcaption>
+      </div>
+    </article>
+
+    <article
+      class="mx-auto grid max-w-6xl gap-12 border-t border-cuidaty-dark/10 pt-16 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16"
+    >
+      <div class="lg:order-1">
+        <div class="space-y-4 sm:hidden">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={prontuario}
+              alt="Tela de prontuarios do Cuidaty com registros medicos e historico do paciente"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={relatorios}
+              alt="Tela de relatorios clinicos do Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+
+        <div class="relative hidden sm:block">
+          <figure
+            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
+          >
+            <Image
+              src={prontuario}
+              alt="Tela de prontuarios do Cuidaty com registros medicos e historico do paciente"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+          <figure
+            class="relative z-10 ml-auto mt-[-12%] w-[68%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:w-[62%]"
+          >
+            <Image
+              src={relatorios}
+              alt="Tela de relatorios clinicos do Cuidaty"
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="h-auto w-full"
+            />
+          </figure>
+        </div>
+        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
+          Registros clinicos e relatorios conectados para acompanhar cada paciente.
+        </figcaption>
+      </div>
+
+      <div class="lg:order-2">
+        <div class="mb-5 flex items-baseline gap-4">
+          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">04</span>
+          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
+        </div>
+        <h3
+          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
+        >
+          Prontuarios e relatorios
+        </h3>
+        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
+          Centralize o historico do paciente e transforme cada atendimento em documentos e
+          relatorios prontos para consulta ou compartilhamento.
+        </p>
+        <ul class="space-y-3">
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Prontuario eletronico completo com registros pesquisaveis
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Gestão financeira integrada</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Relatorios clinicos e documentos personalizaveis por especialidade
+            </span>
           </li>
-          <li class="flex items-start gap-2 text-sm text-gray-600">
-            <svg class="w-5 h-5 text-cuidaty-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-            </svg>
-            <span>Relatórios e documentos personalizados</span>
+          <li class="flex gap-3 text-foreground/75">
+            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
+            ></span>
+            <span class="text-[0.95rem] leading-relaxed">
+              Historico organizado para consulta rapida e acompanhamento longitudinal
+            </span>
           </li>
         </ul>
       </div>
+    </article>
 
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center">
+    <div class="mx-auto mt-20 max-w-5xl text-center">
       <a
         href="#planos"
-        class="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/90 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all hover:shadow-lg hover:scale-105"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-dark"
       >
-        Saber mais
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        Ver todos os planos
+        <svg
+          class="h-4 w-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
         </svg>
       </a>
-      <p class="text-sm text-gray-500 mt-4">
-        + Mais de 30 funcionalidades incluídas para completa gestão do seu consultório
+      <p class="mt-4 text-sm text-foreground/50">
+        + mais de 30 funcionalidades incluidas para a gestao completa do seu consultorio
       </p>
     </div>
-
   </div>
 </section>

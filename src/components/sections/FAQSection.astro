@@ -1,0 +1,40 @@
+---
+import { homeFaqs } from '../../lib/seo';
+---
+
+<section id="faq" class="bg-background py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-14">
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+          Perguntas frequentes
+        </p>
+        <h2
+          class="text-balance font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl"
+        >
+          Dúvidas comuns sobre software para clínicas e consultórios de saúde.
+        </h2>
+        <p class="mt-6 max-w-3xl text-lg leading-relaxed text-foreground/70">
+          Respostas rápidas sobre agenda online, WhatsApp, prontuário eletrônico, financeiro,
+          equipes, relatórios e conformidade para a área da saúde.
+        </p>
+      </div>
+
+      <div class="space-y-4">
+        {
+          homeFaqs.map((faq) => (
+            <details class="group rounded-xl border border-border bg-white p-6 shadow-soft">
+              <summary class="cursor-pointer list-none pr-8 text-lg font-semibold text-cuidaty-dark marker:content-none">
+                {faq.question}
+                <span class="float-right text-cuidaty-primary transition-transform group-open:rotate-45">
+                  +
+                </span>
+              </summary>
+              <p class="mt-4 leading-relaxed text-foreground/70">{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

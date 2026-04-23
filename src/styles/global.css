@@ -27,11 +27,19 @@
 
   h1,
   h2,
-  h3,
+  h3 {
+    @apply font-serif font-semibold tracking-tight;
+    font-feature-settings: 'kern', 'liga', 'onum';
+  }
+
   h4,
   h5,
   h6 {
     @apply font-sans font-semibold;
+  }
+
+  body {
+    font-feature-settings: 'kern', 'ss01', 'cv11';
   }
 }
 
@@ -76,10 +84,6 @@
 
   .focus-ring {
     @apply focus:ring-ring focus:outline-none focus:ring-2 focus:ring-offset-2;
-  }
-
-  .text-gradient {
-    @apply from-primary to-secondary bg-gradient-to-r bg-clip-text text-transparent;
   }
 
   @keyframes float {

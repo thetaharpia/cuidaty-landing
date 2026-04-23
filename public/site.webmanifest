@@ -1,13 +1,14 @@
 {
-  "name": "Cuidaty - Mais que um software, um suporte invisível",
+  "name": "Cuidaty - Software para Psicologos, Clinicas e Consultorios de Saude",
   "short_name": "Cuidaty",
-  "description": "A tecnologia que devolve o respiro à sua rotina clínica. Sistema de gestão completa para consultórios e clínicas.",
+  "description": "Sistema para psicologos, clinicas e consultorios de saude com agenda online, prontuario eletronico e automacao de WhatsApp.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#356588",
   "lang": "pt-BR",
-  "categories": ["business", "health", "productivity"],
+  "categories": ["business", "health", "medical", "productivity"],
   "icons": [
     {
       "src": "/favicon-16x16.png",

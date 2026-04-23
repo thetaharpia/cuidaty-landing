@@ -1,90 +1,69 @@
 ---
-// StatsHero - Split layout section with empathy message, stats, and image
 import { Image } from 'astro:assets';
 import psychologistMeetingImage from '../../assets/psycologist-on-meeting.jpg';
 ---
 
-<section id="resultados" class="relative bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20 overflow-hidden">
-  <!-- Decorative background pattern -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute inset-0" style="background-image: radial-gradient(circle, white 1px, transparent 1px); background-size: 40px 40px;"></div>
-  </div>
+<section id="resultados" class="bg-background py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-center">
 
-  <div class="container mx-auto px-4 md:px-6 relative z-10">
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12 items-center">
+      <!-- Left: Editorial copy -->
+      <div>
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+          Resultados
+        </p>
 
-      <!-- Left: Empathy Message -->
-      <div class="text-white space-y-4">
-        <h2 class="text-2xl md:text-3xl font-serif leading-tight">
-          Sabemos como é desafiador
+        <h2 class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl">
+          Sabemos como é<br/>
+          <span class="italic text-cuidaty-dark/70">desafiador cuidar.</span>
         </h2>
-        <p class="text-white/90 leading-relaxed">
-          Gerenciar agenda, pagamentos, lembretes e toda a parte administrativa enquanto cuida dos seus pacientes.
+
+        <p class="mb-12 max-w-prose text-lg leading-relaxed text-foreground/70">
+          Gerenciar agenda, pagamentos, lembretes e toda a parte administrativa
+          enquanto cuida dos seus pacientes. É por isso que existe o Cuidaty —
+          e é por isso que <span class="text-foreground/90 font-medium">500 profissionais</span>
+          escolheram ele para cuidar da gestão.
         </p>
-        <p class="text-white/90 leading-relaxed">
-          É por isso que existe o Cuidaty.
-        </p>
+
+        <!-- Stats as typographic rhythm, not metric-card template -->
+        <dl class="divide-y divide-border/70 border-y border-border/70">
+          <div class="flex items-baseline gap-6 py-5">
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">500<span class="text-3xl text-cuidaty-primary/60">+</span></dt>
+            <dd class="text-sm text-foreground/70 md:text-base">
+              profissionais já cuidam com a gente
+            </dd>
+          </div>
+          <div class="flex items-baseline gap-6 py-5">
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">8<span class="text-3xl text-cuidaty-primary/60">h</span></dt>
+            <dd class="text-sm text-foreground/70 md:text-base">
+              economizadas por semana, em média
+            </dd>
+          </div>
+          <div class="flex items-baseline gap-6 py-5">
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">73<span class="text-3xl text-cuidaty-primary/60">%</span></dt>
+            <dd class="text-sm text-foreground/70 md:text-base">
+              menos faltas em consultas (no-show)
+            </dd>
+          </div>
+        </dl>
       </div>
 
-      <!-- Center: Stats -->
-      <div class="space-y-6">
-        <!-- Stat 1: Profissionais -->
-        <div class="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-lg p-5 hover:bg-white/15 transition-colors">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-            </svg>
-          </div>
-          <div class="flex-1">
-            <div class="text-3xl md:text-4xl font-bold text-white">500+</div>
-            <div class="text-white/80 text-sm mt-1">Profissionais atendidos</div>
-          </div>
-        </div>
-
-        <!-- Stat 2: Tempo economizado -->
-        <div class="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-lg p-5 hover:bg-white/15 transition-colors">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div class="flex-1">
-            <div class="text-3xl md:text-4xl font-bold text-white">8h</div>
-            <div class="text-white/80 text-sm mt-1">Economizadas por semana</div>
-          </div>
-        </div>
-
-        <!-- Stat 3: Redução no-show -->
-        <div class="flex items-start gap-4 bg-white/10 backdrop-blur-sm rounded-lg p-5 hover:bg-white/15 transition-colors">
-          <div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <div class="flex-1">
-            <div class="text-3xl md:text-4xl font-bold text-white">73%</div>
-            <div class="text-white/80 text-sm mt-1">Menos faltas (no-show)</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: Video therapy session image from Figma -->
-      <div class="hidden lg:block">
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-          <Image
-            src={psychologistMeetingImage}
-            alt="Sessão de terapia online via videochamada"
-            class="w-full h-auto object-cover"
-            width={600}
-            height={450}
-            loading="lazy"
-            quality={85}
-            format="webp"
-          />
-          <!-- Overlay gradient for better text contrast if needed -->
-          <div class="absolute inset-0 bg-gradient-to-t from-cuidaty-primary/20 to-transparent pointer-events-none"></div>
-        </div>
-      </div>
+      <!-- Right: Single editorial photograph -->
+      <figure class="relative hidden lg:block">
+        <Image
+          src={psychologistMeetingImage}
+          alt="Sessão de terapia online via videochamada"
+          class="w-full rounded-sm object-cover shadow-lifted"
+          width={720}
+          height={540}
+          loading="lazy"
+          quality={85}
+          format="webp"
+        />
+        <figcaption class="absolute -bottom-1 -left-1 bg-background px-4 py-2 font-serif text-xs italic text-foreground/60">
+          Uma consulta que começa no horário — e termina com você mais inteiro.
+        </figcaption>
+      </figure>
 
     </div>
   </div>

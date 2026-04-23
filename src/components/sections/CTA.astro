@@ -1,57 +1,133 @@
 ---
+
 ---
 
-<section id="contato" class="bg-gradient-to-br from-primary to-primary-hover py-20 lg:py-28">
-  <div class="container mx-auto px-4">
-    <div class="mx-auto max-w-4xl text-center">
-      <h2 class="mb-6 font-serif text-3xl font-semibold text-white md:text-4xl lg:text-5xl">
-        Você merece cuidar de si também
-      </h2>
+<section id="contato" class="bg-cuidaty-dark py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+      <!-- Left: headline + primary CTA -->
+      <div>
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-accent-light">
+          Converse com a gente
+        </p>
 
-      <p class="mb-8 text-lg text-white/90 md:text-xl">
-        Converse com nosso time e descubra como o Cuidaty pode aliviar
-        sua carga administrativa e devolver o foco ao que realmente importa.
-      </p>
-
-      <div class="mb-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <a
-          href="mailto:contato@thetaharpia.com"
-          class="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-4 font-medium text-primary shadow-lg transition-all hover:scale-105 hover:shadow-xl"
+        <h2
+          class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
         >
-          Falar com Nosso Time
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          Agende uma demonstração e sinta o Cuidaty em ação.
+        </h2>
+
+        <p class="mb-10 max-w-xl text-lg leading-relaxed text-white/70">
+          Em 30 minutos você vê como automatizar a agenda, eliminar faltas e recuperar horas da sua
+          semana. Atendimento com o fundador, sem robô.
+        </p>
+
+        <a
+          href="https://calendly.com/pedro-thetaharpia/30min"
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center gap-3 rounded-md bg-white px-8 py-4 text-base font-semibold text-cuidaty-dark transition-all hover:bg-beige"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
+          </svg>
+          Agendar demonstração
+          <svg
+            class="h-4 w-4 transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
           </svg>
         </a>
 
-        <a
-          href="mailto:contato@thetaharpia.com?subject=Agendar%20Demonstra%C3%A7%C3%A3o%20Cuidaty"
-          class="inline-flex items-center gap-2 rounded-lg border-2 border-white px-8 py-4 font-medium text-white transition-all hover:bg-white/10"
-        >
-          Agendar uma Demonstração
-        </a>
+        <p class="mt-6 text-sm text-white/50">30 minutos · Sem compromisso · Atendimento humano</p>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-white/80">
-        <div class="flex items-center gap-2">
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          <span>Atendimento humanizado</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          <span>Implementação personalizada</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-          </svg>
-          <span>Suporte contínuo</span>
-        </div>
-      </div>
+      <!-- Right: quieter contact channels -->
+      <aside class="border-l border-white/10 pl-8 lg:pl-12">
+        <p class="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
+          Ou converse direto
+        </p>
+
+        <ul class="space-y-6">
+          <li>
+            <a
+              href="https://wa.me/5596984058103?text=Ol%C3%A1%21%20Tenho%20interesse%20em%20conhecer%20o%20Cuidaty."
+              target="_blank"
+              rel="noopener"
+              class="group flex items-start gap-4 text-white/80 transition-colors hover:text-white"
+            >
+              <svg
+                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-accent-light"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"
+                ></path>
+              </svg>
+              <span>
+                <span class="block font-serif text-lg font-medium">WhatsApp</span>
+                <span class="text-sm text-white/60 group-hover:text-white/80">(96) 98405-8103</span>
+              </span>
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="mailto:pedro@thetaharpia.com?subject=Quero%20conhecer%20o%20Cuidaty"
+              class="group flex items-start gap-4 text-white/80 transition-colors hover:text-white"
+            >
+              <svg
+                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-accent-light"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <span>
+                <span class="block font-serif text-lg font-medium">E-mail</span>
+                <span class="text-sm text-white/60 group-hover:text-white/80"
+                  >pedro@thetaharpia.com</span
+                >
+              </span>
+            </a>
+          </li>
+
+          <li class="border-t border-white/10 pt-4">
+            <p class="text-xs leading-relaxed text-white/40">
+              Atendemos profissionais da saúde mental e clínicas multidisciplinares em todo o
+              Brasil. Resposta média em até 4 horas em dias úteis.
+            </p>
+          </li>
+        </ul>
+      </aside>
     </div>
   </div>
 </section>

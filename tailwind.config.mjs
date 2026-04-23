@@ -7,10 +7,11 @@ export default {
         cuidaty: {
           dark: '#0c202f',
           primary: '#356588',
-          'primary-hover': '#2d5d80',
-          secondary: '#5AC3B0',
+          'primary-hover': '#2a5070',
+          secondary: '#5ac3b0',
           accent: '#a7e9a5',
-          light: '#ddfdbe',
+          'accent-light': '#ddfdbe',
+          light: '#f8fafc',
           gray: '#e2e8f0',
         },
         beige: {
@@ -19,27 +20,27 @@ export default {
         },
         'mission-blue': '#0C202F',
         'teal-light': '#CEEDE8',
-        background: '#ffffff',
-        foreground: '#1a202c',
-        border: '#e2e8f0',
-        input: '#ffffff',
+        background: '#fbfbf9',
+        foreground: '#0f1c26',
+        border: '#e6e4df',
+        input: '#fbfbf9',
         ring: '#356588',
         card: {
           DEFAULT: '#ffffff',
-          foreground: '#1a202c',
+          foreground: '#0f1c26',
         },
         popover: {
           DEFAULT: '#ffffff',
-          foreground: '#1a202c',
+          foreground: '#0f1c26',
         },
         primary: {
           DEFAULT: '#356588',
           foreground: '#ffffff',
-          hover: '#2d5d80',
+          hover: '#2a5070',
         },
         secondary: {
-          DEFAULT: '#5AC3B0',
-          foreground: '#ffffff',
+          DEFAULT: '#5ac3b0',
+          foreground: '#0c202f',
           hover: '#4ab3a0',
         },
         muted: {
@@ -47,8 +48,8 @@ export default {
           foreground: '#475569',
         },
         accent: {
-          DEFAULT: '#f8fafb',
-          foreground: '#1a202c',
+          DEFAULT: '#f1efe9',
+          foreground: '#0f1c26',
         },
         destructive: {
           DEFAULT: '#d9534f',
@@ -82,16 +83,14 @@ export default {
       },
       fontFamily: {
         sans: [
-          'Poppins',
+          'Figtree',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
           'Apple Color Emoji',
           'Segoe UI Emoji',
-          'Segoe UI Symbol',
-          'Noto Color Emoji',
         ],
-        serif: ['Lora', 'Arapey', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+        serif: ['Besley', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
       },
       borderRadius: {
         sm: '0.25rem',
@@ -101,6 +100,10 @@ export default {
         xl: '1rem',
         '2xl': '1rem',
         '3xl': '1.5rem',
+      },
+      boxShadow: {
+        soft: '0 1px 2px rgba(12, 32, 47, 0.04), 0 4px 12px rgba(12, 32, 47, 0.06)',
+        lifted: '0 2px 4px rgba(12, 32, 47, 0.05), 0 12px 32px rgba(12, 32, 47, 0.08)',
       },
     },
   },

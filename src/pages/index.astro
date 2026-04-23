@@ -10,27 +10,42 @@ import Pain from '../components/sections/Pain.astro';
 import Features from '../components/sections/Features.astro';
 import Mission from '../components/sections/Mission.astro';
 import NacaoCuidaty from '../components/sections/NacaoCuidaty.astro';
+import Rebranding from '../components/sections/Rebranding.astro';
 import Personas from '../components/sections/Personas.astro';
 import TrustBadges from '../components/sections/TrustBadges.astro';
+import BlogSection from '../components/sections/BlogSection.astro';
 import CTA from '../components/sections/CTA.astro';
+import FAQSection from '../components/sections/FAQSection.astro';
+import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 ---
 
-<Layout
-  title="Cuidaty - Software para Psicólogos e Clínicas | Agenda Online, Prontuário Eletrônico e WhatsApp Automático"
-  description="Sistema completo de gestão para consultórios, clínicas de saúde mental, hospitais e centros multidisciplinares. Prontuário eletrônico, agenda online com confirmação via WhatsApp, gestão financeira, controle de equipes e conformidade com LGPD, CFM, CFP e padrão TISS. Mais de 500 profissionais economizam 8h por semana e reduziram 73% das faltas."
-  keywords="cuidaty, software para psicólogos, sistema para consultório de psicologia, agenda online para psicólogos, prontuário eletrônico psicologia, prontuário SOAP, automação whatsapp consultório, confirmação de consulta automática, lembrete de consulta whatsapp, gestão de consultório, sistema para clínicas de saúde, agendamento online pacientes, controle financeiro consultório, software para terapeutas, sistema para nutricionistas, sistema para fisioterapeutas, plataforma para profissionais de saúde, redução de faltas consultório, no-show consultório, portal de agendamento online, gestão de pacientes, software LGPD saúde, teleconsulta, gestão clínica integrada, repasse financeiro clínica, software médico, sistema de gestão clínica, agenda médica online, consultório online, secretária virtual consultório, conformidade CFM, conformidade CFP, padrão TISS, anamnese digital, prescrição eletrônica, sistema multi-unidade saúde"
->
+<Layout title={homeTitle} description={homeDescription} keywords={homeKeywords}>
   <Header />
   <main>
+    <!-- 1. Hook: captura + CTA primário -->
     <Hero />
+    <!-- 2. Credibilidade rápida (500+, 8h, 73%) -->
     <StatsHero />
+    <!-- 3. Conecta com a dor -->
     <Pain />
+    <!-- 4. Entrega de valor (o que você ganha) -->
     <Features />
-    <Mission />
-    <NacaoCuidaty />
+    <!-- 5. Para quem é? Cliente se reconhece -->
     <Personas />
+    <!-- 6. Prova social de pico: depoimentos + clínicas -->
+    <NacaoCuidaty />
+    <!-- 7. Narrativa da marca: de ThetaHarpia para Cuidaty -->
+    <Rebranding />
+    <!-- 8. Propósito emocional -->
+    <Mission />
+    <!-- 9. Reasseguramento técnico antes da conversão -->
     <TrustBadges />
+    <!-- 10. FAQ indexável e visível -->
+    <FAQSection />
+    <!-- 11. Momento de contato — Calendly / WhatsApp / e-mail -->
     <CTA />
+    <!-- 12. Retenção: conteúdo para quem não converteu ainda -->
+    <BlogSection />
   </main>
   <Footer />
 </Layout>

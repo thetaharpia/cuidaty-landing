@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+
+import logoWritten from '../assets/logo-written.svg';
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -6,17 +10,15 @@ const currentYear = new Date().getFullYear();
   <div class="container mx-auto px-4 py-12">
     <div class="grid gap-8 md:grid-cols-4">
       <div class="col-span-2 md:col-span-1">
-        <img
-          src="/logo.svg"
+        <Image
+          src={logoWritten}
           alt="Cuidaty"
           class="mb-4 h-10 w-auto"
-          width="120"
-          height="40"
           loading="lazy"
-          decoding="async"
+          quality={100}
         />
         <p class="text-sm text-foreground/70">
-          Tecnologia que cuida da sua rotina profissional.
+          Software para psicologos, consultorios e clinicas de saude.
         </p>
       </div>
 
@@ -24,18 +26,26 @@ const currentYear = new Date().getFullYear();
         <h3 class="mb-4 font-semibold text-foreground">Produto</h3>
         <ul class="space-y-2 text-sm">
           <li>
-            <a href="#funcionalidades" class="text-foreground/70 transition-colors hover:text-foreground">
-              Funcionalidades
+            <a
+              href="#funcionalidades"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Agenda, WhatsApp e prontuário
             </a>
           </li>
           <li>
             <a href="#planos" class="text-foreground/70 transition-colors hover:text-foreground">
-              Planos e Preços
+              Planos para consultórios e clínicas
             </a>
           </li>
           <li>
             <a href="#seguranca" class="text-foreground/70 transition-colors hover:text-foreground">
-              Segurança
+              Segurança, LGPD e conformidade
+            </a>
+          </li>
+          <li>
+            <a href="#faq" class="text-foreground/70 transition-colors hover:text-foreground">
+              FAQ sobre software para saúde
             </a>
           </li>
         </ul>
@@ -46,15 +56,35 @@ const currentYear = new Date().getFullYear();
         <ul class="space-y-2 text-sm">
           <li>
             <a
-              href="mailto:contato@thetaharpia.com"
+              href="mailto:pedro@thetaharpia.com"
               class="text-foreground/70 transition-colors hover:text-foreground"
             >
-              Contato
+              pedro@thetaharpia.com
             </a>
           </li>
           <li>
             <a
-              href="https://app.cuidaty.com"
+              href="https://wa.me/5596984058103"
+              target="_blank"
+              rel="noopener"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              WhatsApp: (96) 98405-8103
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://calendly.com/pedro-thetaharpia/30min"
+              target="_blank"
+              rel="noopener"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Agendar Demonstração
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://app.cuidaty.com/login"
               class="text-foreground/70 transition-colors hover:text-foreground"
             >
               Acessar Plataforma
@@ -72,8 +102,27 @@ const currentYear = new Date().getFullYear();
             </a>
           </li>
           <li>
-            <a href="#resultados" class="text-foreground/70 transition-colors hover:text-foreground">
+            <a
+              href="#resultados"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
               Resultados
+            </a>
+          </li>
+          <li>
+            <a
+              href="/politica-privacidade"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Política de Privacidade
+            </a>
+          </li>
+          <li>
+            <a
+              href="/termos-uso"
+              class="text-foreground/70 transition-colors hover:text-foreground"
+            >
+              Termos de Uso
             </a>
           </li>
         </ul>
