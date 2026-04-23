@@ -1,46 +1,53 @@
 ---
-import { Image } from 'astro:assets';
-import psychologistMeetingImage from '../../assets/psycologist-on-meeting.jpg';
+
 ---
 
 <section id="resultados" class="bg-background py-24 md:py-32">
   <div class="container mx-auto px-5 md:px-8">
     <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-
       <!-- Left: Editorial copy -->
       <div>
         <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
           Resultados
         </p>
 
-        <h2 class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl">
-          Sabemos como é<br/>
+        <h2
+          class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl"
+        >
+          Sabemos como é<br />
           <span class="italic text-cuidaty-dark/70">desafiador cuidar.</span>
         </h2>
 
         <p class="mb-12 max-w-prose text-lg leading-relaxed text-foreground/70">
-          Gerenciar agenda, pagamentos, lembretes e toda a parte administrativa
-          enquanto cuida dos seus pacientes. É por isso que existe o Cuidaty —
-          e é por isso que <span class="text-foreground/90 font-medium">500 profissionais</span>
+          Gerenciar agenda, pagamentos, lembretes e toda a parte administrativa enquanto cuida dos
+          seus pacientes. É por isso que existe o Cuidaty — e é por isso que <span
+            class="font-medium text-foreground/90">500 profissionais</span
+          >
           escolheram ele para cuidar da gestão.
         </p>
 
         <!-- Stats as typographic rhythm, not metric-card template -->
         <dl class="divide-y divide-border/70 border-y border-border/70">
           <div class="flex items-baseline gap-6 py-5">
-            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">500<span class="text-3xl text-cuidaty-primary/60">+</span></dt>
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">
+              500<span class="text-3xl text-cuidaty-primary/60">+</span>
+            </dt>
             <dd class="text-sm text-foreground/70 md:text-base">
               profissionais já cuidam com a gente
             </dd>
           </div>
           <div class="flex items-baseline gap-6 py-5">
-            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">8<span class="text-3xl text-cuidaty-primary/60">h</span></dt>
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">
+              8<span class="text-3xl text-cuidaty-primary/60">h</span>
+            </dt>
             <dd class="text-sm text-foreground/70 md:text-base">
               economizadas por semana, em média
             </dd>
           </div>
           <div class="flex items-baseline gap-6 py-5">
-            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">73<span class="text-3xl text-cuidaty-primary/60">%</span></dt>
+            <dt class="font-serif text-5xl font-semibold text-cuidaty-primary md:text-6xl">
+              73<span class="text-3xl text-cuidaty-primary/60">%</span>
+            </dt>
             <dd class="text-sm text-foreground/70 md:text-base">
               menos faltas em consultas (no-show)
             </dd>
@@ -50,21 +57,20 @@ import psychologistMeetingImage from '../../assets/psycologist-on-meeting.jpg';
 
       <!-- Right: Single editorial photograph -->
       <figure class="relative hidden lg:block">
-        <Image
-          src={psychologistMeetingImage}
+        <img
+          src="/psycologist-on-meeting.jpg"
           alt="Sessão de terapia online via videochamada"
           class="w-full rounded-sm object-cover shadow-lifted"
-          width={720}
-          height={540}
+          width="720"
+          height="540"
           loading="lazy"
-          quality={85}
-          format="webp"
         />
-        <figcaption class="absolute -bottom-1 -left-1 bg-background px-4 py-2 font-serif text-xs italic text-foreground/60">
+        <figcaption
+          class="absolute -bottom-1 -left-1 bg-background px-4 py-2 font-serif text-xs italic text-foreground/60"
+        >
           Uma consulta que começa no horário — e termina com você mais inteiro.
         </figcaption>
       </figure>
-
     </div>
   </div>
 </section>

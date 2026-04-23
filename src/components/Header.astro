@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
 
-import logoWritten from '../assets/logo-written.svg';
 ---
 
 <header
@@ -10,13 +8,7 @@ import logoWritten from '../assets/logo-written.svg';
 >
   <nav class="container mx-auto flex items-center justify-between px-5 py-3 md:px-8 md:py-4">
     <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
-      <Image
-        src={logoWritten}
-        alt="Cuidaty"
-        class="h-8 w-auto sm:h-9"
-        loading="eager"
-        quality={100}
-      />
+      <img src="/logo-written.svg" alt="Cuidaty" class="h-8 w-auto sm:h-9" loading="eager" />
     </a>
 
     <div class="hidden items-center gap-8 md:flex">

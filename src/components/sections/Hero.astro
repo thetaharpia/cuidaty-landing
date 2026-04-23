@@ -1,7 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import backgroundImage from '../../assets/background-first-page.jpg';
-import psychologistImage from '../../assets/psycologist-taking-coffe.jpg';
+
 ---
 
 <section id="hero" class="relative min-h-[100dvh] overflow-hidden bg-beige">
@@ -12,17 +10,13 @@ import psychologistImage from '../../assets/psycologist-taking-coffe.jpg';
 
   <!-- Background image (desktop only, as ambient texture) -->
   <div class="absolute inset-0 hidden lg:block">
-    <Image
-      src={backgroundImage}
+    <img
+      src="/background-first-page.jpg"
       alt=""
       class="h-full w-full object-cover"
-      widths={[1024, 1920]}
-      sizes="100vw"
       loading="eager"
-      fetchpriority="high"
       decoding="async"
-      quality={80}
-      format="webp"
+      fetchpriority="high"
     />
     <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/85 to-beige/30"></div>
   </div>
@@ -200,16 +194,14 @@ import psychologistImage from '../../assets/psycologist-taking-coffe.jpg';
     <!-- Right: Editorial photograph -->
     <div class="hero-fade hero-fade-right relative flex h-full items-center">
       <figure class="relative w-full">
-        <Image
-          src={psychologistImage}
+        <img
+          src="/psycologist-taking-coffe.jpg"
           alt="Profissional da saúde em seu consultório"
           class="h-[72vh] max-h-[620px] w-full rounded-sm object-cover shadow-lifted"
-          width={640}
-          height={800}
+          width="640"
+          height="800"
           loading="eager"
           decoding="async"
-          quality={85}
-          format="webp"
         />
         <figcaption
           class="absolute -bottom-1 -left-1 bg-beige px-4 py-2 font-serif text-xs italic text-cuidaty-dark/70"

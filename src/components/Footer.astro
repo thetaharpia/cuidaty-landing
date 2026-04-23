@@ -1,8 +1,4 @@
 ---
-import { Image } from 'astro:assets';
-
-import logoWritten from '../assets/logo-written.svg';
-
 const currentYear = new Date().getFullYear();
 ---
 
@@ -10,13 +6,7 @@ const currentYear = new Date().getFullYear();
   <div class="container mx-auto px-4 py-12">
     <div class="grid gap-8 md:grid-cols-4">
       <div class="col-span-2 md:col-span-1">
-        <Image
-          src={logoWritten}
-          alt="Cuidaty"
-          class="mb-4 h-10 w-auto"
-          loading="lazy"
-          quality={100}
-        />
+        <img src="/logo-written.svg" alt="Cuidaty" class="mb-4 h-10 w-auto" loading="lazy" />
         <p class="text-sm text-foreground/70">
           Software para psicologos, consultorios e clinicas de saude.
         </p>
