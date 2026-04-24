@@ -6,18 +6,17 @@ const waUrl =
 
 <div
   id="mobile-cta-bar"
-  class="bg-background/98 fixed bottom-0 left-0 right-0 z-[55] border-t border-cuidaty-dark/10 shadow-[0_-4px_24px_rgba(12,32,47,0.08)] backdrop-saturate-150 transition-transform duration-300 lg:hidden"
-  style="padding-bottom: env(safe-area-inset-bottom);"
+  class="fixed bottom-0 left-0 right-0 z-[55] border-t border-cuidaty-dark/8 bg-background/95 shadow-[0_-2px_16px_rgba(12,32,47,0.07)] backdrop-blur-sm transition-transform duration-300 ease-in-out lg:hidden"
+  style="padding-bottom: env(safe-area-inset-bottom); transform: translateY(100%);"
 >
-  <div class="flex items-stretch gap-2 p-3">
+  <div class="flex items-center gap-2 px-3 py-2.5">
     <a
       href={calendlyUrl}
       target="_blank"
       rel="noopener"
-      class="flex flex-1 items-center justify-center gap-2 rounded-md bg-cuidaty-primary px-5 py-3.5 text-sm font-semibold text-white transition-colors active:bg-cuidaty-primary-hover"
-      style="min-height: 48px;"
+      class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-cuidaty-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors active:bg-cuidaty-primary-hover"
     >
-      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg class="h-3.5 w-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -32,8 +31,8 @@ const waUrl =
       target="_blank"
       rel="noopener"
       aria-label="Falar no WhatsApp"
-      class="flex items-center justify-center rounded-md bg-[#25D366] px-4 text-white transition-colors active:bg-[#1fb855]"
-      style="min-width: 48px; min-height: 48px;"
+      class="flex items-center justify-center rounded-lg bg-[#25D366] text-white transition-colors active:bg-[#1fb855]"
+      style="min-width: 44px; min-height: 44px;"
     >
       <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path
@@ -42,7 +41,7 @@ const waUrl =
       </svg>
     </a>
   </div>
-  <p class="pb-2 text-center text-[11px] text-foreground/55">
+  <p class="pb-1.5 text-center text-[10px] text-foreground/45">
     Sem compromisso · Atendimento humano · Resposta em 4h
   </p>
 </div>
@@ -52,27 +51,49 @@ const waUrl =
   if (bar) {
     let lastScrollY = window.scrollY;
     let heroHeight = 0;
+    let visible = false;
+    let ticking = false;
 
     const computeHeroHeight = () => {
       const hero = document.getElementById('hero');
       heroHeight = hero ? hero.offsetHeight * 0.6 : 400;
     };
 
+    const setVisible = (show: boolean) => {
+      if (visible === show) return;
+      visible = show;
+      bar.style.transform = show ? 'translateY(0)' : 'translateY(100%)';
+    };
+
     computeHeroHeight();
-    window.addEventListener('resize', computeHeroHeight);
+    window.addEventListener('resize', computeHeroHeight, { passive: true });
 
     const onScroll = () => {
-      const currentY = window.scrollY;
-      const goingDown = currentY > lastScrollY;
-      const pastHero = currentY > heroHeight;
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const currentY = window.scrollY;
+        const delta = currentY - lastScrollY;
+        const pastHero = currentY > heroHeight;
+        const nearBottom =
+          window.innerHeight + currentY >= document.body.scrollHeight - 120;
 
-      if (!pastHero) {
-        bar.style.transform = 'translateY(100%)';
-      } else {
-        bar.style.transform = goingDown ? 'translateY(0)' : 'translateY(0)';
-      }
+        if (!pastHero) {
+          setVisible(false);
+        } else if (nearBottom) {
+          // always show near page bottom (conversion moment)
+          setVisible(true);
+        } else if (delta > 10) {
+          // scrolling down → reading, get out of the way
+          setVisible(false);
+        } else if (delta < -10) {
+          // scrolling up → user looking for controls
+          setVisible(true);
+        }
 
-      lastScrollY = currentY;
+        lastScrollY = currentY;
+        ticking = false;
+      });
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
