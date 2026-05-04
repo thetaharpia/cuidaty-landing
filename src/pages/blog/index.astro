@@ -1,0 +1,82 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getAllPosts } from '../../lib/blog.server';
+import type { BlogPost, BlogMeta } from '../../lib/blog.server';
+
+let posts: BlogPost[] = [];
+let meta: BlogMeta | null = null;
+
+try {
+  const result = await getAllPosts(1);
+  posts = result.posts;
+  meta = result.meta;
+} catch {
+  posts = [];
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Cuidaty',
+  description: 'Conteúdo sobre psicologia, gestão clínica e cuidado com quem cuida.',
+  url: 'https://cuidaty.com/blog',
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    url: 'https://cuidaty.com',
+    logo: { '@type': 'ImageObject', url: 'https://cuidaty.com/logo.svg' },
+  },
+};
+---
+
+<Layout
+  title="Blog Cuidaty — Psicologia, Gestão Clínica e Saúde Mental"
+  description="Artigos sobre psicologia, gestão de consultório, saúde mental e cuidado com profissionais da saúde. Conteúdo produzido pela equipe Cuidaty."
+  keywords="blog psicologia, gestão clínica, saúde mental, profissionais de saúde, consultório, cuidaty"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <Header />
+
+  <main class="pt-24 pb-16 bg-white">
+    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="max-w-3xl mx-auto text-center text-white">
+          <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">Conteúdo que cuida</p>
+          <h1 class="font-serif text-4xl font-semibold md:text-5xl mb-4">Blog Cuidaty</h1>
+          <p class="text-lg opacity-90 leading-relaxed">
+            Psicologia, gestão clínica e reflexões sobre o cuidado com quem cuida.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container mx-auto px-4 md:px-6 py-16">
+      <div class="max-w-6xl mx-auto">
+        {meta && (
+          <p class="text-sm text-gray-400 mb-10">
+            {meta.total} {meta.total === 1 ? 'artigo' : 'artigos'} publicados
+          </p>
+        )}
+
+        {posts.length > 0 ? (
+          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard post={post} headingLevel="h2" />
+            ))}
+          </div>
+        ) : (
+          <div class="text-center py-20 text-gray-500">
+            <p class="text-lg">Nenhum artigo publicado ainda.</p>
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

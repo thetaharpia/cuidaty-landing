@@ -1,14 +1,13 @@
 ---
-import { getLatestPosts } from '../../lib/ghost';
+import { getLatestPosts } from '../../lib/blog.server';
+import BlogCard from '../BlogCard.astro';
 
 const posts = await getLatestPosts(3);
-const blogUrl = 'https://blog.cuidaty.com/';
 ---
 
 <section id="blog" class="bg-white py-20 md:py-28">
   <div class="container mx-auto px-4 md:px-6">
     <div class="mx-auto max-w-6xl">
-      <!-- Header -->
       <div class="mb-12 text-center">
         <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-cuidaty-primary">
           Conteúdo que cuida
@@ -21,121 +20,27 @@ const blogUrl = 'https://blog.cuidaty.com/';
           gestão clínica e cuidado com quem cuida.
         </p>
         <a
-          href={blogUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/blog"
           class="inline-flex items-center gap-2 rounded-full bg-cuidaty-primary px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:bg-cuidaty-primary-hover hover:shadow-lg"
         >
           <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
           </svg>
-          Conhecer o blog
+          Ver todos os artigos
         </a>
       </div>
 
       {posts.length > 0 ? (
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-all hover:-translate-y-1 hover:shadow-xl">
-              <a
-                href={post.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block overflow-hidden"
-                aria-label={post.title}
-              >
-                <div class="relative aspect-[16/10] overflow-hidden bg-gray-100">
-                  {post.feature_image ? (
-                    <img
-                      src={post.feature_image}
-                      alt={post.title}
-                      loading="lazy"
-                      decoding="async"
-                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-cuidaty-primary/8 to-cuidaty-secondary/8">
-                      <svg class="h-12 w-12 text-cuidaty-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v10a2 2 0 01-2 2z"/>
-                      </svg>
-                    </div>
-                  )}
-                </div>
-              </a>
-
-              <div class="flex flex-1 flex-col p-6">
-                {post.tags && post.tags.length > 0 && (
-                  <div class="mb-3 flex flex-wrap gap-2">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <span class="rounded-full bg-cuidaty-primary/10 px-3 py-0.5 text-xs font-medium text-cuidaty-primary">
-                        {tag.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-
-                <h3 class="mb-3 font-serif text-xl font-semibold leading-snug text-cuidaty-dark line-clamp-2">
-                  <a
-                    href={post.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="transition-colors hover:text-cuidaty-primary"
-                  >
-                    {post.title}
-                  </a>
-                </h3>
-
-                {post.excerpt && (
-                  <p class="mb-4 text-sm text-gray-600 leading-relaxed line-clamp-3">
-                    {post.excerpt}
-                  </p>
-                )}
-
-                <div class="mt-auto flex items-center justify-between text-sm text-gray-500">
-                  <time datetime={post.published_at}>
-                    {new Date(post.published_at).toLocaleDateString('pt-BR', {
-                      day: '2-digit',
-                      month: 'short',
-                      year: 'numeric',
-                    })}
-                  </time>
-                  {post.reading_time && (
-                    <span class="flex items-center gap-1">
-                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                      {post.reading_time} min
-                    </span>
-                  )}
-                </div>
-
-                <a
-                  href={post.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-primary-hover"
-                >
-                  Ler artigo
-                  <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                  </svg>
-                </a>
-              </div>
-            </article>
+            <BlogCard post={post} headingLevel="h3" />
           ))}
         </div>
       ) : (
         <div class="mx-auto max-w-2xl rounded-2xl bg-gray-50 p-10 text-center">
-          <p class="mb-6 text-gray-600">
-            Não conseguimos carregar os posts agora. Visite o blog diretamente:
-          </p>
-          <a
-            href={blogUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 font-semibold text-cuidaty-primary hover:underline"
-          >
-            Acesse o blog da Cuidaty
+          <p class="mb-6 text-gray-600">Nenhum post encontrado no momento.</p>
+          <a href="/blog" class="inline-flex items-center gap-2 font-semibold text-cuidaty-primary hover:underline">
+            Acessar o blog
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
             </svg>

@@ -1,0 +1,152 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getAllSlugs, getPostBySlug, DEFAULT_COVER, formatDate, readingTime } from '../../lib/blog.server';
+
+export async function getStaticPaths() {
+  const slugs = await getAllSlugs();
+  return slugs.map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const post = await getPostBySlug(slug);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const coverImage = post.cover_image_url || DEFAULT_COVER;
+
+const mins = readingTime(post.content_html);
+const title = post.seo.meta_title || post.title;
+const description = post.seo.meta_description || post.excerpt?.slice(0, 160) || '';
+const ogImage = post.seo.og_image_url || post.cover_image_url || DEFAULT_COVER;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description,
+  image: ogImage,
+  datePublished: post.published_at,
+  author: {
+    '@type': 'Person',
+    name: post.author.name,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    url: 'https://cuidaty.com',
+    logo: { '@type': 'ImageObject', url: 'https://cuidaty.com/logo.svg' },
+  },
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': `https://cuidaty.com/blog/${post.slug}`,
+  },
+};
+---
+
+<Layout title={title} description={description} image={ogImage}>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <Header />
+
+  <main class="pt-24 pb-16 bg-white">
+    <!-- Hero -->
+    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-14 md:py-20">
+      <div class="container mx-auto px-4 md:px-6">
+        <div class="max-w-3xl mx-auto text-white">
+          <a href="/blog" class="inline-flex items-center gap-1 text-sm opacity-75 hover:opacity-100 mb-6 transition-opacity">
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+            </svg>
+            Voltar ao blog
+          </a>
+
+          {post.tags && post.tags.length > 0 && (
+            <div class="mb-4 flex flex-wrap gap-2">
+              {post.tags.slice(0, 3).map((tag) => (
+                <span class="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">
+                  {tag.name}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h1 class="font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl mb-6">
+            {post.title}
+          </h1>
+
+          <div class="flex flex-wrap items-center gap-4 text-sm opacity-80">
+            <span>{post.author.name}</span>
+            <span>·</span>
+            <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
+            <span>·</span>
+            <span>{mins} min de leitura</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cover image -->
+    {coverImage && (
+      <div class="container mx-auto px-4 md:px-6 -mt-8">
+        <div class="max-w-3xl mx-auto">
+          <img
+            src={coverImage}
+            alt={post.title}
+            class="w-full rounded-2xl shadow-xl aspect-[16/7] object-cover"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    )}
+
+    <!-- Content -->
+    <article class="container mx-auto px-4 md:px-6 py-12">
+      <div class="max-w-3xl mx-auto">
+        <div
+          class="prose prose-lg max-w-none
+            prose-headings:font-serif prose-headings:text-cuidaty-dark
+            prose-h2:text-2xl prose-h3:text-xl
+            prose-p:text-gray-700 prose-p:leading-relaxed
+            prose-a:text-cuidaty-primary prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-cuidaty-dark
+            prose-blockquote:border-cuidaty-primary prose-blockquote:text-gray-600
+            prose-img:rounded-xl prose-img:shadow-md
+            prose-ul:text-gray-700 prose-ol:text-gray-700"
+          set:html={post.content_html}
+        />
+
+        <!-- Author box -->
+        <div class="mt-16 rounded-2xl bg-gray-50 p-6 flex items-center gap-4">
+          <div class="flex-shrink-0 h-12 w-12 rounded-full bg-cuidaty-primary/20 flex items-center justify-center text-cuidaty-primary font-semibold text-lg">
+            {post.author.name.charAt(0)}
+          </div>
+          <div>
+            <p class="font-semibold text-cuidaty-dark">{post.author.name}</p>
+            <p class="text-sm text-gray-500">Equipe Cuidaty</p>
+          </div>
+        </div>
+
+        <!-- Back link -->
+        <div class="mt-10">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 rounded-full border border-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-cuidaty-primary transition-all hover:bg-cuidaty-primary hover:text-white"
+          >
+            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+            </svg>
+            Ver todos os artigos
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
