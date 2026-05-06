@@ -9,9 +9,19 @@ interface Props {
 
 const { post, headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
+const DEFAULT_COVER = '/images/blog-placeholder.jpg';
 ---
 
 <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-all hover:-translate-y-1 hover:shadow-xl">
+  <a href={`/blog/${post.slug}`} class="relative block h-48 overflow-hidden bg-gray-100">
+    <img
+      src={post.cover_image_url ?? DEFAULT_COVER}
+      alt={post.title}
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+    />
+  </a>
   <div class="flex flex-1 flex-col p-6">
     {post.tags && post.tags.length > 0 && (
       <div class="mb-3 flex flex-wrap gap-2">
