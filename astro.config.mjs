@@ -5,12 +5,12 @@ import sitemap from '@astrojs/sitemap';
 import compress from '@playform/compress';
 import node from '@astrojs/node';
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: 'https://cuidaty.com',
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: cloudflare(),
   trailingSlash: 'ignore',
   server: {
     port: 4321,
