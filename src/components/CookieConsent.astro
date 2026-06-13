@@ -1,0 +1,117 @@
+---
+// Cookie consent banner with Google Consent Mode v2.
+// Analytics only loads/sends data AFTER the user accepts (LGPD-aligned).
+// Configure the GA id via PUBLIC_GA_ID in .env (e.g. G-XXXXXXXXXX).
+// Without PUBLIC_GA_ID nothing is loaded and no banner is shown.
+const gaId = import.meta.env.PUBLIC_GA_ID;
+---
+
+{
+  gaId && (
+    <>
+      {/* Consent Mode v2 — default everything to DENIED before GA loads */}
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+
+        gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          wait_for_update: 500,
+        });
+
+        // Re-apply a previously granted choice on subsequent visits.
+        try {
+          if (localStorage.getItem('cuidaty_cookie_consent') === 'granted') {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+          }
+        } catch (e) {}
+
+        gtag('js', new Date());
+        gtag('config', gaId, { anonymize_ip: true });
+      </script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+
+      {/* Banner */}
+      <div
+        id="cookie-consent"
+        class="fixed inset-x-0 bottom-0 z-[60] hidden px-4 pb-4 lg:px-6"
+        role="dialog"
+        aria-live="polite"
+        aria-label="Aviso de cookies"
+      >
+        <div class="mx-auto flex max-w-3xl flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-5 shadow-xl sm:flex-row sm:items-center sm:justify-between">
+          <p class="text-sm leading-relaxed text-gray-700">
+            Usamos cookies para entender como você usa o site e melhorar sua experiência. Você pode
+            aceitar ou recusar a coleta de dados de análise.{' '}
+            <a href="/politica-privacidade" class="font-semibold text-cuidaty-primary underline">
+              Saiba mais
+            </a>
+            .
+          </p>
+          <div class="flex shrink-0 gap-3">
+            <button
+              id="cookie-decline"
+              type="button"
+              class="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-100"
+            >
+              Recusar
+            </button>
+            <button
+              id="cookie-accept"
+              type="button"
+              class="rounded-full bg-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-hover"
+            >
+              Aceitar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <script is:inline>
+        (function () {
+          var KEY = 'cuidaty_cookie_consent';
+          var banner = document.getElementById('cookie-consent');
+          if (!banner) return;
+
+          var stored = null;
+          try {
+            stored = localStorage.getItem(KEY);
+          } catch (e) {}
+
+          if (!stored) banner.classList.remove('hidden');
+
+          function close() {
+            banner.classList.add('hidden');
+          }
+
+          var accept = document.getElementById('cookie-accept');
+          var decline = document.getElementById('cookie-decline');
+
+          if (accept)
+            accept.addEventListener('click', function () {
+              try {
+                localStorage.setItem(KEY, 'granted');
+              } catch (e) {}
+              if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'granted' });
+              close();
+            });
+
+          if (decline)
+            decline.addEventListener('click', function () {
+              try {
+                localStorage.setItem(KEY, 'denied');
+              } catch (e) {}
+              if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+              close();
+            });
+        })();
+      </script>
+    </>
+  )
+}

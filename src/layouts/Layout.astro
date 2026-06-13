@@ -3,6 +3,7 @@ import { SEO } from 'astro-seo';
 import '../styles/global.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import MobileCTABar from '../components/MobileCTABar.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
@@ -20,6 +21,9 @@ const {
   noindex = false,
   keywords = homeKeywords,
 } = Astro.props;
+
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
@@ -107,7 +111,7 @@ const softwareData = {
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       description:
-        'Para profissionais solo com secretária. Até 2 usuários, todos os módulos habilitados, agenda compartilhada, portal de agendamento e controle financeiro.',
+        'Para profissionais solo com assistente. Até 2 usuários, todos os módulos habilitados, agenda compartilhada, portal de agendamento e controle financeiro.',
     },
     {
       '@type': 'Offer',
@@ -280,12 +284,16 @@ const structuredData = [
     <!-- Additional Meta Tags -->
     <meta name="keywords" content={keywords} />
     <meta name="author" content="Cuidaty" />
-    <meta
-      name="robots"
-      content={noindex
-        ? 'noindex,nofollow'
-        : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}
-    />
+    <!-- Robots directive is emitted once by astro-seo (<SEO noindex>) below.
+         This googlebot tag adds rich-result preview hints without duplicating name="robots". -->
+    {
+      !noindex && (
+        <meta
+          name="googlebot"
+          content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+        />
+      )
+    }
     <meta name="language" content="Portuguese" />
     <meta name="revisit-after" content="7 days" />
     <meta name="generator" content={Astro.generator} />
@@ -302,12 +310,16 @@ const structuredData = [
     <meta name="geo.region" content="BR" />
     <meta name="geo.placename" content="Brasil" />
 
-    <!-- Search Engine Verification (replace with actual values) -->
-    <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" /> -->
-    <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
+    <!-- Search Engine Verification (set codes in .env) -->
+    {
+      googleSiteVerification && (
+        <meta name="google-site-verification" content={googleSiteVerification} />
+      )
+    }
+    {bingSiteVerification && <meta name="msvalidate.01" content={bingSiteVerification} />}
 
     <!-- Sitemap -->
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
     <!-- Language alternates -->
     <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
@@ -437,5 +449,6 @@ const structuredData = [
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />
+    <CookieConsent />
   </body>
 </html>
