@@ -16,5 +16,4 @@ User-agent: Yandex
 Crawl-delay: 10
 
 # Sitemaps
-Sitemap: https://cuidaty.com/sitemap.xml
 Sitemap: https://cuidaty.com/sitemap-index.xml

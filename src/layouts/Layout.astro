@@ -51,12 +51,12 @@ const organizationData = {
   image: fullImageURL,
   slogan: 'Menos burocracia. Mais escuta.',
   description: 'Tecnologia que devolve o respiro à rotina clínica de profissionais da saúde.',
-  email: 'pedro@thetaharpia.com',
+  email: 'contato@thetaharpia.com',
   contactPoint: [
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: 'pedro@thetaharpia.com',
+      email: 'contato@thetaharpia.com',
       telephone: '+55-96-98405-8103',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
@@ -64,7 +64,7 @@ const organizationData = {
     {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'pedro@thetaharpia.com',
+      email: 'contato@thetaharpia.com',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
     },
@@ -77,7 +77,6 @@ const organizationData = {
   foundingDate: '2024',
   sameAs: [
     'https://www.instagram.com/cuidaty_com/',
-    'https://blog.cuidaty.com/',
     'https://www.linkedin.com/company/thetaharpia',
     'https://x.com/thetaharpia',
     'https://www.youtube.com/channel/UCBoprCxMDUrZdcvNDwiOBzg',
@@ -101,29 +100,41 @@ const softwareData = {
   offers: [
     {
       '@type': 'Offer',
-      name: 'Plano Solo',
+      name: 'Plano Básico',
       price: '59.90',
       priceCurrency: 'BRL',
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       description:
-        'Para profissionais solo com secretária. Até 2 usuários, todos os módulos habilitados, agenda compartilhada, portal de agendamento e controle financeiro.',
+        'Gestão completa do consultório: agenda inteligente, prontuário eletrônico, gestão de pacientes, formulários, relatórios, financeiro e portal de agendamento.',
     },
     {
       '@type': 'Offer',
-      name: 'Plano Profissional',
+      name: 'Plano Premium',
+      price: '89.90',
       priceCurrency: 'BRL',
+      priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       description:
-        'Para clínicas e grupos com até 3 unidades. Gestão de repasses, dashboard consolidado e relatórios gerenciais.',
+        'Tudo do Básico com comunicação por WhatsApp, Cuty AI (assistente clínico baseado no prontuário) e geração de documentos.',
     },
     {
       '@type': 'Offer',
-      name: 'Plano Empresarial',
+      name: 'Plano Plus',
+      price: '159.90',
+      priceCurrency: 'BRL',
+      priceValidUntil: '2026-12-31',
+      availability: 'https://schema.org/InStock',
+      description:
+        'Tudo do Premium com transcrição de consultas e teleconsultas e resumo clínico automático no padrão SOAP.',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Plano Clínicas e Grupos',
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
       description:
-        'Para hospitais e grandes operações com +3 unidades ou +50 usuários. API para integração, analytics avançado e Business Intelligence.',
+        'Para clínicas, redes e grupos: multiunidade, equipes e permissões avançadas, analytics, migração de dados e limites customizáveis. Preço sob consulta.',
     },
   ],
   aggregateRating: {
@@ -302,8 +313,8 @@ const structuredData = [
     <meta name="geo.region" content="BR" />
     <meta name="geo.placename" content="Brasil" />
 
-    <!-- Search Engine Verification (replace with actual values) -->
-    <!-- <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" /> -->
+    <!-- Search Engine Verification -->
+    <meta name="google-site-verification" content="CuQ7uBwOoGiZimHGFB_WF-rWulUEtnNMyjfq_Vs6VqQ" />
     <!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE" /> -->
 
     <!-- Sitemap -->
@@ -397,7 +408,47 @@ const structuredData = [
       header {
         min-height: 72px;
       }
+
+      /* Reveal on scroll — pré-oculta o conteúdo das seções (exceto o Hero)
+         só quando há JS, evitando flash. Anima os blocos internos em cascata. */
+      .reveal-ready main > section:not(#hero) > div:first-child > * {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+          transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        will-change: opacity, transform;
+      }
+      .reveal-ready main > section:not(#hero) > div:first-child.is-in > * {
+        opacity: 1;
+        transform: none;
+      }
+      /* Stagger: cada bloco surge logo após o anterior */
+      .reveal-ready main > section:not(#hero) > div:first-child.is-in > *:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .reveal-ready main > section:not(#hero) > div:first-child.is-in > *:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .reveal-ready main > section:not(#hero) > div:first-child.is-in > *:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+      .reveal-ready main > section:not(#hero) > div:first-child.is-in > *:nth-child(n + 5) {
+        transition-delay: 0.4s;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal-ready main > section:not(#hero) > div:first-child > * {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
     </style>
+
+    <!-- Marca que há JS para o reveal pré-ocultar antes do paint -->
+    <script is:inline>
+      document.documentElement.classList.add('reveal-ready');
+    </script>
 
     <!-- Performance optimization script -->
     <script is:inline>
@@ -437,5 +488,28 @@ const structuredData = [
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />
+
+    <script>
+      // Reveal on scroll: anima o conteúdo de cada seção ao entrar na viewport
+      const targets = Array.from(
+        document.querySelectorAll<HTMLElement>('main > section:not(#hero) > div:first-child')
+      );
+      if (targets.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+        );
+        targets.forEach((el) => io.observe(el));
+      } else {
+        targets.forEach((el) => el.classList.add('is-in'));
+      }
+    </script>
   </body>
 </html>
