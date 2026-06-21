@@ -4,6 +4,152 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const lastUpdated = '20 de junho de 2026';
+
+/**
+ * Política de Privacidade como documento legal editorial: cláusulas numeradas,
+ * índice fixo (TOC) no desktop e tipografia serifada. Mesmo padrão dos Termos.
+ */
+type Clause = {
+  id: string;
+  title: string;
+  paras?: string[];
+  items?: string[];
+  groups?: { subtitle: string; items: string[] }[];
+};
+
+const clauses: Clause[] = [
+  {
+    id: 'introducao',
+    title: 'Introdução',
+    paras: [
+      'A Cuidaty valoriza sua privacidade e está comprometida em proteger seus dados pessoais. Esta Política explica como coletamos, usamos, compartilhamos e protegemos suas informações quando você utiliza a plataforma.',
+      'Ela está em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018) e suas atualizações, além das normas aplicáveis ao uso de Inteligência Artificial em vigor.',
+    ],
+  },
+  {
+    id: 'dados-coletados',
+    title: 'Dados que coletamos',
+    groups: [
+      {
+        subtitle: 'Dados fornecidos por você',
+        items: [
+          'Informações de cadastro (nome, e-mail, telefone, CRM/CRP/registro profissional)',
+          'Dados da clínica ou consultório (nome, endereço, especialidade)',
+          'Informações de pagamento (processadas por terceiros seguros)',
+          'Dados de pacientes inseridos no sistema',
+          'Gravações de áudio de consultas (apenas nos planos com transcrição), processadas para gerar o resumo clínico e descartadas em seguida',
+        ],
+      },
+      {
+        subtitle: 'Dados coletados automaticamente',
+        items: [
+          'Informações de acesso (endereço IP, navegador, dispositivo)',
+          'Dados de uso da plataforma (páginas visitadas, tempo de sessão)',
+          'Cookies e tecnologias similares',
+          'Logs de sistema para segurança e manutenção',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'uso',
+    title: 'Como utilizamos seus dados',
+    items: [
+      'Fornecimento e melhoria dos nossos serviços',
+      'Processamento de pagamentos e cobrança',
+      'Comunicação sobre atualizações e suporte',
+      'Análise de uso para otimização da plataforma',
+      'Cumprimento de obrigações legais',
+      'Prevenção de fraudes e garantia de segurança',
+    ],
+  },
+  {
+    id: 'base-legal',
+    title: 'Base legal para tratamento',
+    paras: ['Tratamos seus dados pessoais com base nas seguintes hipóteses previstas na LGPD:'],
+    items: [
+      'Execução de contrato — para fornecer os serviços contratados',
+      'Interesse legítimo — para melhoria dos serviços e segurança',
+      'Consentimento — para envio de comunicações de marketing',
+      'Cumprimento de obrigação legal — para atender a requisitos regulatórios',
+    ],
+  },
+  {
+    id: 'compartilhamento',
+    title: 'Compartilhamento de dados',
+    paras: ['Não vendemos seus dados pessoais. Podemos compartilhar informações limitadas com:'],
+    items: [
+      'Prestadores de serviços (hospedagem, pagamento, suporte e processamento de IA)',
+      'Autoridades competentes, quando exigido por lei',
+      'Terceiros, mediante o seu consentimento explícito',
+    ],
+  },
+  {
+    id: 'seguranca',
+    title: 'Segurança dos dados',
+    paras: ['Adotamos medidas técnicas e organizacionais adequadas para proteger seus dados:'],
+    items: [
+      'Criptografia de dados em trânsito e em repouso',
+      'Controles de acesso rigorosos',
+      'Monitoramento contínuo de segurança',
+      'Backups seguros e regulares',
+      'Treinamento da equipe em proteção de dados',
+    ],
+  },
+  {
+    id: 'ia',
+    title: 'Inteligência artificial e transcrição',
+    paras: [
+      'A Cuidaty oferece recursos de IA: o assistente Cuty AI (planos Premium e Plus) e a transcrição de consultas (plano Plus).',
+    ],
+    items: [
+      'O Cuty AI gera respostas e resumos a partir do prontuário do próprio profissional, sempre citando a fonte',
+      'A transcrição usa o áudio da consulta apenas para gerar o resumo clínico (em SOAP ou outro formato); o áudio é descartado após o processamento e não é armazenado de forma permanente',
+      'Os dados de pacientes e o conteúdo das consultas não são usados para treinar modelos de IA de terceiros',
+      'O tratamento por IA observa a LGPD e as normas aplicáveis à Inteligência Artificial em vigor',
+      'Os recursos de IA são auxiliares e não substituem o julgamento clínico do profissional',
+    ],
+  },
+  {
+    id: 'direitos',
+    title: 'Seus direitos',
+    paras: ['Você tem os seguintes direitos sobre seus dados pessoais:'],
+    items: [
+      'Confirmação da existência de tratamento',
+      'Acesso aos dados',
+      'Correção de dados incompletos, inexatos ou desatualizados',
+      'Anonimização, bloqueio ou eliminação de dados desnecessários',
+      'Portabilidade dos dados',
+      'Eliminação dos dados tratados com consentimento',
+      'Revogação do consentimento',
+    ],
+  },
+  {
+    id: 'retencao',
+    title: 'Retenção de dados',
+    paras: [
+      'Mantemos seus dados pelo período necessário para cumprir as finalidades desta política, respeitando prazos legais e nossos interesses legítimos. Após o cancelamento, os dados são mantidos por até 90 dias antes da eliminação definitiva, salvo obrigação legal de retenção.',
+    ],
+  },
+  {
+    id: 'cookies',
+    title: 'Cookies',
+    paras: [
+      'Usamos cookies para melhorar sua experiência. Você pode gerenciar suas preferências nas configurações do seu navegador.',
+    ],
+  },
+  {
+    id: 'alteracoes',
+    title: 'Alterações nesta política',
+    paras: [
+      'Podemos atualizar esta política periodicamente. Avisaremos sobre mudanças significativas por e-mail ou por aviso na própria plataforma.',
+    ],
+  },
+];
+
+const num = (i: number) => String(i + 1).padStart(2, '0');
 ---
 
 <Layout
@@ -12,167 +158,205 @@ import Footer from '../components/Footer.astro';
   keywords="política de privacidade Cuidaty, LGPD, proteção de dados, privacidade consultório, dados do paciente"
 >
   <Header />
-  <main class="pt-24 pb-16 bg-white">
-    <!-- Hero -->
-    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20">
-      <div class="container mx-auto px-4 md:px-6">
-        <div class="max-w-4xl mx-auto text-center text-white">
-          <span class="mb-4 inline-block rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur-sm">
-            Conformidade com a LGPD
-          </span>
-          <h1 class="mb-4 font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
+  <main class="bg-white">
+    <!-- Cabeçalho editorial -->
+    <header class="border-b border-border">
+      <div class="container mx-auto px-5 md:px-8">
+        <div class="mx-auto max-w-3xl pb-12 pt-32 md:pb-16 md:pt-40">
+          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cuidaty-primary">
+            Privacidade e dados
+          </p>
+          <h1
+            class="font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-cuidaty-dark md:text-7xl"
+          >
             Política de Privacidade
           </h1>
-          <p class="text-lg text-white/80">
-            Última atualização: 15 de julho de 2025
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-foreground/70">
+            Como coletamos, usamos e protegemos seus dados — e os dos seus pacientes.
           </p>
+          <dl class="mt-10 flex flex-wrap gap-x-12 gap-y-4 border-t border-border pt-6 text-sm">
+            <div>
+              <dt class="text-foreground/50">Última atualização</dt>
+              <dd class="mt-0.5 font-medium text-cuidaty-dark">{lastUpdated}</dd>
+            </div>
+            <div>
+              <dt class="text-foreground/50">Legislação</dt>
+              <dd class="mt-0.5 font-medium text-cuidaty-dark">Brasil · LGPD</dd>
+            </div>
+            <div>
+              <dt class="text-foreground/50">Cláusulas</dt>
+              <dd class="mt-0.5 font-medium text-cuidaty-dark">{clauses.length}</dd>
+            </div>
+          </dl>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- Content -->
-    <article class="container mx-auto px-4 md:px-6 py-12 md:py-16">
-      <div class="max-w-4xl mx-auto prose prose-lg prose-slate max-w-none">
+    <!-- Corpo: índice fixo + cláusulas -->
+    <div class="container mx-auto px-5 md:px-8">
+      <div
+        class="mx-auto grid max-w-6xl gap-y-12 py-16 md:py-20 lg:grid-cols-[200px_1fr] lg:gap-x-20"
+      >
+        <!-- Índice (sticky no desktop) -->
+        <aside class="hidden lg:block">
+          <nav aria-label="Índice da Política" class="sticky top-28">
+            <p class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-foreground/40">
+              Índice
+            </p>
+            <ol class="space-y-2.5">
+              {
+                clauses.map((clause, i) => (
+                  <li>
+                    <a
+                      href={`#${clause.id}`}
+                      data-toc={clause.id}
+                      class="toc-link group flex gap-2.5 text-sm leading-snug text-foreground/55 transition-colors hover:text-cuidaty-dark"
+                    >
+                      <span class="font-serif text-cuidaty-primary/60 tabular-nums">{num(i)}</span>
+                      <span>{clause.title}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </aside>
 
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">1. Introdução</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            A Cuidaty valoriza sua privacidade e está comprometida em proteger seus dados pessoais.
-            Esta Política de Privacidade explica como coletamos, usamos, compartilhamos e protegemos suas
-            informações quando você utiliza nossos serviços.
-          </p>
-          <p class="text-gray-700 leading-relaxed">
-            Esta política está em conformidade com a Lei Geral de Proteção de Dados (LGPD - Lei 13.709/2018)
-            e demais regulamentações aplicáveis.
-          </p>
-        </section>
+        <!-- Cláusulas -->
+        <div class="max-w-2xl">
+          {
+            clauses.map((clause, i) => (
+              <section id={clause.id} class="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0">
+                <p class="mb-3 font-serif text-base font-semibold tabular-nums text-cuidaty-primary">
+                  {num(i)}
+                </p>
+                <h2 class="font-serif text-2xl font-semibold leading-tight text-cuidaty-dark md:text-3xl">
+                  {clause.title}
+                </h2>
 
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">2. Dados que Coletamos</h2>
+                {clause.paras &&
+                  clause.paras.map((para) => (
+                    <p class="mt-4 text-[1.05rem] leading-relaxed text-foreground/75">{para}</p>
+                  ))}
 
-          <h3 class="text-xl font-medium text-cuidaty-dark mb-3">2.1 Dados Fornecidos por Você</h3>
-          <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
-            <li>Informações de cadastro (nome, e-mail, telefone, CRM/CRP/registro profissional)</li>
-            <li>Dados da clínica/consultório (nome, endereço, especialidade)</li>
-            <li>Informações de pagamento (processadas por terceiros seguros)</li>
-            <li>Dados de pacientes inseridos no sistema</li>
-          </ul>
+                {clause.groups &&
+                  clause.groups.map((group) => (
+                    <div class="mt-6 first:mt-5">
+                      <h3 class="mb-3 text-sm font-semibold uppercase tracking-[0.12em] text-cuidaty-dark/70">
+                        {group.subtitle}
+                      </h3>
+                      <ul class="space-y-3">
+                        {group.items.map((item) => (
+                          <li class="flex gap-3 text-foreground/75">
+                            <span
+                              class="mt-[0.7rem] h-px w-4 flex-shrink-0 bg-cuidaty-secondary"
+                              aria-hidden="true"
+                            />
+                            <span class="leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
 
-          <h3 class="text-xl font-medium text-cuidaty-dark mb-3">2.2 Dados Coletados Automaticamente</h3>
-          <ul class="list-disc list-inside text-gray-700 mb-4 space-y-2">
-            <li>Informações de acesso (endereço IP, navegador, dispositivo)</li>
-            <li>Dados de uso da plataforma (páginas visitadas, tempo de sessão)</li>
-            <li>Cookies e tecnologias similares</li>
-            <li>Logs de sistema para segurança e manutenção</li>
-          </ul>
-        </section>
+                {clause.items && (
+                  <ul class="mt-5 space-y-3">
+                    {clause.items.map((item) => (
+                      <li class="flex gap-3 text-foreground/75">
+                        <span
+                          class="mt-[0.7rem] h-px w-4 flex-shrink-0 bg-cuidaty-secondary"
+                          aria-hidden="true"
+                        />
+                        <span class="leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </section>
+            ))
+          }
 
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">3. Como Utilizamos seus Dados</h2>
-          <ul class="list-disc list-inside text-gray-700 space-y-2">
-            <li>Fornecimento e melhoria dos nossos serviços</li>
-            <li>Processamento de pagamentos e cobrança</li>
-            <li>Comunicação sobre atualizações e suporte</li>
-            <li>Análise de uso para otimização da plataforma</li>
-            <li>Cumprimento de obrigações legais</li>
-            <li>Prevenção de fraudes e garantia de segurança</li>
-          </ul>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">4. Base Legal para Tratamento</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Tratamos seus dados pessoais com base nas seguintes bases legais previstas na LGPD:
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-2">
-            <li><strong>Execução de contrato:</strong> Para fornecimento dos serviços contratados</li>
-            <li><strong>Interesse legítimo:</strong> Para melhoria dos serviços e segurança</li>
-            <li><strong>Consentimento:</strong> Para envio de comunicações de marketing</li>
-            <li><strong>Cumprimento de obrigação legal:</strong> Para atendimento a requisitos regulatórios</li>
-          </ul>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">5. Compartilhamento de Dados</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Não vendemos seus dados pessoais. Podemos compartilhar informações limitadas com:
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-2">
-            <li>Prestadores de serviços (hospedagem, pagamento, suporte)</li>
-            <li>Autoridades competentes quando exigido por lei</li>
-            <li>Terceiros com seu consentimento explícito</li>
-          </ul>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">6. Segurança dos Dados</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Implementamos medidas técnicas e organizacionais adequadas para proteger seus dados:
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-2">
-            <li>Criptografia de dados em trânsito e em repouso</li>
-            <li>Controles de acesso rigorosos</li>
-            <li>Monitoramento contínuo de segurança</li>
-            <li>Backups seguros e regulares</li>
-            <li>Treinamento da equipe em proteção de dados</li>
-          </ul>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">7. Seus Direitos</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Você possui os seguintes direitos em relação aos seus dados pessoais:
-          </p>
-          <ul class="list-disc list-inside text-gray-700 space-y-2">
-            <li>Confirmação da existência de tratamento</li>
-            <li>Acesso aos dados</li>
-            <li>Correção de dados incompletos, inexatos ou desatualizados</li>
-            <li>Anonimização, bloqueio ou eliminação de dados desnecessários</li>
-            <li>Portabilidade dos dados</li>
-            <li>Eliminação dos dados tratados com consentimento</li>
-            <li>Revogação do consentimento</li>
-          </ul>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">8. Retenção de Dados</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Mantemos seus dados pelo período necessário para cumprir as finalidades descritas nesta política,
-            respeitando prazos legais aplicáveis e nossos interesses legítimos.
-          </p>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">9. Cookies</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Utilizamos cookies para melhorar sua experiência. Você pode gerenciar suas preferências
-            de cookies através das configurações do seu navegador.
-          </p>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">10. Alterações nesta Política</h2>
-          <p class="text-gray-700 leading-relaxed">
-            Podemos atualizar esta política periodicamente. Notificaremos sobre mudanças significativas
-            através de e-mail ou aviso em nossa plataforma.
-          </p>
-        </section>
-
-        <section class="mb-10">
-          <h2 class="font-serif text-2xl md:text-3xl font-semibold text-cuidaty-dark mb-4">11. Contato</h2>
-          <p class="text-gray-700 leading-relaxed mb-4">
-            Para questões sobre esta política ou exercer seus direitos, entre em contato:
-          </p>
-          <div class="rounded-2xl bg-accent p-6 space-y-2">
-            <p class="text-gray-700"><strong>E-mail:</strong> <a href="mailto:pedro@thetaharpia.com" class="text-cuidaty-primary hover:underline">pedro@thetaharpia.com</a></p>
-            <p class="text-gray-700"><strong>Encarregado de Dados:</strong> <a href="mailto:pedro@thetaharpia.com" class="text-cuidaty-primary hover:underline">pedro@thetaharpia.com</a></p>
-            <p class="text-gray-700"><strong>WhatsApp:</strong> <a href="https://wa.me/5596984058103" target="_blank" rel="noopener" class="text-cuidaty-primary hover:underline">(96) 98405-8103</a></p>
-            <p class="text-gray-700"><strong>Endereço:</strong> Macapá, AP</p>
-          </div>
-        </section>
-
+          <!-- Contato -->
+          <section id="contato" class="mt-12 scroll-mt-28 rounded-2xl bg-beige px-6 py-8 md:px-9 md:py-10">
+            <h2 class="font-serif text-2xl font-semibold text-cuidaty-dark">
+              Contato e exercício de direitos
+            </h2>
+            <p class="mt-2 text-foreground/70">
+              Para dúvidas sobre esta política ou para exercer seus direitos, fale com a gente.
+            </p>
+            <dl class="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/45">
+                  E-mail e Encarregado de Dados
+                </dt>
+                <dd class="mt-1.5">
+                  <a
+                    href="mailto:pedro@thetaharpia.com"
+                    class="font-medium text-cuidaty-primary underline-offset-4 hover:underline"
+                  >
+                    pedro@thetaharpia.com
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/45">
+                  WhatsApp
+                </dt>
+                <dd class="mt-1.5">
+                  <a
+                    href="https://wa.me/5596984058103"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-medium text-cuidaty-primary underline-offset-4 hover:underline"
+                  >
+                    (96) 98405-8103
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/45">
+                  Endereço
+                </dt>
+                <dd class="mt-1.5 font-medium text-cuidaty-dark">Macapá, AP</dd>
+              </div>
+            </dl>
+          </section>
+        </div>
       </div>
-    </article>
+    </div>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .toc-link.toc-active {
+    color: #0c202f;
+    font-weight: 500;
+  }
+  .toc-link.toc-active span:first-child {
+    color: #356588;
+  }
+</style>
+
+<script>
+  // Scroll-spy: destaca a cláusula visível no índice
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc-link'));
+  const byId = new Map(links.map((l) => [l.dataset.toc ?? '', l]));
+  const sections = links
+    .map((l) => document.getElementById(l.dataset.toc ?? ''))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (sections.length) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((l) => l.classList.remove('toc-active'));
+          byId.get(entry.target.id)?.classList.add('toc-active');
+        });
+      },
+      { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+    );
+    sections.forEach((s) => spy.observe(s));
+  }
+</script>

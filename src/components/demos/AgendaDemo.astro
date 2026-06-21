@@ -1,0 +1,1287 @@
+---
+/**
+ * Demo animada da Agenda inteligente — componente isolado para a landing.
+ * Portado de cuidaty/public/agenda-demo.html (animações preservadas).
+ * CSS escopado sob .agd e script multi-instância (.agd).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['agd', className]}>
+  <div class="stage">
+    <div class="caption">
+      <div class="kicker">Agenda inteligente</div>
+      <div class="headline" data-headline>Agende a consulta em segundos</div>
+    </div>
+
+    <div class="surface">
+      <div class="appbar">
+        <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="wtitle">Cuidaty · Agenda</span>
+      </div>
+      <div class="screen">
+        <!-- AGENDA -->
+        <div class="agenda" data-agenda>
+          <div class="agenda-head">
+            <div class="day" data-agenda-day>
+              Quinta · 12 jun<small data-agenda-sub>2 consultas</small>
+            </div>
+            <span class="new"
+              ><svg class="ic s12" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg
+              >Novo</span
+            >
+          </div>
+          <div class="slots" data-slots></div>
+        </div>
+
+        <!-- MODAL -->
+        <div class="dim" data-dim></div>
+        <div class="modal" data-modal>
+          <div class="modal-head">
+            <span class="t"
+              ><span class="lead"
+                ><svg class="ic s14" viewBox="0 0 24 24"
+                  ><rect x="3" y="4" width="18" height="18" rx="2"></rect><path
+                    d="M16 2v4M8 2v4M3 10h18"></path></svg
+                ></span
+              ><span data-modal-title>Novo agendamento</span></span
+            >
+            <svg class="ic s14" style="color:var(--mf)" viewBox="0 0 24 24"
+              ><path d="M18 6 6 18M6 6l12 12"></path></svg
+            >
+          </div>
+          <div class="modal-body" data-modal-body>
+            <div class="ffield" data-f="pac">
+              <div class="flabel">Paciente</div>
+              <div class="fcontrol">
+                <svg class="ic s14" viewBox="0 0 24 24"
+                  ><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg
+                ><span class="val" data-pac></span><span class="ph" data-ph>Buscar paciente…</span>
+              </div>
+            </div>
+            <div class="ffield" data-f="prof">
+              <div class="flabel">Profissional</div>
+              <div class="fcontrol">
+                <span class="val">Dra. Ana Martins</span><svg class="ic s14 chev" viewBox="0 0 24 24"
+                  ><path d="m6 9 6 6 6-6"></path></svg
+                >
+              </div>
+            </div>
+            <div class="ffield" data-f="data">
+              <div class="flabel">Data</div>
+              <div class="fcontrol">
+                <svg class="ic s14" viewBox="0 0 24 24"
+                  ><rect x="3" y="4" width="18" height="18" rx="2"></rect><path
+                    d="M16 2v4M8 2v4M3 10h18"></path></svg
+                ><span class="val" data-data>12/06/2026</span>
+              </div>
+            </div>
+            <div class="ffield row2" data-f="hora">
+              <div>
+                <div class="flabel">Início</div>
+                <div class="fcontrol">
+                  <svg class="ic s14" viewBox="0 0 24 24"
+                    ><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg
+                  ><span class="val" data-ini>14:00</span>
+                </div>
+              </div>
+              <div>
+                <div class="flabel">Fim</div>
+                <div class="fcontrol">
+                  <svg class="ic s14" viewBox="0 0 24 24"
+                    ><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg
+                  ><span class="val" data-fim>14:50</span>
+                </div>
+              </div>
+            </div>
+            <div class="ffield" data-f="status">
+              <div class="flabel">Status</div>
+              <div class="fcontrol">
+                <span class="val">Confirmado</span><svg class="ic s14 chev" viewBox="0 0 24 24"
+                  ><path d="m6 9 6 6 6-6"></path></svg
+                >
+              </div>
+            </div>
+
+            <!-- Notificações WhatsApp -->
+            <div class="ffield" data-f="wa">
+              <div class="wa-head">
+                <svg class="ic s14" viewBox="0 0 24 24"
+                  ><path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"
+                  ></path></svg
+                >Notificações WhatsApp
+              </div>
+              <div class="wa-box">
+                <div class="wa-toggle">
+                  <span class="switch on"></span>
+                  <div class="txt">
+                    <div class="wl">Agendamento</div>
+                    <div class="wd">Avisa que a consulta foi marcada</div>
+                  </div>
+                </div>
+                <div class="wa-toggle">
+                  <span class="switch on"></span>
+                  <div class="txt">
+                    <div class="wl">Confirmação (24h antes)</div>
+                    <div class="wd">Pede para o paciente confirmar ou cancelar</div>
+                  </div>
+                </div>
+                <div class="wa-toggle">
+                  <span class="switch on"></span>
+                  <div class="txt">
+                    <div class="wl">Cancelamento</div>
+                    <div class="wd">Avisa se a consulta for cancelada</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Consulta Recorrente -->
+            <div class="ffield" data-f="rec">
+              <div class="switchrow">
+                <span class="switch" data-rec-switch></span>
+                <span class="lbl"
+                  ><svg class="ic s14" viewBox="0 0 24 24"
+                    ><path d="m17 2 4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path><path
+                      d="m7 22-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path></svg
+                  >Consulta Recorrente</span
+                >
+              </div>
+              <div class="recpanel" data-rec-panel>
+                <div class="ffield row2 show" style="opacity:1;transform:none">
+                  <div>
+                    <div class="flabel">Frequência</div>
+                    <div class="fcontrol">
+                      <span class="val">Semanal</span><svg class="ic s14 chev" viewBox="0 0 24 24"
+                        ><path d="m6 9 6 6 6-6"></path></svg
+                      >
+                    </div>
+                  </div>
+                  <div style="max-width:96px">
+                    <div class="flabel">A cada</div>
+                    <div class="fcontrol"><span class="val">1</span></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="flabel" style="margin-bottom:6px">Termina</div>
+                  <div class="radio-row">
+                    <div class="radio-opt sel">
+                      <span class="dot"></span>Após <span class="mini-input">8</span> consultas
+                    </div>
+                    <div class="radio-opt"><span class="dot"></span>Em data</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conflito -->
+            <div class="conflict" data-conflict>
+              <div class="conflict-head">
+                <svg class="ic s14" viewBox="0 0 24 24"
+                  ><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"
+                  ></path><path d="M12 9v4M12 17h.01"></path></svg
+                >Conflito de horário
+              </div>
+              <div class="conflict-body">
+                <div class="crow">
+                  <span class="nm">Maria Souza</span>
+                  <span class="old">14:00–14:50</span>
+                  <svg class="ic s14" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                  <span class="new">15:00–15:50</span>
+                </div>
+              </div>
+              <div class="conflict-foot">A consulta existente será reagendada logo após.</div>
+            </div>
+          </div>
+          <div class="modal-foot" data-modal-foot>
+            <span class="btn outline sm">Cancelar</span>
+            <span class="btn primary sm" data-save-btn>Salvar</span>
+          </div>
+        </div>
+
+        <!-- CENA WHATSAPP -->
+        <div class="wascene" data-wascene>
+          <div class="wabar">
+            <span class="av">CA</span>
+            <div><div class="nm">Clínica Dra. Ana</div><div class="st">online agora</div></div>
+          </div>
+          <div class="wachat" data-wachat>
+            <div class="wadots" data-wa-dots><i></i><i></i><i></i></div>
+            <div class="wabubble" data-wa-msg>
+              Olá, Maria! 👋 Sua consulta com a <b>Dra. Ana</b> está marcada para
+              <b>quinta, 12/06 às 14:00</b>.<br />
+              Para confirmar responda <b>CONFIRMAR</b>, ou <b>CANCELAR</b> se não puder comparecer.
+              <span class="meta">14:32 ✓✓</span>
+            </div>
+            <div class="wabubble reply" data-wa-reply>CONFIRMAR ✅<span class="meta">14:33</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">Demonstração ilustrativa · Cuidaty</div>
+  </div>
+</div>
+
+<style is:global>
+  .agd {
+    --bg: #f8fafc;
+    --fg: #0c202f;
+    --card: #fff;
+    --primary: #356588;
+    --secondary: #5ac3b0;
+    --muted: #e2e8f0;
+    --mf: #64748b;
+    --destructive: #ef4444;
+    --warning: #d97706;
+    --border: #e2e8f0;
+    --r-sm: 0.25rem;
+    --r-lg: 0.65rem;
+    --r-xl: 1rem;
+    --sh-xs: 0 1px 2px rgba(12, 32, 47, 0.05);
+    --sh-sm: 0 1px 3px rgba(12, 32, 47, 0.08), 0 1px 2px rgba(12, 32, 47, 0.04);
+    --sh-modal: 0 24px 60px -24px rgba(12, 32, 47, 0.45);
+    --wa: #1f8a70;
+    --wa-bg: #ece5dd;
+    color: var(--fg);
+    display: flex;
+    justify-content: center;
+  }
+  .agd * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .agd .stage {
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .agd .caption {
+    text-align: center;
+    min-height: 46px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+  }
+  .agd .caption .kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mf);
+  }
+  .agd .caption .headline {
+    font-size: 17px;
+    font-weight: 600;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .agd .caption .headline.swap {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  .agd .surface {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    box-shadow: var(--sh-sm), 0 18px 40px -28px rgba(12, 32, 47, 0.28);
+    overflow: hidden;
+    height: 640px;
+  }
+  .agd .appbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .agd .appbar .wdots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .agd .appbar .wdots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(12, 32, 47, 0.15);
+  }
+  .agd .appbar .wtitle {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mf);
+    letter-spacing: -0.01em;
+  }
+  .agd .screen {
+    position: relative;
+    height: calc(100% - 38px);
+  }
+  .agd svg.ic {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .agd svg.ic.s14 {
+    width: 14px;
+    height: 14px;
+  }
+  .agd svg.ic.s12 {
+    width: 12px;
+    height: 12px;
+  }
+  .agd .agenda {
+    position: absolute;
+    inset: 0;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+  }
+  .agd .agenda-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .agd .agenda-head .day {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .agd .agenda-head .day small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--mf);
+  }
+  .agd .agenda-head .new {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: var(--r-sm);
+    background: var(--primary);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    box-shadow: var(--sh-xs);
+  }
+  .agd .slots {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 2px;
+  }
+  .agd .appt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border);
+    border-left-width: 3px;
+    border-radius: var(--r-sm);
+    background: var(--card);
+    padding: 9px 11px;
+    box-shadow: var(--sh-xs);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
+  }
+  .agd .appt.show {
+    opacity: 1;
+    transform: none;
+  }
+  .agd .appt.moving {
+    transition: opacity 0.4s ease, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .agd .appt .time {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    width: 46px;
+    flex: 0 0 auto;
+    color: var(--fg);
+  }
+  .agd .appt .who {
+    flex: 1;
+    min-width: 0;
+  }
+  .agd .appt .who .nm {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .agd .appt .who .sub {
+    font-size: 11px;
+    color: var(--mf);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .agd .appt.confirmed {
+    border-left-color: var(--secondary);
+  }
+  .agd .appt.pending {
+    border-left-color: var(--warning);
+  }
+  .agd .appt .rep {
+    color: var(--primary);
+  }
+  .agd .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-size: 10.5px;
+    font-weight: 500;
+    flex: 0 0 auto;
+  }
+  .agd .badge.confirmed {
+    background: rgba(90, 195, 176, 0.12);
+    color: #2f8b7a;
+    border: 1px solid rgba(90, 195, 176, 0.3);
+  }
+  .agd .badge.pending {
+    background: rgba(217, 119, 6, 0.1);
+    color: #b45309;
+    border: 1px solid rgba(217, 119, 6, 0.3);
+  }
+  .agd .dim {
+    position: absolute;
+    inset: 0;
+    background: rgba(12, 32, 47, 0.28);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+  }
+  .agd .dim.show {
+    opacity: 1;
+  }
+  .agd .modal {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 14px;
+    max-height: calc(100% - 28px);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-modal);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    transform: scale(0.96);
+    display: flex;
+    flex-direction: column;
+  }
+  .agd .modal.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .agd .modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    flex: 0 0 auto;
+  }
+  .agd .modal-head .t {
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .agd .modal-head .t .lead {
+    color: var(--primary);
+    display: flex;
+  }
+  .agd .modal-body {
+    position: relative;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    scroll-behavior: smooth;
+  }
+  .agd .modal-foot {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    flex: 0 0 auto;
+  }
+  .agd .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    height: 36px;
+    padding: 0 14px;
+    border-radius: var(--r-sm);
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid transparent;
+    box-shadow: var(--sh-xs);
+  }
+  .agd .btn.primary {
+    background: var(--primary);
+    color: #fff;
+  }
+  .agd .btn.outline {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    outline: none; /* evita colisão com o utilitário .outline do Tailwind */
+  }
+  .agd .btn.sm {
+    height: 32px;
+    font-size: 12px;
+    padding: 0 11px;
+  }
+  .agd .btn.pressed {
+    transform: scale(0.96);
+    filter: brightness(0.95);
+  }
+  .agd .ffield {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .agd .ffield.show {
+    opacity: 1;
+    transform: none;
+  }
+  .agd .ffield.row2 {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .agd .ffield.row2 > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .agd .flabel {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mf);
+  }
+  .agd .fcontrol {
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+    font-size: 13px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .agd .fcontrol.focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(53, 101, 136, 0.12);
+  }
+  .agd .fcontrol svg {
+    color: var(--mf);
+    flex: 0 0 auto;
+  }
+  .agd .fcontrol .val {
+    transition: opacity 0.25s ease;
+  }
+  .agd .fcontrol .ph {
+    color: var(--mf);
+  }
+  .agd .fcontrol .chev {
+    margin-left: auto;
+    color: var(--mf);
+  }
+  .agd .pillpac {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .agd .pillpac .av {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(53, 101, 136, 0.12);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .agd .switch {
+    position: relative;
+    width: 34px;
+    height: 20px;
+    border-radius: 999px;
+    background: var(--muted);
+    transition: background 0.3s ease;
+    flex: 0 0 auto;
+  }
+  .agd .switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: var(--sh-xs);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .agd .switch.on {
+    background: var(--primary);
+  }
+  .agd .switch.on::after {
+    transform: translateX(14px);
+  }
+  .agd .wa-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--fg);
+  }
+  .agd .wa-head svg {
+    color: var(--wa);
+  }
+  .agd .wa-box {
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    background: rgba(226, 232, 240, 0.2);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    margin-top: 7px;
+  }
+  .agd .wa-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .agd .wa-toggle .txt {
+    flex: 1;
+    min-width: 0;
+  }
+  .agd .wa-toggle .wl {
+    font-size: 12.5px;
+    font-weight: 500;
+  }
+  .agd .wa-toggle .wd {
+    font-size: 10.5px;
+    color: var(--mf);
+  }
+  .agd .switchrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .agd .switchrow .lbl {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .agd .switchrow .lbl svg {
+    color: var(--primary);
+  }
+  .agd .recpanel {
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    background: rgba(226, 232, 240, 0.25);
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.45s ease, opacity 0.4s ease, padding 0.45s ease;
+  }
+  .agd .recpanel.show {
+    max-height: 340px;
+    opacity: 1;
+    padding: 12px;
+  }
+  .agd .radio-row {
+    display: flex;
+    gap: 8px;
+  }
+  .agd .radio-opt {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .agd .radio-opt.sel {
+    border-color: rgba(53, 101, 136, 0.4);
+    background: rgba(53, 101, 136, 0.05);
+  }
+  .agd .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--mf);
+    flex: 0 0 auto;
+    position: relative;
+  }
+  .agd .radio-opt.sel .dot {
+    border-color: var(--primary);
+  }
+  .agd .radio-opt.sel .dot::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+  .agd .mini-input {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 24px;
+    padding: 0 6px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    background: var(--card);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .agd .conflict {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+  }
+  .agd .conflict.show {
+    display: flex;
+  }
+  .agd .conflict-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: rgba(217, 119, 6, 0.07);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .agd .conflict-head svg {
+    color: var(--warning);
+  }
+  .agd .conflict-body {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .agd .crow {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .agd .crow .nm {
+    font-size: 12px;
+    font-weight: 500;
+    width: 84px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .agd .crow .old {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    text-decoration: line-through;
+    color: var(--mf);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 3px 7px;
+    background: rgba(226, 232, 240, 0.4);
+  }
+  .agd .crow .new {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--primary);
+    border: 1px solid rgba(53, 101, 136, 0.2);
+    border-radius: var(--r-sm);
+    padding: 3px 7px;
+    background: rgba(53, 101, 136, 0.06);
+  }
+  .agd .crow svg {
+    color: var(--mf);
+    flex: 0 0 auto;
+  }
+  .agd .conflict-foot {
+    font-size: 11px;
+    color: var(--mf);
+    padding: 0 12px 12px;
+  }
+  .agd .wascene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--wa-bg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  .agd .wascene.show {
+    opacity: 1;
+  }
+  .agd .wabar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--wa);
+    color: #fff;
+  }
+  .agd .wabar .av {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .agd .wabar .nm {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .agd .wabar .st {
+    font-size: 10.5px;
+    opacity: 0.85;
+  }
+  .agd .wachat {
+    flex: 1;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .agd .wabubble {
+    align-self: flex-start;
+    max-width: 80%;
+    background: #fff;
+    border-radius: 0 10px 10px 10px;
+    padding: 8px 11px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    font-size: 13px;
+    line-height: 1.45;
+    color: #111b21;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .agd .wabubble.show {
+    opacity: 1;
+    transform: none;
+  }
+  .agd .wabubble b {
+    font-weight: 600;
+  }
+  .agd .wabubble .meta {
+    display: block;
+    text-align: right;
+    font-size: 10px;
+    color: #667781;
+    margin-top: 3px;
+  }
+  .agd .wabubble.reply {
+    align-self: flex-end;
+    background: #d9fdd3;
+    border-radius: 10px 0 10px 10px;
+  }
+  .agd .wadots {
+    align-self: flex-start;
+    background: #fff;
+    border-radius: 0 10px 10px 10px;
+    padding: 9px 12px;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .agd .wadots.show {
+    opacity: 1;
+  }
+  .agd .wadots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #9aa6ac;
+    animation: agd-typing 1.1s infinite;
+  }
+  .agd .wadots i:nth-child(2) {
+    animation-delay: 0.18s;
+  }
+  .agd .wadots i:nth-child(3) {
+    animation-delay: 0.36s;
+  }
+  .agd .foot {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mf);
+  }
+  @keyframes agd-typing {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    30% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .agd * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  function initAgendaDemo(root: HTMLElement) {
+    const q = (s: string) => root.querySelector(s) as HTMLElement;
+    const qa = (s: string) => [...root.querySelectorAll(s)] as HTMLElement[];
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const headline = q('[data-headline]');
+    async function setHeadline(t: string) {
+      headline.classList.add('swap');
+      await sleep(330);
+      headline.textContent = t;
+      headline.classList.remove('swap');
+    }
+
+    const body = q('[data-modal-body]');
+    const formFields = [...body.children].filter((c) =>
+      c.classList.contains('ffield'),
+    ) as HTMLElement[];
+    const initials = (n: string) =>
+      n
+        .split(' ')
+        .map((w) => w[0])
+        .slice(0, 2)
+        .join('')
+        .toUpperCase();
+
+    function scrollToField(el: HTMLElement) {
+      const vTop = body.scrollTop,
+        vBot = vTop + body.clientHeight;
+      const eTop = el.offsetTop,
+        eBot = eTop + el.offsetHeight;
+      let top = vTop;
+      if (eBot > vBot - 14) top = eBot - body.clientHeight + 14;
+      if (eTop < vTop + 14) top = eTop - 14;
+      if (top !== vTop) body.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+
+    function makeAppt({ time, name, sub, status, recurring }: any) {
+      const el = document.createElement('div');
+      el.className = `appt ${status}`;
+      el.innerHTML = `
+        <span class="time">${time}</span>
+        <span class="who"><span class="nm">${name}</span><span class="sub">${recurring ? '<svg class="ic s12 rep" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>' : ''}${sub}</span></span>
+        <span class="badge ${status}">${status === 'confirmed' ? 'Confirmado' : 'Pendente'}</span>`;
+      return el;
+    }
+
+    const ff = (k: string) => q(`[data-f="${k}"]`);
+
+    async function openModal(title: string) {
+      q('[data-modal-title]').textContent = title;
+      body.scrollTop = 0;
+      q('[data-dim]').classList.add('show');
+      q('[data-modal]').classList.add('show');
+      await sleep(380);
+    }
+    async function closeModal() {
+      q('[data-modal]').classList.remove('show');
+      q('[data-dim]').classList.remove('show');
+      await sleep(360);
+    }
+    async function press(btn: HTMLElement) {
+      btn.classList.add('pressed');
+      await sleep(150);
+      btn.classList.remove('pressed');
+    }
+
+    function resetForm() {
+      formFields.forEach((f) => {
+        f.classList.remove('show');
+        f.style.display = '';
+      });
+      q('[data-rec-switch]').classList.remove('on');
+      q('[data-rec-panel]').classList.remove('show');
+      q('[data-conflict]').classList.remove('show');
+      qa('.fcontrol').forEach((c) => c.classList.remove('focus'));
+      body.scrollTop = 0;
+      const v = q('[data-pac]'),
+        p = q('[data-ph]');
+      v.innerHTML = '';
+      p.style.display = '';
+    }
+
+    async function showField(f: HTMLElement, focus = true, dwell = 420) {
+      f.classList.add('show');
+      scrollToField(f);
+      const ctrl = f.querySelector('.fcontrol') as HTMLElement | null;
+      if (focus && ctrl) ctrl.classList.add('focus');
+      await sleep(dwell);
+      if (ctrl) ctrl.classList.remove('focus');
+    }
+    function setPatient(name: string) {
+      const v = q('[data-pac]'),
+        p = q('[data-ph]');
+      p.style.display = 'none';
+      v.innerHTML = `<span class="pillpac"><span class="av">${initials(name)}</span>${name}</span>`;
+    }
+
+    function setAgenda(day: string, sub: string) {
+      q('[data-agenda-day]').childNodes[0].nodeValue = day;
+      q('[data-agenda-sub]').textContent = sub;
+    }
+    const clearSlots = () => (q('[data-slots]').innerHTML = '');
+    async function addAppt(opts: any, reveal = true) {
+      const el = makeAppt(opts);
+      q('[data-slots]').appendChild(el);
+      if (reveal) {
+        await sleep(40);
+        el.classList.add('show');
+      }
+      return el;
+    }
+
+    async function act1() {
+      setAgenda('Quinta · 12 jun', '2 consultas');
+      clearSlots();
+      await addAppt({ time: '09:00', name: 'João Lima', sub: 'Retorno', status: 'confirmed' });
+      await sleep(110);
+      await addAppt({ time: '11:00', name: 'Paula Reis', sub: 'Avaliação', status: 'pending' });
+      await sleep(650);
+
+      await setHeadline('Agende a consulta em segundos');
+      await openModal('Novo agendamento');
+      await showField(ff('pac'));
+      setPatient('Maria Souza');
+      await sleep(220);
+      await showField(ff('prof'));
+      await showField(ff('data'));
+      await showField(ff('hora'));
+      await showField(ff('status'));
+
+      await setHeadline('E avisa o paciente no WhatsApp');
+      await showField(ff('wa'), false, 1700);
+      ff('rec').classList.add('show');
+      scrollToField(ff('rec'));
+      await sleep(500);
+      await press(q('[data-save-btn]'));
+      await closeModal();
+
+      await setHeadline('Pronto — direto na agenda');
+      const novo = await addAppt({
+        time: '14:00',
+        name: 'Maria Souza',
+        sub: 'Consulta',
+        status: 'confirmed',
+      });
+      setAgenda('Quinta · 12 jun', '3 consultas');
+      novo.style.boxShadow = '0 0 0 2px rgba(90,195,176,.45)';
+      await sleep(1200);
+      novo.style.boxShadow = '';
+
+      await setHeadline('O paciente recebe no WhatsApp na hora');
+      q('[data-wa-msg]').classList.remove('show');
+      q('[data-wa-reply]').classList.remove('show');
+      q('[data-wa-dots]').classList.add('show');
+      q('[data-wascene]').classList.add('show');
+      await sleep(1100);
+      q('[data-wa-dots]').classList.remove('show');
+      q('[data-wa-msg]').classList.add('show');
+      await sleep(2400);
+      q('[data-wa-reply]').classList.add('show');
+      await setHeadline('Confirmação automática, sem ligar');
+      await sleep(2600);
+      q('[data-wascene]').classList.remove('show');
+      await sleep(500);
+    }
+
+    async function act2() {
+      await setHeadline('Horário ocupado? Reagenda sozinho');
+      resetForm();
+      await openModal('Novo agendamento');
+      await showField(ff('pac'));
+      setPatient('Carlos Dias');
+      await sleep(200);
+      ff('prof').classList.add('show');
+      ff('data').classList.add('show');
+      await showField(ff('hora'));
+      ff('status').classList.add('show');
+      ff('wa').classList.add('show');
+      ff('rec').classList.add('show');
+      await sleep(300);
+      await press(q('[data-save-btn]'));
+
+      await sleep(250);
+      formFields.forEach((f) => (f.style.display = 'none'));
+      body.scrollTop = 0;
+      q('[data-conflict]').classList.add('show');
+      q('[data-save-btn]').textContent = 'Mover para 15:00';
+      await setHeadline('A existente é remarcada logo após');
+      await sleep(2500);
+      await press(q('[data-save-btn]'));
+      await closeModal();
+      q('[data-save-btn]').textContent = 'Salvar';
+      q('[data-conflict]').classList.remove('show');
+
+      await setHeadline('Conflito resolvido, sem retrabalho');
+      const blocos = qa('.slots .appt');
+      const maria = blocos[blocos.length - 1];
+      maria.classList.add('moving');
+      (maria.querySelector('.time') as HTMLElement).textContent = '15:00';
+      maria.style.transform = 'translateY(46px)';
+      await sleep(110);
+      const carlos = makeAppt({
+        time: '14:00',
+        name: 'Carlos Dias',
+        sub: 'Consulta',
+        status: 'confirmed',
+      });
+      carlos.classList.add('show');
+      q('[data-slots]').insertBefore(carlos, maria);
+      await sleep(560);
+      maria.style.transform = '';
+      maria.classList.remove('moving');
+      setAgenda('Quinta · 12 jun', '4 consultas');
+      carlos.style.boxShadow = '0 0 0 2px rgba(90,195,176,.45)';
+      await sleep(1500);
+      carlos.style.boxShadow = '';
+      await sleep(800);
+    }
+
+    async function act3() {
+      await setHeadline('Consulta recorrente? Crie a série inteira');
+      resetForm();
+      await openModal('Novo agendamento');
+      ff('pac').classList.add('show');
+      setPatient('Helena Costa');
+      ff('prof').classList.add('show');
+      ff('data').classList.add('show');
+      ff('hora').classList.add('show');
+      ff('status').classList.add('show');
+      ff('wa').classList.add('show');
+      await showField(ff('rec'), false, 300);
+      await sleep(300);
+
+      q('[data-rec-switch]').classList.add('on');
+      scrollToField(ff('rec'));
+      await sleep(320);
+      q('[data-rec-panel]').classList.add('show');
+      await sleep(300);
+      scrollToField(ff('rec'));
+      await sleep(260);
+      scrollToField(ff('rec'));
+      await setHeadline('Semanal · até 8 consultas');
+      await sleep(2100);
+      await press(q('[data-save-btn]'));
+      await closeModal();
+
+      await setHeadline('8 consultas criadas de uma vez');
+      setAgenda('Toda quinta · 14:00', 'Série recorrente · 8 consultas');
+      clearSlots();
+      const datas = ['12 jun', '19 jun', '26 jun', '03 jul', '10 jul', '17 jul', '24 jul', '31 jul'];
+      for (const d of datas) {
+        await addAppt({
+          time: '14:00',
+          name: 'Helena Costa',
+          sub: `${d} · semanal`,
+          status: 'confirmed',
+          recurring: true,
+        });
+        await sleep(150);
+      }
+      await sleep(2600);
+    }
+
+    async function runOnce() {
+      await act1();
+      await act2();
+      await act3();
+    }
+    (root as any).__runDemo = runOnce;
+    root.dispatchEvent(new CustomEvent('demo:ready', { bubbles: true }));
+    if (!root.closest('[data-controlled]')) {
+      (async () => {
+        while (true) {
+          await runOnce();
+          await sleep(250);
+        }
+      })();
+    }
+  }
+
+  function boot() {
+    document
+      .querySelectorAll<HTMLElement>('.agd')
+      .forEach((root) => {
+        if (root.dataset.booted) return;
+        root.dataset.booted = '1';
+        initAgendaDemo(root);
+      });
+  }
+  if (document.readyState !== 'loading') boot();
+  else document.addEventListener('DOMContentLoaded', boot);
+</script>

@@ -1,0 +1,125 @@
+---
+import AgendaDemo from '../demos/AgendaDemo.astro';
+import TeleconsultaDemo from '../demos/TeleconsultaDemo.astro';
+import CutyChatDemo from '../demos/CutyChatDemo.astro';
+
+/**
+ * ConsultationFlow — carrossel de uma coluna que percorre a jornada do
+ * atendimento mostrando UM demo animado por vez, em loop:
+ *   Pré-consulta → AgendaDemo  →  Durante → TeleconsultaDemo  →  Pós → CutyChatDemo
+ *
+ * Os três demos ficam empilhados na mesma célula (altura estável, sem "pulo")
+ * e a troca acontece após cada demo rodar — o tempo de cada slide é afinado ao
+ * ciclo do respectivo demo (data-flow-duration, em ms).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={['flow-carousel mx-auto w-full max-w-md lg:max-w-none', className]}
+  data-flow-carousel
+>
+  <div class="flow-slide is-active" data-flow-slide data-flow-duration="24000">
+    <AgendaDemo />
+  </div>
+  <div class="flow-slide" data-flow-slide data-flow-duration="15500">
+    <TeleconsultaDemo />
+  </div>
+  <div class="flow-slide" data-flow-slide data-flow-duration="12000">
+    <CutyChatDemo />
+  </div>
+</div>
+
+<style>
+  /* Empilha os slides na mesma célula: a altura assume a do demo mais alto,
+     então a troca não causa "pulo" de layout. */
+  .flow-carousel {
+    display: grid;
+  }
+  .flow-slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px) scale(0.99);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+    pointer-events: none;
+  }
+  .flow-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flow-slide {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  /* Esconde a barra de janela ("Cuidaty · Agenda …") de todos os demos e
+     recupera o espaço dela, sem alterar os componentes de demo. */
+  .flow-carousel :global(.appbar) {
+    display: none;
+  }
+  .flow-carousel :global(.screen) {
+    height: 100%;
+  }
+
+  /* No desktop os demos preenchem a coluna (um pouco mais largos). */
+  @media (min-width: 1024px) {
+    .flow-carousel :global(.stage) {
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  function initFlowCarousel(root: HTMLElement) {
+    const slides = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-flow-slide]')
+    );
+    if (slides.length < 2) {
+      return;
+    }
+
+    const durations = slides.map((s) => Number(s.dataset.flowDuration) || 12000);
+    let current = 0;
+
+    const advance = () => {
+      slides[current].classList.remove('is-active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('is-active');
+      schedule();
+    };
+
+    const schedule = () => {
+      window.setTimeout(advance, durations[current]);
+    };
+
+    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === 0));
+    schedule();
+  }
+
+  function bootFlowCarousels() {
+    document.querySelectorAll<HTMLElement>('[data-flow-carousel]').forEach((root) => {
+      if (root.dataset.flowBooted) {
+        return;
+      }
+      root.dataset.flowBooted = '1';
+      initFlowCarousel(root);
+    });
+  }
+
+  if (document.readyState !== 'loading') {
+    bootFlowCarousels();
+  } else {
+    document.addEventListener('DOMContentLoaded', bootFlowCarousels);
+  }
+</script>

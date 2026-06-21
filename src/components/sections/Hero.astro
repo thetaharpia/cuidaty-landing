@@ -1,93 +1,47 @@
 ---
-
+import ConsultationFlow from './ConsultationFlow.astro';
 ---
 
-<section id="hero" class="relative min-h-[100dvh] overflow-hidden bg-beige">
+<section id="hero" class="relative min-h-[100dvh] overflow-hidden bg-white">
   <h1 class="sr-only">
     Software para psicólogos, clínicas e consultórios de saúde com agenda online, prontuário
     eletrônico e automação de WhatsApp
   </h1>
-
-  <!-- Background image (desktop only, as ambient texture) -->
-  <div class="absolute inset-0 hidden lg:block">
-    <img
-      src="/background-first-page.jpg"
-      alt=""
-      class="h-full w-full object-cover"
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
-    />
-    <div class="absolute inset-0 bg-gradient-to-r from-beige via-beige/85 to-beige/30"></div>
-  </div>
 
   <!-- Mobile layout -->
   <div
     class="container relative mx-auto flex min-h-[100dvh] flex-col px-5 pb-8 pt-24 sm:pt-28 lg:hidden"
   >
     <div class="hero-fade hero-fade-up flex flex-1 flex-col justify-center py-8">
-      <!-- Urgency eyebrow -->
-      <div
-        class="mb-5 inline-flex w-fit items-center gap-2 rounded-full bg-cuidaty-accent-light/60 px-3 py-1.5 text-xs font-semibold text-cuidaty-dark"
-      >
-        <span class="h-1.5 w-1.5 rounded-full bg-cuidaty-secondary"></span>
-        Demonstração personalizada · sem compromisso
-      </div>
+      <img
+        src="/logo-written.svg"
+        alt="Cuidaty"
+        width="314"
+        height="82"
+        loading="eager"
+        class="mb-6 w-auto self-start"
+        style="height: clamp(2.75rem, 11vw, 4rem);"
+      />
 
-      <p
-        class="mb-5 font-serif text-[2.75rem] font-semibold leading-[1.02] tracking-tight text-cuidaty-dark"
-      >
-        Recupere <span class="text-cuidaty-primary">8 horas</span> da sua semana.
-      </p>
-
-      <p class="mb-7 font-serif text-xl italic leading-snug text-cuidaty-dark/75">
-        Menos burocracia. Mais escuta.
+      <p class="mb-7 font-serif text-xl italic leading-snug text-cuidaty-dark/75" data-typewriter>
+        <span class="tw-text">Menos burocracia. Mais escuta.</span><span
+          class="tw-caret"
+          aria-hidden="true"></span>
       </p>
 
       <p class="mb-8 max-w-prose text-base leading-relaxed text-foreground/70">
-        O Cuidaty é um sistema para psicólogos, consultórios e clínicas de saúde com agenda online,
-        prontuário eletrônico, financeiro e automação de WhatsApp.
+        A plataforma de gestão para psicólogos e demais profissionais de saúde: agenda, prontuário,
+        financeiro, WhatsApp e um assistente de IA que transcreve consultas e tira dúvidas sobre o
+        paciente — tudo num só lugar, para você focar no cuidado.
       </p>
-
-      <!-- Stat pills — trust signals visible in first viewport -->
-      <dl class="mb-8 grid grid-cols-3 gap-2">
-        <div class="rounded-md border border-cuidaty-primary/15 bg-white px-3 py-2.5">
-          <dt class="font-serif text-lg font-semibold text-cuidaty-primary">500+</dt>
-          <dd class="text-[11px] leading-tight text-foreground/60">profissionais</dd>
-        </div>
-        <div class="rounded-md border border-cuidaty-primary/15 bg-white px-3 py-2.5">
-          <dt class="font-serif text-lg font-semibold text-cuidaty-primary">−73%</dt>
-          <dd class="text-[11px] leading-tight text-foreground/60">de faltas</dd>
-        </div>
-        <div class="rounded-md border border-cuidaty-primary/15 bg-white px-3 py-2.5">
-          <dt class="font-serif text-lg font-semibold text-cuidaty-primary">4h</dt>
-          <dd class="text-[11px] leading-tight text-foreground/60">resposta</dd>
-        </div>
-      </dl>
 
       <!-- Primary CTA, full-width -->
       <a
-        href="https://calendly.com/pedro-thetaharpia/30min"
-        target="_blank"
-        rel="noopener"
+        href="#contato"
         class="group flex items-center justify-center gap-2 rounded-md bg-cuidaty-primary px-6 text-base font-semibold text-white transition-all active:bg-cuidaty-primary-hover"
         style="min-height: 52px;"
       >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-          ></path>
-        </svg>
-        Agendar demonstração grátis
+        Falar com a gente
         <svg
           class="h-4 w-4 transition-transform group-active:translate-x-1"
           fill="none"
@@ -103,73 +57,55 @@
         </svg>
       </a>
 
-      <p class="mt-4 text-center text-xs text-foreground/55">
-        30 minutos com o fundador · Atendimento humano
+      <p class="mt-4 text-center text-sm text-foreground/60">
+        Mais de <span class="font-semibold text-foreground/80">500 profissionais</span> já confiam no Cuidaty.
       </p>
+
+      <!-- Jornada animada do atendimento -->
+      <ConsultationFlow class="mt-12" />
     </div>
   </div>
 
-  <!-- Desktop layout: editorial two-column -->
+  <!-- Desktop layout: texto + jornada animada (no lugar da imagem) -->
   <div
-    class="container relative mx-auto hidden h-[100dvh] min-h-[700px] max-w-7xl items-center gap-16 px-8 lg:grid lg:grid-cols-[1.1fr_1fr] xl:gap-24 xl:px-12"
+    class="container relative mx-auto hidden min-h-[100dvh] max-w-7xl items-center gap-16 px-8 py-28 lg:grid lg:grid-cols-[1.1fr_1fr] xl:gap-24 xl:px-12"
   >
-    <!-- Left: Editorial text column -->
-    <div class="hero-fade hero-fade-left flex flex-col justify-center">
-      <div
-        class="mb-6 inline-flex w-fit items-center gap-2 rounded-full bg-cuidaty-accent-light/60 px-3.5 py-1.5 text-xs font-semibold text-cuidaty-dark"
-      >
-        <span class="h-1.5 w-1.5 rounded-full bg-cuidaty-secondary"></span>
-        Demonstração personalizada · sem compromisso
-      </div>
-
-      <p
-        class="mb-8 font-serif font-semibold leading-[0.95] tracking-tight text-cuidaty-dark"
-        style="font-size: clamp(3.5rem, 7vw, 6.5rem);"
-      >
-        Cuidat<span class="text-cuidaty-secondary">y</span>.
-      </p>
+    <!-- Texto editorial -->
+    <div class="hero-fade hero-fade-left flex flex-col">
+      <img
+        src="/logo-written.svg"
+        alt="Cuidaty"
+        width="314"
+        height="82"
+        loading="eager"
+        class="mb-8 w-auto self-start"
+        style="height: clamp(3.25rem, 6vw, 5.5rem);"
+      />
 
       <p
         class="mb-8 max-w-md font-serif text-2xl font-normal italic leading-tight text-cuidaty-dark/80 xl:text-3xl"
+        data-typewriter
       >
-        Menos burocracia. Mais escuta.
+        <span class="tw-text">Menos burocracia. Mais escuta.</span><span
+          class="tw-caret"
+          aria-hidden="true"></span>
       </p>
 
       <p class="mb-10 max-w-md text-base leading-relaxed text-foreground/70 xl:text-lg">
-        Sistema para psicólogos, consultórios e clínicas de saúde com agenda online, prontuário
-        eletrônico, financeiro, equipes, relatórios e automação de WhatsApp.
+        A plataforma de gestão para psicólogos e demais profissionais de saúde: agenda, prontuário,
+        financeiro, WhatsApp e um assistente de IA que transcreve consultas e tira dúvidas sobre o
+        paciente — tudo num só lugar, para você focar no cuidado.
       </p>
-
-      <!-- Trust pills for desktop -->
-      <div class="mb-8 flex flex-wrap gap-3 text-sm">
-        <span
-          class="rounded-full bg-cuidaty-accent-light/50 px-3.5 py-1.5 font-medium text-cuidaty-dark"
-        >
-          500+ profissionais
-        </span>
-        <span
-          class="rounded-full bg-cuidaty-accent-light/50 px-3.5 py-1.5 font-medium text-cuidaty-dark"
-        >
-          −73% de faltas
-        </span>
-        <span
-          class="rounded-full bg-cuidaty-accent-light/50 px-3.5 py-1.5 font-medium text-cuidaty-dark"
-        >
-          8h/semana economizadas
-        </span>
-      </div>
 
       <div
         class="hero-fade hero-fade-up flex flex-col items-start gap-6"
         style="animation-delay: 0.25s;"
       >
         <a
-          href="https://calendly.com/pedro-thetaharpia/30min"
-          target="_blank"
-          rel="noopener"
+          href="#contato"
           class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-primary px-8 py-4 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
         >
-          Agendar demonstração
+          Falar com a gente
           <svg
             class="h-4 w-4 transition-transform group-hover:translate-x-1"
             fill="none"
@@ -191,24 +127,9 @@
       </div>
     </div>
 
-    <!-- Right: Editorial photograph -->
-    <div class="hero-fade hero-fade-right relative flex h-full items-center">
-      <figure class="relative w-full">
-        <img
-          src="/psycologist-taking-coffe.jpg"
-          alt="Profissional da saúde em seu consultório"
-          class="h-[72vh] max-h-[620px] w-full rounded-sm object-cover shadow-lifted"
-          width="640"
-          height="800"
-          loading="eager"
-          decoding="async"
-        />
-        <figcaption
-          class="absolute -bottom-1 -left-1 bg-beige px-4 py-2 font-serif text-xs italic text-cuidaty-dark/70"
-        >
-          Um suporte que cuida de quem cuida.
-        </figcaption>
-      </figure>
+    <!-- Jornada animada do atendimento (no lugar da imagem) -->
+    <div class="hero-fade hero-fade-right w-full" style="animation-delay: 0.35s;">
+      <ConsultationFlow />
     </div>
   </div>
 </section>
@@ -296,6 +217,36 @@
       animation: none !important;
     }
   }
+
+  /* Typewriter — cursor piscando ao lado do texto */
+  .tw-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 3px;
+    background: currentColor;
+    vertical-align: -0.12em;
+    animation: twBlink 0.9s steps(1) infinite;
+  }
+  [data-typewriter].is-done .tw-caret {
+    animation: none;
+    opacity: 0;
+  }
+  @keyframes twBlink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    50.01%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-caret {
+      display: none;
+    }
+  }
 </style>
 
 <script>
@@ -308,6 +259,36 @@
         },
         100 + index * 120
       );
+    });
+
+    // Typewriter de "Menos burocracia. Mais escuta."
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach((el) => {
+      const textEl = el.querySelector<HTMLElement>('.tw-text');
+      if (!textEl) {
+        return;
+      }
+      const full = textEl.textContent ?? '';
+      if (reduceMotion) {
+        el.classList.add('is-done');
+        return;
+      }
+
+      textEl.textContent = '';
+      let i = 0;
+      const type = () => {
+        if (i >= full.length) {
+          el.classList.add('is-done');
+          return;
+        }
+        const char = full.charAt(i);
+        textEl.textContent += char;
+        i += 1;
+        // pausa maior após pontuação para dar ritmo
+        const delay = char === '.' ? 420 : char === ' ' ? 50 : 55;
+        window.setTimeout(type, delay);
+      };
+      window.setTimeout(type, 650);
     });
   });
 </script>

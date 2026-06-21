@@ -1,444 +1,366 @@
 ---
+import Icon from '../mockups/Icon.astro';
+import AgendaDemo from '../demos/AgendaDemo.astro';
+import PortalAgendamentoDemo from '../demos/PortalAgendamentoDemo.astro';
+import WhatsAppMock from '../mockups/WhatsAppMock.astro';
+import TeleconsultaDemo from '../demos/TeleconsultaDemo.astro';
+import CutyChatDemo from '../demos/CutyChatDemo.astro';
 
+/**
+ * Seção de funcionalidades em abas. Cada aba mostra o mockup estático da
+ * feature e uma explicação curta e objetiva.
+ */
+const tabs = [
+  {
+    id: 'agenda',
+    icon: 'calendar',
+    label: 'Agenda',
+    title: 'Agenda inteligente',
+    desc: 'Uma agenda que organiza a rotina inteira do consultório: marque consultas com recorrência, evite encaixes em conflito e acompanhe o dia, a semana e o mês em uma só tela. Ao agendar, o paciente recebe a confirmação no WhatsApp na hora.',
+    points: [
+      'Recorrências automáticas e detecção de conflitos de horário',
+      'Visão por dia, semana e mês de toda a sua agenda',
+      'Confirmação e lembrete enviados no WhatsApp a cada agendamento',
+    ],
+    Comp: AgendaDemo,
+  },
+  {
+    id: 'portal',
+    icon: 'globe',
+    label: 'Portal de agendamento',
+    title: 'Portal de agendamento do paciente',
+    desc: 'O paciente agenda sozinho numa página com a marca da sua clínica, sem login e sem app. A confirmação chega no WhatsApp.',
+    points: [
+      'O paciente escolhe profissional, data e horário',
+      'Sem login e sem app, direto no navegador, 24h por dia',
+      'Confirmação enviada automaticamente no WhatsApp',
+    ],
+    Comp: PortalAgendamentoDemo,
+  },
+  {
+    id: 'whatsapp',
+    icon: 'whatsapp',
+    label: 'WhatsApp',
+    title: 'Automação via WhatsApp',
+    desc: 'Boas-vindas, confirmação e lembrete no automático. O paciente responde e a agenda se atualiza sozinha.',
+    points: [
+      'Fluxos prontos de boas-vindas, confirmação e lembrete',
+      'Atendimento dentro da plataforma e no aplicativo',
+      'Você assume a conversa quando quiser',
+    ],
+    Comp: WhatsAppMock,
+  },
+  {
+    id: 'transcricao',
+    icon: 'mic',
+    label: 'Transcrição',
+    title: 'Transcrição com IA',
+    desc: 'Grave a consulta (presencial ou teleconsulta) e ela vira um resumo clínico estruturado. O áudio é descartado após o processamento.',
+    points: [
+      'Gravação ao vivo de consultas presenciais e teleconsultas',
+      'Resumo clínico estruturado em SOAP ou outros formatos',
+      'Transcrição completa por trechos, pronta para o registro',
+    ],
+    Comp: TeleconsultaDemo,
+  },
+  {
+    id: 'cuty-ai',
+    icon: 'bot',
+    label: 'Cuty AI',
+    title: 'Cuty AI',
+    desc: 'Pergunte sobre o paciente e receba a resposta com base no prontuário, sempre com a fonte citada.',
+    points: [
+      'Respostas fundamentadas no histórico do paciente',
+      'Citação da fonte: consulta e registro de origem',
+      'Resumo do que mudou na consulta de hoje',
+    ],
+    Comp: CutyChatDemo,
+  },
+] as const;
 ---
 
-<section id="funcionalidades" class="bg-beige py-24 md:py-32">
+<section id="funcionalidades" class="bg-white py-24 md:py-32">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto mb-24 max-w-4xl">
-      <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
-        Entrega de valor
-      </p>
-      <h2
-        class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
-      >
-        Tecnologia que<br />
-        <span class="italic text-cuidaty-dark/70">acolhe em silêncio.</span>
-      </h2>
-      <p class="mt-6 max-w-2xl text-lg leading-relaxed text-foreground/70">
-        Quatro capacidades que funcionam em background para que você fique com os pacientes, não com
-        a burocracia.
+    <div class="mx-auto mb-12 grid max-w-6xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+          Entrega de valor
+        </p>
+        <h2
+          class="font-serif text-4xl font-semibold leading-[1.03] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
+        >
+          Tecnologia que<br />
+          <span class="italic text-cuidaty-dark/70">acolhe em silêncio.</span>
+        </h2>
+      </div>
+      <p class="text-lg leading-relaxed text-foreground/70">
+        Capacidades que funcionam em background para que você fique com os pacientes, não com a
+        burocracia.
       </p>
     </div>
 
-    <article
-      class="mx-auto mb-32 grid max-w-6xl gap-12 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16"
-    >
-      <div>
-        <div class="mb-5 flex items-baseline gap-4">
-          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">01</span>
-          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
-        </div>
-        <h3
-          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
-        >
-          Automacao via WhatsApp
-        </h3>
-        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
-          Um assistente automatizado que atende na plataforma e no aplicativo do seu consultorio —
-          configure uma vez, funciona todos os dias.
-        </p>
-        <ul class="space-y-3">
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Fluxos prontos de boas-vindas, confirmacao e lembrete
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Uso do WhatsApp dentro da plataforma e tambem no aplicativo
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Acompanhamento do bot em tempo real — voce assume quando quiser
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="space-y-4 sm:hidden">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/configure-automacoes-whatsapp.png"
-              alt="Interface de configuracao das automacoes de WhatsApp no Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/acompanhe-atendimento-do-seu-bot-em-tempo-real.png"
-              alt="Acompanhamento de atendimentos do bot em tempo real"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="mx-auto w-[52%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/use-whatsapp-dentro-da-plataforma-integrado-com-sua-rotina-clinica.png"
-              alt="Tela do aplicativo do Cuidaty com atendimento pelo WhatsApp"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-
-        <div class="relative hidden sm:block sm:pb-24">
-          <figure
-            class="relative z-10 overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/configure-automacoes-whatsapp.png"
-              alt="Interface de configuracao das automacoes de WhatsApp no Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="relative z-20 ml-auto mt-[-12%] w-[78%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:mt-[-10%] md:w-[72%]"
-          >
-            <img
-              src="/acompanhe-atendimento-do-seu-bot-em-tempo-real.png"
-              alt="Acompanhamento de atendimentos do bot em tempo real"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="absolute bottom-0 left-6 z-30 w-[30%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:w-[28%]"
-          >
-            <img
-              src="/use-whatsapp-dentro-da-plataforma-integrado-com-sua-rotina-clinica.png"
-              alt="Tela do aplicativo do Cuidaty com atendimento pelo WhatsApp"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
-          Configure, acompanhe em tempo real e atenda tambem pelo aplicativo.
-        </figcaption>
-      </div>
-    </article>
-
-    <article
-      class="mx-auto mb-32 grid max-w-6xl gap-12 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16"
-    >
-      <div class="lg:order-1">
-        <div class="space-y-4 sm:hidden">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/agenda-semanal.png"
-              alt="Agenda semanal do Cuidaty com consultas agendadas"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/avise-agendamento-no-wahtsapp.png"
-              alt="Aviso de agendamento enviado automaticamente pelo WhatsApp"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-
-        <div class="relative hidden sm:block">
-          <figure
-            class="relative overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/agenda-semanal.png"
-              alt="Agenda semanal do Cuidaty com consultas agendadas"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="relative z-10 ml-auto mt-[-14%] w-[68%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:mt-[-10%] md:w-[62%]"
-          >
-            <img
-              src="/avise-agendamento-no-wahtsapp.png"
-              alt="Aviso de agendamento enviado automaticamente pelo WhatsApp"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
-          Cada agendamento na plataforma dispara a notificacao automaticamente.
-        </figcaption>
-      </div>
-
-      <div class="lg:order-2">
-        <div class="mb-5 flex items-baseline gap-4">
-          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">02</span>
-          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
-        </div>
-        <h3
-          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
-        >
-          Agenda e presenca digital
-        </h3>
-        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
-          Uma agenda integrada que trabalha por voce — agendou na plataforma, o paciente recebe a
-          notificacao no WhatsApp.
-        </p>
-        <ul class="space-y-3">
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Visao semanal e mensal, com status por cor
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Cada agendamento na plataforma dispara confirmacao e lembrete no WhatsApp
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Link de agendamento proprio — funciona 24 horas
-            </span>
-          </li>
-        </ul>
-      </div>
-    </article>
-
-    <article
-      class="mx-auto mb-32 grid max-w-6xl gap-12 border-t border-cuidaty-dark/10 pt-16 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16"
-    >
-      <div>
-        <div class="mb-5 flex items-baseline gap-4">
-          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">03</span>
-          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
-        </div>
-        <h3
-          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
-        >
-          Financeiro e gestao de equipes
-        </h3>
-        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
-          Tenha visao clara da operacao: acompanhe receita, repasses, status das consultas e a
-          estrutura da sua equipe no mesmo sistema.
-        </p>
-        <ul class="space-y-3">
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Painel financeiro com receita, a receber, cancelamentos e tendencias
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Profissionais em destaque, repasses e desempenho acompanhados em tempo real
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Gestao de equipes com papeis, hierarquia e visibilidade por profissional
-            </span>
-          </li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="space-y-4 sm:hidden">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/painel-finaneiro-acompanhe-profissionais-destaque.png"
-              alt="Painel financeiro do Cuidaty com receita, repasses e profissionais em destaque"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/gestao-de-equipe.png"
-              alt="Tela de gestao de equipes do Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-
-        <div class="relative hidden sm:block sm:pb-16">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/painel-finaneiro-acompanhe-profissionais-destaque.png"
-              alt="Painel financeiro do Cuidaty com receita, repasses e profissionais em destaque"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="absolute bottom-0 right-0 w-[58%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/gestao-de-equipe.png"
-              alt="Tela de gestao de equipes do Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
-          Resultado financeiro e equipe organizados no mesmo painel de gestao.
-        </figcaption>
-      </div>
-    </article>
-
-    <article
-      class="mx-auto grid max-w-6xl gap-12 border-t border-cuidaty-dark/10 pt-16 lg:grid-cols-[1.3fr_1fr] lg:items-center lg:gap-16"
-    >
-      <div class="lg:order-1">
-        <div class="space-y-4 sm:hidden">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/prontuario.png"
-              alt="Tela de prontuarios do Cuidaty com registros medicos e historico do paciente"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/relatorios.png"
-              alt="Tela de relatorios clinicos do Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-
-        <div class="relative hidden sm:block">
-          <figure
-            class="overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted"
-          >
-            <img
-              src="/prontuario.png"
-              alt="Tela de prontuarios do Cuidaty com registros medicos e historico do paciente"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-          <figure
-            class="relative z-10 ml-auto mt-[-12%] w-[68%] overflow-hidden rounded-sm border border-cuidaty-dark/10 bg-white shadow-lifted md:w-[62%]"
-          >
-            <img
-              src="/relatorios.png"
-              alt="Tela de relatorios clinicos do Cuidaty"
-              loading="lazy"
-              class="h-auto w-full"
-            />
-          </figure>
-        </div>
-        <figcaption class="mt-3 text-right font-serif text-xs italic text-foreground/55">
-          Registros clinicos e relatorios conectados para acompanhar cada paciente.
-        </figcaption>
-      </div>
-
-      <div class="lg:order-2">
-        <div class="mb-5 flex items-baseline gap-4">
-          <span class="font-serif text-2xl font-semibold text-cuidaty-primary/80">04</span>
-          <span class="h-px flex-1 bg-cuidaty-primary/20"></span>
-        </div>
-        <h3
-          class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl"
-        >
-          Prontuarios e relatorios
-        </h3>
-        <p class="mb-8 text-lg leading-relaxed text-foreground/70">
-          Centralize o historico do paciente e transforme cada atendimento em documentos e
-          relatorios prontos para consulta ou compartilhamento.
-        </p>
-        <ul class="space-y-3">
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Prontuario eletronico completo com registros pesquisaveis
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Relatorios clinicos e documentos personalizaveis por especialidade
-            </span>
-          </li>
-          <li class="flex gap-3 text-foreground/75">
-            <span class="mt-3 h-px w-5 flex-shrink-0 bg-cuidaty-secondary" aria-hidden="true"
-            ></span>
-            <span class="text-[0.95rem] leading-relaxed">
-              Historico organizado para consulta rapida e acompanhamento longitudinal
-            </span>
-          </li>
-        </ul>
-      </div>
-    </article>
-
-    <div class="mx-auto mt-20 max-w-5xl text-center">
-      <a
-        href="/#planos"
-        class="inline-flex items-center gap-2 text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-dark"
+    <div class="mx-auto max-w-6xl" data-tabs>
+      <!-- Abas -->
+      <div
+        role="tablist"
+        aria-label="Funcionalidades do Cuidaty"
+        class="flex flex-wrap justify-center gap-2"
       >
-        Ver todos os planos
+        {
+          tabs.map((tab, i) => (
+            <button
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-controls={`panel-${tab.id}`}
+              aria-selected={i === 0 ? 'true' : 'false'}
+              tabindex={i === 0 ? 0 : -1}
+              data-tab={tab.id}
+              class="tab inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-cuidaty-dark/12 bg-white px-4 py-2.5 text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
+            >
+              <Icon name={tab.icon} size={16} />
+              {tab.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Painéis (altura animada para evitar "pulo" ao trocar de aba) -->
+      <div class="relative mt-10 transition-[height] duration-300 ease-out" data-panels>
+        {
+          tabs.map((tab, i) => {
+            const Comp = tab.Comp;
+            return (
+              <div
+                role="tabpanel"
+                id={`panel-${tab.id}`}
+                aria-labelledby={`tab-${tab.id}`}
+                data-panel={tab.id}
+                hidden={i !== 0}
+                aria-hidden={i !== 0 ? 'true' : undefined}
+                class:list={[
+                  'grid gap-6 transition-opacity duration-300 ease-out lg:grid-cols-2 lg:items-center lg:gap-16',
+                  i === 0 ? 'opacity-100' : 'pointer-events-none opacity-0',
+                ]}
+              >
+                {/* Demo — no topo no mobile, à direita no desktop */}
+                <div
+                  class="order-first flex w-full justify-center lg:order-last"
+                  data-anim
+                  style="--d:40ms"
+                >
+                  <Comp class="w-full" />
+                </div>
+
+                {/* Texto — card no mobile, plano no desktop */}
+                <div class="rounded-2xl border border-border bg-white p-6 shadow-soft md:p-7 lg:order-first lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
+                  <h3
+                    class="mb-3 font-serif text-2xl font-semibold leading-tight text-cuidaty-dark md:text-3xl lg:mb-5 lg:text-4xl"
+                    data-anim
+                    style="--d:90ms"
+                  >
+                    {tab.title}
+                  </h3>
+                  <p class="mb-5 leading-relaxed text-foreground/70 lg:mb-8 lg:text-lg" data-anim style="--d:130ms">
+                    {tab.desc}
+                  </p>
+                  <ul class="space-y-2.5 lg:space-y-3">
+                    {tab.points.map((point, pi) => (
+                      <li class="flex gap-3 text-foreground/75" data-anim style={`--d:${190 + pi * 60}ms`}>
+                        <span
+                          class="mt-2.5 h-px w-4 flex-shrink-0 bg-cuidaty-secondary lg:mt-3 lg:w-5"
+                          aria-hidden="true"
+                        />
+                        <span class="text-sm leading-relaxed lg:text-[0.95rem]">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Confiança e segurança — bloco independente, separado por divisor -->
+    <div class="mx-auto mt-24 max-w-6xl border-t border-border pt-14 md:mt-28 md:pt-20">
+      <div class="grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center md:gap-16">
+        <div>
+          <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+            Confiança e segurança
+          </p>
+          <p class="text-lg leading-relaxed text-foreground/70">
+            Hospedagem 100% brasileira, auditoria de segurança semestral e criptografia AES-256 em
+            trânsito e em repouso.
+          </p>
+        </div>
+        <dl class="grid grid-cols-2 gap-px overflow-hidden rounded-xl bg-border">
+          <div class="bg-white px-4 py-6 text-center">
+            <dt class="font-serif text-2xl font-semibold text-cuidaty-dark">LGPD</dt>
+            <dd class="mt-1 text-xs text-foreground/60">Em conformidade</dd>
+          </div>
+          <div class="bg-white px-4 py-6 text-center">
+            <dt class="font-serif text-2xl font-semibold text-cuidaty-dark">Suporte</dt>
+            <dd class="mt-1 text-xs text-foreground/60">Humano, em horário comercial</dd>
+          </div>
+        </dl>
+      </div>
+      <p class="mt-8 flex items-start gap-2.5 text-sm leading-relaxed text-foreground/55">
         <svg
-          class="h-4 w-4"
+          class="mt-0.5 h-4 w-4 flex-shrink-0 text-cuidaty-primary"
           fill="none"
           stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
-      </a>
-      <p class="mt-4 text-sm text-foreground/50">
-        + mais de 30 funcionalidades incluidas para a gestao completa do seu consultorio
+        <span>
+          As funcionalidades de IA (transcrição e Cuty AI) operam em conformidade com a LGPD e são
+          auxiliares: não substituem o julgamento clínico do profissional.
+        </span>
+      </p>
+    </div>
+
+    <div class="mx-auto mt-16 max-w-5xl text-center">
+      <p class="text-sm text-foreground/50">
+        + mais de 30 funcionalidades incluídas para a gestão completa do seu consultório
       </p>
     </div>
   </div>
 </section>
+
+<style>
+  .tab[aria-selected='true'] {
+    background-color: #356588;
+    border-color: #356588;
+    color: #fff;
+  }
+
+  /* Painéis sobrepostos só quando o JS assume (crossfade + altura fluida) */
+  [data-panels][data-enhanced] > [role='tabpanel'] {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+  }
+
+  /* Entrada sutil do conteúdo: rise + fade com stagger.
+     Só vale depois que o JS assume — sem JS, tudo aparece normalmente. */
+  [data-panels][data-enhanced] [role='tabpanel'] [data-anim] {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  [data-panels][data-enhanced] [role='tabpanel'].is-active [data-anim] {
+    animation: feat-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--d, 0ms);
+  }
+
+  @keyframes feat-rise {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-panels],
+    [data-panels] > [role='tabpanel'] {
+      transition: none !important;
+    }
+
+    [data-panels][data-enhanced] [role='tabpanel'] [data-anim] {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initTabs(root: HTMLElement) {
+    const tabs = Array.from(root.querySelectorAll<HTMLElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+    const panelsWrap = root.querySelector<HTMLElement>('[data-panels]');
+    if (!tabs.length || !panelsWrap) {
+      return;
+    }
+
+    let currentId = tabs[0].dataset.tab ?? '';
+
+    // Aprimoramento: revela todos os painéis e habilita o empilhamento absoluto
+    panels.forEach((panel) => {
+      panel.hidden = false;
+    });
+    panelsWrap.dataset.enhanced = 'true';
+
+    const sizeToActive = () => {
+      const active = panels.find((panel) => panel.dataset.panel === currentId);
+      if (active) {
+        panelsWrap.style.height = `${active.offsetHeight}px`;
+      }
+    };
+
+    const select = (id: string, focus = false) => {
+      currentId = id;
+      tabs.forEach((tab) => {
+        const active = tab.dataset.tab === id;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        if (active && focus) {
+          tab.focus();
+        }
+      });
+      panels.forEach((panel) => {
+        const active = panel.dataset.panel === id;
+        panel.classList.toggle('opacity-100', active);
+        panel.classList.toggle('opacity-0', !active);
+        panel.classList.toggle('pointer-events-none', !active);
+        panel.setAttribute('aria-hidden', String(!active));
+        if (active) {
+          // Reinicia a animação de entrada do conteúdo a cada troca de aba
+          panel.classList.remove('is-active');
+          void panel.offsetWidth;
+          panel.classList.add('is-active');
+        } else {
+          panel.classList.remove('is-active');
+        }
+      });
+      sizeToActive();
+    };
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => select(tab.dataset.tab ?? ''));
+      tab.addEventListener('keydown', (event) => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
+          return;
+        }
+        event.preventDefault();
+        const dir = event.key === 'ArrowRight' ? 1 : -1;
+        const next = tabs[(i + dir + tabs.length) % tabs.length];
+        select(next.dataset.tab ?? '', true);
+      });
+    });
+
+    // Mantém a altura sincronizada com o conteúdo (fontes, resize, responsivo)
+    window.addEventListener('resize', sizeToActive);
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => sizeToActive());
+      panels.forEach((panel) => ro.observe(panel));
+    }
+
+    select(currentId);
+  }
+
+  function bootTabs() {
+    document.querySelectorAll<HTMLElement>('[data-tabs]').forEach(initTabs);
+  }
+
+  if (document.readyState !== 'loading') {
+    bootTabs();
+  } else {
+    document.addEventListener('DOMContentLoaded', bootTabs);
+  }
+</script>

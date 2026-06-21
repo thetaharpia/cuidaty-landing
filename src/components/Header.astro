@@ -2,193 +2,161 @@
 
 ---
 
-<header
-  class="bg-background/92 fixed left-0 right-0 top-0 z-50 border-b border-border shadow-soft backdrop-blur-md transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 md:border-border/70 md:bg-background/80 md:shadow-soft md:backdrop-blur-md"
-  id="main-header"
->
-  <nav class="container mx-auto flex items-center justify-between px-5 py-3 md:px-8 md:py-4">
-    <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
-      <img src="/logo-written.svg" alt="Cuidaty" class="h-8 w-auto sm:h-9" loading="eager" />
-    </a>
-
-    <div class="hidden items-center gap-8 md:flex">
-      <a
-        href="/#funcionalidades"
-        class="text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
-      >
-        Funcionalidades
-      </a>
-      <a
-        href="/#resultados"
-        class="text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
-      >
-        Resultados
-      </a>
-      <a
-        href="/#sobre"
-        class="text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
-      >
-        Sobre
-      </a>
-      <a
-        href="/#blog"
-        class="text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
-      >
-        Blog
-      </a>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <a
-        href="https://app.cuidaty.com/login"
-        class="hidden text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark sm:inline-flex"
-      >
-        Entrar
-      </a>
-      <a
-        href="https://calendly.com/pedro-thetaharpia/30min"
-        target="_blank"
-        rel="noopener"
-        class="hidden items-center gap-2 rounded-md bg-cuidaty-primary px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-cuidaty-primary-hover md:inline-flex"
-      >
-        Agendar demonstração
+<header class="fixed inset-x-0 top-3 z-50 px-4 sm:top-4 md:px-6" id="main-header">
+  <div class="mx-auto max-w-7xl">
+    <!-- Barra flutuante arredondada, fundo sólido (sem efeito de vidro) -->
+    <nav
+      class="flex items-center justify-between gap-4 rounded-2xl border border-border bg-white px-5 py-2.5 shadow-lifted md:px-7 md:py-3"
+      id="nav-bar"
+    >
+      <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
+        <img src="/logo-written.svg" alt="Cuidaty" class="h-8 w-auto sm:h-9" loading="eager" />
       </a>
 
-      <!-- Mobile menu button -->
-      <button
-        id="mobile-menu-button"
-        class="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md border border-cuidaty-dark/10 bg-white/90 text-cuidaty-dark shadow-soft transition-colors hover:bg-white md:hidden"
-        aria-label="Abrir menu"
-        aria-expanded="false"
-      >
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-  </nav>
+      <div class="hidden items-center gap-6 md:flex">
+        <a
+          href="/#hero"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Início
+        </a>
+        <a
+          href="/#funcionalidades"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Funcionalidades
+        </a>
+        <a
+          href="/#planos"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Preços
+        </a>
+        <a
+          href="/#sobre"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Sobre
+        </a>
+        <a
+          href="/#contato"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Contato
+        </a>
+        <a
+          href="https://cuidaty.com/blog"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Acesse nosso blog
+        </a>
+      </div>
 
-  <!-- Mobile Menu -->
-  <div
-    id="mobile-menu"
-    class="bg-background/98 hidden border-t border-border shadow-soft backdrop-blur-md md:hidden"
-  >
-    <div class="container mx-auto flex flex-col px-5 py-3">
-      <a
-        href="/#funcionalidades"
-        class="flex items-center py-3.5 text-base font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
-        style="min-height: 44px;"
-      >
-        Funcionalidades
-      </a>
-      <a
-        href="/#resultados"
-        class="flex items-center py-3.5 text-base font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
-        style="min-height: 44px;"
-      >
-        Resultados
-      </a>
-      <a
-        href="/#sobre"
-        class="flex items-center py-3.5 text-base font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
-        style="min-height: 44px;"
-      >
-        Sobre
-      </a>
-      <a
-        href="/#blog"
-        class="flex items-center py-3.5 text-base font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
-        style="min-height: 44px;"
-      >
-        Blog
-      </a>
-      <a
-        href="https://app.cuidaty.com/login"
-        class="flex items-center py-3.5 text-base font-medium text-cuidaty-dark/80 transition-colors hover:text-cuidaty-dark"
-        style="min-height: 44px;"
-      >
-        Entrar
-      </a>
-      <a
-        href="https://calendly.com/pedro-thetaharpia/30min"
-        target="_blank"
-        rel="noopener"
-        class="mt-3 flex items-center justify-center gap-2 rounded-md bg-cuidaty-primary text-base font-semibold text-white transition-colors active:bg-cuidaty-primary-hover"
-        style="min-height: 48px;"
-      >
-        Agendar demonstração
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-        </svg>
-      </a>
+      <div class="flex items-center gap-3">
+        <a
+          href="https://app.cuidaty.com/login"
+          class="hidden text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark sm:inline-flex"
+        >
+          Entrar
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-button"
+          class="flex min-h-[40px] min-w-[40px] items-center justify-center rounded-full border border-cuidaty-dark/10 bg-white text-cuidaty-dark transition-colors hover:bg-beige md:hidden"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="mt-2 hidden rounded-2xl border border-border bg-white p-3 shadow-lifted md:hidden"
+    >
+      <div class="flex flex-col">
+        <a
+          href="/#hero"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Início
+        </a>
+        <a
+          href="/#funcionalidades"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Funcionalidades
+        </a>
+        <a
+          href="/#planos"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Preços
+        </a>
+        <a
+          href="/#sobre"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Sobre
+        </a>
+        <a
+          href="/#contato"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Contato
+        </a>
+        <a
+          href="https://cuidaty.com/blog"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Acesse nosso blog
+        </a>
+        <a
+          href="https://app.cuidaty.com/login"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Entrar
+        </a>
+      </div>
     </div>
   </div>
 </header>
 
+<style>
+  /* Link da seção atual (scroll-spy) */
+  .nav-active {
+    color: #0c202f;
+    text-decoration-line: underline;
+    text-underline-offset: 4px;
+  }
+</style>
+
 <script>
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
-  const header = document.getElementById('main-header');
   const desktopMedia = window.matchMedia('(min-width: 768px)');
-
-  const syncHeader = () => {
-    const isDesktop = desktopMedia.matches;
-    const menuOpen = mobileMenu ? !mobileMenu.classList.contains('hidden') : false;
-    const shouldElevateDesktop = isDesktop && window.scrollY > 16;
-
-    if (shouldElevateDesktop) {
-      header?.classList.add(
-        'bg-background/95',
-        'backdrop-saturate-150',
-        'border-border',
-        'shadow-soft'
-      );
-      header?.classList.remove('bg-background/80', 'border-border/70');
-      return;
-    }
-
-    if (isDesktop) {
-      header?.classList.add(
-        'bg-background/80',
-        'border-border/70',
-        'shadow-soft',
-        'backdrop-blur-md'
-      );
-      header?.classList.remove(
-        'bg-background/95',
-        'backdrop-saturate-150',
-        'border-border',
-        'bg-transparent',
-        'border-transparent',
-        'shadow-none'
-      );
-      return;
-    }
-
-    header?.classList.add('border-border', 'bg-background/92', 'shadow-soft', 'backdrop-blur-md');
-    header?.classList.remove('bg-transparent', 'border-transparent', 'shadow-none');
-
-    if (menuOpen) {
-      header?.classList.add('bg-background');
-    } else {
-      header?.classList.remove('bg-background');
-    }
-  };
 
   mobileMenuButton?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
     const menuOpen = mobileMenu ? !mobileMenu.classList.contains('hidden') : false;
     mobileMenuButton.setAttribute('aria-expanded', String(menuOpen));
     document.body.style.overflow = menuOpen ? 'hidden' : '';
-    syncHeader();
   });
 
   mobileMenu?.querySelectorAll('a').forEach((link) => {
@@ -196,18 +164,45 @@
       mobileMenu.classList.add('hidden');
       mobileMenuButton?.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
-      syncHeader();
     });
   });
 
-  window.addEventListener('scroll', syncHeader, { passive: true });
   desktopMedia.addEventListener('change', () => {
     if (desktopMedia.matches) {
       mobileMenu?.classList.add('hidden');
       mobileMenuButton?.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
-    syncHeader();
   });
-  syncHeader();
+
+  // Scroll-spy: sublinha o link da seção visível na viewport
+  const spyLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('#nav-bar a[href^="/#"]')
+  );
+  const linkById = new Map<string, HTMLAnchorElement>();
+  spyLinks.forEach((link) => {
+    const id = link.getAttribute('href')?.split('#')[1];
+    if (id) {
+      linkById.set(id, link);
+    }
+  });
+  const spySections = Array.from(linkById.keys())
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => el !== null);
+
+  if (spySections.length) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+          spyLinks.forEach((link) => link.classList.remove('nav-active'));
+          linkById.get(entry.target.id)?.classList.add('nav-active');
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+    spySections.forEach((section) => spy.observe(section));
+  }
 </script>

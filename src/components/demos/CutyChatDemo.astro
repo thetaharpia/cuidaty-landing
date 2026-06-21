@@ -1,0 +1,514 @@
+---
+/**
+ * Demo animada do Cuty AI (chat com prontuário) — componente isolado para a landing.
+ * Portado de cuidaty/public/cuty-demo-chat.html (animações preservadas).
+ * CSS escopado sob .cch e script multi-instância (.cch).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['cch', className]}>
+  <div class="stage">
+    <div class="caption">
+      <div class="kicker">Inteligência clínica</div>
+      <div class="headline" data-headline>Pergunte qualquer coisa ao Cuty AI</div>
+    </div>
+
+    <div class="surface">
+      <div class="appbar">
+        <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="wtitle">Cuidaty · Cuty AI</span>
+      </div>
+      <div class="screen">
+        <section class="scene" data-scene-chat>
+          <div class="chat-head">
+            <span class="leaf">🌿</span>
+            <div class="meta"><b>Cuty IA</b><small>Breno Prestes</small></div>
+            <div class="tools">
+              <button aria-label="Histórico"
+                ><svg class="ic s14" viewBox="0 0 24 24"
+                  ><path d="M3 12a9 9 0 1 0 3-6.7L3 8"></path><path d="M3 3v5h5"></path><path
+                    d="M12 7v5l3 2"></path></svg
+                ></button
+              >
+              <button aria-label="Nova conversa"
+                ><svg class="ic s14" viewBox="0 0 24 24"
+                  ><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"
+                  ></path></svg
+                ></button
+              >
+              <button aria-label="Fechar"
+                ><svg class="ic s14" viewBox="0 0 24 24"
+                  ><path d="M18 6 6 18"></path><path d="M6 6l12 12"></path></svg
+                ></button
+              >
+            </div>
+          </div>
+
+          <div class="chat-body" data-chat-body></div>
+
+          <div class="composer">
+            <span class="field-in">Escreva sua pergunta...</span>
+            <span class="send"
+              ><svg class="ic" viewBox="0 0 24 24"
+                ><path d="M3 3 21 12 3 21l4-9Z"></path><path d="M7 12h14"></path></svg
+              ></span
+            >
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="foot">Demonstração ilustrativa · Cuidaty IA</div>
+  </div>
+</div>
+
+<style is:global>
+  .cch {
+    --background: #f8fafc;
+    --foreground: #0c202f;
+    --card: #ffffff;
+    --primary: #356588;
+    --primary-foreground: #ffffff;
+    --secondary: #5ac3b0;
+    --muted: #e2e8f0;
+    --muted-foreground: #64748b;
+    --destructive: #ef4444;
+    --success: #5ac3b0;
+    --border: #e2e8f0;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 1rem;
+    --shadow-xs: 0 1px 2px rgba(12, 32, 47, 0.05);
+    --shadow-sm: 0 1px 3px rgba(12, 32, 47, 0.08), 0 1px 2px rgba(12, 32, 47, 0.04);
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cch * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .cch .stage {
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cch .caption {
+    text-align: center;
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+  }
+  .cch .caption .kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .cch .caption .headline {
+    font-size: 17px;
+    font-weight: 600;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .cch .caption .headline.swap {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  .cch .surface {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm), 0 18px 40px -28px rgba(12, 32, 47, 0.28);
+    overflow: hidden;
+    height: 548px;
+  }
+  .cch .appbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+  }
+  .cch .appbar .wdots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .cch .appbar .wdots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(12, 32, 47, 0.15);
+  }
+  .cch .appbar .wtitle {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    letter-spacing: -0.01em;
+  }
+  .cch .appbar .leaf {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .cch .appbar .wm {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .cch .appbar .brand-logo {
+    height: 26px;
+    width: auto;
+    display: block;
+  }
+  .cch .appbar .ctx {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px 8px;
+  }
+  .cch .appbar .ctx b {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+  .cch .screen {
+    position: relative;
+    height: calc(100% - 38px);
+  }
+  .cch .scene {
+    position: absolute;
+    inset: 0;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+  }
+  .cch svg.ic {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .cch svg.ic.s14 {
+    width: 14px;
+    height: 14px;
+  }
+  .cch .chat-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .cch .chat-head .leaf {
+    font-size: 18px;
+    line-height: 1;
+  }
+  .cch .chat-head .meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .cch .chat-head .meta b {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .cch .chat-head .meta small {
+    font-size: 11px;
+    color: var(--muted-foreground);
+  }
+  .cch .chat-head .tools {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+  }
+  .cch .chat-head .tools button {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted-foreground);
+    background: transparent;
+    border: 0;
+  }
+  .cch .chat-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    padding: 16px 2px 8px;
+  }
+  .cch .empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    color: var(--muted-foreground);
+    margin: auto;
+    max-width: 280px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .cch .empty.show {
+    opacity: 1;
+  }
+  .cch .empty p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .cch .bubble {
+    max-width: 85%;
+    border-radius: var(--radius-lg);
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  .cch .bubble.show {
+    opacity: 1;
+    transform: none;
+  }
+  .cch .bubble.user {
+    align-self: flex-end;
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+  .cch .bubble.bot {
+    align-self: flex-start;
+    background: var(--muted);
+    color: var(--foreground);
+  }
+  .cch .typing {
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .cch .typing i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(100, 116, 139, 0.6);
+    animation: cch-bounce 1.2s infinite;
+  }
+  .cch .typing i:nth-child(2) {
+    animation-delay: -0.15s;
+  }
+  .cch .typing i:nth-child(3) {
+    animation-delay: -0.3s;
+  }
+  .cch .ref {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    margin: 0 1px;
+    background: rgba(53, 101, 136, 0.12);
+    color: var(--primary);
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 600;
+    vertical-align: 1px;
+  }
+  .cch .src {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted-foreground);
+    border-top: 1px solid rgba(12, 32, 47, 0.08);
+    padding-top: 8px;
+  }
+  .cch .src .n {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-sm);
+    background: rgba(53, 101, 136, 0.12);
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .cch .composer {
+    margin-top: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+  }
+  .cch .composer .field-in {
+    flex: 1;
+    min-height: 40px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    color: var(--muted-foreground);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+  }
+  .cch .composer .send {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .cch .foot {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted-foreground);
+  }
+  @keyframes cch-bounce {
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    30% {
+      transform: translateY(-4px);
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cch * {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+  function initCutyChatDemo(root: HTMLElement) {
+    const q = (s: string) => root.querySelector(s) as HTMLElement;
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const headline = q('[data-headline]');
+    async function setHeadline(text: string) {
+      headline.classList.add('swap');
+      await sleep(330);
+      headline.textContent = text;
+      headline.classList.remove('swap');
+    }
+    async function typeText(el: HTMLElement, text: string, speed = 16) {
+      el.textContent = '';
+      for (let i = 0; i < text.length; i++) {
+        el.textContent += text[i];
+        await sleep(text[i] === ' ' ? speed * 0.5 : speed);
+      }
+    }
+
+    const chatBody = q('[data-chat-body]');
+
+    function reset() {
+      chatBody.innerHTML =
+        '<div class="empty" data-empty><svg class="ic" style="width:30px;height:30px" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><path d="M8 16h.01"/><path d="M16 16h.01"/></svg><p>Pergunte ao Cuty sobre o histórico, sintomas, conduta ou peça um resumo do paciente.</p></div>';
+    }
+
+    function makeBubble(kind: string, html: string) {
+      const b = document.createElement('div');
+      b.className = `bubble ${kind}`;
+      b.innerHTML = html;
+      chatBody.appendChild(b);
+      requestAnimationFrame(() => b.classList.add('show'));
+      return b;
+    }
+
+    async function run() {
+      reset();
+      await setHeadline('Pergunte qualquer coisa ao Cuty AI');
+
+      const empty = root.querySelector('[data-empty]') as HTMLElement | null;
+      if (empty) {
+        empty.classList.add('show');
+      }
+      await sleep(1000);
+      if (empty) {
+        empty.style.opacity = '0';
+        await sleep(280);
+        empty.remove();
+      }
+
+      const u = makeBubble('user', '');
+      await typeText(u, 'Faça um resumo do que mudou na consulta de hoje.', 16);
+      await sleep(550);
+
+      await setHeadline('O Cuty responde com base no prontuário');
+      const bot = makeBubble('bot', '<span class="typing"><i></i><i></i><i></i></span>');
+      await sleep(1700);
+
+      bot.innerHTML = '';
+      const plain =
+        'Na consulta de hoje, Breno relatou cefaleia recorrente vespertina, intensidade 7/10, associada a insônia há ~3 semanas ⟦1⟧. Exame neurológico sem alterações. Conduta: higiene do sono e retorno em 30 dias.';
+      for (let i = 0; i < plain.length; i++) {
+        bot.textContent += plain[i];
+        await sleep(plain[i] === ' ' ? 6 : 13);
+      }
+      bot.innerHTML =
+        plain.replace('⟦1⟧', '<span class="ref">1</span>') +
+        '<div class="src"><span class="n">1</span> Prontuário · Consulta 16/06/2026 — Queixa principal</div>';
+      await sleep(3600);
+    }
+
+    async function runOnce() {
+      await run();
+    }
+    (root as any).__runDemo = runOnce;
+    root.dispatchEvent(new CustomEvent('demo:ready', { bubbles: true }));
+    if (!root.closest('[data-controlled]')) {
+      (async () => {
+        while (true) {
+          await runOnce();
+          await sleep(400);
+        }
+      })();
+    }
+  }
+
+  function boot() {
+    document.querySelectorAll<HTMLElement>('.cch').forEach((root) => {
+      if (root.dataset.booted) return;
+      root.dataset.booted = '1';
+      initCutyChatDemo(root);
+    });
+  }
+  if (document.readyState !== 'loading') boot();
+  else document.addEventListener('DOMContentLoaded', boot);
+</script>

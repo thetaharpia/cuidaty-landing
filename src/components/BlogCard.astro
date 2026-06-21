@@ -13,7 +13,7 @@ const DEFAULT_COVER = '/images/blog-placeholder.jpg';
 ---
 
 <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-all hover:-translate-y-1 hover:shadow-xl">
-  <a href={`/blog/${post.slug}`} class="relative block h-48 overflow-hidden bg-gray-100">
+  <a href={`/blog/${post.slug}/`} class="relative block h-48 overflow-hidden bg-gray-100">
     <img
       src={post.cover_image_url ?? DEFAULT_COVER}
       alt={post.title}
@@ -34,7 +34,7 @@ const DEFAULT_COVER = '/images/blog-placeholder.jpg';
     )}
 
     <Heading class="mb-3 font-serif text-xl font-semibold leading-snug text-cuidaty-dark line-clamp-2">
-      <a href={`/blog/${post.slug}`} class="transition-colors hover:text-cuidaty-primary">
+      <a href={`/blog/${post.slug}/`} class="transition-colors hover:text-cuidaty-primary">
         {post.title}
       </a>
     </Heading>
@@ -51,7 +51,7 @@ const DEFAULT_COVER = '/images/blog-placeholder.jpg';
     </div>
 
     <a
-      href={`/blog/${post.slug}`}
+      href={`/blog/${post.slug}/`}
       class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-primary-hover"
     >
       Ler artigo
