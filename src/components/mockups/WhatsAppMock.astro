@@ -1,0 +1,50 @@
+---
+import AppFrame from './AppFrame.astro';
+import Icon from './Icon.astro';
+
+/**
+ * Mockup: notificação de agendamento e confirmação automática pelo WhatsApp,
+ * dentro da moldura de janela (AppFrame), igual aos demais mockups.
+ */
+interface Props {
+  maxWidth?: number;
+  class?: string;
+}
+const { maxWidth = 480, class: className = '' } = Astro.props;
+---
+
+<AppFrame title="Cuidaty · WhatsApp" maxWidth={maxWidth} class={className}>
+  <!-- barra do contato -->
+  <div class="flex items-center gap-3 bg-[#1f8a70] px-4 py-3 text-white">
+    <span
+      class="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white/20 text-sm font-semibold"
+    >
+      CA
+    </span>
+    <div class="min-w-0">
+      <p class="text-sm font-semibold leading-tight">Clínica Dra. Ana</p>
+      <p class="text-xs opacity-85">online agora</p>
+    </div>
+    <span class="ml-auto opacity-90"><Icon name="whatsapp" size={20} /></span>
+  </div>
+
+  <!-- conversa -->
+  <div class="flex flex-col gap-3 bg-[#ece5dd] px-4 py-5">
+    <div
+      class="max-w-[85%] self-start rounded-2xl rounded-tl-none bg-white px-4 py-3 text-sm leading-relaxed text-[#111b21] shadow-sm"
+    >
+      Olá, Maria! 👋 Sua consulta com a <b class="font-semibold">Dra. Ana</b> está marcada para
+      <b class="font-semibold">quinta, 12/06 às 14:00</b>. Para confirmar responda
+      <b class="font-semibold">CONFIRMAR</b>, ou <b class="font-semibold">CANCELAR</b> se não puder
+      comparecer.
+      <span class="mt-2 block text-right text-[0.65rem] text-[#667781]">14:32 ✓✓</span>
+    </div>
+
+    <div
+      class="max-w-[85%] self-end rounded-2xl rounded-tr-none bg-[#d9fdd3] px-4 py-3 text-sm leading-relaxed text-[#111b21] shadow-sm"
+    >
+      CONFIRMAR ✅
+      <span class="mt-1 block text-right text-[0.65rem] text-[#667781]">14:33</span>
+    </div>
+  </div>
+</AppFrame>

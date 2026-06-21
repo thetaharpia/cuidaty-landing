@@ -12,6 +12,7 @@ interface Plan {
   inherits?: string;
   features: string[];
   exclusions?: string[];
+  featuresNote?: string;
   cta: { label: string; href: string };
   dark?: boolean;
   recommended?: boolean;
@@ -33,6 +34,7 @@ const plans: Plan[] = [
       'Portal de agendamento online + portal do paciente',
     ],
     exclusions: ['Sem comunicação por WhatsApp', 'Sem Cuty AI'],
+    featuresNote: '+ 30 funcionalidades incluídas',
     cta: { label: 'Começar agora', href: '#contato' },
   },
   {
@@ -48,6 +50,7 @@ const plans: Plan[] = [
       'Geração de modelos de documentos',
       'Comunicação WhatsApp completa: central, automações e lembretes',
     ],
+    featuresNote: '+ 40 funcionalidades incluídas',
     cta: { label: 'Começar agora', href: '#contato' },
   },
   {
@@ -59,8 +62,9 @@ const plans: Plan[] = [
     inherits: 'Tudo do Premium, mais:',
     features: [
       'Transcrição de consultas e teleconsulta, com captura de áudio',
-      'Resumo clínico automático (SOAP) a partir do áudio',
+      'Resumo clínico automático a partir do áudio (SOAP e outros formatos)',
     ],
+    featuresNote: '+ 45 funcionalidades incluídas',
     cta: { label: 'Começar agora', href: '#contato' },
     recommended: true,
   },
@@ -79,6 +83,7 @@ const plans: Plan[] = [
       'Diretórios de profissionais e importação de usuários em massa',
       'Limites de usuários e módulos customizáveis',
     ],
+    featuresNote: 'Tudo do Cuidaty, sem limites',
     cta: { label: 'Solicitar proposta', href: 'https://calendly.com/pedro-thetaharpia/30min' },
     dark: true,
   },
@@ -234,6 +239,29 @@ const plans: Plan[] = [
             </div>
 
             <div class="mt-auto pt-8">
+              {plan.featuresNote &&
+                (plan.dark ? (
+                  <p class="mb-4 text-sm font-medium text-white/75">{plan.featuresNote}</p>
+                ) : (
+                  <a
+                    href="/#funcionalidades"
+                    class="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-cuidaty-primary transition-colors hover:text-cuidaty-dark"
+                  >
+                    {plan.featuresNote}
+                    <svg
+                      class="h-4 w-4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                ))}
               <a
                 href={plan.cta.href}
                 target={plan.cta.href.startsWith('http') ? '_blank' : undefined}

@@ -5,14 +5,11 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Hero from '../components/sections/Hero.astro';
-import StatsHero from '../components/sections/StatsHero.astro';
+import StatsBar from '../components/sections/StatsBar.astro';
 import Pain from '../components/sections/Pain.astro';
 import Features from '../components/sections/Features.astro';
-import Mission from '../components/sections/Mission.astro';
 import NacaoCuidaty from '../components/sections/NacaoCuidaty.astro';
-import Rebranding from '../components/sections/Rebranding.astro';
 import Personas from '../components/sections/Personas.astro';
-import TrustBadges from '../components/sections/TrustBadges.astro';
 import BlogSection from '../components/sections/BlogSection.astro';
 import CTA from '../components/sections/CTA.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
@@ -24,22 +21,16 @@ import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
   <main>
     <!-- 1. Hook: captura + CTA primário -->
     <Hero />
-    <!-- 2. Credibilidade rápida (500+, 8h, 73%) -->
-    <StatsHero />
-    <!-- 3. Conecta com a dor -->
-    <Pain />
-    <!-- 4. Entrega de valor (o que você ganha) -->
+    <!-- 1.5. Números animados (count-up) -->
+    <StatsBar />
+    <!-- 3. Entrega de valor + confiança e segurança -->
     <Features />
-    <!-- 5. Para quem é? Cliente se reconhece -->
+    <!-- 4. Planos / preços -->
     <Personas />
-    <!-- 6. Prova social de pico: depoimentos + clínicas -->
+    <!-- 5. Resultados: prova social — depoimentos + clínicas -->
     <NacaoCuidaty />
-    <!-- 7. Narrativa da marca: de ThetaHarpia para Cuidaty -->
-    <Rebranding />
-    <!-- 8. Propósito emocional -->
-    <Mission />
-    <!-- 9. Reasseguramento técnico antes da conversão -->
-    <TrustBadges />
+    <!-- 7. Sobre: por que o Cuidaty existe + missão + valores -->
+    <Pain />
     <!-- 10. FAQ indexável e visível -->
     <FAQSection />
     <!-- 11. Momento de contato — Calendly / WhatsApp / e-mail -->

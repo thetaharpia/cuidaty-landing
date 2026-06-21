@@ -1,37 +1,66 @@
 ---
+const values = [
+  { title: 'Simplicidade', desc: 'Tecnologia intuitiva que não complica o seu dia.' },
+  { title: 'Confiança', desc: 'Dados seguros, conformidade com a LGPD, hospedagem brasileira.' },
+  { title: 'Empatia', desc: 'Construído por quem conhece a rotina de quem cuida.' },
+];
 ---
 
-<section class="bg-background py-24 md:py-28">
-  <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto max-w-3xl">
-      <p class="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
-        Por que o Cuidaty existe
+<section class="bg-white py-24 md:py-32">
+  <div class="container mx-auto max-w-6xl px-5 md:px-8">
+    <!-- Por que o Cuidaty existe -->
+    <div class="mb-12 grid gap-8 md:grid-cols-[1.15fr_1fr] md:items-end md:gap-16">
+      <div>
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+          Por que o Cuidaty existe
+        </p>
+        <h2
+          class="font-serif text-4xl font-semibold leading-[1.03] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
+        >
+          A carga invisível<br />
+          <span class="italic text-cuidaty-dark/70">que ninguém vê.</span>
+        </h2>
+      </div>
+      <p class="text-lg leading-relaxed text-foreground/70">
+        Você cuida o dia todo, mas quando o último paciente sai, o trabalho continua: confirmar
+        consultas, atualizar prontuários, enviar lembretes, calcular repasses, responder mensagens.
+        E parece que nunca para. Não precisa ser assim: existe ferramenta que cuida de quem cuida.
       </p>
+    </div>
 
-      <h2 class="mb-10 font-serif text-4xl font-semibold leading-[1.08] tracking-tight text-cuidaty-dark md:text-5xl">
-        A carga invisível <span class="italic text-cuidaty-dark/70">que ninguém vê.</span>
-      </h2>
-
-      <div class="space-y-6 text-lg leading-relaxed text-foreground/75 md:text-xl">
-        <p>
-          Você atende o dia todo, escuta com atenção, oferece o melhor de si.
-          Mas quando o último paciente sai, o trabalho continua.
+    <!-- Foco: card destaque -->
+    <div class="mb-6 rounded-2xl border border-border bg-card p-8 shadow-soft md:p-10">
+      <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+        Foco no que importa
+      </p>
+      <h3 class="mb-5 font-serif text-3xl font-semibold leading-tight text-cuidaty-dark md:text-4xl">
+        Você valida, não digita.
+      </h3>
+      <div class="grid gap-5 md:grid-cols-2 md:gap-10">
+        <p class="text-lg leading-relaxed text-foreground/70">
+          Com a transcrição e o Cuty AI, o registro clínico nasce pronto a partir da própria
+          consulta. Você só revisa e confirma, com apoio rápido e ágil durante e depois do
+          atendimento, em vez de perder tempo digitando.
         </p>
-
-        <p>
-          Confirmar consultas. Atualizar prontuários. Enviar lembretes. Calcular repasses.
-          Responder mensagens. <span class="text-foreground/95 font-medium">E você sente que nunca para.</span>
-        </p>
-
-        <p>
-          Seu paciente percebe quando você está exausto. Aquele olhar cansado na sessão,
-          a resposta que demora, o esquecimento de um detalhe.
-        </p>
-
-        <p class="pt-4 font-serif text-2xl italic leading-snug text-cuidaty-primary md:text-3xl">
-          Não precisa ser assim. Existe ferramenta que cuida de quem cuida.
+        <p class="text-lg leading-relaxed text-foreground/70">
+          O resultado é dos dois lados: você termina o dia com
+          <span class="font-medium text-foreground/90">menos carga de trabalho</span>, e o paciente,
+          com você presente na conversa e não preso à tela, se sente
+          <span class="font-medium text-foreground/90">verdadeiramente acolhido</span>.
         </p>
       </div>
+    </div>
+
+    <!-- Valores em cards -->
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        values.map((value) => (
+          <div class="rounded-2xl border border-border bg-card p-6 shadow-soft md:p-7">
+            <p class="mb-3 font-serif text-xl font-semibold text-cuidaty-dark">{value.title}</p>
+            <p class="leading-relaxed text-foreground/60">{value.desc}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

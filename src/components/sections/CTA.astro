@@ -2,69 +2,33 @@
 
 ---
 
-<section id="contato" class="bg-cuidaty-dark py-24 md:py-32">
+<section id="contato" class="bg-white py-24 md:py-32">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-      <!-- Left: headline + primary CTA -->
+    <div class="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.1fr_1fr] lg:items-start">
+      <!-- Esquerda: chamada -->
       <div>
-        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-accent-light">
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
           Converse com a gente
         </p>
 
         <h2
-          class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-6xl"
+          class="mb-8 font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
         >
-          Agende uma demonstração e sinta o Cuidaty em ação.
+          Fale direto<br />
+          <span class="italic text-cuidaty-dark/70">com a gente.</span>
         </h2>
 
-        <p class="mb-10 max-w-xl text-lg leading-relaxed text-white/70">
-          Em 30 minutos você vê como automatizar a agenda, eliminar faltas e recuperar horas da sua
-          semana. Atendimento com o fundador, sem robô.
+        <p class="max-w-xl text-lg leading-relaxed text-foreground/70">
+          Tire suas dúvidas sobre o Cuidaty pelo canal que preferir. Atendimento humano, sem robô.
+          Atendemos profissionais da saúde mental e clínicas multidisciplinares em todo o Brasil,
+          com resposta média em até 4 horas em dias úteis.
         </p>
-
-        <a
-          href="https://calendly.com/pedro-thetaharpia/30min"
-          target="_blank"
-          rel="noopener"
-          class="group inline-flex items-center gap-3 rounded-md bg-white px-8 py-4 text-base font-semibold text-cuidaty-dark transition-all hover:bg-beige"
-        >
-          <svg
-            class="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            ></path>
-          </svg>
-          Agendar demonstração
-          <svg
-            class="h-4 w-4 transition-transform group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-          </svg>
-        </a>
-
-        <p class="mt-6 text-sm text-white/50">30 minutos · Sem compromisso · Atendimento humano</p>
       </div>
 
-      <!-- Right: quieter contact channels -->
-      <aside class="border-l border-white/10 pl-8 lg:pl-12">
-        <p class="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/50">
-          Ou converse direto
+      <!-- Direita: canais de contato -->
+      <aside class="lg:border-l lg:border-border lg:pl-12">
+        <p class="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/50">
+          Canais de contato
         </p>
 
         <ul class="space-y-6">
@@ -73,10 +37,10 @@
               href="https://wa.me/5596984058103?text=Ol%C3%A1%21%20Tenho%20interesse%20em%20conhecer%20o%20Cuidaty."
               target="_blank"
               rel="noopener"
-              class="group flex items-start gap-4 text-white/80 transition-colors hover:text-white"
+              class="group flex items-start gap-4 text-foreground/80 transition-colors hover:text-foreground"
             >
               <svg
-                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-accent-light"
+                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-primary"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -86,19 +50,21 @@
                 ></path>
               </svg>
               <span>
-                <span class="block font-serif text-lg font-medium">WhatsApp</span>
-                <span class="text-sm text-white/60 group-hover:text-white/80">(96) 98405-8103</span>
+                <span class="block font-serif text-lg font-medium text-cuidaty-dark">WhatsApp</span>
+                <span class="text-sm text-foreground/60 group-hover:text-foreground/80"
+                  >Enviar mensagem</span
+                >
               </span>
             </a>
           </li>
 
           <li>
             <a
-              href="mailto:pedro@thetaharpia.com?subject=Quero%20conhecer%20o%20Cuidaty"
-              class="group flex items-start gap-4 text-white/80 transition-colors hover:text-white"
+              href="mailto:contato@thetaharpia.com?subject=Quero%20conhecer%20o%20Cuidaty"
+              class="group flex items-start gap-4 text-foreground/80 transition-colors hover:text-foreground"
             >
               <svg
-                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-accent-light"
+                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-primary"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -112,19 +78,43 @@
                 ></path>
               </svg>
               <span>
-                <span class="block font-serif text-lg font-medium">E-mail</span>
-                <span class="text-sm text-white/60 group-hover:text-white/80"
-                  >pedro@thetaharpia.com</span
+                <span class="block font-serif text-lg font-medium text-cuidaty-dark">E-mail</span>
+                <span class="text-sm text-foreground/60 group-hover:text-foreground/80"
+                  >contato@thetaharpia.com</span
                 >
               </span>
             </a>
           </li>
 
-          <li class="border-t border-white/10 pt-4">
-            <p class="text-xs leading-relaxed text-white/40">
-              Atendemos profissionais da saúde mental e clínicas multidisciplinares em todo o
-              Brasil. Resposta média em até 4 horas em dias úteis.
-            </p>
+          <li>
+            <a
+              href="https://www.instagram.com/cuidaty_com/"
+              target="_blank"
+              rel="noopener"
+              class="group flex items-start gap-4 text-foreground/80 transition-colors hover:text-foreground"
+            >
+              <svg
+                class="mt-1 h-5 w-5 flex-shrink-0 text-cuidaty-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.5"></rect>
+                <path
+                  stroke-width="1.5"
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2" stroke-linecap="round"
+                ></line>
+              </svg>
+              <span>
+                <span class="block font-serif text-lg font-medium text-cuidaty-dark">Instagram</span>
+                <span class="text-sm text-foreground/60 group-hover:text-foreground/80"
+                  >@cuidaty_com</span
+                >
+              </span>
+            </a>
           </li>
         </ul>
       </aside>

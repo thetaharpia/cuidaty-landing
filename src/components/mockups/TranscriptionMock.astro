@@ -1,0 +1,77 @@
+---
+import AppFrame from './AppFrame.astro';
+import Icon from './Icon.astro';
+
+/**
+ * Mockup: transcrição da consulta com resumo clínico SOAP gerado por IA.
+ * Estado final da cena Transcription do cuidaty-reels.
+ */
+interface Props {
+  maxWidth?: number;
+  class?: string;
+}
+const { maxWidth = 420, class: className = '' } = Astro.props;
+
+const fields = [
+  { full: true, lbl: 'Queixa principal', val: 'Cefaleia recorrente vespertina há ~3 semanas.' },
+  { full: false, lbl: 'Subjetivo (S)', val: 'Dor 7/10, associada a insônia. Sem náusea ou aura.' },
+  { full: false, lbl: 'Objetivo (O)', val: 'PA 128/82. Exame neurológico sem alterações.' },
+  { full: true, lbl: 'Avaliação (A)', val: 'Cefaleia tensional provável, agravada por privação de sono.' },
+  { full: true, lbl: 'Plano (P)', val: 'Higiene do sono, analgésico se necessário, retorno em 30 dias.' },
+];
+---
+
+<AppFrame title="Cuidaty · Prontuário" maxWidth={maxWidth} class={className}>
+  <div class="flex flex-col p-5">
+    <!-- cabeçalho -->
+    <div class="flex items-center gap-3 border-b border-border pb-4">
+      <span class="text-cuidaty-primary"><Icon name="mic" size={22} /></span>
+      <div>
+        <p class="text-base font-semibold text-cuidaty-dark">Transcrever consulta</p>
+        <p class="text-xs text-muted-foreground">
+          gravação ao vivo · áudio descartado após o processamento
+        </p>
+      </div>
+    </div>
+
+    <!-- card de resultado -->
+    <div class="mt-5 flex flex-col gap-4 rounded-md border border-border bg-card p-5">
+      <div class="flex items-center justify-between gap-3">
+        <span class="text-sm text-muted-foreground">Resumo clínico</span>
+        <span
+          class="inline-flex items-center gap-1.5 rounded-full bg-cuidaty-secondary/15 px-3 py-1 text-xs font-medium text-[#2f8b7a]"
+        >
+          <Icon name="check" size={14} />
+          Concluída
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        {
+          fields.map((field) => (
+            <div class:list={['flex flex-col gap-1', field.full && 'col-span-2']}>
+              <span class="text-xs text-muted-foreground">{field.lbl}</span>
+              <span class="text-sm leading-snug text-[#243747]">{field.val}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div
+        class="flex items-center gap-2 rounded-md border border-border bg-cuidaty-gray/25 px-4 py-3 text-sm font-medium text-foreground/80"
+      >
+        <Icon name="chevron" size={16} />
+        Ver transcrição completa · 4 trechos
+      </div>
+
+      <div class="flex justify-end">
+        <span
+          class="inline-flex items-center gap-2 rounded-md bg-cuidaty-primary px-4 py-2.5 text-sm font-medium text-white"
+        >
+          <Icon name="file-plus" size={16} />
+          Usar no novo registro
+        </span>
+      </div>
+    </div>
+  </div>
+</AppFrame>

@@ -1,0 +1,74 @@
+---
+import AppFrame from './AppFrame.astro';
+import Icon from './Icon.astro';
+
+/**
+ * Mockup: agenda do dia com status por cor.
+ * Estado final da lista da cena Agenda do cuidaty-reels.
+ */
+interface Props {
+  maxWidth?: number;
+  class?: string;
+}
+const { maxWidth = 420, class: className = '' } = Astro.props;
+
+const appts = [
+  { time: '09:00', name: 'João Lima', sub: 'Retorno', status: 'confirmed' },
+  { time: '11:00', name: 'Paula Reis', sub: 'Avaliação', status: 'pending' },
+  { time: '14:00', name: 'Maria Souza', sub: 'Consulta', status: 'confirmed' },
+] as const;
+
+const badge = {
+  confirmed: { label: 'Confirmado', cls: 'bg-cuidaty-secondary/15 text-[#2f8b7a] border-cuidaty-secondary/30' },
+  pending: { label: 'Pendente', cls: 'bg-warning/10 text-[#b45309] border-warning/30' },
+};
+const leftBorder = { confirmed: 'border-l-cuidaty-secondary', pending: 'border-l-warning' };
+---
+
+<AppFrame title="Cuidaty · Agenda" maxWidth={maxWidth} class={className}>
+  <div class="flex flex-col p-5">
+    <!-- cabeçalho -->
+    <div class="flex items-start justify-between gap-3">
+      <div>
+        <p class="text-base font-semibold text-cuidaty-dark">Quinta · 12 jun</p>
+        <p class="text-xs text-muted-foreground">3 consultas</p>
+      </div>
+      <span
+        class="inline-flex items-center gap-1.5 rounded-md bg-cuidaty-primary px-3.5 py-2 text-xs font-medium text-white"
+      >
+        <Icon name="plus" size={14} />
+        Novo
+      </span>
+    </div>
+
+    <!-- lista -->
+    <div class="mt-5 flex flex-col gap-3">
+      {
+        appts.map((appt) => (
+          <div
+            class:list={[
+              'flex items-center gap-4 rounded-md border border-l-[5px] border-border bg-card px-4 py-3.5 shadow-soft',
+              leftBorder[appt.status],
+            ]}
+          >
+            <span class="w-12 flex-none font-mono text-sm font-medium tabular-nums text-cuidaty-dark">
+              {appt.time}
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-sm font-medium text-cuidaty-dark">{appt.name}</span>
+              <span class="block text-xs text-muted-foreground">{appt.sub}</span>
+            </span>
+            <span
+              class:list={[
+                'inline-flex flex-none items-center rounded-full border px-3 py-1 text-xs font-medium',
+                badge[appt.status].cls,
+              ]}
+            >
+              {badge[appt.status].label}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</AppFrame>

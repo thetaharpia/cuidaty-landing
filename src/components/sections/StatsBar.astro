@@ -1,0 +1,34 @@
+---
+/**
+ * Faixa de números do Cuidaty (abaixo do Hero), sem background.
+ * Os itens são filhos diretos do container, então o sistema global de
+ * reveal-on-scroll do Layout faz cada número "aparecer" em cascata.
+ */
+const stats = [
+  { value: '98%', label: 'taxa média de resposta automática' },
+  { value: '−60%', label: 'de redução no no-show das consultas' },
+  { value: '4h', label: 'tempo médio de resposta em dias úteis' },
+];
+---
+
+<section aria-label="Números do Cuidaty" class="bg-white py-12 md:py-16">
+  <div
+    class="container mx-auto grid max-w-4xl grid-cols-3 gap-x-4 gap-y-8 px-5 text-center md:gap-x-8 md:px-8"
+  >
+    <p
+      class="col-span-3 mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary"
+    >
+      Resultados dos nossos clientes
+    </p>
+    {
+      stats.map((stat) => (
+        <div>
+          <p class="font-serif text-4xl font-semibold leading-none tracking-tight text-cuidaty-primary md:text-5xl">
+            {stat.value}
+          </p>
+          <p class="mt-2 text-sm leading-snug text-foreground/60">{stat.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

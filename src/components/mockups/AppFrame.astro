@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+
+/**
+ * Moldura de "janela do app" para os mockups das features.
+ * Replica a superfície branca arredondada do reel, mas em escala web e responsiva.
+ */
+interface Props {
+  /** Título exibido na barra superior (ex.: "Cuidaty · Prontuário"). */
+  title?: string;
+  /** Largura máxima do mockup (px). Default 420. */
+  maxWidth?: number;
+  class?: string;
+}
+
+const { title = 'Cuidaty', maxWidth = 420, class: className = '' } = Astro.props;
+---
+
+<div
+  class:list={[
+    'mx-auto w-full overflow-hidden rounded-xl border border-cuidaty-dark/10 bg-card shadow-lifted',
+    className,
+  ]}
+  style={`max-width:${maxWidth}px`}
+>
+  <!-- barra de janela -->
+  <div class="flex items-center gap-2 border-b border-cuidaty-dark/10 bg-cuidaty-light/70 px-4 py-2.5">
+    <span class="flex gap-1.5" aria-hidden="true">
+      <span class="h-2.5 w-2.5 rounded-full bg-cuidaty-dark/15"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-cuidaty-dark/15"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-cuidaty-dark/15"></span>
+    </span>
+    <span
+      class="ml-2 flex items-center gap-1.5 text-[0.7rem] font-medium tracking-tight text-foreground/45"
+    >
+      <Icon name="search" size={12} />
+      {title}
+    </span>
+  </div>
+
+  <!-- conteúdo -->
+  <div class="bg-card">
+    <slot />
+  </div>
+</div>
