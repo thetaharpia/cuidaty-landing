@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const links = [
+  { href: '/#funcionalidades', label: 'Funcionalidades' },
+  { href: '/#resultados', label: 'Resultados' },
+  { href: '/#sobre', label: 'Sobre' },
+  { href: '/blog', label: 'Blog' },
+];
+---
+
+<Layout
+  title="Página não encontrada (404) - Cuidaty"
+  description="A página que você procura não existe ou foi movida. Volte para a Cuidaty e continue cuidando da sua rotina clínica com menos burocracia."
+  noindex={true}
+>
+  <Header />
+
+  <main
+    class="relative flex min-h-[calc(100vh-72px)] items-center overflow-hidden bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover pt-24 pb-16"
+  >
+    <!-- Decorative glow -->
+    <div
+      class="pointer-events-none absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-cuidaty-secondary/20 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+    <div
+      class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-cuidaty-accent/20 blur-3xl"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div class="container relative z-10 mx-auto px-5 md:px-8">
+      <div class="mx-auto max-w-2xl text-center text-white">
+        <a
+          href="/"
+          class="mx-auto mb-10 flex w-fit items-center rounded-full bg-white px-5 py-2.5 shadow-soft"
+          aria-label="Cuidaty"
+        >
+          <img src="/logo-written.svg" alt="Cuidaty" class="h-7 w-auto" loading="eager" />
+        </a>
+
+        <span
+          class="mx-auto mb-6 block w-fit rounded-full bg-white/15 px-4 py-1.5 text-sm font-medium backdrop-blur-sm"
+        >
+          Erro 404
+        </span>
+
+        <p
+          class="font-serif text-7xl font-semibold leading-none tracking-tight sm:text-8xl md:text-9xl"
+        >
+          404
+        </p>
+
+        <h1 class="mt-6 font-serif text-3xl font-semibold leading-tight md:text-4xl">
+          Esta página não foi encontrada
+        </h1>
+
+        <p class="mx-auto mt-4 max-w-md text-lg text-white/80">
+          O link pode estar quebrado ou a página pode ter sido movida. Mas calma — a gente cuida do
+          resto.
+        </p>
+
+        <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a
+            href="/"
+            class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-md bg-white px-6 py-3 text-sm font-semibold text-cuidaty-primary shadow-soft transition-all hover:bg-white/90"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+            Voltar para o início
+          </a>
+          <a
+            href="https://calendly.com/pedro-thetaharpia/30min"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-md border border-white/40 bg-transparent px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white/10"
+          >
+            Agendar demonstração
+          </a>
+        </div>
+
+        <div class="mt-12 border-t border-white/15 pt-8">
+          <p class="mb-5 text-sm font-medium text-white/60">Ou explore:</p>
+          <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-3">
+            {
+              links.map((link, i) => (
+                <>
+                  {i > 0 && <span class="hidden h-1 w-1 rounded-full bg-white/30 sm:block" aria-hidden="true" />}
+                  <a
+                    href={link.href}
+                    class="rounded-md px-3 py-1.5 text-sm font-medium text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
