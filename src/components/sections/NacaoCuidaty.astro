@@ -1,5 +1,17 @@
 ---
-const testimonials = [
+type Testimonial = {
+  img: string | null;
+  initials?: string;
+  name: string;
+  role: string;
+  crp: string;
+  link?: string;
+  quote: string;
+  slug?: string;
+  fullQuote?: string[];
+};
+
+const testimonials: Testimonial[] = [
   {
     img: '/testimonials/huini-prova-social.png',
     name: 'Huini Coelho',
@@ -9,17 +21,27 @@ const testimonials = [
       'O Cuidaty trouxe leveza à minha rotina. Antes era um caos responder mensagens no WhatsApp entre sessões.',
   },
   {
-    img: '/testimonials/gabriel-prova-social.svg',
-    name: 'Gabriel Garcia',
-    role: 'Psicólogo, Abordagem Centrada na Pessoa',
-    crp: 'CRP 05/83142',
-    quote: 'Com o Cuidaty, a gestão da clínica se tornou mais inteligente e fluida.',
+    img: '/testimonials/fernanda-prova-social.jpg',
+    name: 'Fernanda Mancilha',
+    role: 'Psicóloga',
+    crp: 'CRP MG 04/78540',
+    link: 'https://www.instagram.com/fernandamancilhapsi/',
+    slug: 'fernanda',
+    quote:
+      'Tenho tudo em um só lugar — da evolução dos prontuários à comunicação com os pacientes. Com a I.A, as evoluções e o resumo do histórico clínico ficaram ainda melhores, e ainda crio e envio instrumentos clínicos direto pela plataforma.',
+    fullQuote: [
+      'Tenho utilizado a Cuidaty e vejo que o meu dia a dia na clínica se tornou muito mais funcional, prático e eficiente.',
+      'Com as integrações da plataforma, consigo ter tudo em um só lugar. Desde a evolução dos prontuários até a comunicação com os meus pacientes.',
+      'Agora, com a I.A tornou ainda melhor a experiência, tendo em vista a otimização das evoluções, na integração dos dados para poder ter um acesso a parte de resumo/ histórico clínico e outras funções. Outro fator excelente e que só enriquece é o campo de instrumentos clínicos, tanto os já existentes quando a possibilidade de se criar personalizado e, claro, enviar diretamente da plataforma para o paciente.',
+      'Esse período de utilização está sendo muito importante para a otimização da minha atuação e tudo isso é possível também devido à assistência dos profissionais que estão por trás do projeto!',
+    ],
   },
   {
     img: '/testimonials/giovana-prova-social.svg',
-    name: 'Giovana Dos Santos P Ferreira',
+    name: 'Giovana Ferreira',
     role: 'Gestora de atividades clínicas, Startuppsi',
     crp: 'CRP 05/86762',
+    link: 'https://www.instagram.com/startuppsi/',
     quote:
       'O Cuidaty trouxe organização para a gestão da nossa clínica, assertividade e agilidade.',
   },
@@ -68,8 +90,17 @@ const clinics = [
       <!-- Depoimentos em cards -->
       <div class="mb-16 grid gap-6 md:grid-cols-3">
         {
-          testimonials.map((t) => (
-            <figure class="flex flex-col rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-lifted md:p-7">
+          testimonials.map((t) => {
+            const Tag = t.link ? 'a' : 'div';
+            const hasFull = Boolean(t.fullQuote);
+            return (
+            <figure
+              class:list={[
+                'flex flex-col rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-lifted md:p-7',
+                hasFull && 'cursor-pointer',
+              ]}
+              data-testimonial-open={t.slug}
+            >
               <svg
                 class="mb-5 h-6 w-6 text-cuidaty-secondary"
                 fill="currentColor"
@@ -78,27 +109,133 @@ const clinics = [
               >
                 <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z" />
               </svg>
-              <blockquote class="mb-6 text-lg leading-snug text-cuidaty-dark">{t.quote}</blockquote>
-              <figcaption class="mt-auto flex items-center gap-3 border-t border-border pt-5">
-                <img
-                  src={t.img}
-                  alt={t.name}
-                  width="48"
-                  height="48"
-                  loading="lazy"
-                  decoding="async"
-                  class="h-12 w-12 flex-shrink-0 rounded-full object-cover"
-                />
-                <div>
-                  <div class="font-semibold text-cuidaty-dark">{t.name}</div>
-                  <div class="text-xs text-foreground/60">{t.role}</div>
-                  <div class="text-xs text-foreground/45">{t.crp}</div>
-                </div>
+              <blockquote class="mb-4 text-lg leading-snug text-cuidaty-dark">{t.quote}</blockquote>
+              {hasFull && (
+                <button
+                  type="button"
+                  data-testimonial-open={t.slug}
+                  class="mb-6 inline-flex items-center gap-1 self-start text-sm font-medium text-cuidaty-primary hover:underline"
+                >
+                  Ler mais
+                  <svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              )}
+              <figcaption class="mt-auto border-t border-border pt-5">
+                <Tag
+                  href={t.link ?? undefined}
+                  target={t.link ? '_blank' : undefined}
+                  rel={t.link ? 'noopener noreferrer' : undefined}
+                  data-no-modal={t.link ? '' : undefined}
+                  class="group flex items-center gap-3"
+                >
+                  {t.img ? (
+                    <img
+                      src={t.img}
+                      alt={t.name}
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                      decoding="async"
+                      class="h-12 w-12 flex-shrink-0 rounded-full object-cover"
+                    />
+                  ) : (
+                    <span class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-cuidaty-primary/10 font-serif font-semibold text-cuidaty-primary">
+                      {t.initials}
+                    </span>
+                  )}
+                  <div>
+                    <div class="flex items-center gap-1.5 font-semibold text-cuidaty-dark group-hover:underline">
+                      {t.name}
+                      {t.link && (
+                        <svg class="h-3.5 w-3.5 text-foreground/45" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                      )}
+                    </div>
+                    <div class="text-xs text-foreground/60">{t.role}</div>
+                    <div class="text-xs text-foreground/45">{t.crp}</div>
+                  </div>
+                </Tag>
               </figcaption>
             </figure>
-          ))
+            );
+          })
         }
       </div>
+
+      <!-- Modais com o depoimento completo -->
+      {
+        testimonials
+          .filter((t) => t.fullQuote)
+          .map((t) => {
+            const paras = t.fullQuote ?? [];
+            return (
+              <dialog
+                id={`testimonial-${t.slug}`}
+                class="m-auto w-[92vw] max-w-2xl rounded-2xl bg-card p-0 text-cuidaty-dark shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+              >
+                <div class="relative max-h-[85vh] overflow-y-auto p-6 sm:p-8">
+                  <button
+                    type="button"
+                    data-testimonial-close
+                    aria-label="Fechar"
+                    class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-cuidaty-dark/60 transition-colors hover:bg-muted hover:text-cuidaty-dark"
+                  >
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+
+                  <div class="mb-6 flex flex-col items-center gap-3 text-center sm:flex-row sm:items-center sm:gap-4 sm:pr-10 sm:text-left">
+                    {t.img ? (
+                      <img
+                        src={t.img}
+                        alt={t.name}
+                        width="128"
+                        height="128"
+                        decoding="async"
+                        class="h-24 w-24 flex-shrink-0 rounded-full object-cover sm:h-32 sm:w-32"
+                      />
+                    ) : (
+                      <span class="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-cuidaty-primary/10 font-serif text-xl font-semibold text-cuidaty-primary">
+                        {t.initials}
+                      </span>
+                    )}
+                    <div>
+                      <div class="font-serif text-xl font-semibold text-cuidaty-dark">{t.name}</div>
+                      <div class="text-sm text-foreground/60">{t.role}</div>
+                      <div class="text-xs text-foreground/45">{t.crp}</div>
+                      {t.link && (
+                        <a
+                          href={t.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="mt-1 inline-flex items-center gap-1 text-xs font-medium text-cuidaty-primary hover:underline"
+                        >
+                          <svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                          </svg>
+                          Ver no Instagram
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="space-y-4 leading-relaxed text-foreground/80">
+                    {paras.map((p, i) => (
+                      <p>
+                        {i === 0 ? `"${p}` : p}
+                        {i === paras.length - 1 ? '"' : ''}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </dialog>
+            );
+          })
+      }
 
       <!-- Clínicas em cards -->
       <p class="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
@@ -142,3 +279,32 @@ const clinics = [
     </div>
   </div>
 </section>
+
+<script>
+  // Abre o depoimento completo em modal ao clicar no card ou no "Ler mais".
+  document.querySelectorAll<HTMLElement>('[data-testimonial-open]').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      const target = event.target as Element | null;
+      // Cliques no link do Instagram não abrem o modal.
+      if (target?.closest('[data-no-modal]')) return;
+
+      const id = trigger.dataset.testimonialOpen;
+      const dialog = document.getElementById(`testimonial-${id}`) as HTMLDialogElement | null;
+      if (!dialog || dialog.open) return;
+      dialog.showModal();
+    });
+  });
+
+  document
+    .querySelectorAll<HTMLDialogElement>('dialog[id^="testimonial-"]')
+    .forEach((dialog) => {
+      dialog
+        .querySelectorAll<HTMLElement>('[data-testimonial-close]')
+        .forEach((btn) => btn.addEventListener('click', () => dialog.close()));
+
+      // Fecha ao clicar no fundo (backdrop).
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    });
+</script>
