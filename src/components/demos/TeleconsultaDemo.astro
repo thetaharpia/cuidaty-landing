@@ -88,7 +88,7 @@ const { class: className = '' } = Astro.props;
               <div class="pending-msg" data-pending-msg>
                 <span class="spin"></span>
                 <span
-                  >A transcrição pode levar alguns minutos. Você pode sair desta tela — ela
+                  >A transcrição pode levar alguns minutos. Você pode sair desta tela, ela
                   continuará processando.</span
                 >
               </div>
@@ -669,7 +669,7 @@ const { class: className = '' } = Astro.props;
       q('[data-switch]').classList.add('on');
       await sleep(1500);
 
-      await setHeadline('Grave a consulta ao vivo — os dois lados são capturados');
+      await setHeadline('Grave a consulta ao vivo: os dois lados são capturados');
       q('[data-rec-btn]').className = 'btn destructive';
       q('[data-rec-label]').textContent = 'Parar';
       q('[data-rec-icon]').innerHTML = '<rect x="6" y="6" width="12" height="12" rx="1"/>';
@@ -685,7 +685,7 @@ const { class: className = '' } = Astro.props;
       q('[data-card-panel]').classList.remove('hide');
       await sleep(2400);
 
-      await setHeadline('Resumo clínico pronto — marcado como teleconsulta');
+      await setHeadline('Resumo clínico pronto, marcado como teleconsulta');
       q('[data-status-badge]').className = 'badge success';
       q('[data-status-badge]').innerHTML =
         '<svg class="ic s12" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Concluída';

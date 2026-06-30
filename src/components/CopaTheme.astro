@@ -1,0 +1,127 @@
+---
+/**
+ * Camada visual do tema "Copa do Mundo" (clima Brasil 🇧🇷).
+ *
+ * É renderizado SOMENTE quando `COPA_THEME` está ligado (ver src/lib/theme.ts).
+ * Para remover de vez o tema, basta apagar este componente e o import no Layout.
+ *
+ * O que ele adiciona:
+ *  - uma faixa verde/amarela/azul fina no topo da página;
+ *  - um banner festivo logo abaixo do header;
+ *  - overrides de cor (verde-amarelas) escopados em `.theme-copa`,
+ *    sem alterar o tema padrão do site.
+ */
+---
+
+<!-- Faixa do Brasil no topo -->
+<div class="copa-stripe" aria-hidden="true"></div>
+
+<!-- Banner festivo -->
+<aside class="copa-banner" role="note" aria-label="Cuidaty no clima da Copa do Mundo">
+  <span class="copa-banner__flag" aria-hidden="true">🇧🇷</span>
+  <p class="copa-banner__text">
+    <strong>É Copa!</strong> A Cuidaty está no clima: bom jogo e bom cuidado. <span
+      aria-hidden="true">⚽💚💛</span
+    >
+  </p>
+</aside>
+
+<style is:global>
+  /* ====================================================================
+     TEMA COPA DO MUNDO — escopado em .theme-copa (no <html>).
+     Cores oficiais inspiradas na bandeira do Brasil.
+     ==================================================================== */
+  :root {
+    --copa-green: #009739;
+    --copa-yellow: #ffdf00;
+    --copa-blue: #002776;
+    --copa-green-dark: #007a2e;
+  }
+
+  /* Faixa fixa no topo */
+  .theme-copa .copa-stripe {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 4px;
+    z-index: 60;
+    background: linear-gradient(
+      90deg,
+      var(--copa-green) 0%,
+      var(--copa-green) 33%,
+      var(--copa-yellow) 33%,
+      var(--copa-yellow) 66%,
+      var(--copa-blue) 66%,
+      var(--copa-blue) 100%
+    );
+  }
+
+  /* Banner festivo logo abaixo do header flutuante */
+  .theme-copa .copa-banner {
+    position: fixed;
+    inset: auto 0 auto 0;
+    top: 76px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    background: linear-gradient(90deg, var(--copa-green) 0%, var(--copa-green-dark) 100%);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 39, 118, 0.18);
+  }
+  .theme-copa .copa-banner__flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  .theme-copa .copa-banner__text {
+    margin: 0;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .theme-copa .copa-banner__text strong {
+    color: var(--copa-yellow);
+    font-weight: 700;
+  }
+  @media (min-width: 640px) {
+    .theme-copa .copa-banner {
+      top: 84px;
+    }
+    .theme-copa .copa-banner__text {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Empurra o conteúdo pra não ficar atrás do banner festivo */
+  .theme-copa body {
+    padding-top: 2.25rem;
+  }
+
+  /* ---- Recoloração verde-amarela dos elementos primários ---- */
+  /* Botões/CTAs primários ganham o degradê do Brasil */
+  .theme-copa .bg-cuidaty-primary,
+  .theme-copa .bg-primary {
+    background-image: linear-gradient(135deg, var(--copa-green) 0%, var(--copa-green-dark) 100%);
+  }
+  .theme-copa .hover\:bg-cuidaty-primary-hover:hover,
+  .theme-copa .active\:bg-cuidaty-primary-hover:active,
+  .theme-copa .hover\:bg-primary-hover:hover {
+    background-image: linear-gradient(135deg, var(--copa-green-dark) 0%, #006225 100%);
+  }
+
+  /* Acentos de borda/texto que usam o azul Cuidaty viram verde da bandeira */
+  .theme-copa .border-cuidaty-primary {
+    border-color: var(--copa-green) !important;
+  }
+  .theme-copa .text-cuidaty-primary {
+    color: var(--copa-green) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-copa .copa-banner {
+      transition: none;
+    }
+  }
+</style>
