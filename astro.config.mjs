@@ -46,6 +46,11 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 1.0,
       lastmod: new Date(),
+      customPages: [
+        'https://app.cuidaty.com/',
+        'https://diagnostico.cuidaty.com/',
+        'https://ajuda.cuidaty.com/',
+      ],
       i18n: {
         defaultLocale: 'pt-BR',
         locales: {
