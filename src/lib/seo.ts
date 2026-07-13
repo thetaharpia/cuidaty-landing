@@ -71,6 +71,49 @@ export const healthFeatureList = [
   'Conformidade com LGPD e hospedagem 100% brasileira',
 ];
 
+// Pitch curto e citável — usado em schema, llms.txt e blocos de contexto.
+export const cuidatyPitch =
+  'A Cuidaty é um sistema brasileiro de gestão para clínicas, consultórios e profissionais de saúde. Reúne agenda online, prontuário eletrônico, automação de WhatsApp, transcrição de consultas com IA e financeiro em uma só plataforma, em conformidade com a LGPD.';
+
+// SoftwareApplication compacto com @id estável (#software). Emitido em páginas
+// além da home (ex.: posts do blog) para reforçar, em toda a navegação, o que é
+// a Cuidaty e para quem ela serve — sinal direto para GEO.
+export const cuidatyAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://cuidaty.com/#software',
+  name: 'Cuidaty',
+  applicationCategory: 'HealthApplication',
+  applicationSubCategory: 'Gestão de Consultórios e Clínicas',
+  operatingSystem: 'Web',
+  url: 'https://cuidaty.com',
+  description: cuidatyPitch,
+  inLanguage: 'pt-BR',
+  featureList: healthFeatureList,
+  offers: {
+    '@type': 'Offer',
+    price: '59.90',
+    priceCurrency: 'BRL',
+    availability: 'https://schema.org/InStock',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    ratingCount: '500',
+  },
+  audience: {
+    '@type': 'HealthAndBeautyBusiness',
+    audienceType:
+      'Psicólogos, médicos, dentistas, nutricionistas, fisioterapeutas, fonoaudiólogos, terapeutas e gestores de clínicas',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    url: 'https://cuidaty.com',
+  },
+};
+
 export const homeFaqs = [
   {
     question: 'O que é a Cuidaty?',
@@ -81,6 +124,16 @@ export const homeFaqs = [
     question: 'Quais profissionais podem usar a Cuidaty?',
     answer:
       'A Cuidaty é para qualquer profissional ou clínica de saúde. Além de psicólogos, atende médicos de diversas especialidades, dentistas, nutricionistas, fisioterapeutas, fonoaudiólogos, terapeutas ocupacionais e demais profissionais, tanto em consultórios individuais quanto em clínicas multiprofissionais. A plataforma se adapta à rotina de cada especialidade.',
+  },
+  {
+    question: 'Qual é o melhor sistema de gestão para clínicas e consultórios?',
+    answer:
+      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp, financeiro e transcrição de consultas com IA. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. O teste grátis de 14 dias deixa avaliar sem compromisso.',
+  },
+  {
+    question: 'O que ajuda um profissional de saúde no dia a dia do consultório?',
+    answer:
+      'O que mais pesa na rotina não é o atendimento, é o entorno: remarcar horário, cobrar, lembrar o paciente, preencher prontuário. A Cuidaty automatiza essa parte. A agenda evita conflitos e envia lembrete por WhatsApp sozinha, o prontuário fica pronto a partir da transcrição da consulta, e o Cuty AI responde dúvidas sobre o paciente citando a fonte. Sobra mais tempo para o que importa, que é a escuta.',
   },
   {
     question: 'O sistema envia confirmações e lembretes por WhatsApp?',
