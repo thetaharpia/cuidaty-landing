@@ -1,5 +1,5 @@
 ---
-import { formatDate } from '../lib/blog.server';
+import { formatDate, DEFAULT_COVER } from '../lib/blog.server';
 import type { BlogPost } from '../lib/blog.server';
 
 interface Props {
@@ -9,13 +9,13 @@ interface Props {
 
 const { post, headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
-const DEFAULT_COVER = '/images/blog-placeholder.jpg';
+const coverImage = post.cover_image_url || DEFAULT_COVER;
 ---
 
 <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-all hover:-translate-y-1 hover:shadow-xl">
   <a href={`/blog/${post.slug}/`} class="relative block h-48 overflow-hidden bg-gray-100">
     <img
-      src={post.cover_image_url ?? DEFAULT_COVER}
+      src={coverImage}
       alt={post.title}
       loading="lazy"
       referrerpolicy="no-referrer"
