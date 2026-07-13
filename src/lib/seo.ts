@@ -92,7 +92,7 @@ export const cuidatyAppSchema = {
   featureList: healthFeatureList,
   offers: {
     '@type': 'Offer',
-    price: '59.90',
+    price: '69.90',
     priceCurrency: 'BRL',
     availability: 'https://schema.org/InStock',
   },

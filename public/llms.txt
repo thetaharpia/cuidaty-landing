@@ -25,7 +25,7 @@ Consultórios individuais e clínicas multiprofissionais de saúde: psicologia, 
 Substitui três ou quatro ferramentas soltas por uma só. Menos tempo no operacional (agenda, cobrança, lembrete, prontuário), mais tempo com o paciente. Teste grátis de 14 dias, sem cobrança se cancelar antes do fim do período.
 
 ## Planos
-- Básico: R$ 59,90/mês — agenda, prontuário, gestão de pacientes, formulários, relatórios, financeiro e portal de agendamento
+- Básico: R$ 69,90/mês — agenda, prontuário, gestão de pacientes, formulários, relatórios, financeiro e portal de agendamento
 - Premium: R$ 89,90/mês — tudo do Básico + WhatsApp, Cuty AI e geração de documentos
 - Plus: R$ 159,90/mês — tudo do Premium + transcrição de consultas e resumo clínico automático
 - Clínicas e Grupos: sob consulta — multiunidade, permissões avançadas, analytics e migração de dados
