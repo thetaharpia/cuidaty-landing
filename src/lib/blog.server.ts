@@ -86,6 +86,65 @@ export function formatDate(iso: string): string {
 }
 
 export function readingTime(html: string): number {
-  const words = html.replace(/<[^>]+>/g, '').split(/\s+/).length;
+  const words = wordCount(html);
   return Math.max(1, Math.round(words / 200));
+}
+
+export function wordCount(html: string): number {
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length;
+}
+
+export interface TocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
+}
+
+export function slugify(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+/**
+ * Adiciona ids âncora aos títulos h2/h3 do conteúdo do Ghost e devolve o
+ * sumário. Ids ajudam na navegação (legibilidade) e dão alvos citáveis para
+ * mecanismos de IA (GEO).
+ */
+export function enhanceContent(html: string): { html: string; toc: TocItem[] } {
+  const toc: TocItem[] = [];
+  const used = new Set<string>();
+
+  const enhanced = html.replace(
+    /<(h2|h3)([^>]*)>([\s\S]*?)<\/\1>/gi,
+    (match, tag: string, attrs: string, inner: string) => {
+      const text = inner.replace(/<[^>]+>/g, '').trim();
+      if (!text) return match;
+
+      const existing = attrs.match(/\sid=["']([^"']+)["']/i);
+      let id = existing ? existing[1] : slugify(text);
+      if (!id) return match;
+
+      const base = id;
+      let n = 2;
+      while (used.has(id)) id = `${base}-${n++}`;
+      used.add(id);
+
+      const level = tag.toLowerCase() === 'h2' ? 2 : 3;
+      toc.push({ id, text, level });
+
+      const cleanAttrs = attrs.replace(/\sid=["'][^"']*["']/i, '');
+      return `<${tag}${cleanAttrs} id="${id}">${inner}</${tag}>`;
+    }
+  );
+
+  return { html: enhanced, toc };
 }
