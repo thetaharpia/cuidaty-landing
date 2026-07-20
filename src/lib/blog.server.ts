@@ -5,6 +5,9 @@ const API_KEY = import.meta.env.BLOG_API_KEY as string;
 
 export const DEFAULT_COVER = '/default-blog.png';
 
+/** Domínio canônico do blog. Todo link interno para o blog deve usar esta constante. */
+export const BLOG_URL = 'https://blog.cuidaty.com';
+
 export interface BlogPost {
   id: number;
   title: string;

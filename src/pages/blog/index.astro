@@ -5,7 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import BlogCard from '../../components/BlogCard.astro';
-import { getAllPosts } from '../../lib/blog.server';
+import { getAllPosts, BLOG_URL } from '../../lib/blog.server';
 import type { BlogPost, BlogMeta } from '../../lib/blog.server';
 
 let posts: BlogPost[] = [];
@@ -24,7 +24,7 @@ const structuredData = {
   '@type': 'Blog',
   name: 'Blog Cuidaty',
   description: 'Conteúdo sobre psicologia, gestão clínica e cuidado com quem cuida.',
-  url: 'https://cuidaty.com/blog/',
+  url: `${BLOG_URL}/`,
   publisher: {
     '@type': 'Organization',
     name: 'Cuidaty',
@@ -38,6 +38,7 @@ const structuredData = {
   title="Blog Cuidaty | Psicologia, Gestão Clínica e Saúde Mental"
   description="Artigos sobre psicologia, gestão de consultório, saúde mental e cuidado com profissionais da saúde. Conteúdo produzido pela equipe Cuidaty."
   keywords="blog psicologia, gestão clínica, saúde mental, profissionais de saúde, consultório, cuidaty"
+  canonicalURL={`${BLOG_URL}/`}
 >
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <Header />

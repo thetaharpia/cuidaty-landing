@@ -11,6 +11,7 @@ import {
   readingTime,
   wordCount,
   enhanceContent,
+  BLOG_URL,
 } from '../../lib/blog.server';
 import { cuidatyAppSchema } from '../../lib/seo';
 
@@ -23,7 +24,7 @@ const { slug } = Astro.params;
 const post = await getPostBySlug(slug);
 
 if (!post) {
-  return Astro.redirect('/blog');
+  return Astro.redirect(`${BLOG_URL}/`);
 }
 
 const mins = readingTime(post.content_html);
@@ -34,7 +35,7 @@ const showToc = toc.length >= 3;
 const title = post.seo.meta_title || post.title;
 const description = post.seo.meta_description || post.excerpt?.slice(0, 160) || '';
 const ogImage = post.seo.og_image_url || post.cover_image_url || '';
-const postUrl = `https://cuidaty.com/blog/${post.slug}/`;
+const postUrl = `${BLOG_URL}/${post.slug}/`;
 
 // Article schema enriquecido para GEO: dados que mecanismos de IA usam para
 // entender e citar o conteúdo (wordCount, dateModified, speakable), com
@@ -69,7 +70,7 @@ const articleData = {
   },
   isPartOf: {
     '@type': 'Blog',
-    '@id': 'https://cuidaty.com/blog/#blog',
+    '@id': `${BLOG_URL}/#blog`,
     name: 'Blog Cuidaty',
   },
   mainEntityOfPage: {
@@ -87,7 +88,7 @@ const articleData = {
 const structuredData = [articleData, cuidatyAppSchema];
 ---
 
-<Layout title={title} description={description} image={ogImage}>
+<Layout title={title} description={description} image={ogImage} canonicalURL={postUrl}>
   {
     structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -100,7 +101,7 @@ const structuredData = [articleData, cuidatyAppSchema];
     <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-14 md:py-20">
       <div class="container mx-auto px-4 md:px-6">
         <div class="max-w-3xl mx-auto text-white">
-          <a href="/blog/" class="inline-flex items-center gap-1 text-sm opacity-75 hover:opacity-100 mb-6 transition-opacity">
+          <a href="https://blog.cuidaty.com/" class="inline-flex items-center gap-1 text-sm opacity-75 hover:opacity-100 mb-6 transition-opacity">
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
               <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
             </svg>
@@ -212,7 +213,7 @@ const structuredData = [articleData, cuidatyAppSchema];
         <!-- Back link -->
         <div class="mt-10">
           <a
-            href="/blog/"
+            href="https://blog.cuidaty.com/"
             class="inline-flex items-center gap-2 rounded-full border border-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-cuidaty-primary transition-all hover:bg-cuidaty-primary hover:text-white"
           >
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">

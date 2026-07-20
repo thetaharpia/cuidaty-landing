@@ -1,5 +1,5 @@
 ---
-import { formatDate, DEFAULT_COVER } from '../lib/blog.server';
+import { formatDate, DEFAULT_COVER, BLOG_URL } from '../lib/blog.server';
 import type { BlogPost } from '../lib/blog.server';
 
 interface Props {
@@ -10,11 +10,12 @@ interface Props {
 const { post, headingLevel = 'h2' } = Astro.props;
 const Heading = headingLevel;
 const coverImage = post.cover_image_url || DEFAULT_COVER;
+const postHref = `${BLOG_URL}/${post.slug}/`;
 ---
 
 <article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-lifted hover:ring-cuidaty-primary/15">
   <a
-    href={`/blog/${post.slug}/`}
+    href={postHref}
     class="focus-ring relative block h-48 overflow-hidden bg-gray-100"
     tabindex="-1"
   >
@@ -38,7 +39,7 @@ const coverImage = post.cover_image_url || DEFAULT_COVER;
     )}
 
     <Heading class="mb-3 font-serif text-xl font-semibold leading-snug text-cuidaty-dark line-clamp-2">
-      <a href={`/blog/${post.slug}/`} class="focus-ring rounded-sm transition-colors hover:text-cuidaty-primary">
+      <a href={postHref} class="focus-ring rounded-sm transition-colors hover:text-cuidaty-primary">
         {post.title}
       </a>
     </Heading>
@@ -60,7 +61,7 @@ const coverImage = post.cover_image_url || DEFAULT_COVER;
     </div>
 
     <a
-      href={`/blog/${post.slug}/`}
+      href={postHref}
       class="link-underline focus-ring mt-4 inline-flex w-fit items-center gap-1 rounded-sm text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-primary-hover"
     >
       Ler artigo completo
