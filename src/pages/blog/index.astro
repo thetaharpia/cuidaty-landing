@@ -49,17 +49,30 @@ const structuredData = {
           <div class="text-center text-white md:text-left">
             <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">Conteúdo que cuida</p>
             <h1 class="mb-4 font-serif text-4xl font-semibold md:text-5xl">Blog Cuidaty</h1>
-            <p class="text-lg leading-relaxed opacity-90 md:max-w-md">
-              Psicologia, gestão clínica e reflexões sobre o cuidado com quem cuida.
+            <p class="min-h-[3.5rem] text-lg leading-relaxed opacity-90 md:max-w-md md:min-h-[4rem]">
+              <span class="sr-only">Aqui você encontra informação que cuida de quem cuida.</span>
+              <span id="blog-typewriter" aria-hidden="true">Aqui você encontra informação que cuida de quem cuida.</span><span
+                aria-hidden="true"
+                class="ml-0.5 inline-block h-[1.1em] w-[2px] animate-pulse bg-white/70 align-middle"
+              ></span>
             </p>
           </div>
-          <img
-            src="/psycologist-taking-coffe.jpg"
-            alt="Psicóloga sorrindo em frente ao notebook, escrevendo para o blog da Cuidaty"
-            width="600"
-            height="750"
-            class="mx-auto aspect-[4/5] w-full max-w-xs rounded-2xl object-cover shadow-lifted ring-1 ring-white/20 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:max-w-sm md:rotate-1 md:hover:rotate-0"
-          />
+          <div class="relative mx-auto h-72 w-full max-w-md md:h-96 md:max-w-none">
+            <img
+              src="/doctor-desk.png"
+              alt=""
+              width="864"
+              height="576"
+              class="animate-float absolute right-0 top-2 w-[70%] max-w-sm [animation-duration:7s] drop-shadow-2xl md:top-0"
+            />
+            <img
+              src="/therapist-session.png"
+              alt=""
+              width="864"
+              height="576"
+              class="animate-float absolute bottom-2 left-0 w-[62%] max-w-xs [animation-delay:-3s] [animation-duration:8s] drop-shadow-2xl md:bottom-0"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -88,4 +101,21 @@ const structuredData = {
   </main>
 
   <Footer />
+
+  <script>
+    const el = document.getElementById('blog-typewriter');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (el && !prefersReducedMotion) {
+      const text = el.textContent || '';
+      el.textContent = '';
+      let i = 0;
+      const type = () => {
+        el.textContent = text.slice(0, i);
+        i++;
+        if (i <= text.length) setTimeout(type, 32);
+      };
+      setTimeout(type, 500);
+    }
+  </script>
 </Layout>
