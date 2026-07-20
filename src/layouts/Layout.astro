@@ -12,7 +12,6 @@ interface Props {
   image?: string;
   noindex?: boolean;
   keywords?: string;
-  canonicalURL?: string;
 }
 
 const {
@@ -21,7 +20,6 @@ const {
   image = '/screenshot.png',
   noindex = false,
   keywords = homeKeywords,
-  canonicalURL: canonicalURLOverride,
 } = Astro.props;
 
 const googleSiteVerification =
@@ -30,9 +28,7 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
 const effectiveKeywords = keywords;
 
-const canonicalURL = canonicalURLOverride
-  ? new URL(canonicalURLOverride)
-  : new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
 const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
 const pathname = Astro.url.pathname;
