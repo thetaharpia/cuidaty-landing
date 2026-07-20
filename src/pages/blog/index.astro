@@ -43,14 +43,23 @@ const structuredData = {
   <Header />
 
   <main class="pt-24 pb-16 bg-white">
-    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-16 md:py-20">
+    <section class="overflow-hidden bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover">
       <div class="container mx-auto px-4 md:px-6">
-        <div class="max-w-3xl mx-auto text-center text-white">
-          <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">Conteúdo que cuida</p>
-          <h1 class="font-serif text-4xl font-semibold md:text-5xl mb-4">Blog Cuidaty</h1>
-          <p class="text-lg opacity-90 leading-relaxed">
-            Psicologia, gestão clínica e reflexões sobre o cuidado com quem cuida.
-          </p>
+        <div class="mx-auto grid max-w-5xl items-center gap-10 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-20 lg:gap-16">
+          <div class="text-center text-white md:text-left">
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">Conteúdo que cuida</p>
+            <h1 class="mb-4 font-serif text-4xl font-semibold md:text-5xl">Blog Cuidaty</h1>
+            <p class="text-lg leading-relaxed opacity-90 md:max-w-md">
+              Psicologia, gestão clínica e reflexões sobre o cuidado com quem cuida.
+            </p>
+          </div>
+          <img
+            src="/psycologist-taking-coffe.jpg"
+            alt="Psicóloga sorrindo em frente ao notebook, escrevendo para o blog da Cuidaty"
+            width="600"
+            height="750"
+            class="mx-auto aspect-[4/5] w-full max-w-xs rounded-2xl object-cover shadow-lifted ring-1 ring-white/20 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:max-w-sm md:rotate-1 md:hover:rotate-0"
+          />
         </div>
       </div>
     </section>
