@@ -4,9 +4,6 @@ import '../styles/global.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import MobileCTABar from '../components/MobileCTABar.astro';
 import CookieConsent from '../components/CookieConsent.astro';
-import CopaTheme from '../components/CopaTheme.astro';
-import { COPA_THEME } from '../lib/theme';
-import { copaFaqs, copaKeywords } from '../lib/copa';
 import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
@@ -29,8 +26,7 @@ const googleSiteVerification =
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? 'CuQ7uBwOoGiZimHGFB_WF-rWulUEtnNMyjfq_Vs6VqQ';
 const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
-// Keywords da Copa entram só quando o tema sazonal está ligado (feature flag)
-const effectiveKeywords = COPA_THEME ? `${keywords}, ${copaKeywords.join(', ')}` : keywords;
+const effectiveKeywords = keywords;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
@@ -234,7 +230,7 @@ const breadcrumbData = {
 const faqData = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [...homeFaqs, ...(COPA_THEME ? copaFaqs : [])].map((faq) => ({
+  mainEntity: homeFaqs.map((faq) => ({
     '@type': 'Question',
     name: faq.question,
     acceptedAnswer: {
@@ -255,7 +251,7 @@ const structuredData = [
 ---
 
 <!doctype html>
-<html lang="pt-BR" class={COPA_THEME ? 'theme-copa' : undefined}>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -503,7 +499,6 @@ const structuredData = [
     </script>
   </head>
   <body class="pb-[92px] lg:pb-0">
-    {COPA_THEME && <CopaTheme />}
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />

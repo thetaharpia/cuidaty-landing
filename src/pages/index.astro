@@ -14,8 +14,6 @@ import Personas from '../components/sections/Personas.astro';
 import BlogSection from '../components/sections/BlogSection.astro';
 import CTA from '../components/sections/CTA.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
-import CopaSeo from '../components/sections/CopaSeo.astro';
-import { COPA_THEME } from '../lib/copa';
 import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 ---
 
@@ -38,8 +36,6 @@ import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
     <Pain />
     <!-- 10. FAQ indexável e visível -->
     <FAQSection />
-    {/* Seção sazonal de SEO da Copa do Mundo (feature flag COPA_THEME) */}
-    {COPA_THEME && <CopaSeo />}
     <!-- 11. Momento de contato — Calendly / WhatsApp / e-mail -->
     <CTA />
     <!-- 12. Retenção: conteúdo para quem não converteu ainda -->
