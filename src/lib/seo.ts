@@ -1,7 +1,7 @@
 export const homeTitle = 'Software para Psicologos, Clinicas e Consultorios | Cuidaty';
 
 export const homeDescription =
-  'Sistema para psicologos, clinicas e consultorios com agenda online, prontuario eletronico, automacao de WhatsApp, transcricao de consultas com IA, resumo clinico em SOAP e outros formatos, assistente Cuty AI que tira duvidas sobre o paciente, modelos de documentos, financeiro e relatorios, em conformidade com a LGPD. Teste gratis por 14 dias.';
+  'Sistema para psicologos, clinicas e consultorios com agenda online, prontuario eletronico, automacao de WhatsApp, transcricao de consultas com IA, resumo clinico em SOAP e outros formatos, assistente Cuty AI que tira duvidas sobre o paciente, modelos de documentos, financeiro e relatorios, em conformidade com a LGPD. Plano gratuito para ate 10 pacientes.';
 
 export const homeKeywords = [
   'software para psicologos',
@@ -128,7 +128,7 @@ export const homeFaqs = [
   {
     question: 'Qual é o melhor sistema de gestão para clínicas e consultórios?',
     answer:
-      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp, financeiro e transcrição de consultas com IA. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. O teste grátis de 14 dias deixa avaliar sem compromisso.',
+      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp, financeiro e transcrição de consultas com IA. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. Há um plano gratuito para até 10 pacientes e teste grátis de 3 dias nos planos pagos.',
   },
   {
     question: 'O que ajuda um profissional de saúde no dia a dia do consultório?',
@@ -156,9 +156,9 @@ export const homeFaqs = [
       'Sim. Você acompanha cobranças, pagamentos e faturas sem planilhas paralelas e enxerga a saúde financeira da clínica com clareza. Na equipe, cada usuário tem seu acesso e permissões: o gestor define quem vê o financeiro, quem agenda e quem registra prontuário.',
   },
   {
-    question: 'A Cuidaty tem teste grátis? Como funciona a cobrança?',
+    question: 'A Cuidaty tem plano grátis ou teste grátis? Como funciona a cobrança?',
     answer:
-      'Sim. Você tem 14 dias de teste grátis para usar a plataforma. A cobrança só é feita após esse período: se decidir não continuar, basta cancelar antes do fim dos 14 dias e nada é cobrado. Depois do teste, a assinatura é mensal, conforme o plano escolhido (Básico, Premium ou Plus), e pode ser cancelada a qualquer momento.',
+      'Sim. Há um plano gratuito permanente para até 10 pacientes. Para os planos pagos, você tem 3 dias de teste grátis: a cobrança só é feita após esse período, e se decidir não continuar, basta cancelar antes do fim dos 3 dias que nada é cobrado. Depois do teste, a assinatura é mensal, conforme o plano escolhido (Básico, Premium ou Plus), e pode ser cancelada a qualquer momento.',
   },
   {
     question: 'A Cuidaty é segura e está em conformidade com a LGPD?',
