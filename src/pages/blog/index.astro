@@ -64,7 +64,7 @@ const structuredData = {
         )}
 
         {posts.length > 0 ? (
-          <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="stagger-cards grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post) => (
               <BlogCard post={post} headingLevel="h2" />
             ))}

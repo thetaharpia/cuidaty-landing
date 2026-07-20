@@ -1,3 +1,5 @@
+import { localPosts } from './posts.local';
+
 const API_URL = import.meta.env.BLOG_API_URL as string;
 const API_KEY = import.meta.env.BLOG_API_KEY as string;
 
@@ -35,25 +37,40 @@ function headers(): HeadersInit {
   return { Authorization: `Bearer ${API_KEY}` };
 }
 
+function byDateDesc(a: BlogPost, b: BlogPost): number {
+  return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+}
+
 export async function getLatestPosts(limit = 3): Promise<BlogPost[]> {
+  let apiPosts: BlogPost[] = [];
   try {
     const res = await fetch(`${API_URL}?page=1`, { headers: headers() });
-    if (!res.ok) return [];
-    const json = (await res.json()) as { data: BlogPost[] };
-    return json.data.slice(0, limit);
+    if (res.ok) apiPosts = ((await res.json()) as { data: BlogPost[] }).data;
   } catch {
-    return [];
+    // segue só com os posts locais
   }
+  return [...localPosts, ...apiPosts].sort(byDateDesc).slice(0, limit);
 }
 
 export async function getAllPosts(page = 1): Promise<{ posts: BlogPost[]; meta: BlogMeta }> {
   const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
   if (!res.ok) throw new Error(`Blog API error: ${res.status}`);
   const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
-  return { posts: json.data, meta: json.meta };
+
+  if (page !== 1 || localPosts.length === 0) {
+    return { posts: json.data, meta: json.meta };
+  }
+
+  return {
+    posts: [...localPosts, ...json.data].sort(byDateDesc),
+    meta: { ...json.meta, total: json.meta.total + localPosts.length },
+  };
 }
 
 export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> {
+  const local = localPosts.find((p) => p.slug === slug);
+  if (local) return local;
+
   try {
     const res = await fetch(`${API_URL}/${slug}`, { headers: headers() });
     if (!res.ok) return null;
@@ -64,7 +81,7 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
 }
 
 export async function getAllSlugs(): Promise<string[]> {
-  const slugs: string[] = [];
+  const slugs: string[] = localPosts.map((p) => p.slug);
   let page = 1;
   while (true) {
     const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
@@ -115,7 +132,7 @@ export function slugify(text: string): string {
 }
 
 /**
- * Adiciona ids âncora aos títulos h2/h3 do conteúdo do Ghost e devolve o
+ * Adiciona ids âncora aos títulos h2/h3 do conteúdo do post e devolve o
  * sumário. Ids ajudam na navegação (legibilidade) e dão alvos citáveis para
  * mecanismos de IA (GEO).
  */

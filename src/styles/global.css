@@ -98,4 +98,48 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
+
+  /* Sublinhado que se desenha da esquerda pra direita no hover/focus */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Cards de uma grid entram em cascata quando a seção fica visível
+     (reaproveita a classe .is-in já aplicada pelo reveal-on-scroll do Layout). */
+  @media (prefers-reduced-motion: no-preference) {
+    .stagger-cards > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .is-in .stagger-cards > * {
+      opacity: 1;
+      transform: none;
+    }
+    .is-in .stagger-cards > *:nth-child(2) {
+      transition-delay: 0.08s;
+    }
+    .is-in .stagger-cards > *:nth-child(3) {
+      transition-delay: 0.16s;
+    }
+    .is-in .stagger-cards > *:nth-child(4) {
+      transition-delay: 0.24s;
+    }
+    .is-in .stagger-cards > *:nth-child(5) {
+      transition-delay: 0.32s;
+    }
+    .is-in .stagger-cards > *:nth-child(n + 6) {
+      transition-delay: 0.4s;
+    }
+  }
 }
