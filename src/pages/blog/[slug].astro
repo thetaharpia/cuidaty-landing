@@ -117,9 +117,15 @@ const structuredData = [articleData, cuidatyAppSchema];
             </div>
           )}
 
-          <h1 class="font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl mb-6">
+          <h1 class="font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl mb-4">
             {post.title}
           </h1>
+
+          {post.subtitle && (
+            <p class="mb-6 text-lg leading-relaxed opacity-90 md:text-xl">
+              {post.subtitle}
+            </p>
+          )}
 
           <div class="flex flex-wrap items-center gap-4 text-sm opacity-80">
             <span>{post.author.name}</span>

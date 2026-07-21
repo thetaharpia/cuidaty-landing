@@ -8,6 +8,7 @@ export const DEFAULT_COVER = '/default-blog.png';
 export interface BlogPost {
   id: number;
   title: string;
+  subtitle?: string;
   slug: string;
   excerpt: string;
   cover_image_url: string | null;
