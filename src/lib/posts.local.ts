@@ -13,7 +13,7 @@ export const localPosts: BlogPostFull[] = [
     slug: 'assedio-cometido-por-pacientes-tabu-psicologia',
     excerpt:
       'A ética clínica costuma discutir o poder do terapeuta e a vulnerabilidade do paciente. Mas existe um silêncio na profissão sobre o que acontece quando é o paciente quem cruza a linha, e a psicóloga se torna a vítima dentro da própria sala.',
-    cover_image_url: null,
+    cover_image_url: '/blog/terapia_abuso_por_pacientes.png',
     published_at: '2026-07-22T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
     tags: [
