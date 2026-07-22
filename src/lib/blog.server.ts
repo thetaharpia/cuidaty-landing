@@ -81,6 +81,20 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
   }
 }
 
+export async function getAllPostsFlat(): Promise<BlogPost[]> {
+  const posts: BlogPost[] = [...localPosts];
+  let page = 1;
+  while (true) {
+    const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
+    if (!res.ok) break;
+    const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
+    posts.push(...json.data);
+    if (page >= json.meta.last_page) break;
+    page++;
+  }
+  return posts.sort(byDateDesc);
+}
+
 export async function getAllSlugs(): Promise<string[]> {
   const slugs: string[] = localPosts.map((p) => p.slug);
   let page = 1;

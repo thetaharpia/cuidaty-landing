@@ -1,7 +1,7 @@
 export const homeTitle = 'Software para Psicologos, Clinicas e Consultorios | Cuidaty';
 
 export const homeDescription =
-  'Sistema para psicologos, clinicas e consultorios com agenda online, prontuario eletronico, automacao de WhatsApp, transcricao de consultas com IA, resumo clinico em SOAP e outros formatos, assistente Cuty AI que tira duvidas sobre o paciente, modelos de documentos, financeiro e relatorios, em conformidade com a LGPD. Plano gratuito para ate 10 pacientes.';
+  'Sistema para psicologos e clinicas: agenda online, prontuario eletronico, WhatsApp automatico e transcricao de consultas com IA. Plano gratuito.';
 
 export const homeKeywords = [
   'software para psicologos',

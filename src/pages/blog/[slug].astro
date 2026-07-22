@@ -35,6 +35,7 @@ const title = post.seo.meta_title || post.title;
 const description = post.seo.meta_description || post.excerpt?.slice(0, 160) || '';
 const ogImage = post.seo.og_image_url || post.cover_image_url || '';
 const postUrl = `https://cuidaty.com/blog/${post.slug}/`;
+const canonicalUrl = post.seo.canonical_url || postUrl;
 
 // Article schema enriquecido para GEO: dados que mecanismos de IA usam para
 // entender e citar o conteúdo (wordCount, dateModified, speakable), com
@@ -87,7 +88,7 @@ const articleData = {
 const structuredData = [articleData, cuidatyAppSchema];
 ---
 
-<Layout title={title} description={description} image={ogImage}>
+<Layout title={title} description={description} image={ogImage} canonical={canonicalUrl}>
   {
     structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />

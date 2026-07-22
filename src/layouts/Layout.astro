@@ -12,6 +12,7 @@ interface Props {
   image?: string;
   noindex?: boolean;
   keywords?: string;
+  canonical?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   image = '/screenshot.png',
   noindex = false,
   keywords = homeKeywords,
+  canonical,
 } = Astro.props;
 
 const googleSiteVerification =
@@ -28,7 +30,7 @@ const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
 const effectiveKeywords = keywords;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = canonical ? new URL(canonical) : new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
 const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
 const pathname = Astro.url.pathname;
@@ -333,10 +335,12 @@ const structuredData = [
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-
-    <!-- Language alternates -->
-    <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
-    <link rel="alternate" hreflang="x-default" href={canonicalURL.toString()} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Blog Cuidaty"
+      href="/blog/rss.xml"
+    />
 
     <SEO
       title={title}
@@ -497,6 +501,7 @@ const structuredData = [
         });
       }
     </script>
+    <slot name="head" />
   </head>
   <body class="pb-[92px] lg:pb-0">
     <slot />

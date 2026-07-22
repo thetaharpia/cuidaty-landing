@@ -4,7 +4,7 @@ export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import BlogCard from '../../components/BlogCard.astro';
+import BlogPostsGrid from '../../components/BlogPostsGrid.astro';
 import { getAllPosts } from '../../lib/blog.server';
 import type { BlogPost, BlogMeta } from '../../lib/blog.server';
 
@@ -39,6 +39,9 @@ const structuredData = {
   description="Artigos sobre psicologia, gestão de consultório, saúde mental e cuidado com profissionais da saúde. Conteúdo produzido pela equipe Cuidaty."
   keywords="blog psicologia, gestão clínica, saúde mental, profissionais de saúde, consultório, cuidaty"
 >
+  <Fragment slot="head">
+    {meta && meta.last_page > 1 && <link rel="next" href="/blog/page/2/" />}
+  </Fragment>
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <Header />
 
@@ -61,7 +64,7 @@ const structuredData = {
             <div class="absolute right-0 top-0 w-[64%] max-w-sm -rotate-2 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0">
               <img
                 src="/doctor-desk.png"
-                alt=""
+                alt="Psicólogo organizando o consultório com apoio da Cuidaty"
                 width="864"
                 height="576"
                 class="aspect-[3/2] w-full rounded-xl object-contain"
@@ -70,7 +73,7 @@ const structuredData = {
             <div class="absolute bottom-0 left-0 w-[52%] max-w-xs rotate-3 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0">
               <img
                 src="/therapist-session.png"
-                alt=""
+                alt="Sessão de terapia conduzida por psicóloga"
                 width="864"
                 height="576"
                 class="aspect-[3/2] w-full rounded-xl object-contain"
@@ -81,27 +84,7 @@ const structuredData = {
       </div>
     </section>
 
-    <section class="container mx-auto px-4 md:px-6 py-16">
-      <div class="max-w-6xl mx-auto">
-        {meta && (
-          <p class="text-sm text-gray-400 mb-10">
-            {meta.total} {meta.total === 1 ? 'artigo' : 'artigos'} publicados
-          </p>
-        )}
-
-        {posts.length > 0 ? (
-          <div class="stagger-cards grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <BlogCard post={post} headingLevel="h2" />
-            ))}
-          </div>
-        ) : (
-          <div class="text-center py-20 text-gray-500">
-            <p class="text-lg">Nenhum artigo publicado ainda.</p>
-          </div>
-        )}
-      </div>
-    </section>
+    <BlogPostsGrid posts={posts} meta={meta} />
   </main>
 
   <Footer />

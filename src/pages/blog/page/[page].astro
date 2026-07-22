@@ -1,0 +1,74 @@
+---
+export const prerender = true;
+
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import BlogPostsGrid from '../../../components/BlogPostsGrid.astro';
+import { getAllPosts } from '../../../lib/blog.server';
+import type { BlogPost, BlogMeta } from '../../../lib/blog.server';
+
+export async function getStaticPaths() {
+  try {
+    const { meta } = await getAllPosts(1);
+    return Array.from({ length: Math.max(0, meta.last_page - 1) }, (_, i) => ({
+      params: { page: String(i + 2) },
+    }));
+  } catch {
+    return [];
+  }
+}
+
+const { page } = Astro.params;
+const currentPage = Number(page);
+
+let posts: BlogPost[] = [];
+let meta: BlogMeta | null = null;
+
+try {
+  const result = await getAllPosts(currentPage);
+  posts = result.posts;
+  meta = result.meta;
+} catch {
+  posts = [];
+}
+
+if (currentPage <= 1 || posts.length === 0) {
+  return Astro.redirect('/blog', 301);
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Blog Cuidaty',
+  description: 'Conteúdo sobre psicologia, gestão clínica e cuidado com quem cuida.',
+  url: `https://cuidaty.com/blog/page/${currentPage}/`,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    url: 'https://cuidaty.com',
+    logo: { '@type': 'ImageObject', url: 'https://cuidaty.com/logo.svg' },
+  },
+};
+---
+
+<Layout
+  title={`Blog Cuidaty | Página ${currentPage}`}
+  description="Artigos sobre psicologia, gestão de consultório, saúde mental e cuidado com profissionais da saúde. Conteúdo produzido pela equipe Cuidaty."
+  keywords="blog psicologia, gestão clínica, saúde mental, profissionais de saúde, consultório, cuidaty"
+>
+  <Fragment slot="head">
+    <link rel="prev" href={currentPage === 2 ? '/blog/' : `/blog/page/${currentPage - 1}/`} />
+    {meta && currentPage < meta.last_page && (
+      <link rel="next" href={`/blog/page/${currentPage + 1}/`} />
+    )}
+  </Fragment>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  <Header />
+
+  <main class="pt-24 pb-16 bg-white">
+    <BlogPostsGrid posts={posts} meta={meta} />
+  </main>
+
+  <Footer />
+</Layout>

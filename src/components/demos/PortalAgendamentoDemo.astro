@@ -30,7 +30,7 @@ const { maxWidth = 480, class: className = '' } = Astro.props;
       <section class="scene" data-scene="hero">
         <div class="hero">
           <span class="hlogo">E</span>
-          <h1>Espaço Viver</h1>
+          <p class="demo-h1">Espaço Viver</p>
           <p class="tag">Psicologia e saúde mental · atendimento presencial e online</p>
           <span class="cta" data-hero-cta>
             Agendar consulta agora
@@ -199,7 +199,7 @@ const { maxWidth = 480, class: className = '' } = Astro.props;
 
   .pad .hero { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 6px; padding: 8px 6px; }
   .pad .hero .hlogo { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; background: var(--pt-primary); color: var(--pt-primary-fg); margin-bottom: 6px; box-shadow: var(--shadow-sm); }
-  .pad .hero h1 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+  .pad .hero .demo-h1 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
   .pad .hero .tag { font-size: 12.5px; color: var(--pt-muted); max-width: 240px; line-height: 1.45; }
   .pad .hero .cta { margin-top: 12px; display: inline-flex; align-items: center; gap: 7px; background: var(--pt-primary); color: var(--pt-primary-fg); font-size: 13px; font-weight: 600; border-radius: 11px; padding: 12px 20px; box-shadow: var(--shadow-xs); transition: transform 0.15s ease, filter 0.15s ease; }
   .pad .hero .cta.pressed { transform: scale(0.96); filter: brightness(0.95); }

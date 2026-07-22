@@ -148,7 +148,7 @@ export const localPosts: BlogPostFull[] = [
       { name: 'Saúde Mental', slug: 'saude-mental' },
     ],
     seo: {
-      meta_title: null,
+      meta_title: 'Psicologia Organizacional vs. Clínica: diferenças, salários e mercado',
       meta_description:
         'Psicologia Organizacional vs. Clínica: diferenças de atuação, salários no Brasil, EUA e Portugal, e por que as duas áreas se tornaram complementares no combate ao burnout.',
       og_image_url: null,

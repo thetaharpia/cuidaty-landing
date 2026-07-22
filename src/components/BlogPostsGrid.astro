@@ -1,0 +1,38 @@
+---
+import BlogCard from './BlogCard.astro';
+import BlogPagination from './BlogPagination.astro';
+import type { BlogPost, BlogMeta } from '../lib/blog.server';
+
+interface Props {
+  posts: BlogPost[];
+  meta: BlogMeta | null;
+}
+
+const { posts, meta } = Astro.props;
+---
+
+<section class="container mx-auto px-4 md:px-6 py-16">
+  <div class="max-w-6xl mx-auto">
+    {
+      meta && (
+        <p class="text-sm text-gray-400 mb-10">
+          {meta.total} {meta.total === 1 ? 'artigo' : 'artigos'} publicados
+        </p>
+      )
+    }
+
+    {
+      posts.length > 0 ? (
+        <div class="stagger-cards grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => <BlogCard post={post} headingLevel="h2" />)}
+        </div>
+      ) : (
+        <div class="text-center py-20 text-gray-500">
+          <p class="text-lg">Nenhum artigo publicado ainda.</p>
+        </div>
+      )
+    }
+
+    {meta && <BlogPagination currentPage={meta.current_page} lastPage={meta.last_page} />}
+  </div>
+</section>
