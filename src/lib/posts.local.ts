@@ -7,6 +7,71 @@ import type { BlogPostFull } from './blog.server';
  */
 export const localPosts: BlogPostFull[] = [
   {
+    id: -3,
+    title: 'Antes de Terapeuta, Mulher: O Tabu do Assédio Cometido por Pacientes',
+    subtitle: 'O que fazer quando quem deveria ser cuidado cruza o limite',
+    slug: 'assedio-cometido-por-pacientes-tabu-psicologia',
+    excerpt:
+      'A ética clínica costuma discutir o poder do terapeuta e a vulnerabilidade do paciente. Mas existe um silêncio na profissão sobre o que acontece quando é o paciente quem cruza a linha, e a psicóloga se torna a vítima dentro da própria sala.',
+    cover_image_url: null,
+    published_at: '2026-07-22T00:00:00.000Z',
+    author: { name: 'Equipe Cuidaty' },
+    tags: [
+      { name: 'Ética Profissional', slug: 'etica-profissional' },
+      { name: 'Saúde Mental', slug: 'saude-mental' },
+      { name: 'Psicologia Clínica', slug: 'psicologia-clinica' },
+      { name: 'Assédio', slug: 'assedio' },
+    ],
+    seo: {
+      meta_title: 'Assédio cometido por pacientes: o tabu que a psicologia não discute',
+      meta_description:
+        'Assédio sexual cometido por pacientes contra psicólogas: por que a empatia profissional não pode custar a integridade da terapeuta, como identificar a escalada de desvios de limites e o que fazer diante de uma violação em sessão.',
+      og_image_url: null,
+      canonical_url: null,
+    },
+    content_html: `
+<p>A ética clínica tem um roteiro conhecido: o poder é do terapeuta, a vulnerabilidade é do paciente. Esse roteiro cobre a maior parte dos casos reais. Mas ele quebra quando a dinâmica se inverte, quando é o paciente quem cruza a linha e a psicóloga que se torna alvo dentro da própria sala de atendimento.</p>
+
+<p>Existe um silêncio perigoso em torno disso. Formamos psicólogas para acolher, para compreender contextos, para ressignificar dores alheias. Só que a empatia profissional não pode custar a integridade física e pessoal de quem está do outro lado do divã.</p>
+
+<h2>O peso da empatia e o conflito de papéis</h2>
+
+<p>Um relato que virou referência na literatura clínica é o da psicóloga estadunidense Ashley Herbst. Durante um atendimento, ela foi assediada sexualmente por um paciente ao fim da sessão. A reação dela, como a de muitas profissionais na mesma situação, foi um conflito interno imediato: será que denunciar prejudica o progresso clínico dele? O histórico de sofrimento do paciente justifica o que aconteceu?</p>
+
+<p>Esse é o ponto central do tabu do assédio reverso: a terapeuta tende a justificar clinicamente o abuso, só para não sair do papel de terapeuta. Foi a supervisora clínica de Herbst quem trouxe a clareza que faltava, relatada no <a href="https://www.societyforpsychotherapy.org/ethical-considerations-when-a-client-crosses-sexual-boundaries-my-experience-as-a-student-therapist/" target="_blank" rel="noopener noreferrer">artigo original publicado pela Society for the Advancement of Psychotherapy</a>: naquele momento, ela não era apenas uma terapeuta. Era uma mulher que tinha acabado de ser violada. A segurança dela vinha antes de qualquer contrato terapêutico.</p>
+
+<h2>A escalada do abuso: do desvio à violação</h2>
+
+<p>Abusos raramente começam de forma abrupta. Eles seguem uma escalada bem documentada na literatura sobre ética clínica:</p>
+
+<p><strong>Desvios de limites (boundary crossings):</strong> começam pequenos. Um pedido para prolongar a sessão sem motivo clínico. Perguntas insistentes sobre a vida pessoal da terapeuta. Toques que o paciente chama de casuais.</p>
+
+<p><strong>Violações de limites (boundary violations):</strong> se os desvios não são freados com firmeza, evoluem para comentários sexuais explícitos, assédio e agressão, quebrando de vez o setting terapêutico.</p>
+
+<p>Um <a href="https://www.tandfonline.com/doi/full/10.1080/23311908.2016.1194176" target="_blank" rel="noopener noreferrer">estudo publicado na Cogent Psychology</a> mostra que cerca de 75% dos terapeutas relatam já ter percebido algum nível de atração vinda de um cliente. Sentir atração é humano. Agir sobre ela de forma abusiva não é.</p>
+
+<h2>O que fazer quando o limite é cruzado</h2>
+
+<p>Não existe um código de ética que regule o comportamento do paciente. A responsabilidade de impor o limite, e de se proteger, é da profissional. Diante de uma violação, algumas diretrizes ajudam a atravessar o momento:</p>
+
+<p>Interrompa na hora. Ao primeiro sinal de violação, o limite precisa ser verbalizado de forma assertiva e inegociável. Não tente analisar o assédio enquanto ele está acontecendo.</p>
+
+<p>Busque supervisão imediatamente. O choque costuma vir acompanhado de vergonha e da sensação de incompetência profissional. Levar o caso à supervisão clínica e à rede de apoio quebra o isolamento antes que ele se instale.</p>
+
+<p>Você tem o direito de denunciar. As diretrizes de sigilo do <a href="https://site.cfp.org.br/legislacao/codigo-de-etica/" target="_blank" rel="noopener noreferrer">Conselho Federal de Psicologia</a> exigem não causar dano ao paciente, mas isso não anula o direito da profissional à justiça e ao autocuidado. Prestar queixa é uma opção legítima, e em muitos casos, necessária.</p>
+
+<p>Encerre o vínculo terapêutico. Continuar o atendimento depois de uma violação compromete a objetividade e a saúde mental da profissional. Encerrar o caso, com encaminhamento se for seguro fazê-lo, costuma ser a única via ética disponível.</p>
+
+<h2>Registro e gestão como proteção real</h2>
+
+<p>A organização da clínica funciona como escudo nesses casos. Manter registros rigorosos de cada sessão não é burocracia. É segurança jurídica e ética.</p>
+
+<p>Um sistema de gestão e prontuário eletrônico bem estruturado permite documentar os primeiros sinais de desvio de limites: falas literais do paciente, comportamentos inadequados, e as intervenções de limite que a profissional já fez antes da situação escalar. Se um dia isso vira denúncia formal ou justifica o rompimento forçado do vínculo, um prontuário bem mantido é prova da conduta correta da terapeuta.</p>
+
+<p>O consultório é espaço de trabalho, não escudo contra a realidade. Antes de terapeuta, você é uma mulher, e proteger a sua prática começa por reconhecer que a sua segurança não é negociável.</p>
+`,
+  },
+  {
     id: -2,
     title: 'RS em Alerta: A Ecoansiedade Que Pede um Psicólogo',
     subtitle: 'Entenda o papel do psicólogo nas mudanças climáticas no Brasil',
