@@ -7,6 +7,12 @@ RUN apk add --no-cache curl wget && npm install -g pnpm
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
 
+# GA Measurement ID (público). Injetado via build-arg pelo Coolify.
+# Precisa estar disponível em BUILD TIME: o Astro inlina PUBLIC_GA_ID no build.
+# No Coolify, marque a env PUBLIC_GA_ID como "Build Variable".
+ARG PUBLIC_GA_ID
+ENV PUBLIC_GA_ID=$PUBLIC_GA_ID
+
 COPY . .
 RUN pnpm run build
 
