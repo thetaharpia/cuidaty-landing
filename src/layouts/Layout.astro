@@ -509,6 +509,20 @@ const structuredData = [
     <MobileCTABar />
     <CookieConsent />
 
+    <script is:inline>
+      // Tracking de CTAs: delega o clique de qualquer link com data-ga-event
+      // para o GA4 (window.gtag já é exposto pelo CookieConsent, e o Consent
+      // Mode v2 cuida de não enviar nada se o usuário recusar cookies).
+      document.addEventListener('click', function (e) {
+        var el = e.target && e.target.closest ? e.target.closest('[data-ga-event]') : null;
+        if (!el || typeof window.gtag !== 'function') return;
+        window.gtag('event', el.getAttribute('data-ga-event'), {
+          cta_location: el.getAttribute('data-ga-location') || undefined,
+          link_url: el.getAttribute('href') || undefined,
+        });
+      });
+    </script>
+
     <script>
       // Reveal on scroll: anima o conteúdo de cada seção ao entrar na viewport
       const targets = Array.from(
