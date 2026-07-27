@@ -3,7 +3,11 @@
  * Seção de planos (id="planos"). Três planos: Premium (gestão), Plus (gestão +
  * comunicação + IA) e Clínicas e Grupos (escala). Conteúdo do design do Figma.
  */
+const REGISTER_URL = 'https://app.cuidaty.com/register';
+
 interface Plan {
+  /** Identificador usado nos eventos do GA4 (cta_location / plan). */
+  slug: string;
   name: string;
   subtitle: string;
   tagline: string;
@@ -13,13 +17,14 @@ interface Plan {
   features: string[];
   exclusions?: string[];
   featuresNote?: string;
-  cta: { label: string; href: string };
+  cta: { label: string; href: string; event?: string };
   dark?: boolean;
   recommended?: boolean;
 }
 
 const plans: Plan[] = [
   {
+    slug: 'basico',
     name: 'Básico',
     subtitle: 'A base para organizar a rotina',
     tagline: 'Gestão completa do consultório para organizar toda a sua rotina.',
@@ -35,9 +40,10 @@ const plans: Plan[] = [
     ],
     exclusions: ['Sem comunicação por WhatsApp', 'Sem Cuty AI'],
     featuresNote: '+ 30 funcionalidades incluídas',
-    cta: { label: 'Começar agora', href: '#contato' },
+    cta: { label: 'Começar agora', href: REGISTER_URL },
   },
   {
+    slug: 'premium',
     name: 'Premium',
     subtitle: 'Comunicação e inteligência clínica',
     tagline: 'Tudo do Básico, agora com WhatsApp, Cuty AI e geração de documentos.',
@@ -51,9 +57,10 @@ const plans: Plan[] = [
       'Comunicação WhatsApp completa: central, automações e lembretes',
     ],
     featuresNote: '+ 40 funcionalidades incluídas',
-    cta: { label: 'Começar agora', href: '#contato' },
+    cta: { label: 'Começar agora', href: REGISTER_URL },
   },
   {
+    slug: 'plus',
     name: 'Plus',
     subtitle: 'Cada palavra da sessão organizada',
     tagline: 'Tudo do Premium, agora com transcrição e resumo automático das sessões.',
@@ -65,10 +72,11 @@ const plans: Plan[] = [
       'Resumo clínico automático a partir do áudio (SOAP e outros formatos)',
     ],
     featuresNote: '+ 45 funcionalidades incluídas',
-    cta: { label: 'Começar agora', href: '#contato' },
+    cta: { label: 'Começar agora', href: REGISTER_URL },
     recommended: true,
   },
   {
+    slug: 'clinicas',
     name: 'Clínicas e Grupos',
     subtitle: 'Escala, controle e inteligência de negócio',
     tagline: 'Para clínicas, redes e grupos que precisam crescer com gestão.',
@@ -84,7 +92,11 @@ const plans: Plan[] = [
       'Limites de usuários e módulos customizáveis',
     ],
     featuresNote: 'Tudo da Cuidaty, sem limites',
-    cta: { label: 'Solicitar proposta', href: 'https://calendly.com/pedro-thetaharpia/30min' },
+    cta: {
+      label: 'Solicitar proposta',
+      href: 'https://calendly.com/pedro-thetaharpia/30min',
+      event: 'contact_click',
+    },
     dark: true,
   },
 ];
@@ -265,7 +277,10 @@ const plans: Plan[] = [
               <a
                 href={plan.cta.href}
                 target={plan.cta.href.startsWith('http') ? '_blank' : undefined}
-                rel={plan.cta.href.startsWith('http') ? 'noopener' : undefined}
+                rel={plan.cta.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                data-ga-event={plan.cta.event ?? 'generate_lead'}
+                data-ga-location={`planos_${plan.slug}`}
+                data-ga-plan={plan.slug}
                 class:list={[
                   'flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-all',
                   plan.dark

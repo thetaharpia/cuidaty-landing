@@ -563,6 +563,7 @@ const structuredData = [
         window.gtag('event', el.getAttribute('data-ga-event'), {
           cta_location: el.getAttribute('data-ga-location') || undefined,
           link_url: el.getAttribute('href') || undefined,
+          plan: el.getAttribute('data-ga-plan') || undefined,
         });
       });
     </script>
