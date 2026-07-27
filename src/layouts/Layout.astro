@@ -44,6 +44,22 @@ const pageLabel =
         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
         .join(' ');
 
+const helpCenterUrl = 'https://ajuda.cuidaty.com';
+
+// Categorias da Central de Ajuda (usadas no JSON-LD e no link rel="help")
+const helpCenterSections = [
+  { name: 'Agenda online', path: '/agenda' },
+  { name: 'Prontuário eletrônico', path: '/prontuario' },
+  { name: 'Pacientes', path: '/pacientes' },
+  { name: 'WhatsApp e comunicação', path: '/comunicacao' },
+  { name: 'Transcrição de consultas', path: '/transcricao' },
+  { name: 'Cuty AI', path: '/cuty-ia' },
+  { name: 'Financeiro', path: '/financeiro' },
+  { name: 'Portal de agendamento', path: '/portal' },
+  { name: 'Equipe e permissões', path: '/permissoes' },
+  { name: 'Conta e assinatura', path: '/conta' },
+];
+
 // Organization structured data
 const organizationData = {
   '@context': 'https://schema.org',
@@ -158,8 +174,7 @@ const softwareData = {
   screenshot: fullImageURL,
   softwareVersion: '2.0',
   softwareHelp: {
-    '@type': 'CreativeWork',
-    url: `${siteUrl}#funcionalidades`,
+    '@id': `${helpCenterUrl}#website`,
   },
   provider: {
     '@id': `${siteUrl}#organization`,
@@ -185,6 +200,31 @@ const websiteData = {
     '@id': `${siteUrl}#organization`,
   },
   inLanguage: 'pt-BR',
+};
+
+// Central de Ajuda (subdomínio) — declara a relação com o site principal
+const helpCenterData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${helpCenterUrl}#website`,
+  name: 'Central de Ajuda Cuidaty',
+  alternateName: 'Ajuda Cuidaty',
+  url: helpCenterUrl,
+  description:
+    'Tutoriais e passo a passo da Cuidaty: agenda online, prontuário eletrônico, WhatsApp, transcrição de consultas, financeiro e portal de agendamento.',
+  inLanguage: 'pt-BR',
+  publisher: {
+    '@id': `${siteUrl}#organization`,
+  },
+  isPartOf: {
+    '@id': `${siteUrl}#website`,
+  },
+  hasPart: helpCenterSections.map((section) => ({
+    '@type': 'WebPage',
+    name: `${section.name} — Central de Ajuda Cuidaty`,
+    url: `${helpCenterUrl}${section.path}`,
+    inLanguage: 'pt-BR',
+  })),
 };
 
 // WebPage structured data
@@ -248,7 +288,7 @@ const structuredData = [
   websiteData,
   webPageData,
   breadcrumbData,
-  ...(isHomePage ? [softwareData, faqData] : []),
+  ...(isHomePage ? [softwareData, faqData, helpCenterData] : []),
 ];
 ---
 
@@ -272,6 +312,10 @@ const structuredData = [
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap"
     />
+
+    <!-- Central de Ajuda (subdomínio) -->
+    <link rel="help" href={helpCenterUrl} title="Central de Ajuda Cuidaty" />
+    <link rel="dns-prefetch" href={helpCenterUrl} />
 
     <!-- OpenSearch -->
     <link

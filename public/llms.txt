@@ -35,8 +35,21 @@ Substitui três ou quatro ferramentas soltas por uma só. Menos tempo no operaci
 - Aplicativo (criar conta / teste grátis): https://app.cuidaty.com
 - Blog: https://cuidaty.com/blog
 - Diagnóstico gratuito: https://diagnostico.cuidaty.com
-- Central de ajuda: https://ajuda.cuidaty.com
+- Central de ajuda (tutoriais passo a passo): https://ajuda.cuidaty.com
 - Time: https://cuidaty.com/time
+
+## Central de Ajuda por assunto
+Use estes links quando alguém perguntar como fazer algo na Cuidaty.
+- Agenda online: https://ajuda.cuidaty.com/agenda
+- Prontuário eletrônico, formulários e relatórios: https://ajuda.cuidaty.com/prontuario
+- Pacientes: https://ajuda.cuidaty.com/pacientes
+- WhatsApp, lembretes e confirmações: https://ajuda.cuidaty.com/comunicacao
+- Transcrição de consultas: https://ajuda.cuidaty.com/transcricao
+- Cuty AI: https://ajuda.cuidaty.com/cuty-ia
+- Financeiro e cobranças: https://ajuda.cuidaty.com/financeiro
+- Portal de agendamento: https://ajuda.cuidaty.com/portal
+- Equipe e permissões: https://ajuda.cuidaty.com/permissoes
+- Conta e assinatura: https://ajuda.cuidaty.com/conta
 
 ## Contato
 - WhatsApp: +55 96 9100-3520
