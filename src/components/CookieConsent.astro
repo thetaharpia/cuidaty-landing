@@ -27,7 +27,9 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
 
         // Re-apply a previously granted choice on subsequent visits.
         try {
-          if (localStorage.getItem('cuidaty_cookie_consent') === 'granted') {
+          var consentCookie = document.cookie.match(/(?:^|;\s*)cuidaty_cookie_consent=(granted|denied)/);
+          var priorChoice = consentCookie ? consentCookie[1] : localStorage.getItem('cuidaty_cookie_consent');
+          if (priorChoice === 'granted') {
             gtag('consent', 'update', { analytics_storage: 'granted' });
           }
         } catch (e) {}
@@ -79,37 +81,43 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           var banner = document.getElementById('cookie-consent');
           if (!banner) return;
 
-          var stored = null;
-          try {
-            stored = localStorage.getItem(KEY);
-          } catch (e) {}
+          function readConsent() {
+            var match = document.cookie.match(/(?:^|;\s*)cuidaty_cookie_consent=(granted|denied)/);
+            if (match) return match[1];
+            try {
+              return localStorage.getItem(KEY);
+            } catch (e) {
+              return null;
+            }
+          }
 
-          if (!stored) banner.classList.remove('hidden');
+          function writeConsent(value) {
+            try {
+              localStorage.setItem(KEY, value);
+            } catch (e) {}
+            var host = window.location.hostname;
+            var domain = host === 'cuidaty.com' || host.endsWith('.cuidaty.com') ? '; domain=.cuidaty.com' : '';
+            var secure = window.location.protocol === 'https:' ? '; Secure' : '';
+            document.cookie = KEY + '=' + value + '; path=/; max-age=31536000; SameSite=Lax' + domain + secure;
+          }
+
+          if (!readConsent()) banner.classList.remove('hidden');
 
           function close() {
             banner.classList.add('hidden');
           }
 
+          function decide(value) {
+            writeConsent(value);
+            if (window.gtag) window.gtag('consent', 'update', { analytics_storage: value });
+            close();
+          }
+
           var accept = document.getElementById('cookie-accept');
           var decline = document.getElementById('cookie-decline');
 
-          if (accept)
-            accept.addEventListener('click', function () {
-              try {
-                localStorage.setItem(KEY, 'granted');
-              } catch (e) {}
-              if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'granted' });
-              close();
-            });
-
-          if (decline)
-            decline.addEventListener('click', function () {
-              try {
-                localStorage.setItem(KEY, 'denied');
-              } catch (e) {}
-              if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
-              close();
-            });
+          if (accept) accept.addEventListener('click', function () { decide('granted'); });
+          if (decline) decline.addEventListener('click', function () { decide('denied'); });
         })();
       </script>
     </>
