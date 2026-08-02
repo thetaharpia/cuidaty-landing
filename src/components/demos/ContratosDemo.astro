@@ -1,0 +1,958 @@
+---
+/**
+ * Demo animada de Contratos — gestão automatizada de contratos.
+ * História em loop: modelo preenchido com dados do paciente → envio no
+ * WhatsApp → assinatura e arquivamento automático.
+ * CSS escopado sob .ctd e script multi-instância (.ctd).
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['ctd', className]}>
+  <div class="stage">
+    <div class="caption">
+      <div class="kicker">Contratos · Gestão automatizada</div>
+      <div class="headline" data-headline>Escolha o modelo. O resto se preenche.</div>
+    </div>
+
+    <div class="surface">
+      <div class="appbar">
+        <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="wtitle">Cuidaty · Contratos</span>
+      </div>
+
+      <div class="screen">
+        <!-- Cena 1 · modelo + preenchimento automático -->
+        <div class="scene compose show" data-sc-compose>
+          <div class="tpl-label">Novo contrato · escolha o modelo</div>
+          <div class="tpl-chips">
+            <span class="chip sel">Psicoterapia individual</span>
+            <span class="chip">Pacote mensal</span>
+            <span class="chip">Teleconsulta</span>
+          </div>
+
+          <div class="doc">
+            <div class="doc-head">
+              <svg class="ic s14" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <path d="M14 2v6h6"></path>
+              </svg>
+              Contrato de prestação de serviços
+            </div>
+            <div class="doc-rows">
+              <div class="doc-row" data-fill-row>
+                <span class="dl">Paciente</span>
+                <span class="dv">Marina Souza</span>
+                <svg class="ic s14 ok" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+              </div>
+              <div class="doc-row" data-fill-row>
+                <span class="dl">CPF</span>
+                <span class="dv">•••.418.290-••</span>
+                <svg class="ic s14 ok" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+              </div>
+              <div class="doc-row" data-fill-row>
+                <span class="dl">Valor da sessão</span>
+                <span class="dv">R$ 155,00</span>
+                <svg class="ic s14 ok" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+              </div>
+              <div class="doc-row" data-fill-row>
+                <span class="dl">Recorrência</span>
+                <span class="dv">Semanal · quintas, 14h</span>
+                <svg class="ic s14 ok" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+              </div>
+              <div class="doc-row" data-fill-row>
+                <span class="dl">Vigência</span>
+                <span class="dv">6 meses</span>
+                <svg class="ic s14 ok" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+              </div>
+            </div>
+            <div class="doc-note" data-fill-note>Preenchido com os dados do prontuário</div>
+          </div>
+
+          <span class="sbtn" data-send-btn>
+            <svg class="ic s14" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"></path><path
+                d="M22 2 11 13"></path></svg>
+            Enviar para assinatura
+          </span>
+        </div>
+
+        <!-- Cena 2 · envio no WhatsApp -->
+        <div class="scene send" data-sc-send>
+          <div class="wa">
+            <div class="wa-head">
+              <span class="wa-avatar" aria-hidden="true">M</span>
+              <span class="wa-who">
+                <b>Marina Souza</b>
+                <i>online</i>
+              </span>
+            </div>
+            <div class="wa-body">
+              <div class="wa-bubble" data-wa-bubble>
+                <div class="wa-doc">
+                  <svg class="ic" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <path d="M14 2v6h6"></path>
+                  </svg>
+                  <span class="wa-doc-txt">
+                    <b>Contrato_Psicoterapia.pdf</b>
+                    <i>2 páginas · PDF</i>
+                  </span>
+                </div>
+                <p class="wa-msg">
+                  Olá, Marina! Seu contrato com a clínica está pronto. É só tocar para ler e
+                  assinar. 😊
+                </p>
+                <span class="wa-link">Ler e assinar</span>
+                <span class="wa-meta">
+                  14:31
+                  <svg class="ticks" data-wa-ticks viewBox="0 0 18 12" aria-hidden="true">
+                    <path d="m1.5 6.5 3 3 5-6.5"></path>
+                    <path d="m7.5 6.5 3 3 5-6.5"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="track">
+            <div class="tstep" data-t-step>
+              <span class="tdot"></span>
+              <span class="tl">Enviado</span>
+              <span class="tt">14:31</span>
+            </div>
+            <div class="tstep" data-t-step>
+              <span class="tdot"></span>
+              <span class="tl">Visualizado</span>
+              <span class="tt">14:32</span>
+            </div>
+            <div class="tstep" data-t-step>
+              <span class="tdot"></span>
+              <span class="tl">Assinado</span>
+              <span class="tt">14:34</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cena 3 · assinado + gestão -->
+        <div class="scene manage" data-sc-manage>
+          <div class="sign-card">
+            <div class="sign-top">
+              <span class="sign-who">
+                <b>Marina Souza</b>
+                <i>Contrato de psicoterapia · 6 meses</i>
+              </span>
+              <span class="sign-badge">
+                <svg class="ic s14" viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"></path></svg>
+                Assinado
+              </span>
+            </div>
+            <svg class="signature" viewBox="0 0 220 54" aria-hidden="true">
+              <path
+                d="M12 38 C 26 12, 38 10, 44 26 C 49 39, 58 40, 66 26 C 73 14, 82 16, 86 30 C 90 42, 99 40, 110 30 C 122 19, 132 34, 148 30 C 163 26, 172 30, 206 24"
+              ></path>
+            </svg>
+            <div class="sign-note">Arquivado no prontuário da paciente</div>
+          </div>
+
+          <div class="mg-list">
+            <div class="mg-head">Seus contratos</div>
+            <div class="mg-row" style="--d: 200ms">
+              <span class="ml">
+                <b>João Lima</b>
+                <i>Pacote mensal</i>
+              </span>
+              <span class="pill ok">Assinado</span>
+            </div>
+            <div class="mg-row" style="--d: 340ms">
+              <span class="ml">
+                <b>Ana Castro</b>
+                <i>Teleconsulta</i>
+              </span>
+              <span class="pill wait">Aguardando</span>
+            </div>
+            <div class="mg-row" style="--d: 480ms">
+              <span class="ml">
+                <b>Pedro Alves</b>
+                <i>Psicoterapia individual</i>
+              </span>
+              <span class="pill renew">Renova em 15 dias</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">Demonstração ilustrativa · Cuidaty</div>
+  </div>
+</div>
+
+<style is:global>
+  .ctd {
+    --bg: #f8fafc;
+    --fg: #0c202f;
+    --card: #fff;
+    --primary: #356588;
+    --secondary: #5ac3b0;
+    --secondary-deep: #2f8b7a;
+    --mf: #64748b;
+    --border: #e2e8f0;
+    --r-sm: 0.25rem;
+    --r-md: 0.5rem;
+    --r-xl: 1rem;
+    --sh-xs: 0 1px 2px rgba(12, 32, 47, 0.05);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    color: var(--fg);
+    display: flex;
+    justify-content: center;
+  }
+  .ctd * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  .ctd .stage {
+    width: 100%;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .ctd .caption {
+    text-align: center;
+    min-height: 46px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+  }
+  .ctd .caption .kicker {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mf);
+  }
+  .ctd .caption .headline {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--fg);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+  .ctd .caption .headline.swap {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  .ctd .surface {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-xl);
+    box-shadow:
+      0 1px 3px rgba(12, 32, 47, 0.06),
+      0 30px 70px -30px rgba(12, 32, 47, 0.25);
+    overflow: hidden;
+    height: 520px;
+  }
+  .ctd .appbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .ctd .appbar .wdots {
+    display: inline-flex;
+    gap: 6px;
+  }
+  .ctd .appbar .wdots i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(12, 32, 47, 0.15);
+  }
+  .ctd .appbar .wtitle {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mf);
+    letter-spacing: -0.01em;
+  }
+  .ctd .screen {
+    position: relative;
+    height: calc(100% - 38px);
+  }
+  .ctd svg.ic {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+  }
+  .ctd svg.ic.s14 {
+    width: 14px;
+    height: 14px;
+  }
+
+  .ctd .scene {
+    position: absolute;
+    inset: 0;
+    padding: 22px 24px;
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s var(--ease);
+  }
+  .ctd .scene.show {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ── Cena 1: modelo + preenchimento ── */
+  .ctd .compose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .ctd .tpl-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mf);
+  }
+  .ctd .tpl-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .ctd .chip {
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--mf);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px 11px;
+    background: var(--card);
+  }
+  .ctd .chip.sel {
+    color: var(--primary);
+    border-color: rgba(53, 101, 136, 0.4);
+    background: rgba(53, 101, 136, 0.06);
+  }
+  .ctd .doc {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--sh-xs);
+    padding: 16px 18px 12px;
+  }
+  .ctd .doc-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12.5px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ctd .doc-head .ic {
+    color: var(--primary);
+  }
+  .ctd .doc-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(7px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s var(--ease);
+  }
+  .ctd .doc-row.show {
+    opacity: 1;
+    transform: none;
+  }
+  .ctd .doc-row .dl {
+    flex: 1;
+    font-size: 12.5px;
+    color: var(--mf);
+  }
+  .ctd .doc-row .dv {
+    font-size: 12.5px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transform: translateX(6px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s var(--ease);
+  }
+  .ctd .doc-row .ok {
+    color: var(--secondary-deep);
+    opacity: 0;
+    transform: scale(0.5);
+    transition:
+      opacity 0.25s ease,
+      transform 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
+  }
+  .ctd .doc-row.done .dv,
+  .ctd .doc-row.done .ok {
+    opacity: 1;
+    transform: none;
+  }
+  .ctd .doc-note {
+    padding-top: 9px;
+    font-size: 10.5px;
+    color: var(--mf);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .ctd .doc-note.show {
+    opacity: 1;
+  }
+  .ctd .sbtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 16px;
+    border-radius: var(--r-sm);
+    background: var(--primary);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: var(--sh-xs);
+    transition:
+      transform 0.15s ease,
+      filter 0.15s ease;
+  }
+  .ctd .sbtn.pressed {
+    transform: scale(0.96);
+    filter: brightness(0.94);
+  }
+
+  /* ── Cena 2: WhatsApp ── */
+  .ctd .send {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 22px;
+  }
+  .ctd .wa {
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: #e9e2d9;
+    box-shadow: var(--sh-xs);
+  }
+  .ctd .wa-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #10493f;
+    color: #fff;
+  }
+  .ctd .wa-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .ctd .wa-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+  .ctd .wa-who b {
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .ctd .wa-who i {
+    font-style: normal;
+    font-size: 10.5px;
+    opacity: 0.75;
+  }
+  .ctd .wa-body {
+    padding: 16px 14px 18px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .ctd .wa-bubble {
+    max-width: 88%;
+    background: #d7f2c8;
+    border-radius: 10px 2px 10px 10px;
+    padding: 8px 10px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    box-shadow: 0 1px 1px rgba(12, 32, 47, 0.1);
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+    transition:
+      opacity 0.4s ease,
+      transform 0.45s var(--ease);
+  }
+  .ctd .wa-bubble.show {
+    opacity: 1;
+    transform: none;
+  }
+  .ctd .wa-doc {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 7px;
+    padding: 8px 10px;
+  }
+  .ctd .wa-doc .ic {
+    color: #b3423a;
+  }
+  .ctd .wa-doc-txt {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .ctd .wa-doc-txt b {
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+  .ctd .wa-doc-txt i {
+    font-style: normal;
+    font-size: 10px;
+    color: var(--mf);
+  }
+  .ctd .wa-msg {
+    font-size: 12px;
+    line-height: 1.45;
+    color: #1b2b22;
+  }
+  .ctd .wa-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0f6c5c;
+    border-top: 1px solid rgba(12, 32, 47, 0.1);
+    padding-top: 6px;
+    text-align: center;
+  }
+  .ctd .wa-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    font-size: 9.5px;
+    color: rgba(27, 43, 34, 0.55);
+  }
+  .ctd .ticks {
+    width: 15px;
+    height: 10px;
+    fill: none;
+    stroke: rgba(27, 43, 34, 0.4);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease;
+  }
+  .ctd .ticks.read {
+    stroke: #34a4dc;
+  }
+
+  .ctd .track {
+    display: flex;
+    align-items: flex-start;
+  }
+  .ctd .tstep {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+  }
+  .ctd .tstep::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+  }
+  .ctd .tstep:first-child::before {
+    display: none;
+  }
+  .ctd .tdot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--border);
+    position: relative;
+    z-index: 1;
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease;
+  }
+  .ctd .tstep.done .tdot {
+    background: var(--secondary);
+    border-color: var(--secondary);
+  }
+  .ctd .tstep.done::before {
+    background: var(--secondary);
+  }
+  .ctd .tl {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mf);
+    transition: color 0.3s ease;
+  }
+  .ctd .tstep.done .tl {
+    color: var(--fg);
+  }
+  .ctd .tt {
+    font-size: 10px;
+    color: var(--mf);
+    font-variant-numeric: tabular-nums;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .ctd .tstep.done .tt {
+    opacity: 1;
+  }
+
+  /* ── Cena 3: assinatura + gestão ── */
+  .ctd .manage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+  }
+  .ctd .sign-card {
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--sh-xs);
+    padding: 14px 16px 12px;
+  }
+  .ctd .sign-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .ctd .sign-who {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+  .ctd .sign-who b {
+    font-size: 13px;
+    font-weight: 650;
+  }
+  .ctd .sign-who i {
+    font-style: normal;
+    font-size: 11px;
+    color: var(--mf);
+  }
+  .ctd .sign-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--secondary-deep);
+    background: rgba(90, 195, 176, 0.12);
+    border: 1px solid rgba(90, 195, 176, 0.3);
+    border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: scale(0.85);
+    transition:
+      opacity 0.3s ease 1.15s,
+      transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1) 1.15s;
+  }
+  .ctd .manage.show .sign-badge {
+    opacity: 1;
+    transform: none;
+  }
+  .ctd .signature {
+    width: min(220px, 70%);
+    height: auto;
+    display: block;
+    margin: 8px auto 2px;
+  }
+  .ctd .signature path {
+    fill: none;
+    stroke: var(--fg);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 460;
+    stroke-dashoffset: 460;
+  }
+  .ctd .manage.show .signature path {
+    animation: ctd-sign 1.1s var(--ease) 0.25s forwards;
+  }
+  .ctd .sign-note {
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--mf);
+    border-top: 1px dashed var(--border);
+    padding-top: 8px;
+    margin-top: 6px;
+    opacity: 0;
+    transition: opacity 0.4s ease 1.4s;
+  }
+  .ctd .manage.show .sign-note {
+    opacity: 1;
+  }
+  .ctd .mg-list {
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--card);
+    box-shadow: var(--sh-xs);
+    padding: 4px 16px;
+  }
+  .ctd .mg-head {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mf);
+    padding: 10px 0 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ctd .mg-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(9px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.5s var(--ease);
+  }
+  .ctd .mg-row:last-child {
+    border-bottom: 0;
+  }
+  .ctd .manage.show .mg-row {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(var(--d, 0ms) + 1200ms);
+  }
+  .ctd .ml {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    min-width: 0;
+  }
+  .ctd .ml b {
+    font-size: 12.5px;
+    font-weight: 600;
+  }
+  .ctd .ml i {
+    font-style: normal;
+    font-size: 10.5px;
+    color: var(--mf);
+  }
+  .ctd .pill {
+    font-size: 10.5px;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 3px 9px;
+    white-space: nowrap;
+  }
+  .ctd .pill.ok {
+    color: var(--secondary-deep);
+    background: rgba(90, 195, 176, 0.12);
+    border: 1px solid rgba(90, 195, 176, 0.3);
+  }
+  .ctd .pill.wait {
+    color: var(--primary);
+    background: rgba(53, 101, 136, 0.07);
+    border: 1px solid rgba(53, 101, 136, 0.25);
+  }
+  .ctd .pill.renew {
+    color: #8a6116;
+    background: rgba(240, 173, 78, 0.12);
+    border: 1px solid rgba(240, 173, 78, 0.35);
+  }
+  .ctd .foot {
+    text-align: center;
+    font-size: 11px;
+    color: var(--mf);
+  }
+
+  @keyframes ctd-sign {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ctd * {
+      transition-duration: 0.01ms !important;
+      transition-delay: 0ms !important;
+      animation: none !important;
+    }
+    .ctd .signature path {
+      stroke-dashoffset: 0;
+    }
+  }
+</style>
+
+<script>
+  function initContratosDemo(root: HTMLElement) {
+    const q = (s: string) => root.querySelector(s) as HTMLElement;
+    const qa = (s: string) => [...root.querySelectorAll(s)] as HTMLElement[];
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const headline = q('[data-headline]');
+    const scCompose = q('[data-sc-compose]');
+    const scSend = q('[data-sc-send]');
+    const scManage = q('[data-sc-manage]');
+    const fillRows = qa('[data-fill-row]');
+    const fillNote = q('[data-fill-note]');
+    const bubble = q('[data-wa-bubble]');
+    const ticks = q('[data-wa-ticks]');
+    const tSteps = qa('[data-t-step]');
+
+    async function setHeadline(t: string) {
+      headline.classList.add('swap');
+      await sleep(330);
+      headline.textContent = t;
+      headline.classList.remove('swap');
+    }
+
+    function showScene(scene: HTMLElement) {
+      [scCompose, scSend, scManage].forEach((s) => s.classList.toggle('show', s === scene));
+    }
+
+    function showFinalState() {
+      fillRows.forEach((r) => r.classList.add('show', 'done'));
+      fillNote.classList.add('show');
+      bubble.classList.add('show');
+      ticks.classList.add('read');
+      tSteps.forEach((s) => s.classList.add('done'));
+      headline.textContent = 'Assinado e arquivado no prontuário';
+      showScene(scManage);
+    }
+
+    if (reduced) {
+      showFinalState();
+      return;
+    }
+
+    async function runOnce() {
+      // Cena 1 · modelo + preenchimento
+      fillRows.forEach((r) => r.classList.remove('show', 'done'));
+      fillNote.classList.remove('show');
+      bubble.classList.remove('show');
+      ticks.classList.remove('read');
+      tSteps.forEach((s) => s.classList.remove('done'));
+      showScene(scCompose);
+      await sleep(700);
+      for (const row of fillRows) {
+        row.classList.add('show');
+        await sleep(260);
+        row.classList.add('done');
+        await sleep(110);
+      }
+      fillNote.classList.add('show');
+      await sleep(800);
+      const btn = q('[data-send-btn]');
+      btn.classList.add('pressed');
+      await sleep(170);
+      btn.classList.remove('pressed');
+      await sleep(280);
+
+      // Cena 2 · envio no WhatsApp
+      await setHeadline('O contrato chega no WhatsApp da paciente');
+      showScene(scSend);
+      await sleep(500);
+      bubble.classList.add('show');
+      await sleep(500);
+      tSteps[0].classList.add('done');
+      await sleep(1000);
+      ticks.classList.add('read');
+      tSteps[1].classList.add('done');
+      await sleep(1400);
+      tSteps[2].classList.add('done');
+      await sleep(900);
+
+      // Cena 3 · assinatura + gestão
+      await setHeadline('Assinado e arquivado no prontuário');
+      showScene(scManage);
+      await sleep(3200);
+      await setHeadline('Vencimentos e renovações sob controle');
+      await sleep(2800);
+
+      await setHeadline('Escolha o modelo. O resto se preenche.');
+    }
+
+    // Só roda quando o demo entra na viewport (economiza CPU fora da tela)
+    let running = false;
+    const start = () => {
+      if (running) return;
+      running = true;
+      (async () => {
+        while (true) {
+          await runOnce();
+          await sleep(300);
+        }
+      })();
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            start();
+            io.disconnect();
+          }
+        },
+        { rootMargin: '120px' }
+      );
+      io.observe(root);
+    } else {
+      start();
+    }
+  }
+
+  function bootContratosDemo() {
+    document.querySelectorAll<HTMLElement>('.ctd').forEach((root) => {
+      if (root.dataset.booted) return;
+      root.dataset.booted = '1';
+      initContratosDemo(root);
+    });
+  }
+  if (document.readyState !== 'loading') bootContratosDemo();
+  else document.addEventListener('DOMContentLoaded', bootContratosDemo);
+</script>
