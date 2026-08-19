@@ -1,5 +1,18 @@
 ---
 import { homeFaqs } from '../../lib/seo';
+
+const helpTopics = [
+  { label: 'Agenda online', href: 'https://ajuda.cuidaty.com/agenda' },
+  { label: 'Prontuário eletrônico', href: 'https://ajuda.cuidaty.com/prontuario' },
+  { label: 'WhatsApp e lembretes', href: 'https://ajuda.cuidaty.com/comunicacao' },
+  { label: 'Transcrição de consultas', href: 'https://ajuda.cuidaty.com/transcricao' },
+  { label: 'Cuty AI', href: 'https://ajuda.cuidaty.com/cuty-ia' },
+  { label: 'Financeiro', href: 'https://ajuda.cuidaty.com/financeiro' },
+  { label: 'Portal de agendamento', href: 'https://ajuda.cuidaty.com/portal' },
+  { label: 'Pacientes', href: 'https://ajuda.cuidaty.com/pacientes' },
+  { label: 'Equipe e permissões', href: 'https://ajuda.cuidaty.com/permissoes' },
+  { label: 'Conta e assinatura', href: 'https://ajuda.cuidaty.com/conta' },
+];
 ---
 
 <section id="faq" class="bg-white py-24 md:py-32">
@@ -19,6 +32,32 @@ import { homeFaqs } from '../../lib/seo';
           Respostas rápidas sobre agenda online, WhatsApp, prontuário eletrônico, financeiro,
           equipes e conformidade para a área da saúde.
         </p>
+        <p class="mt-6 text-base leading-relaxed text-foreground/70">
+          Precisa do passo a passo? A
+          <a
+            href="https://ajuda.cuidaty.com"
+            rel="noopener"
+            class="font-semibold text-cuidaty-primary underline underline-offset-4 hover:text-cuidaty-primary-hover"
+          >
+            Central de Ajuda da Cuidaty
+          </a>
+          reúne tutoriais de cada recurso da plataforma, com telas e exemplos.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2">
+          {
+            helpTopics.map((topic) => (
+              <li>
+                <a
+                  href={topic.href}
+                  rel="noopener"
+                  class="inline-flex rounded-full border border-border bg-white px-3.5 py-1.5 text-sm text-foreground/70 transition-colors hover:border-cuidaty-primary hover:text-cuidaty-dark"
+                >
+                  {topic.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
       </div>
 
       <!-- Lista (direita) -->

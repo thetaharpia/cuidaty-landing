@@ -1,7 +1,7 @@
 export const homeTitle = 'Software para Psicologos, Clinicas e Consultorios | Cuidaty';
 
 export const homeDescription =
-  'Sistema para psicologos, clinicas e consultorios com agenda online, prontuario eletronico, automacao de WhatsApp, transcricao de consultas com IA, resumo clinico em SOAP e outros formatos, assistente Cuty AI que tira duvidas sobre o paciente, modelos de documentos, financeiro e relatorios, em conformidade com a LGPD. Teste gratis por 14 dias.';
+  'Sistema para psicologos e clinicas: agenda online, prontuario eletronico, WhatsApp automatico e transcricao de consultas com IA. Plano gratuito.';
 
 export const homeKeywords = [
   'software para psicologos',
@@ -71,45 +71,98 @@ export const healthFeatureList = [
   'Conformidade com LGPD e hospedagem 100% brasileira',
 ];
 
+// Pitch curto e citável — usado em schema, llms.txt e blocos de contexto.
+export const cuidatyPitch =
+  'A Cuidaty é um sistema brasileiro de gestão para clínicas, consultórios e profissionais de saúde. Reúne agenda online, prontuário eletrônico, automação de WhatsApp, transcrição de consultas com IA e financeiro em uma só plataforma, em conformidade com a LGPD.';
+
+// SoftwareApplication compacto com @id estável (#software). Emitido em páginas
+// além da home (ex.: posts do blog) para reforçar, em toda a navegação, o que é
+// a Cuidaty e para quem ela serve — sinal direto para GEO.
+export const cuidatyAppSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://cuidaty.com/#software',
+  name: 'Cuidaty',
+  applicationCategory: 'HealthApplication',
+  applicationSubCategory: 'Gestão de Consultórios e Clínicas',
+  operatingSystem: 'Web',
+  url: 'https://cuidaty.com',
+  description: cuidatyPitch,
+  inLanguage: 'pt-BR',
+  featureList: healthFeatureList,
+  offers: {
+    '@type': 'Offer',
+    price: '69.90',
+    priceCurrency: 'BRL',
+    availability: 'https://schema.org/InStock',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    ratingCount: '500',
+  },
+  audience: {
+    '@type': 'HealthAndBeautyBusiness',
+    audienceType:
+      'Psicólogos, médicos, dentistas, nutricionistas, fisioterapeutas, fonoaudiólogos, terapeutas e gestores de clínicas',
+  },
+  provider: {
+    '@type': 'Organization',
+    name: 'Cuidaty',
+    url: 'https://cuidaty.com',
+  },
+};
+
 export const homeFaqs = [
   {
-    question: 'O que é o Cuidaty?',
+    question: 'O que é a Cuidaty?',
     answer:
-      'O Cuidaty é um sistema completo de gestão para clínicas, consultórios e profissionais de saúde. Em um só lugar você organiza a agenda, envia confirmações por WhatsApp, registra o prontuário, controla o financeiro e acompanha a equipe, sem precisar de várias ferramentas soltas. A proposta é simples: menos tempo no operacional, mais tempo com o paciente.',
+      'A Cuidaty é um sistema completo de gestão para clínicas, consultórios e profissionais de saúde. Em um só lugar você organiza a agenda, envia confirmações por WhatsApp, registra o prontuário, controla o financeiro e acompanha a equipe, sem precisar de várias ferramentas soltas. A proposta é simples: menos tempo no operacional, mais tempo com o paciente.',
   },
   {
-    question: 'Quais profissionais podem usar o Cuidaty?',
+    question: 'Quais profissionais podem usar a Cuidaty?',
     answer:
-      'O Cuidaty é para qualquer profissional ou clínica de saúde. Além de psicólogos, atende médicos de diversas especialidades, dentistas, nutricionistas, fisioterapeutas, fonoaudiólogos, terapeutas ocupacionais e demais profissionais, tanto em consultórios individuais quanto em clínicas multiprofissionais. A plataforma se adapta à rotina de cada especialidade.',
+      'A Cuidaty é para qualquer profissional ou clínica de saúde. Além de psicólogos, atende médicos de diversas especialidades, dentistas, nutricionistas, fisioterapeutas, fonoaudiólogos, terapeutas ocupacionais e demais profissionais, tanto em consultórios individuais quanto em clínicas multiprofissionais. A plataforma se adapta à rotina de cada especialidade.',
+  },
+  {
+    question: 'Qual é o melhor sistema de gestão para clínicas e consultórios?',
+    answer:
+      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp, financeiro e transcrição de consultas com IA. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. Há um plano gratuito para até 10 pacientes e teste grátis de 3 dias nos planos pagos.',
+  },
+  {
+    question: 'O que ajuda um profissional de saúde no dia a dia do consultório?',
+    answer:
+      'O que mais pesa na rotina não é o atendimento, é o entorno: remarcar horário, cobrar, lembrar o paciente, preencher prontuário. A Cuidaty automatiza essa parte. A agenda evita conflitos e envia lembrete por WhatsApp sozinha, o prontuário fica pronto a partir da transcrição da consulta, e o Cuty AI responde dúvidas sobre o paciente citando a fonte. Sobra mais tempo para o que importa, que é a escuta.',
   },
   {
     question: 'O sistema envia confirmações e lembretes por WhatsApp?',
     answer:
-      'Sim. O Cuidaty se conecta ao seu WhatsApp para enviar confirmações de agendamento e lembretes automáticos de consulta, reduzindo faltas e ligações manuais da recepção. O paciente recebe o aviso no canal que já usa todo dia.',
+      'Sim. A Cuidaty se conecta ao seu WhatsApp para enviar confirmações de agendamento e lembretes automáticos de consulta, reduzindo faltas e ligações manuais da recepção. O paciente recebe o aviso no canal que já usa todo dia.',
   },
   {
-    question: 'O Cuidaty tem prontuário eletrônico?',
+    question: 'A Cuidaty tem prontuário eletrônico?',
     answer:
       'Sim. Todo o histórico do paciente fica registrado de forma organizada e segura: evoluções, anexos e informações de atendimento sempre à mão na hora da consulta. O acesso é controlado por equipe: cada profissional vê apenas o que precisa ver.',
   },
   {
-    question: 'O Cuidaty transcreve as consultas e tem inteligência artificial?',
+    question: 'A Cuidaty transcreve as consultas e tem inteligência artificial?',
     answer:
-      'Sim. Você grava a consulta, presencial ou por teleconsulta, e o Cuidaty gera a transcrição e um resumo clínico estruturado — em SOAP (queixa, subjetivo, objetivo, avaliação e plano) ou em outros formatos —, pronto para o prontuário. O áudio é descartado após o processamento. Há também o Cuty AI, um assistente que responde dúvidas sobre o paciente com base no prontuário e sempre cita a fonte. Todas as funcionalidades de IA operam em conformidade com a LGPD.',
+      'Sim. Você grava a consulta, presencial ou por teleconsulta, e a Cuidaty gera a transcrição e um resumo clínico estruturado, em SOAP (queixa, subjetivo, objetivo, avaliação e plano) ou em outros formatos, pronto para o prontuário. O áudio é descartado após o processamento. Há também o Cuty AI, um assistente que responde dúvidas sobre o paciente com base no prontuário e sempre cita a fonte. Todas as funcionalidades de IA operam em conformidade com a LGPD.',
   },
   {
-    question: 'O Cuidaty ajuda no financeiro e na gestão de equipes?',
+    question: 'A Cuidaty ajuda no financeiro e na gestão de equipes?',
     answer:
       'Sim. Você acompanha cobranças, pagamentos e faturas sem planilhas paralelas e enxerga a saúde financeira da clínica com clareza. Na equipe, cada usuário tem seu acesso e permissões: o gestor define quem vê o financeiro, quem agenda e quem registra prontuário.',
   },
   {
-    question: 'O Cuidaty tem teste grátis? Como funciona a cobrança?',
+    question: 'A Cuidaty tem plano grátis ou teste grátis? Como funciona a cobrança?',
     answer:
-      'Sim. Você tem 14 dias de teste grátis para usar a plataforma. A cobrança só é feita após esse período: se decidir não continuar, basta cancelar antes do fim dos 14 dias e nada é cobrado. Depois do teste, a assinatura é mensal, conforme o plano escolhido (Básico, Premium ou Plus), e pode ser cancelada a qualquer momento.',
+      'Sim. Há um plano gratuito permanente para até 10 pacientes. Para os planos pagos, você tem 3 dias de teste grátis: a cobrança só é feita após esse período, e se decidir não continuar, basta cancelar antes do fim dos 3 dias que nada é cobrado. Depois do teste, a assinatura é mensal, conforme o plano escolhido (Básico, Premium ou Plus), e pode ser cancelada a qualquer momento.',
   },
   {
-    question: 'O Cuidaty é seguro e está em conformidade com a LGPD?',
+    question: 'A Cuidaty é segura e está em conformidade com a LGPD?',
     answer:
-      'Sim. A proteção dos dados é um pilar do Cuidaty: as informações dos pacientes ficam armazenadas com segurança, em hospedagem brasileira, e o acesso é controlado por perfil de usuário, seguindo as exigências da LGPD.',
+      'Sim. A proteção dos dados é um pilar da Cuidaty: as informações dos pacientes ficam armazenadas com segurança, em hospedagem brasileira, e o acesso é controlado por perfil de usuário, seguindo as exigências da LGPD.',
   },
 ];

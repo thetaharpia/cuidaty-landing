@@ -1,0 +1,35 @@
+---
+interface Props {
+  currentPage: number;
+  lastPage: number;
+}
+
+const { currentPage, lastPage } = Astro.props;
+const pageHref = (n: number) => (n <= 1 ? '/blog/' : `/blog/page/${n}/`);
+---
+
+{
+  lastPage > 1 && (
+    <nav aria-label="Paginação do blog" class="mt-12 flex items-center justify-center gap-2">
+      {currentPage > 1 && (
+        <a
+          href={pageHref(currentPage - 1)}
+          class="focus-ring rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-cuidaty-dark transition-colors hover:border-cuidaty-primary hover:text-cuidaty-primary"
+        >
+          Anterior
+        </a>
+      )}
+      <span class="px-3 text-sm text-gray-500">
+        Página {currentPage} de {lastPage}
+      </span>
+      {currentPage < lastPage && (
+        <a
+          href={pageHref(currentPage + 1)}
+          class="focus-ring rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-cuidaty-dark transition-colors hover:border-cuidaty-primary hover:text-cuidaty-primary"
+        >
+          Próxima
+        </a>
+      )}
+    </nav>
+  )
+}

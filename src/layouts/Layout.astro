@@ -12,6 +12,7 @@ interface Props {
   image?: string;
   noindex?: boolean;
   keywords?: string;
+  canonical?: string;
 }
 
 const {
@@ -20,13 +21,16 @@ const {
   image = '/screenshot.png',
   noindex = false,
   keywords = homeKeywords,
+  canonical,
 } = Astro.props;
 
 const googleSiteVerification =
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? 'CuQ7uBwOoGiZimHGFB_WF-rWulUEtnNMyjfq_Vs6VqQ';
 const bingSiteVerification = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const effectiveKeywords = keywords;
+
+const canonicalURL = canonical ? new URL(canonical) : new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
 const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
 const pathname = Astro.url.pathname;
@@ -39,6 +43,22 @@ const pageLabel =
         .split('-')
         .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
         .join(' ');
+
+const helpCenterUrl = 'https://ajuda.cuidaty.com';
+
+// Categorias da Central de Ajuda (usadas no JSON-LD e no link rel="help")
+const helpCenterSections = [
+  { name: 'Agenda online', path: '/agenda' },
+  { name: 'Prontuário eletrônico', path: '/prontuario' },
+  { name: 'Pacientes', path: '/pacientes' },
+  { name: 'WhatsApp e comunicação', path: '/comunicacao' },
+  { name: 'Transcrição de consultas', path: '/transcricao' },
+  { name: 'Cuty AI', path: '/cuty-ia' },
+  { name: 'Financeiro', path: '/financeiro' },
+  { name: 'Portal de agendamento', path: '/portal' },
+  { name: 'Equipe e permissões', path: '/permissoes' },
+  { name: 'Conta e assinatura', path: '/conta' },
+];
 
 // Organization structured data
 const organizationData = {
@@ -62,7 +82,7 @@ const organizationData = {
       '@type': 'ContactPoint',
       contactType: 'sales',
       email: 'contato@thetaharpia.com',
-      telephone: '+55-96-98405-8103',
+      telephone: '+55-96-9100-3520',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
     },
@@ -105,7 +125,7 @@ const softwareData = {
     {
       '@type': 'Offer',
       name: 'Plano Básico',
-      price: '59.90',
+      price: '69.90',
       priceCurrency: 'BRL',
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
@@ -154,8 +174,7 @@ const softwareData = {
   screenshot: fullImageURL,
   softwareVersion: '2.0',
   softwareHelp: {
-    '@type': 'CreativeWork',
-    url: `${siteUrl}#funcionalidades`,
+    '@id': `${helpCenterUrl}#website`,
   },
   provider: {
     '@id': `${siteUrl}#organization`,
@@ -166,7 +185,7 @@ const softwareData = {
       'Profissionais da saúde, psicólogos, médicos, enfermeiros, terapeutas, gestores de clínicas e hospitais',
   },
   inLanguage: 'pt-BR',
-  keywords,
+  keywords: effectiveKeywords,
 };
 
 // WebSite structured data (enables sitelinks search box)
@@ -181,6 +200,31 @@ const websiteData = {
     '@id': `${siteUrl}#organization`,
   },
   inLanguage: 'pt-BR',
+};
+
+// Central de Ajuda (subdomínio) — declara a relação com o site principal
+const helpCenterData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${helpCenterUrl}#website`,
+  name: 'Central de Ajuda Cuidaty',
+  alternateName: 'Ajuda Cuidaty',
+  url: helpCenterUrl,
+  description:
+    'Tutoriais e passo a passo da Cuidaty: agenda online, prontuário eletrônico, WhatsApp, transcrição de consultas, financeiro e portal de agendamento.',
+  inLanguage: 'pt-BR',
+  publisher: {
+    '@id': `${siteUrl}#organization`,
+  },
+  isPartOf: {
+    '@id': `${siteUrl}#website`,
+  },
+  hasPart: helpCenterSections.map((section) => ({
+    '@type': 'WebPage',
+    name: `${section.name} — Central de Ajuda Cuidaty`,
+    url: `${helpCenterUrl}${section.path}`,
+    inLanguage: 'pt-BR',
+  })),
 };
 
 // WebPage structured data
@@ -244,7 +288,7 @@ const structuredData = [
   websiteData,
   webPageData,
   breadcrumbData,
-  ...(isHomePage ? [softwareData, faqData] : []),
+  ...(isHomePage ? [softwareData, faqData, helpCenterData] : []),
 ];
 ---
 
@@ -268,6 +312,10 @@ const structuredData = [
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap"
     />
+
+    <!-- Central de Ajuda (subdomínio) -->
+    <link rel="help" href={helpCenterUrl} title="Central de Ajuda Cuidaty" />
+    <link rel="dns-prefetch" href={helpCenterUrl} />
 
     <!-- OpenSearch -->
     <link
@@ -293,7 +341,7 @@ const structuredData = [
     <meta name="apple-mobile-web-app-title" content="Cuidaty" />
 
     <!-- Additional Meta Tags -->
-    <meta name="keywords" content={keywords} />
+    <meta name="keywords" content={effectiveKeywords} />
     <meta name="author" content="Cuidaty" />
     <!-- Robots directive is emitted once by astro-seo (<SEO noindex>) below.
          This googlebot tag adds rich-result preview hints without duplicating name="robots". -->
@@ -331,10 +379,12 @@ const structuredData = [
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-
-    <!-- Language alternates -->
-    <link rel="alternate" hreflang="pt-BR" href={canonicalURL.toString()} />
-    <link rel="alternate" hreflang="x-default" href={canonicalURL.toString()} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Blog Cuidaty"
+      href="/blog/rss.xml"
+    />
 
     <SEO
       title={title}
@@ -359,7 +409,7 @@ const structuredData = [
           type: 'image/png',
           width: 1200,
           height: 630,
-          alt: 'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
+          alt: 'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
         },
       }}
       twitter={{
@@ -370,7 +420,7 @@ const structuredData = [
         description: description,
         image: fullImageURL,
         imageAlt:
-          'Cuidaty - Sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
+          'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
       }}
     />
 
@@ -495,12 +545,28 @@ const structuredData = [
         });
       }
     </script>
+    <slot name="head" />
   </head>
   <body class="pb-[92px] lg:pb-0">
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />
     <CookieConsent />
+
+    <script is:inline>
+      // Tracking de CTAs: delega o clique de qualquer link com data-ga-event
+      // para o GA4 (window.gtag já é exposto pelo CookieConsent, e o Consent
+      // Mode v2 cuida de não enviar nada se o usuário recusar cookies).
+      document.addEventListener('click', function (e) {
+        var el = e.target && e.target.closest ? e.target.closest('[data-ga-event]') : null;
+        if (!el || typeof window.gtag !== 'function') return;
+        window.gtag('event', el.getAttribute('data-ga-event'), {
+          cta_location: el.getAttribute('data-ga-location') || undefined,
+          link_url: el.getAttribute('href') || undefined,
+          plan: el.getAttribute('data-ga-plan') || undefined,
+        });
+      });
+    </script>
 
     <script>
       // Reveal on scroll: anima o conteúdo de cada seção ao entrar na viewport
