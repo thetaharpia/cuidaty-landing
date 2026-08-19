@@ -83,28 +83,36 @@ export async function getPostBySlug(slug: string): Promise<BlogPostFull | null> 
 
 export async function getAllPostsFlat(): Promise<BlogPost[]> {
   const posts: BlogPost[] = [...localPosts];
-  let page = 1;
-  while (true) {
-    const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
-    if (!res.ok) break;
-    const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
-    posts.push(...json.data);
-    if (page >= json.meta.last_page) break;
-    page++;
+  try {
+    let page = 1;
+    while (true) {
+      const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
+      if (!res.ok) break;
+      const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
+      posts.push(...json.data);
+      if (page >= json.meta.last_page) break;
+      page++;
+    }
+  } catch {
+    // API indisponível (ou sem BLOG_API_URL no build): segue só com os locais.
   }
   return posts.sort(byDateDesc);
 }
 
 export async function getAllSlugs(): Promise<string[]> {
   const slugs: string[] = localPosts.map((p) => p.slug);
-  let page = 1;
-  while (true) {
-    const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
-    if (!res.ok) break;
-    const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
-    slugs.push(...json.data.map((p) => p.slug));
-    if (page >= json.meta.last_page) break;
-    page++;
+  try {
+    let page = 1;
+    while (true) {
+      const res = await fetch(`${API_URL}?page=${page}`, { headers: headers() });
+      if (!res.ok) break;
+      const json = (await res.json()) as { data: BlogPost[]; meta: BlogMeta };
+      slugs.push(...json.data.map((p) => p.slug));
+      if (page >= json.meta.last_page) break;
+      page++;
+    }
+  } catch {
+    // API indisponível (ou sem BLOG_API_URL no build): segue só com os locais.
   }
   return slugs;
 }

@@ -2,7 +2,7 @@ FROM node:22-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache curl wget && npm install -g pnpm
+RUN apk add --no-cache curl wget && npm install -g pnpm@10.27.0
 
 COPY package.json pnpm-lock.yaml* ./
 RUN pnpm install --frozen-lockfile
