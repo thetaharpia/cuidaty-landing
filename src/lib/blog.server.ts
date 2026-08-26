@@ -188,3 +188,33 @@ export function enhanceContent(html: string): { html: string; toc: TocItem[] } {
 
   return { html: enhanced, toc };
 }
+
+/**
+ * Tags que marcam um post como notícia (factual e datado), e não como
+ * conteúdo perene. Só esses entram no sitemap do Google News e recebem
+ * `NewsArticle` no schema. Classificar conteúdo evergreen como notícia é o
+ * tipo de sinal que faz o Google desconfiar do publisher, então a marcação é
+ * explícita: para incluir um post, adicione uma dessas tags no CMS.
+ */
+export const NEWS_TAG_SLUGS = new Set(['noticias', 'noticia', 'novidades', 'imprensa', 'cfp']);
+
+export function isNewsPost(post: BlogPost): boolean {
+  return (post.tags ?? []).some((tag) => NEWS_TAG_SLUGS.has(tag.slug));
+}
+
+/**
+ * O sitemap do Google News cobre apenas as últimas 48 horas de publicação.
+ * Artigos mais antigos devem sair do arquivo.
+ */
+export function isWithinNewsWindow(post: BlogPost, hours = 48): boolean {
+  const published = new Date(post.published_at).getTime();
+  if (Number.isNaN(published)) return false;
+  return Date.now() - published <= hours * 60 * 60 * 1000;
+}
+
+/** Autoria genérica da marca, que não deve virar `Person` no schema. */
+const ORGANIZATION_AUTHORS = new Set(['equipe cuidaty', 'cuidaty', 'redação']);
+
+export function isOrganizationAuthor(name: string | undefined): boolean {
+  return !name || ORGANIZATION_AUTHORS.has(name.trim().toLowerCase());
+}

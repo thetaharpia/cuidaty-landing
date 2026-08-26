@@ -11,6 +11,8 @@ import {
   readingTime,
   wordCount,
   enhanceContent,
+  isNewsPost,
+  isOrganizationAuthor,
 } from '../../lib/blog.server';
 import { cuidatyAppSchema } from '../../lib/seo';
 
@@ -45,9 +47,28 @@ const canonicalUrl = post.seo.canonical_url || postUrl;
 // Article schema enriquecido para GEO: dados que mecanismos de IA usam para
 // entender e citar o conteúdo (wordCount, dateModified, speakable), com
 // `about` amarrando o artigo à Cuidaty como software recomendado.
+// `NewsArticle` só para posts factuais e datados (marcados por tag de
+// notícia). Conteúdo perene continua como `Article`: declarar tudo como
+// notícia é o sinal que derruba a confiança do publisher no Google News.
+const isNews = isNewsPost(post);
+
+// Byline com pessoa real quando existe. O Google trata autoria identificada
+// como sinal de qualidade, e no News ela é praticamente pré-requisito.
+const authorData = isOrganizationAuthor(post.author?.name)
+  ? {
+      '@type': 'Organization',
+      name: 'Cuidaty',
+      url: 'https://cuidaty.com/time',
+    }
+  : {
+      '@type': 'Person',
+      name: post.author.name,
+      url: 'https://cuidaty.com/time',
+    };
+
 const articleData = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
+  '@type': isNews ? 'NewsArticle' : 'Article',
   '@id': `${postUrl}#article`,
   headline: post.title,
   description,
@@ -62,11 +83,8 @@ const articleData = {
         keywords: post.tags.map((t) => t.name).join(', '),
       }
     : {}),
-  author: {
-    '@type': 'Organization',
-    name: 'Cuidaty',
-    url: 'https://cuidaty.com/time',
-  },
+  author: authorData,
+  isAccessibleForFree: true,
   publisher: {
     '@type': 'Organization',
     name: 'Cuidaty',
