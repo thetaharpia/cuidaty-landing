@@ -1,0 +1,115 @@
+---
+/**
+ * Seção Consultoria — posicionamento de serviço.
+ * Segundo bloco escuro da página, na sequência do par Metas/Contratos: o
+ * argumento aqui não é funcionalidade, é o que a Cuidaty faz junto da clínica
+ * depois que o sistema está no ar.
+ */
+const MEETING_URL = 'https://calendly.com/pedro-thetaharpia/30min';
+
+const pillars = [
+  {
+    title: 'Consultoria, não suporte',
+    desc: 'A gente estuda a operação antes de configurar qualquer coisa. O que entra no sistema sai de uma conversa sobre como a sua clínica trabalha, não de um manual padrão.',
+  },
+  {
+    title: 'O sistema se adapta a você',
+    desc: 'Sua clínica não muda o jeito de trabalhar para caber no software. Campos, fluxos e documentos são ajustados à realidade dela, não o contrário.',
+  },
+  {
+    title: 'Automação sob medida',
+    desc: 'Processo que consome a equipe vira automação. Não é esperar entrar no roadmap: é construir junto o que a sua operação está pedindo agora.',
+  },
+  {
+    title: 'Mais faturamento no convênio',
+    desc: 'Guia emitida do jeito que a operadora exige, glosa mapeada por motivo e operadora, e receita que estava parada voltando para o caixa da clínica.',
+  },
+];
+---
+
+<section id="consultoria" class="relative overflow-hidden bg-cuidaty-dark py-24 md:py-32">
+  <!-- Luz difusa espelhando o bloco de Metas, para os dois lerem como um par -->
+  <div
+    class="pointer-events-none absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full opacity-[0.14]"
+    style="background: radial-gradient(circle, #a7e9a5 0%, transparent 65%)"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="pointer-events-none absolute -bottom-56 -right-40 h-[520px] w-[520px] rounded-full opacity-[0.1]"
+    style="background: radial-gradient(circle, #5ac3b0 0%, transparent 65%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container relative mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div class="grid gap-10 lg:grid-cols-[1.45fr_1fr] lg:items-end lg:gap-16">
+        <div>
+          <p
+            class="mb-5 inline-flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-accent"
+          >
+            <span
+              class="rounded-full bg-cuidaty-accent px-2 py-0.5 text-[10px] font-bold tracking-normal text-cuidaty-dark"
+              >Novo</span
+            >
+            Serviços · Consultoria tecnológica
+          </p>
+
+          <h2
+            class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-5xl lg:text-[3.4rem]"
+          >
+            Software sozinho<br />não resolve clínica.
+            <span class="mt-2 block italic text-white/60">Por isso a gente entra junto.</span>
+          </h2>
+        </div>
+
+        <p class="text-lg leading-relaxed text-white/70">
+          A Cuidaty não termina no login. Junto com o sistema vem um time de tecnologia que entende
+          a operação da sua clínica, adapta a plataforma a ela e continua por perto depois que tudo
+          está no ar.
+        </p>
+      </div>
+
+      <ul class="mt-16 grid gap-5 md:grid-cols-2 md:gap-6">
+        {
+          pillars.map((p) => (
+            <li class="rounded-2xl border border-white/10 bg-white/[0.04] p-7 md:p-8">
+              <span class="block h-px w-8 bg-cuidaty-secondary" aria-hidden="true" />
+              <h3 class="mt-5 font-serif text-2xl font-semibold leading-tight text-white">
+                {p.title}
+              </h3>
+              <p class="mt-3 text-[0.95rem] leading-relaxed text-white/70">{p.desc}</p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-12 flex flex-wrap items-center gap-5">
+        <a
+          href={MEETING_URL}
+          target="_blank"
+          rel="noopener"
+          data-ga-event="generate_lead"
+          data-ga-location="consultoria_section"
+          class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-accent px-7 py-3.5 text-base font-semibold text-cuidaty-dark transition-colors hover:bg-cuidaty-accent-light"
+        >
+          Conversar sobre a minha clínica
+          <svg
+            class="h-5 w-5 transition-transform group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+        <p class="text-sm text-white/50">Trinta minutos, sem compromisso.</p>
+      </div>
+    </div>
+  </div>
+</section>

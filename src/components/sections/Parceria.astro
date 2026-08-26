@@ -1,0 +1,83 @@
+---
+/**
+ * Seção Parceria — como a consultoria acontece na prática.
+ * Linha do tempo horizontal: formato diferente de todo o resto da página, para
+ * o processo não parecer mais uma lista de funcionalidades. Fecha o argumento
+ * aberto no bloco escuro de Consultoria.
+ */
+const steps = [
+  {
+    title: 'Diagnóstico',
+    desc: 'Antes de configurar qualquer coisa, mapeamos a operação: como a agenda funciona, onde o dinheiro trava e o que cada convênio exige de você.',
+    who: 'Time de implantação',
+  },
+  {
+    title: 'Implantação adaptada',
+    desc: 'O sistema é montado em cima da sua rotina: seus fluxos, seus modelos de documento, suas regras de convênio. Seus dados vêm junto da plataforma anterior.',
+    who: 'Time técnico e recepção',
+  },
+  {
+    title: 'Automação contínua',
+    desc: 'A cada rodada, mais trabalho manual sai da mesa. Confirmação, cobrança, envio de documento, conferência antes do faturamento.',
+    who: 'Produto e coordenação',
+  },
+  {
+    title: 'Acompanhamento direto',
+    desc: 'Revisões periódicas com números na mesa: ocupação da agenda, faturamento por operadora e glosa por motivo.',
+    who: 'Seu contato fixo na Cuidaty',
+  },
+];
+---
+
+<section id="parceria" class="bg-white py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-6xl">
+      <div class="mb-16 grid gap-10 md:grid-cols-[1.45fr_1fr] md:items-end">
+        <div>
+          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+            Como trabalhamos junto
+          </p>
+          <h2
+            class="font-serif text-4xl font-semibold leading-[1.05] tracking-tight text-cuidaty-dark md:text-5xl lg:text-[3.4rem]"
+          >
+            Ninguém some depois<br />
+            <span class="italic text-cuidaty-dark/70">de a conta ser criada.</span>
+          </h2>
+        </div>
+        <p class="text-lg leading-relaxed text-foreground/70">
+          Todo fornecedor promete atendimento próximo. O que muda aqui é ter uma pessoa com nome
+          acompanhando a sua clínica, e um processo que continua depois da implantação.
+        </p>
+      </div>
+
+      <ol class="relative grid gap-10 md:grid-cols-4 md:gap-8">
+        {
+          steps.map((step, i) => (
+            <li class="relative flex flex-col">
+              {/* Trilho ligando esta etapa à próxima: some no último item para
+                  a linha não vazar até a borda da seção. */}
+              {i < steps.length - 1 && (
+                <div
+                  class="pointer-events-none absolute left-11 right-[-2rem] top-5 hidden h-px bg-border md:block"
+                  aria-hidden="true"
+                />
+              )}
+              <div class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-cuidaty-primary/25 bg-white font-serif text-lg font-semibold text-cuidaty-primary">
+                {i + 1}
+              </div>
+              <h3 class="mt-5 font-serif text-xl font-semibold leading-tight text-cuidaty-dark">
+                {step.title}
+              </h3>
+              <p class="mb-6 mt-2.5 text-[0.95rem] leading-relaxed text-foreground/70">
+                {step.desc}
+              </p>
+              <p class="mt-auto border-t border-border pt-3 text-xs uppercase tracking-[0.1em] text-foreground/45">
+                {step.who}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
