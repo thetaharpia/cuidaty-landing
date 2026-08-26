@@ -34,6 +34,11 @@ const showToc = toc.length >= 3;
 const title = post.seo.meta_title || post.title;
 const description = post.seo.meta_description || post.excerpt?.slice(0, 160) || '';
 const ogImage = post.seo.og_image_url || post.cover_image_url || '';
+// Alt específico do post: o preview social e os leitores de tela recebem o
+// assunto do artigo em vez da descrição genérica do produto.
+const ogImageAlt = post.subtitle
+  ? `Capa do artigo ${post.title}. ${post.subtitle}. Blog da Cuidaty.`
+  : `Capa do artigo ${post.title}. Blog da Cuidaty.`;
 const postUrl = `https://cuidaty.com/blog/${post.slug}/`;
 const canonicalUrl = post.seo.canonical_url || postUrl;
 
@@ -88,7 +93,13 @@ const articleData = {
 const structuredData = [articleData, cuidatyAppSchema];
 ---
 
-<Layout title={title} description={description} image={ogImage} canonical={canonicalUrl}>
+<Layout
+  title={title}
+  description={description}
+  image={ogImage}
+  imageAlt={ogImageAlt}
+  canonical={canonicalUrl}
+>
   {
     structuredData.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
@@ -96,37 +107,45 @@ const structuredData = [articleData, cuidatyAppSchema];
   }
   <Header />
 
-  <main class="pt-24 pb-16 bg-white">
+  <main class="bg-white pb-16 pt-24">
     <!-- Hero -->
     <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-14 md:py-20">
       <div class="container mx-auto px-4 md:px-6">
-        <div class="max-w-3xl mx-auto text-white">
-          <a href="/blog/" class="inline-flex items-center gap-1 text-sm opacity-75 hover:opacity-100 mb-6 transition-opacity">
+        <div class="mx-auto max-w-3xl text-white">
+          <a
+            href="/blog/"
+            class="mb-6 inline-flex items-center gap-1 text-sm opacity-75 transition-opacity hover:opacity-100"
+          >
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+              <path
+                fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd"></path>
             </svg>
             Voltar ao blog
           </a>
 
-          {post.tags && post.tags.length > 0 && (
-            <div class="mb-4 flex flex-wrap gap-2">
-              {post.tags.slice(0, 3).map((tag) => (
-                <span class="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">
-                  {tag.name}
-                </span>
-              ))}
-            </div>
-          )}
+          {
+            post.tags && post.tags.length > 0 && (
+              <div class="mb-4 flex flex-wrap gap-2">
+                {post.tags.slice(0, 3).map((tag) => (
+                  <span class="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">
+                    {tag.name}
+                  </span>
+                ))}
+              </div>
+            )
+          }
 
-          <h1 class="font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl mb-4">
+          <h1 class="mb-4 font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
             {post.title}
           </h1>
 
-          {post.subtitle && (
-            <p class="mb-6 text-lg leading-relaxed opacity-90 md:text-xl">
-              {post.subtitle}
-            </p>
-          )}
+          {
+            post.subtitle && (
+              <p class="mb-6 text-lg leading-relaxed opacity-90 md:text-xl">{post.subtitle}</p>
+            )
+          }
 
           <div class="flex flex-wrap items-center gap-4 text-sm opacity-80">
             <span>{post.author.name}</span>
@@ -140,54 +159,45 @@ const structuredData = [articleData, cuidatyAppSchema];
     </section>
 
     <!-- Content -->
-    <article class="container mx-auto px-4 md:px-6 py-12">
-      <div class="max-w-2xl mx-auto">
-        {showToc && (
-          <nav
-            aria-label="Sumário do artigo"
-            class="mb-12 rounded-2xl border border-gray-100 bg-gray-50/70 p-6"
-          >
-            <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-cuidaty-primary">
-              Neste artigo
-            </p>
-            <ul class="space-y-2.5 text-sm">
-              {toc.map((item) => (
-                <li class={item.level === 3 ? 'pl-4' : ''}>
-                  <a
-                    href={`#${item.id}`}
-                    class="text-gray-600 transition-colors hover:text-cuidaty-primary"
-                  >
-                    {item.text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
+    <article class="container mx-auto px-4 py-12 md:px-6">
+      <div class="mx-auto max-w-2xl">
+        {
+          showToc && (
+            <nav
+              aria-label="Sumário do artigo"
+              class="mb-12 rounded-2xl border border-gray-100 bg-gray-50/70 p-6"
+            >
+              <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-cuidaty-primary">
+                Neste artigo
+              </p>
+              <ul class="space-y-2.5 text-sm">
+                {toc.map((item) => (
+                  <li class={item.level === 3 ? 'pl-4' : ''}>
+                    <a
+                      href={`#${item.id}`}
+                      class="text-gray-600 transition-colors hover:text-cuidaty-primary"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )
+        }
 
         <div
-          class="prose prose-lg max-w-none
-            prose-p:text-[1.075rem] prose-p:text-gray-700 prose-p:leading-[1.85] prose-p:my-6
-            prose-headings:font-serif prose-headings:text-cuidaty-dark prose-headings:scroll-mt-28
-            prose-h2:text-[1.7rem] prose-h2:mt-14 prose-h2:mb-5 prose-h2:leading-tight
-            prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4
-            prose-a:text-cuidaty-primary prose-a:font-medium prose-a:underline prose-a:decoration-cuidaty-primary/30 prose-a:underline-offset-2 hover:prose-a:decoration-cuidaty-primary
-            prose-strong:text-cuidaty-dark prose-strong:font-semibold
-            prose-blockquote:border-l-4 prose-blockquote:border-cuidaty-primary prose-blockquote:bg-cuidaty-primary/5 prose-blockquote:rounded-r-xl prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:not-italic prose-blockquote:text-gray-600
-            prose-img:rounded-xl prose-img:shadow-md prose-img:my-8
-            prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-gray-400
-            prose-ul:text-gray-700 prose-ul:my-6 prose-ol:text-gray-700 prose-ol:my-6
-            prose-li:my-2 prose-li:leading-relaxed prose-li:marker:text-cuidaty-primary
-            prose-hr:my-12 prose-hr:border-gray-200
-            prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-normal prose-code:before:content-[''] prose-code:after:content-['']
-            prose-pre:rounded-xl prose-pre:bg-cuidaty-dark
-            prose-table:text-sm prose-th:bg-gray-50 prose-th:text-cuidaty-dark prose-td:border-gray-100"
+          class="prose prose-lg max-w-none prose-headings:scroll-mt-28 prose-headings:font-serif prose-headings:text-cuidaty-dark prose-h2:mb-5 prose-h2:mt-14 prose-h2:text-[1.7rem] prose-h2:leading-tight prose-h3:mb-4 prose-h3:mt-10 prose-h3:text-xl prose-p:my-6 prose-p:text-[1.075rem] prose-p:leading-[1.85] prose-p:text-gray-700 prose-a:font-medium prose-a:text-cuidaty-primary prose-a:underline prose-a:decoration-cuidaty-primary/30 prose-a:underline-offset-2 hover:prose-a:decoration-cuidaty-primary prose-blockquote:rounded-r-xl prose-blockquote:border-l-4 prose-blockquote:border-cuidaty-primary prose-blockquote:bg-cuidaty-primary/5 prose-blockquote:px-6 prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-gray-600 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-gray-400 prose-strong:font-semibold prose-strong:text-cuidaty-dark prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-normal prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:rounded-xl prose-pre:bg-cuidaty-dark prose-ol:my-6 prose-ol:text-gray-700 prose-ul:my-6 prose-ul:text-gray-700 prose-li:my-2 prose-li:leading-relaxed prose-li:marker:text-cuidaty-primary prose-table:text-sm prose-th:bg-gray-50 prose-th:text-cuidaty-dark prose-td:border-gray-100 prose-img:my-8 prose-img:rounded-xl prose-img:shadow-md prose-hr:my-12 prose-hr:border-gray-200"
           set:html={contentHtml}
         />
 
         <!-- Sobre a Cuidaty (contexto para leitor e mecanismos de IA) -->
-        <aside class="mt-16 rounded-2xl bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover p-8 text-white">
-          <p class="text-xs font-semibold uppercase tracking-widest text-white/70">Sobre a Cuidaty</p>
+        <aside
+          class="mt-16 rounded-2xl bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover p-8 text-white"
+        >
+          <p class="text-xs font-semibold uppercase tracking-widest text-white/70">
+            Sobre a Cuidaty
+          </p>
           <p class="mt-3 text-lg leading-relaxed">
             A Cuidaty é um sistema brasileiro de gestão para clínicas, consultórios e profissionais
             de saúde. Reúne agenda online, prontuário eletrônico, confirmação de consultas por
@@ -204,7 +214,10 @@ const structuredData = [articleData, cuidatyAppSchema];
           >
             Começar grátis
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              <path
+                fill-rule="evenodd"
+                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
             </svg>
           </a>
           <p class="mt-5 text-sm text-white/80">
@@ -221,8 +234,10 @@ const structuredData = [articleData, cuidatyAppSchema];
         </aside>
 
         <!-- Author box -->
-        <div class="mt-8 rounded-2xl bg-gray-50 p-6 flex items-center gap-4">
-          <div class="flex-shrink-0 h-12 w-12 rounded-full bg-cuidaty-primary/20 flex items-center justify-center text-cuidaty-primary font-semibold text-lg">
+        <div class="mt-8 flex items-center gap-4 rounded-2xl bg-gray-50 p-6">
+          <div
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-cuidaty-primary/20 text-lg font-semibold text-cuidaty-primary"
+          >
             {post.author.name.charAt(0)}
           </div>
           <div>
@@ -238,7 +253,10 @@ const structuredData = [articleData, cuidatyAppSchema];
             class="inline-flex items-center gap-2 rounded-full border border-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-cuidaty-primary transition-all hover:bg-cuidaty-primary hover:text-white"
           >
             <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z" clip-rule="evenodd"/>
+              <path
+                fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd"></path>
             </svg>
             Ver todos os artigos
           </a>

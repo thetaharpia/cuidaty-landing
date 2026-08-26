@@ -10,15 +10,20 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  imageAlt?: string;
   noindex?: boolean;
   keywords?: string;
   canonical?: string;
 }
 
+const DEFAULT_IMAGE_ALT =
+  'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp';
+
 const {
   title = homeTitle,
   description = homeDescription,
   image = '/screenshot.png',
+  imageAlt = DEFAULT_IMAGE_ALT,
   noindex = false,
   keywords = homeKeywords,
   canonical,
@@ -414,7 +419,7 @@ const structuredData = [
           type: imageType,
           width: 1200,
           height: 630,
-          alt: 'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
+          alt: imageAlt,
         },
       }}
       twitter={{
@@ -424,8 +429,7 @@ const structuredData = [
         title: title,
         description: description,
         image: fullImageURL,
-        imageAlt:
-          'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
+        imageAlt: imageAlt,
       }}
     />
 
