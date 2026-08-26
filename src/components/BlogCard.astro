@@ -12,7 +12,9 @@ const Heading = headingLevel;
 const coverImage = post.cover_image_url || DEFAULT_COVER;
 ---
 
-<article class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-lifted hover:ring-cuidaty-primary/15">
+<article
+  class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-lifted hover:ring-cuidaty-primary/15"
+>
   <a
     href={`/blog/${post.slug}/`}
     class="focus-ring relative block h-48 overflow-hidden bg-gray-100"
@@ -27,36 +29,43 @@ const coverImage = post.cover_image_url || DEFAULT_COVER;
     />
   </a>
   <div class="flex flex-1 flex-col p-6">
-    {post.tags && post.tags.length > 0 && (
-      <div class="mb-3 flex flex-wrap gap-2">
-        {post.tags.slice(0, 2).map((tag) => (
-          <span class="rounded-full bg-cuidaty-primary/10 px-3 py-0.5 text-xs font-medium text-cuidaty-primary">
-            {tag.name}
-          </span>
-        ))}
-      </div>
-    )}
+    {
+      post.tags && post.tags.length > 0 && (
+        <div class="mb-3 flex flex-wrap gap-2">
+          {post.tags.slice(0, 2).map((tag) => (
+            <span class="rounded-full bg-cuidaty-primary/10 px-3 py-0.5 text-xs font-medium text-cuidaty-primary">
+              {tag.name}
+            </span>
+          ))}
+        </div>
+      )
+    }
 
-    <Heading class="mb-3 font-serif text-xl font-semibold leading-snug text-cuidaty-dark line-clamp-2">
-      <a href={`/blog/${post.slug}/`} class="focus-ring rounded-sm transition-colors hover:text-cuidaty-primary">
+    <Heading
+      class="mb-3 line-clamp-2 font-serif text-xl font-semibold leading-snug text-cuidaty-dark"
+    >
+      <a
+        href={`/blog/${post.slug}/`}
+        class="focus-ring rounded-sm transition-colors hover:text-cuidaty-primary"
+      >
         {post.title}
       </a>
     </Heading>
 
-    {post.excerpt && (
-      <p
-        class="mb-4 text-sm text-gray-600 leading-relaxed line-clamp-2"
-        style="mask-image: linear-gradient(to bottom, black 65%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);"
-      >
-        {post.excerpt}
-      </p>
-    )}
+    {
+      post.excerpt && (
+        <p
+          class="mb-4 line-clamp-2 text-sm leading-relaxed text-gray-600"
+          style="mask-image: linear-gradient(to bottom, black 65%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);"
+        >
+          {post.excerpt}
+        </p>
+      )
+    }
 
     <div class="mt-auto flex items-center justify-between text-sm text-gray-500">
       <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
-      {post.author?.name && (
-        <span class="text-xs text-gray-400">{post.author.name}</span>
-      )}
+      {post.author?.name && <span class="text-xs text-gray-400">{post.author.name}</span>}
     </div>
 
     <a
@@ -64,8 +73,15 @@ const coverImage = post.cover_image_url || DEFAULT_COVER;
       class="link-underline focus-ring mt-4 inline-flex w-fit items-center gap-1 rounded-sm text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-primary-hover"
     >
       Ler artigo completo
-      <svg class="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
-        <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+      <svg
+        class="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+          clip-rule="evenodd"></path>
       </svg>
     </a>
   </div>

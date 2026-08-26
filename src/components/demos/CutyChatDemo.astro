@@ -121,7 +121,9 @@ const { class: className = '' } = Astro.props;
   .cch .caption .headline {
     font-size: 17px;
     font-weight: 600;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .cch .caption .headline.swap {
     opacity: 0;
@@ -131,7 +133,9 @@ const { class: className = '' } = Astro.props;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-sm), 0 18px 40px -28px rgba(12, 32, 47, 0.28);
+    box-shadow:
+      var(--shadow-sm),
+      0 18px 40px -28px rgba(12, 32, 47, 0.28);
     overflow: hidden;
     height: 548px;
   }
@@ -288,7 +292,9 @@ const { class: className = '' } = Astro.props;
     line-height: 1.5;
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .cch .bubble.show {
     opacity: 1;

@@ -65,8 +65,9 @@ const { class: className = '' } = Astro.props;
             <div class="ffield" data-f="prof">
               <div class="flabel">Profissional</div>
               <div class="fcontrol">
-                <span class="val">Dra. Ana Martins</span><svg class="ic s14 chev" viewBox="0 0 24 24"
-                  ><path d="m6 9 6 6 6-6"></path></svg
+                <span class="val">Dra. Ana Martins</span><svg
+                  class="ic s14 chev"
+                  viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg
                 >
               </div>
             </div>
@@ -182,7 +183,8 @@ const { class: className = '' } = Astro.props;
             <div class="conflict" data-conflict>
               <div class="conflict-head">
                 <svg class="ic s14" viewBox="0 0 24 24"
-                  ><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"
+                  ><path
+                    d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"
                   ></path><path d="M12 9v4M12 17h.01"></path></svg
                 >Conflito de horário
               </div>
@@ -190,7 +192,9 @@ const { class: className = '' } = Astro.props;
                 <div class="crow">
                   <span class="nm">Maria Souza</span>
                   <span class="old">14:00–14:50</span>
-                  <svg class="ic s14" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                  <svg class="ic s14" viewBox="0 0 24 24"
+                    ><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+                  >
                   <span class="new">15:00–15:50</span>
                 </div>
               </div>
@@ -198,7 +202,7 @@ const { class: className = '' } = Astro.props;
             </div>
           </div>
           <div class="modal-foot" data-modal-foot>
-            <span class="btn outline sm">Cancelar</span>
+            <span class="btn sm outline">Cancelar</span>
             <span class="btn primary sm" data-save-btn>Salvar</span>
           </div>
         </div>
@@ -217,7 +221,9 @@ const { class: className = '' } = Astro.props;
               Para confirmar responda <b>CONFIRMAR</b>, ou <b>CANCELAR</b> se não puder comparecer.
               <span class="meta">14:32 ✓✓</span>
             </div>
-            <div class="wabubble reply" data-wa-reply>CONFIRMAR ✅<span class="meta">14:33</span></div>
+            <div class="wabubble reply" data-wa-reply>
+              CONFIRMAR ✅<span class="meta">14:33</span>
+            </div>
           </div>
         </div>
       </div>
@@ -282,7 +288,9 @@ const { class: className = '' } = Astro.props;
   .agd .caption .headline {
     font-size: 17px;
     font-weight: 600;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .agd .caption .headline.swap {
     opacity: 0;
@@ -293,7 +301,9 @@ const { class: className = '' } = Astro.props;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    box-shadow: var(--sh-sm), 0 18px 40px -28px rgba(12, 32, 47, 0.28);
+    box-shadow:
+      var(--sh-sm),
+      0 18px 40px -28px rgba(12, 32, 47, 0.28);
     overflow: hidden;
     height: 640px;
   }
@@ -399,14 +409,19 @@ const { class: className = '' } = Astro.props;
     box-shadow: var(--sh-xs);
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.3s ease;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      box-shadow 0.3s ease;
   }
   .agd .appt.show {
     opacity: 1;
     transform: none;
   }
   .agd .appt.moving {
-    transition: opacity 0.4s ease, transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.4s ease,
+      transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .agd .appt .time {
     font-family: ui-monospace, Menlo, monospace;
@@ -486,7 +501,9 @@ const { class: className = '' } = Astro.props;
     box-shadow: var(--sh-modal);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
     transform: scale(0.96);
     display: flex;
     flex-direction: column;
@@ -570,7 +587,9 @@ const { class: className = '' } = Astro.props;
     gap: 5px;
     opacity: 0;
     transform: translateY(5px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease;
   }
   .agd .ffield.show {
     opacity: 1;
@@ -601,7 +620,9 @@ const { class: className = '' } = Astro.props;
     gap: 8px;
     padding: 0 10px;
     font-size: 13px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
   .agd .fcontrol.focus {
     border-color: var(--primary);
@@ -729,7 +750,10 @@ const { class: className = '' } = Astro.props;
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.45s ease, opacity 0.4s ease, padding 0.45s ease;
+    transition:
+      max-height 0.45s ease,
+      opacity 0.4s ease,
+      padding 0.45s ease;
   }
   .agd .recpanel.show {
     max-height: 340px;
@@ -919,7 +943,9 @@ const { class: className = '' } = Astro.props;
     color: #111b21;
     opacity: 0;
     transform: translateY(8px) scale(0.96);
-    transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
   }
   .agd .wabubble.show {
     opacity: 1;
@@ -1008,7 +1034,7 @@ const { class: className = '' } = Astro.props;
 
     const body = q('[data-modal-body]');
     const formFields = [...body.children].filter((c) =>
-      c.classList.contains('ffield'),
+      c.classList.contains('ffield')
     ) as HTMLElement[];
     const initials = (n: string) =>
       n
@@ -1242,7 +1268,16 @@ const { class: className = '' } = Astro.props;
       await setHeadline('8 consultas criadas de uma vez');
       setAgenda('Toda quinta · 14:00', 'Série recorrente · 8 consultas');
       clearSlots();
-      const datas = ['12 jun', '19 jun', '26 jun', '03 jul', '10 jul', '17 jul', '24 jul', '31 jul'];
+      const datas = [
+        '12 jun',
+        '19 jun',
+        '26 jun',
+        '03 jul',
+        '10 jul',
+        '17 jul',
+        '24 jul',
+        '31 jul',
+      ];
       for (const d of datas) {
         await addAppt({
           time: '14:00',
@@ -1274,13 +1309,11 @@ const { class: className = '' } = Astro.props;
   }
 
   function boot() {
-    document
-      .querySelectorAll<HTMLElement>('.agd')
-      .forEach((root) => {
-        if (root.dataset.booted) return;
-        root.dataset.booted = '1';
-        initAgendaDemo(root);
-      });
+    document.querySelectorAll<HTMLElement>('.agd').forEach((root) => {
+      if (root.dataset.booted) return;
+      root.dataset.booted = '1';
+      initAgendaDemo(root);
+    });
   }
   if (document.readyState !== 'loading') boot();
   else document.addEventListener('DOMContentLoaded', boot);

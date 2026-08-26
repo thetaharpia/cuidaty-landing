@@ -160,7 +160,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
                       data-toc={clause.id}
                       class="toc-link group flex gap-2.5 text-sm leading-snug text-foreground/55 transition-colors hover:text-cuidaty-dark"
                     >
-                      <span class="font-serif text-cuidaty-primary/60 tabular-nums">{num(i)}</span>
+                      <span class="font-serif tabular-nums text-cuidaty-primary/60">{num(i)}</span>
                       <span>{clause.title}</span>
                     </a>
                   </li>
@@ -174,7 +174,10 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
         <div class="max-w-2xl">
           {
             clauses.map((clause, i) => (
-              <section id={clause.id} class="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0">
+              <section
+                id={clause.id}
+                class="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0"
+              >
                 <p class="mb-3 font-serif text-base font-semibold tabular-nums text-cuidaty-primary">
                   {num(i)}
                 </p>
@@ -182,7 +185,9 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
                   {clause.title}
                 </h2>
                 {clause.lead && (
-                  <p class="mt-4 text-[1.05rem] leading-relaxed text-foreground/75">{clause.lead}</p>
+                  <p class="mt-4 text-[1.05rem] leading-relaxed text-foreground/75">
+                    {clause.lead}
+                  </p>
                 )}
                 {clause.items && (
                   <ul class="mt-5 space-y-3">
@@ -203,10 +208,10 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
 
           <!-- Contato -->
           <section class="mt-12 rounded-2xl bg-beige px-6 py-8 md:px-9 md:py-10">
-            <h2 class="font-serif text-2xl font-semibold text-cuidaty-dark">Dúvidas sobre os Termos?</h2>
-            <p class="mt-2 text-foreground/70">
-              Fale com a gente. Respondemos em até 48 horas.
-            </p>
+            <h2 class="font-serif text-2xl font-semibold text-cuidaty-dark">
+              Dúvidas sobre os Termos?
+            </h2>
+            <p class="mt-2 text-foreground/70">Fale com a gente. Respondemos em até 48 horas.</p>
             <dl class="mt-6 grid gap-5 sm:grid-cols-2">
               <div>
                 <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/45">

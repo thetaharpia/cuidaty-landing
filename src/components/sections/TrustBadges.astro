@@ -8,29 +8,36 @@ const badges = [
 <section id="seguranca" class="bg-beige py-20 md:py-24">
   <div class="container mx-auto px-5 md:px-8">
     <div class="mx-auto max-w-5xl">
-
       <div class="mb-12 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <div>
           <p class="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
             Confiança e segurança
           </p>
-          <h2 class="font-serif text-3xl font-semibold leading-tight tracking-tight text-cuidaty-dark md:text-4xl">
-            Protegendo seus dados <span class="italic text-cuidaty-dark/70">e os dos seus pacientes.</span>
+          <h2
+            class="font-serif text-3xl font-semibold leading-tight tracking-tight text-cuidaty-dark md:text-4xl"
+          >
+            Protegendo seus dados <span class="italic text-cuidaty-dark/70"
+              >e os dos seus pacientes.</span
+            >
           </h2>
         </div>
         <p class="max-w-sm text-sm leading-relaxed text-foreground/65">
-          Hospedagem 100% brasileira, auditoria de segurança semestral
-          e criptografia AES-256 em trânsito e em repouso.
+          Hospedagem 100% brasileira, auditoria de segurança semestral e criptografia AES-256 em
+          trânsito e em repouso.
         </p>
       </div>
 
       <dl class="grid grid-cols-2 gap-px bg-border">
-        {badges.map((b) => (
-          <div class="bg-beige px-6 py-8 text-center">
-            <dt class="font-serif text-2xl font-semibold text-cuidaty-dark md:text-3xl">{b.label}</dt>
-            <dd class="mt-2 text-xs text-foreground/60">{b.note}</dd>
-          </div>
-        ))}
+        {
+          badges.map((b) => (
+            <div class="bg-beige px-6 py-8 text-center">
+              <dt class="font-serif text-2xl font-semibold text-cuidaty-dark md:text-3xl">
+                {b.label}
+              </dt>
+              <dd class="mt-2 text-xs text-foreground/60">{b.note}</dd>
+            </div>
+          ))
+        }
       </dl>
 
       <p class="mt-8 flex items-start gap-2.5 text-sm leading-relaxed text-foreground/60">
@@ -47,12 +54,11 @@ const badges = [
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
         </svg>
         <span>
-          As funcionalidades de IA (transcrição e Cuty AI) operam em conformidade com a LGPD: o áudio
-          das consultas é descartado após o processamento e os dados dos pacientes não são usados
-          para treinar modelos de terceiros.
+          As funcionalidades de IA (transcrição e Cuty AI) operam em conformidade com a LGPD: o
+          áudio das consultas é descartado após o processamento e os dados dos pacientes não são
+          usados para treinar modelos de terceiros.
         </span>
       </p>
-
     </div>
   </div>
 </section>

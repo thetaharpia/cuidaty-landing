@@ -59,14 +59,16 @@ const structuredData = {
 >
   <Fragment slot="head">
     <link rel="prev" href={currentPage === 2 ? '/blog/' : `/blog/page/${currentPage - 1}/`} />
-    {meta && currentPage < meta.last_page && (
-      <link rel="next" href={`/blog/page/${currentPage + 1}/`} />
-    )}
+    {
+      meta && currentPage < meta.last_page && (
+        <link rel="next" href={`/blog/page/${currentPage + 1}/`} />
+      )
+    }
   </Fragment>
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <Header />
 
-  <main class="pt-24 pb-16 bg-white">
+  <main class="bg-white pb-16 pt-24">
     <BlogPostsGrid posts={posts} meta={meta} />
   </main>
 

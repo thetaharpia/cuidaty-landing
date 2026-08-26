@@ -45,23 +45,35 @@ const structuredData = {
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   <Header />
 
-  <main class="pt-24 pb-16 bg-white">
-    <section class="overflow-hidden bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover">
+  <main class="bg-white pb-16 pt-24">
+    <section
+      class="overflow-hidden bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover"
+    >
       <div class="container mx-auto px-4 md:px-6">
-        <div class="mx-auto grid max-w-5xl items-center gap-10 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-20 lg:gap-16">
+        <div
+          class="mx-auto grid max-w-5xl items-center gap-10 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-20 lg:gap-16"
+        >
           <div class="text-center text-white md:text-left">
-            <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">Conteúdo que cuida</p>
+            <p class="mb-3 text-sm font-semibold uppercase tracking-widest opacity-80">
+              Conteúdo que cuida
+            </p>
             <h1 class="mb-4 font-serif text-4xl font-semibold md:text-5xl">Blog Cuidaty</h1>
-            <p class="min-h-[3.5rem] text-lg leading-relaxed opacity-90 md:max-w-md md:min-h-[4rem]">
+            <p
+              class="min-h-[3.5rem] text-lg leading-relaxed opacity-90 md:min-h-[4rem] md:max-w-md"
+            >
               <span class="sr-only">Aqui você encontra informação que cuida de quem cuida.</span>
-              <span id="blog-typewriter" aria-hidden="true">Aqui você encontra informação que cuida de quem cuida.</span><span
+              <span id="blog-typewriter" aria-hidden="true"
+                >Aqui você encontra informação que cuida de quem cuida.</span
+              ><span
                 aria-hidden="true"
                 class="ml-0.5 inline-block h-[1.1em] w-[2px] animate-pulse bg-white/70 align-middle"
               ></span>
             </p>
           </div>
           <div class="relative mx-auto h-64 w-full max-w-md md:h-80 md:max-w-none">
-            <div class="absolute right-0 top-0 w-[64%] max-w-sm -rotate-2 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0">
+            <div
+              class="absolute right-0 top-0 w-[64%] max-w-sm -rotate-2 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0"
+            >
               <img
                 src="/doctor-desk.png"
                 alt="Psicólogo organizando o consultório com apoio da Cuidaty"
@@ -70,7 +82,9 @@ const structuredData = {
                 class="aspect-[3/2] w-full rounded-xl object-contain"
               />
             </div>
-            <div class="absolute bottom-0 left-0 w-[52%] max-w-xs rotate-3 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0">
+            <div
+              class="absolute bottom-0 left-0 w-[52%] max-w-xs rotate-3 rounded-2xl bg-white p-2.5 shadow-lifted transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hover:rotate-0"
+            >
               <img
                 src="/therapist-session.png"
                 alt="Sessão de terapia conduzida por psicóloga"

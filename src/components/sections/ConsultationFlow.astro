@@ -82,9 +82,7 @@ const { class: className = '' } = Astro.props;
 
 <script>
   function initFlowCarousel(root: HTMLElement) {
-    const slides = Array.from(
-      root.querySelectorAll<HTMLElement>('[data-flow-slide]')
-    );
+    const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-flow-slide]'));
     if (slides.length < 2) {
       return;
     }

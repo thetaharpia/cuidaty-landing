@@ -32,7 +32,9 @@ const { class: className = '' } = Astro.props;
               ></span
             >
             <div>
-              Transcrever consulta<small>gravação ao vivo · áudio descartado após o processamento</small>
+              Transcrever consulta<small
+                >gravação ao vivo · áudio descartado após o processamento</small
+              >
             </div>
           </div>
 
@@ -48,8 +50,8 @@ const { class: className = '' } = Astro.props;
               </span>
               <span class="btn outline" data-upload-btn>
                 <svg class="ic s14" viewBox="0 0 24 24"
-                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M17 8l-5-5-5 5"
-                  ></path><path d="M12 3v12"></path></svg
+                  ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path
+                    d="M17 8l-5-5-5 5"></path><path d="M12 3v12"></path></svg
                 >
                 Enviar arquivo
               </span>
@@ -73,8 +75,12 @@ const { class: className = '' } = Astro.props;
                   <span class="time">Hoje · 14:32</span>
                   <span class="badge mode">
                     <svg class="ic s12" viewBox="0 0 24 24"
-                      ><path d="m22 8-6 4 6 4V8Z"></path><rect x="2" y="6" width="14" height="12" rx="2"
-                      ></rect></svg
+                      ><path d="m22 8-6 4 6 4V8Z"></path><rect
+                        x="2"
+                        y="6"
+                        width="14"
+                        height="12"
+                        rx="2"></rect></svg
                     >
                     Teleconsulta
                   </span>
@@ -101,11 +107,15 @@ const { class: className = '' } = Astro.props;
                   </div>
                   <div class="field" data-i="1">
                     <div class="lbl">Subjetivo (S)</div>
-                    <div class="val">Pensamento acelerado à noite, despertares frequentes, cansaço diurno.</div>
+                    <div class="val">
+                      Pensamento acelerado à noite, despertares frequentes, cansaço diurno.
+                    </div>
                   </div>
                   <div class="field" data-i="2">
                     <div class="lbl">Objetivo (O)</div>
-                    <div class="val">Paciente colaborativo, discurso organizado, humor ansioso.</div>
+                    <div class="val">
+                      Paciente colaborativo, discurso organizado, humor ansioso.
+                    </div>
                   </div>
                   <div class="field" data-i="3">
                     <div class="lbl">Avaliação (A)</div>
@@ -113,16 +123,18 @@ const { class: className = '' } = Astro.props;
                   </div>
                   <div class="field full" data-i="4">
                     <div class="lbl">Plano (P)</div>
-                    <div class="val">Higiene do sono, técnicas de respiração, retorno em 15 dias.</div>
+                    <div class="val">
+                      Higiene do sono, técnicas de respiração, retorno em 15 dias.
+                    </div>
                   </div>
                 </div>
 
                 <div class="card-actions" data-card-actions>
                   <span class="btn primary sm">
                     <svg class="ic s14" viewBox="0 0 24 24"
-                      ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path
-                      ><path d="M14 2v6h6"></path><path d="M12 18v-6"></path><path d="M9 15h6"
-                      ></path></svg
+                      ><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"
+                      ></path><path d="M14 2v6h6"></path><path d="M12 18v-6"></path><path
+                        d="M9 15h6"></path></svg
                     >
                     Usar no novo registro
                   </span>
@@ -222,7 +234,9 @@ const { class: className = '' } = Astro.props;
   .tel .caption .headline {
     font-size: 17px;
     font-weight: 600;
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .tel .caption .headline.swap {
     opacity: 0;
@@ -232,7 +246,9 @@ const { class: className = '' } = Astro.props;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: var(--r-xl);
-    box-shadow: var(--sh-sm), 0 18px 40px -28px rgba(12, 32, 47, 0.28);
+    box-shadow:
+      var(--sh-sm),
+      0 18px 40px -28px rgba(12, 32, 47, 0.28);
     overflow: hidden;
     height: 548px;
   }
@@ -407,7 +423,9 @@ const { class: className = '' } = Astro.props;
     color: var(--mf);
   }
   .tel .panel {
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
   }
   .tel .panel.hide {
     opacity: 0;
@@ -499,7 +517,9 @@ const { class: className = '' } = Astro.props;
     gap: 3px;
     opacity: 0;
     transform: translateY(6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
   }
   .tel .field.show {
     opacity: 1;
@@ -553,7 +573,9 @@ const { class: className = '' } = Astro.props;
     padding: 0 12px;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease, padding 0.5s ease;
+    transition:
+      max-height 0.5s ease,
+      padding 0.5s ease;
   }
   .tel .details.open .body {
     max-height: 260px;
@@ -565,7 +587,9 @@ const { class: className = '' } = Astro.props;
     color: #243747;
     opacity: 0;
     transform: translateY(4px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
   }
   .tel .seg.show {
     opacity: 1;
@@ -622,9 +646,8 @@ const { class: className = '' } = Astro.props;
       let secs = 0;
       const tick = () => {
         if (!recRunning) return;
-        q('[data-rec-time]').textContent = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(
-          secs % 60,
-        ).padStart(2, '0')}`;
+        q('[data-rec-time]').textContent =
+          `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
         secs += 7;
         setTimeout(tick, 320);
       };

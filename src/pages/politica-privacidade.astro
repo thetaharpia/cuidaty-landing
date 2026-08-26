@@ -212,7 +212,7 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
                       data-toc={clause.id}
                       class="toc-link group flex gap-2.5 text-sm leading-snug text-foreground/55 transition-colors hover:text-cuidaty-dark"
                     >
-                      <span class="font-serif text-cuidaty-primary/60 tabular-nums">{num(i)}</span>
+                      <span class="font-serif tabular-nums text-cuidaty-primary/60">{num(i)}</span>
                       <span>{clause.title}</span>
                     </a>
                   </li>
@@ -226,7 +226,10 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
         <div class="max-w-2xl">
           {
             clauses.map((clause, i) => (
-              <section id={clause.id} class="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0">
+              <section
+                id={clause.id}
+                class="scroll-mt-28 border-t border-border py-10 first:border-t-0 first:pt-0"
+              >
                 <p class="mb-3 font-serif text-base font-semibold tabular-nums text-cuidaty-primary">
                   {num(i)}
                 </p>
@@ -277,7 +280,10 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
           }
 
           <!-- Contato -->
-          <section id="contato" class="mt-12 scroll-mt-28 rounded-2xl bg-beige px-6 py-8 md:px-9 md:py-10">
+          <section
+            id="contato"
+            class="mt-12 scroll-mt-28 rounded-2xl bg-beige px-6 py-8 md:px-9 md:py-10"
+          >
             <h2 class="font-serif text-2xl font-semibold text-cuidaty-dark">
               Contato e exercício de direitos
             </h2>
