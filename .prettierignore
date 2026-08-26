@@ -1,0 +1,9 @@
+# Saída de build
+dist/
+
+# Arquivos gerados: reformatar cria ruído enorme no diff e não traz ganho
+pnpm-lock.yaml
+
+# O parser do prettier-plugin-astro não lê o script com `define:vars`, e o
+# arquivo funciona: fica de fora para o format:check não quebrar por isso.
+src/components/CookieConsent.astro
