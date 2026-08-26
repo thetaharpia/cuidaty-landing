@@ -1,5 +1,8 @@
 ---
 import ConsultationFlow from './ConsultationFlow.astro';
+import { whatsappUrl } from '../../lib/contact';
+
+const WA_URL = whatsappUrl();
 ---
 
 <section id="hero" class="relative min-h-[100dvh] overflow-hidden bg-white">
@@ -37,7 +40,11 @@ import ConsultationFlow from './ConsultationFlow.astro';
 
       <!-- Primary CTA, full-width -->
       <a
-        href="#contato"
+        href={WA_URL}
+        target="_blank"
+        rel="noopener"
+        data-ga-event="generate_lead"
+        data-ga-location="hero_mobile"
         class="group flex items-center justify-center gap-2 rounded-md bg-cuidaty-primary px-6 text-base font-semibold text-white transition-all active:bg-cuidaty-primary-hover"
         style="min-height: 52px;"
       >
@@ -58,7 +65,8 @@ import ConsultationFlow from './ConsultationFlow.astro';
       </a>
 
       <p class="mt-4 text-center text-sm text-foreground/60">
-        Mais de <span class="font-semibold text-foreground/80">500 profissionais</span> já confiam na Cuidaty.
+        Mais de <span class="font-semibold text-foreground/80">500 profissionais</span> já confiam na
+        Cuidaty.
       </p>
 
       <!-- Jornada animada do atendimento -->
@@ -102,7 +110,11 @@ import ConsultationFlow from './ConsultationFlow.astro';
         style="animation-delay: 0.25s;"
       >
         <a
-          href="#contato"
+          href={WA_URL}
+          target="_blank"
+          rel="noopener"
+          data-ga-event="generate_lead"
+          data-ga-location="hero"
           class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-primary px-8 py-4 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
         >
           Falar com a gente

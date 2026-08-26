@@ -1,19 +1,30 @@
 ---
-const waUrl =
-  'https://wa.me/559691003520?text=Ol%C3%A1%21%20Tenho%20interesse%20em%20conhecer%20o%20Cuidaty.';
+import { whatsappUrl } from '../lib/contact';
+
+const waUrl = whatsappUrl('Olá! Tenho interesse em conhecer o Cuidaty.');
 ---
 
 <div
   id="mobile-cta-bar"
-  class="fixed bottom-0 left-0 right-0 z-[55] border-t border-cuidaty-dark/8 bg-background/95 shadow-[0_-2px_16px_rgba(12,32,47,0.07)] backdrop-blur-sm transition-transform duration-300 ease-in-out lg:hidden"
+  class="border-cuidaty-dark/8 fixed bottom-0 left-0 right-0 z-[55] border-t bg-background/95 shadow-[0_-2px_16px_rgba(12,32,47,0.07)] backdrop-blur-sm transition-transform duration-300 ease-in-out lg:hidden"
   style="padding-bottom: env(safe-area-inset-bottom); transform: translateY(100%);"
 >
   <div class="flex items-center gap-2 px-3 py-2.5">
     <a
-      href="#contato"
+      href={waUrl}
+      target="_blank"
+      rel="noopener"
+      data-ga-event="generate_lead"
+      data-ga-location="mobile_bar"
       class="flex flex-1 items-center justify-center gap-2 rounded-lg bg-cuidaty-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors active:bg-cuidaty-primary-hover"
     >
-      <svg class="h-3.5 w-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <svg
+        class="h-3.5 w-3.5 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -72,8 +83,7 @@ const waUrl =
         const currentY = window.scrollY;
         const delta = currentY - lastScrollY;
         const pastHero = currentY > heroHeight;
-        const nearBottom =
-          window.innerHeight + currentY >= document.body.scrollHeight - 120;
+        const nearBottom = window.innerHeight + currentY >= document.body.scrollHeight - 120;
 
         if (!pastHero) {
           setVisible(false);

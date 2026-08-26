@@ -1,5 +1,7 @@
 ---
+import { whatsappUrl } from '../../lib/contact';
 
+const WA_URL = whatsappUrl('Olá! Tenho interesse em conhecer o Cuidaty.');
 ---
 
 <section id="contato" class="bg-white py-24 md:py-32">
@@ -34,7 +36,7 @@
         <ul class="space-y-6">
           <li>
             <a
-              href="https://wa.me/559691003520?text=Ol%C3%A1%21%20Tenho%20interesse%20em%20conhecer%20o%20Cuidaty."
+              href={WA_URL}
               target="_blank"
               rel="noopener"
               class="group flex items-start gap-4 text-foreground/80 transition-colors hover:text-foreground"
@@ -101,15 +103,13 @@
                 aria-hidden="true"
               >
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="1.5"></rect>
-                <path
-                  stroke-width="1.5"
-                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-                ></path>
+                <path stroke-width="1.5" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                 <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2" stroke-linecap="round"
                 ></line>
               </svg>
               <span>
-                <span class="block font-serif text-lg font-medium text-cuidaty-dark">Instagram</span>
+                <span class="block font-serif text-lg font-medium text-cuidaty-dark">Instagram</span
+                >
                 <span class="text-sm text-foreground/60 group-hover:text-foreground/80"
                   >@cuidaty_com</span
                 >
