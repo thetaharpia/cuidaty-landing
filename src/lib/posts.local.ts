@@ -13,7 +13,7 @@ export const localPosts: BlogPostFull[] = [
     slug: 'como-reduzir-glosas-psicologia-ciencia-de-dados-guias-tiss',
     excerpt:
       'A maior parte das glosas de planos de saúde não é discordância clínica, é erro formal na guia. Veja o que as operadoras exigem na emissão, quais indicadores acompanhar e como um sistema de gestão com dados estruturados corta a perda de receita do consultório.',
-    cover_image_url: '/blog/convenio_te_deve_dinheiro.png',
+    cover_image_url: '/blog/convenio_te_deve_dinheiro.webp',
     published_at: '2026-08-25T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
     tags: [
@@ -26,7 +26,7 @@ export const localPosts: BlogPostFull[] = [
       meta_title: 'Como reduzir glosas em psicologia: guias TISS, dados e faturamento',
       meta_description:
         'Reduzir glosas de convênio em clínicas de psicologia: o que os planos exigem na emissão da guia SP/SADT, códigos TUSS, prazos de recurso e como análise de dados no prontuário eletrônico recupera receita.',
-      og_image_url: null,
+      og_image_url: '/blog/convenio_te_deve_dinheiro-og.jpg',
       canonical_url: null,
     },
     content_html: `
@@ -119,7 +119,7 @@ export const localPosts: BlogPostFull[] = [
     slug: 'assedio-cometido-por-pacientes-tabu-psicologia',
     excerpt:
       'A ética clínica costuma discutir o poder do terapeuta e a vulnerabilidade do paciente. Mas existe um silêncio na profissão sobre o que acontece quando é o paciente quem cruza a linha, e a psicóloga se torna a vítima dentro da própria sala.',
-    cover_image_url: '/blog/terapia_abuso_por_pacientes.png',
+    cover_image_url: '/blog/terapia_abuso_por_pacientes.webp',
     published_at: '2026-07-22T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
     tags: [
@@ -132,7 +132,7 @@ export const localPosts: BlogPostFull[] = [
       meta_title: 'Assédio cometido por pacientes: o tabu que a psicologia não discute',
       meta_description:
         'Assédio sexual cometido por pacientes contra psicólogas: por que a empatia profissional não pode custar a integridade da terapeuta, como identificar a escalada de desvios de limites e o que fazer diante de uma violação em sessão.',
-      og_image_url: null,
+      og_image_url: '/blog/terapia_abuso_por_pacientes-og.jpg',
       canonical_url: null,
     },
     content_html: `
@@ -184,7 +184,7 @@ export const localPosts: BlogPostFull[] = [
     slug: 'ecoansiedade-medo-clima-saude-mental',
     excerpt:
       'A cada novo prognóstico hidrológico da Defesa Civil do RS, o coração de quem já viveu uma enchente dispara antes da chuva cair. Entenda por que a ecoansiedade é uma resposta legítima do corpo, e não um transtorno a ser calado.',
-    cover_image_url: '/blog/ecoansiedade-rs.png',
+    cover_image_url: '/blog/ecoansiedade-rs.webp',
     published_at: '2026-07-21T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
     tags: [
@@ -197,7 +197,7 @@ export const localPosts: BlogPostFull[] = [
       meta_title: 'Ecoansiedade no RS: o medo por trás de cada previsão de chuva',
       meta_description:
         'Ecoansiedade no Rio Grande do Sul: por que a previsão do tempo e a situação de inundação em rios como o Quaraí disparam ansiedade real. Entenda a resposta do corpo e como a psicologia pode ajudar.',
-      og_image_url: null,
+      og_image_url: '/blog/ecoansiedade-rs-og.jpg',
       canonical_url: null,
     },
     content_html: `
@@ -245,7 +245,7 @@ export const localPosts: BlogPostFull[] = [
     slug: 'psicologia-organizacional-vs-psicologia-clinica-escolhas-mercados-e-o-futuro-da-saude-mental',
     excerpt:
       'Clínica e Organizacional partiam de escopos diferentes, mas a crise de burnout no trabalho aproximou as duas áreas. Veja as diferenças de atuação, os salários no Brasil, EUA e Portugal, e por que dominar as duas visões virou vantagem competitiva.',
-    cover_image_url: '/blog/clinico_x_organizacional.png',
+    cover_image_url: '/blog/clinico_x_organizacional.webp',
     published_at: '2026-07-20T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
     tags: [
@@ -257,7 +257,7 @@ export const localPosts: BlogPostFull[] = [
       meta_title: 'Psicologia Organizacional vs. Clínica: diferenças, salários e mercado',
       meta_description:
         'Psicologia Organizacional vs. Clínica: diferenças de atuação, salários no Brasil, EUA e Portugal, e por que as duas áreas se tornaram complementares no combate ao burnout.',
-      og_image_url: null,
+      og_image_url: '/blog/clinico_x_organizacional-og.jpg',
       canonical_url: null,
     },
     content_html: `

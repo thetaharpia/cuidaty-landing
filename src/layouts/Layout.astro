@@ -32,6 +32,16 @@ const effectiveKeywords = keywords;
 
 const canonicalURL = canonical ? new URL(canonical) : new URL(Astro.url.pathname, Astro.site);
 const fullImageURL = new URL(image, Astro.site).toString();
+// og:image:type precisa bater com o arquivo real: as capas do blog usam JPEG
+// no OG (WhatsApp não gera preview de WebP de forma confiável).
+const IMAGE_MIME: Record<string, string> = {
+  jpg: 'image/jpeg',
+  jpeg: 'image/jpeg',
+  png: 'image/png',
+  webp: 'image/webp',
+};
+const imageExt = new URL(fullImageURL).pathname.split('.').pop()?.toLowerCase() ?? '';
+const imageType = IMAGE_MIME[imageExt] ?? 'image/png';
 const siteUrl = Astro.site?.toString() || 'https://cuidaty.com';
 const pathname = Astro.url.pathname;
 const isHomePage = pathname === '/';
@@ -379,12 +389,7 @@ const structuredData = [
 
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="Blog Cuidaty"
-      href="/blog/rss.xml"
-    />
+    <link rel="alternate" type="application/rss+xml" title="Blog Cuidaty" href="/blog/rss.xml" />
 
     <SEO
       title={title}
@@ -406,7 +411,7 @@ const structuredData = [
         image: {
           url: fullImageURL,
           secureUrl: fullImageURL,
-          type: 'image/png',
+          type: imageType,
           width: 1200,
           height: 630,
           alt: 'Cuidaty: sistema de gestão completa para consultórios, clínicas e hospitais com prontuário eletrônico, agenda online e automação via WhatsApp',
