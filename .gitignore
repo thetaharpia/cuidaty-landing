@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# artefatos de automação de browser (screenshots, snapshots, logs de console)
+.playwright-mcp/
