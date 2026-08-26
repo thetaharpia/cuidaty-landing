@@ -1,0 +1,552 @@
+---
+/**
+ * Demo animada de Consultoria — o painel da clínica trabalhando.
+ * História em loop: conferência antes do envio → automação ligada →
+ * faturamento por operadora. A tela nunca fica parada e nunca fica vazia:
+ * cada cena termina mostrando um resultado.
+ *
+ * CSS escopado sob .csd, script multi-instância, pausa fora da viewport.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+
+const guias = [
+  { paciente: 'M. Ribeiro', codigo: '50000470', status: 'ok' },
+  { paciente: 'A. Nogueira', codigo: '50000470', status: 'ok' },
+  { paciente: 'C. Tavares', codigo: '50000462', status: 'alerta' },
+  { paciente: 'R. Belmonte', codigo: '20104200', status: 'ok' },
+];
+
+const automacoes = [
+  { nome: 'Confirmação 24h antes', detalhe: 'WhatsApp' },
+  { nome: 'Lembrete no dia', detalhe: 'WhatsApp' },
+  { nome: 'Conferência antes do envio', detalhe: 'Convênio' },
+];
+
+const operadoras = [
+  { nome: 'SulAmérica', pct: 100 },
+  { nome: 'Geap', pct: 74 },
+  { nome: 'Unimed', pct: 57 },
+];
+---
+
+<div class:list={['csd', className]} data-csd>
+  <div class="surface">
+    <div class="appbar">
+      <span class="wdots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="wtitle">Cuidaty · Painel da clínica</span>
+      <span class="live"><i aria-hidden="true"></i>ao vivo</span>
+    </div>
+
+    <div class="screen">
+      <!-- Cena 1 · conferência antes do envio -->
+      <section class="scene show" data-scene="0" aria-label="Conferência de guias antes do envio">
+        <header class="shead">
+          <span class="stitle">Guias do dia</span>
+          <span class="sbadge">Conferindo</span>
+        </header>
+
+        <ul class="rows">
+          {
+            guias.map((g, i) => (
+              <li class="row" data-row style={`--i:${i}`}>
+                <span class="who">
+                  <span class="nm">{g.paciente}</span>
+                  <span class="cd">TUSS {g.codigo}</span>
+                </span>
+                {g.status === 'ok' ? (
+                  <span class="tag ok">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Pronta
+                  </span>
+                ) : (
+                  <span class="tag warn">
+                    <svg class="ic" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 9v4M12 17h.01M10.3 3.9L2.4 18a1.8 1.8 0 001.6 2.7h16a1.8 1.8 0 001.6-2.7L13.7 3.9a1.8 1.8 0 00-3.1 0z" />
+                    </svg>
+                    Senha vencida
+                  </span>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+
+        <footer class="sfoot" data-foot>
+          <strong>1 erro barrado</strong> antes de virar glosa
+        </footer>
+      </section>
+
+      <!-- Cena 2 · automações ligadas -->
+      <section class="scene" data-scene="1" aria-label="Automações ativas da clínica">
+        <header class="shead">
+          <span class="stitle">Automações da clínica</span>
+          <span class="sbadge">Sob medida</span>
+        </header>
+
+        <ul class="rows">
+          {
+            automacoes.map((a, i) => (
+              <li class="row" data-row style={`--i:${i}`}>
+                <span class="who">
+                  <span class="nm">{a.nome}</span>
+                  <span class="cd">{a.detalhe}</span>
+                </span>
+                <span class="switch" data-switch aria-hidden="true">
+                  <i />
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <footer class="sfoot" data-foot>
+          <strong>Rotina no automático</strong>, sem ninguém lembrando à mão
+        </footer>
+      </section>
+
+      <!-- Cena 3 · faturamento por operadora -->
+      <section class="scene" data-scene="2" aria-label="Faturamento consolidado por operadora">
+        <header class="shead">
+          <span class="stitle">Faturamento por operadora</span>
+          <span class="sbadge">Agosto</span>
+        </header>
+
+        <ul class="bars">
+          {
+            operadoras.map((o, i) => (
+              <li class="bar" data-bar style={`--i:${i};--w:${o.pct}%`}>
+                <span class="bnm">{o.nome}</span>
+                <span class="track">
+                  <span class="fill" />
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <footer class="sfoot" data-foot>
+          <strong>Todos os convênios</strong> numa tela só
+        </footer>
+      </section>
+    </div>
+
+    <div class="dots" aria-hidden="true">
+      <i class="on" data-dot></i><i data-dot></i><i data-dot></i>
+    </div>
+  </div>
+</div>
+
+<style>
+  .csd {
+    --ink: #0f1c26;
+    --muted: #64748b;
+    --line: #e6e4df;
+    --primary: #2b7fb8;
+    --good: #2f9e7e;
+    --warn: #b26a00;
+    width: 100%;
+    max-width: 30rem;
+  }
+
+  .csd .surface {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    background: #fff;
+    box-shadow:
+      0 1px 2px rgba(12, 32, 47, 0.04),
+      0 18px 40px -24px rgba(12, 32, 47, 0.28);
+  }
+
+  .csd .appbar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid var(--line);
+    background: #fbfcfc;
+    padding: 0.65rem 0.9rem;
+  }
+  .csd .wdots {
+    display: inline-flex;
+    gap: 0.28rem;
+  }
+  .csd .wdots i {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 999px;
+    background: #dfe4e8;
+  }
+  .csd .wtitle {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .csd .live {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--good);
+  }
+  .csd .live i {
+    height: 0.4rem;
+    width: 0.4rem;
+    border-radius: 999px;
+    background: var(--good);
+    animation: csd-pulse 2s ease-in-out infinite;
+  }
+
+  .csd .screen {
+    position: relative;
+    min-height: 21.5rem;
+    padding: 1.1rem 1.1rem 0.9rem;
+  }
+
+  .csd .scene {
+    position: absolute;
+    inset: 1.1rem 1.1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(6px);
+    pointer-events: none;
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s ease;
+  }
+  .csd .scene.show {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .csd .shead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-bottom: 0.7rem;
+  }
+  .csd .stitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .csd .sbadge {
+    border-radius: 999px;
+    background: #eef4f8;
+    padding: 0.15rem 0.55rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+
+  .csd .rows {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .csd .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.7rem;
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  .csd .scene.show .row {
+    animation: csd-in 0.42s ease forwards;
+    animation-delay: calc(var(--i) * 0.13s + 0.1s);
+  }
+  .csd .who {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+  }
+  .csd .nm {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .csd .cd {
+    font-size: 0.68rem;
+    color: var(--muted);
+  }
+
+  .csd .tag {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.66rem;
+    font-weight: 600;
+    opacity: 0;
+  }
+  .csd .scene.show .tag {
+    animation: csd-pop 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: calc(var(--i) * 0.13s + 0.42s);
+  }
+  .csd .tag.ok {
+    background: #e8f6f1;
+    color: var(--good);
+  }
+  .csd .tag.warn {
+    background: #fdf2e2;
+    color: var(--warn);
+  }
+  .csd .ic {
+    height: 0.75rem;
+    width: 0.75rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .csd .switch {
+    position: relative;
+    height: 1.15rem;
+    width: 2.1rem;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: #dfe4e8;
+    transition: background 0.3s ease;
+  }
+  .csd .switch i {
+    position: absolute;
+    top: 0.17rem;
+    left: 0.17rem;
+    height: 0.81rem;
+    width: 0.81rem;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(12, 32, 47, 0.25);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .csd .switch.on {
+    background: var(--good);
+  }
+  .csd .switch.on i {
+    transform: translateX(0.95rem);
+  }
+
+  .csd .bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin: 0.2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .csd .bnm {
+    display: block;
+    padding-bottom: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .csd .track {
+    display: block;
+    height: 0.6rem;
+    border-radius: 999px;
+    background: #eef1f4;
+  }
+  .csd .fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--primary), #5ac3b0);
+  }
+  .csd .scene.show .fill {
+    animation: csd-grow 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--i) * 0.12s + 0.15s);
+  }
+
+  .csd .sfoot {
+    margin-top: auto;
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    opacity: 0;
+  }
+  .csd .scene.show .sfoot {
+    animation: csd-in 0.5s ease forwards;
+    animation-delay: 0.85s;
+  }
+  .csd .sfoot strong {
+    color: var(--ink);
+  }
+
+  .csd .dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    border-top: 1px solid var(--line);
+    padding: 0.6rem;
+  }
+  .csd .dots i {
+    height: 0.3rem;
+    width: 0.3rem;
+    border-radius: 999px;
+    background: #dfe4e8;
+    transition:
+      width 0.3s ease,
+      background 0.3s ease;
+  }
+  .csd .dots i.on {
+    width: 1.1rem;
+    background: var(--primary);
+  }
+
+  @keyframes csd-in {
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes csd-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.82);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes csd-grow {
+    to {
+      width: var(--w);
+    }
+  }
+  @keyframes csd-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+  }
+
+  /* Sem movimento: tudo visível de uma vez, nada de loop. */
+  @media (prefers-reduced-motion: reduce) {
+    .csd .scene,
+    .csd .row,
+    .csd .tag,
+    .csd .sfoot {
+      opacity: 1;
+      transform: none;
+      animation: none !important;
+    }
+    .csd .fill {
+      width: var(--w);
+      animation: none !important;
+    }
+    .csd .live i {
+      animation: none;
+    }
+    .csd .screen {
+      min-height: 0;
+    }
+    .csd .scene {
+      position: static;
+      inset: auto;
+      margin-bottom: 1.5rem;
+    }
+    .csd .switch {
+      background: var(--good);
+    }
+    .csd .switch i {
+      transform: translateX(0.95rem);
+    }
+  }
+</style>
+
+<script>
+  const SCENE_MS = 4200;
+
+  document.querySelectorAll<HTMLElement>('[data-csd]').forEach((root) => {
+    const scenes = Array.from(root.querySelectorAll<HTMLElement>('.scene'));
+    const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot]'));
+    if (scenes.length < 2) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduced.matches) return;
+
+    let current = 0;
+    let timer: number | undefined;
+
+    // Os switches da cena 2 ligam em cascata, e voltam a desligar quando a
+    // cena sai, para a animação valer de novo no próximo ciclo.
+    function toggleSwitches(scene: HTMLElement, on: boolean) {
+      scene.querySelectorAll<HTMLElement>('[data-switch]').forEach((sw, i) => {
+        if (!on) {
+          sw.classList.remove('on');
+          return;
+        }
+        window.setTimeout(() => sw.classList.add('on'), 380 + i * 220);
+      });
+    }
+
+    function show(next: number) {
+      scenes.forEach((scene, i) => {
+        const active = i === next;
+        scene.classList.toggle('show', active);
+        toggleSwitches(scene, active);
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('on', i === next));
+      current = next;
+    }
+
+    function play() {
+      stop();
+      timer = window.setInterval(() => show((current + 1) % scenes.length), SCENE_MS);
+    }
+
+    function stop() {
+      if (timer) window.clearInterval(timer);
+      timer = undefined;
+    }
+
+    // Só anima em tela: fora da viewport o loop não gasta frame.
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            show(current);
+            play();
+          } else {
+            stop();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(root);
+
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
+  });
+</script>
