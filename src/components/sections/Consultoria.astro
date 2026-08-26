@@ -14,12 +14,32 @@ const results = [
   { value: 80, prefix: '−', suffix: '%', label: 'de redução nas glosas de convênio' },
 ];
 
-const convenios = ['Geap', 'SulAmérica'];
+// Alturas diferentes de propósito: no lockup da Geap a marca ocupa boa parte
+// da arte, no da SulAmérica o logotipo é uma fatia menor. Igualar a altura do
+// arquivo deixaria uma visualmente menor que a outra.
+const convenios = [
+  {
+    nome: 'Geap Saúde',
+    img: '/convenios/geap.webp',
+    site: 'https://www.geap.org.br',
+    w: 488,
+    h: 150,
+    classe: 'h-11',
+  },
+  {
+    nome: 'SulAmérica Saúde',
+    img: '/convenios/sulamerica.webp',
+    site: 'https://portal.sulamericaseguros.com.br/',
+    w: 417,
+    h: 143,
+    classe: 'h-14',
+  },
+];
 
 const pillars = [
   {
-    title: 'Consultoria, não suporte',
-    desc: 'A gente estuda a operação antes de configurar. O que entra no sistema sai de uma conversa sobre como a sua clínica trabalha.',
+    title: 'Consultoria além do suporte',
+    desc: 'Suporte no dia a dia você tem sempre. Junto vem quem estuda a operação antes de configurar, para o sistema sair de uma conversa e não de um manual padrão.',
   },
   {
     title: 'O sistema se adapta a você',
@@ -140,18 +160,34 @@ const pillars = [
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
           Integração com convênios
         </p>
-        <div class="mt-5 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+        <div class="mt-6 flex flex-wrap items-center gap-x-12 gap-y-6">
           {
-            convenios.map((nome) => (
-              <span class="font-serif text-3xl font-semibold text-cuidaty-dark md:text-4xl">
-                {nome}
-              </span>
+            convenios.map((c) => (
+              <a
+                href={c.site}
+                target="_blank"
+                rel="noopener"
+                title={`Site oficial da ${c.nome}`}
+                class="transition-opacity hover:opacity-70"
+              >
+                <img
+                  src={c.img}
+                  alt={`Logotipo ${c.nome}`}
+                  width={c.w}
+                  height={c.h}
+                  loading="lazy"
+                  decoding="async"
+                  class:list={['w-auto object-contain', c.classe]}
+                />
+              </a>
             ))
           }
         </div>
-        <p class="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-foreground/65">
-          Guias emitidas e conferidas dentro da Cuidaty, no formato que cada operadora exige. Novas
-          integrações entram conforme a necessidade da sua clínica.
+        <p class="mt-6 max-w-2xl text-[0.95rem] leading-relaxed text-foreground/65">
+          A Cuidaty é um sistema de gestão para clínicas que integra com Geap e SulAmérica: guias
+          emitidas e conferidas dentro da plataforma, no formato que cada operadora exige, com a
+          glosa mapeada por motivo. Novas integrações de convênio entram conforme a necessidade da
+          sua clínica.
         </p>
       </div>
 

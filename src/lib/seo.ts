@@ -33,6 +33,12 @@ export const homeKeywords = [
   'modelos de documentos clinicos',
   'geracao de documentos clinicos',
   'inteligencia artificial saude',
+  'sistema que integra com geap',
+  'sistema que integra com sulamerica',
+  'software para clinica que atende convenio',
+  'sistema de faturamento tiss para clinicas',
+  'gestao de convenios para clinicas',
+  'reduzir glosas de convenio',
   'gestao financeira consultorio',
   'repasse financeiro clinica',
   'gestao de equipes clinica',
@@ -64,6 +70,7 @@ export const healthFeatureList = [
   'Resumo clinico automatico a partir do audio (SOAP e outros formatos)',
   'Cuty AI: assistente clinico baseado no prontuario com a fonte citada',
   'Geracao de documentos e relatorios clinicos personalizaveis',
+  'Integracao com convenios: Geap e SulAmerica, com emissao e conferencia de guias',
   'Gestao financeira com contas a receber, fluxo de caixa e repasses',
   'Gestao de equipes com niveis de permissao',
   'Portal de agendamento para pacientes, sem login e sem app',
@@ -115,6 +122,11 @@ export const cuidatyAppSchema = {
 };
 
 export const homeFaqs = [
+  {
+    question: 'A Cuidaty integra com Geap e SulAmérica?',
+    answer:
+      'Sim. A Cuidaty integra com a Geap e com a SulAmérica: a guia é emitida e conferida dentro da plataforma, no formato que cada operadora exige, e a glosa fica mapeada por motivo e por operadora. Para clínicas que atendem convênio, isso significa menos guia devolvida por erro de preenchimento e mais visibilidade do que cada plano realmente paga. Novas integrações de convênio entram conforme a necessidade da clínica.',
+  },
   {
     question: 'O que é a Cuidaty?',
     answer:
