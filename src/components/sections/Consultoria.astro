@@ -14,6 +14,8 @@ const results = [
   { value: 80, prefix: '−', suffix: '%', label: 'de redução nas glosas de convênio' },
 ];
 
+const convenios = ['Geap', 'SulAmérica'];
+
 const pillars = [
   {
     title: 'Consultoria, não suporte',
@@ -35,20 +37,6 @@ const pillars = [
 ---
 
 <section id="consultoria" class="relative scroll-mt-24 overflow-hidden bg-[#f6faf9] py-24 md:py-32">
-  <!-- Halos suaves: profundidade no bloco claro sem virar fundo colorido -->
-  <div
-    class="pointer-events-none absolute -left-48 -top-40 h-[560px] w-[560px] rounded-full opacity-40"
-    style="background: radial-gradient(circle, #a7e9a5 0%, transparent 62%)"
-    aria-hidden="true"
-  >
-  </div>
-  <div
-    class="pointer-events-none absolute -bottom-56 -right-48 h-[560px] w-[560px] rounded-full opacity-30"
-    style="background: radial-gradient(circle, #5ac3b0 0%, transparent 62%)"
-    aria-hidden="true"
-  >
-  </div>
-
   <div class="container relative mx-auto px-5 md:px-8">
     <div class="mx-auto max-w-6xl">
       <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
@@ -147,11 +135,31 @@ const pillars = [
         </div>
       </div>
 
+      <!-- Integrações de convênio: nomes em texto, sem logotipo de terceiro -->
+      <div class="mt-16 border-t border-cuidaty-dark/10 pt-10 md:mt-20">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+          Integração com convênios
+        </p>
+        <div class="mt-5 flex flex-wrap items-baseline gap-x-8 gap-y-3">
+          {
+            convenios.map((nome) => (
+              <span class="font-serif text-3xl font-semibold text-cuidaty-dark md:text-4xl">
+                {nome}
+              </span>
+            ))
+          }
+        </div>
+        <p class="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-foreground/65">
+          Guias emitidas e conferidas dentro da Cuidaty, no formato que cada operadora exige. Novas
+          integrações entram conforme a necessidade da sua clínica.
+        </p>
+      </div>
+
       <ul class="mt-6 grid gap-5 md:grid-cols-2 md:gap-6">
         {
           pillars.map((p, i) => (
             <li
-              class="csr border-cuidaty-dark/8 rounded-2xl border bg-white/70 p-7 backdrop-blur-sm md:p-8"
+              class="csr border-cuidaty-dark/8 rounded-2xl border bg-white p-7 md:p-8"
               style={`--d:${i * 70}ms`}
             >
               <span class="block h-px w-8 bg-cuidaty-secondary" aria-hidden="true" />
