@@ -1,5 +1,6 @@
 ---
 import ConsultoriaDemo from '../demos/ConsultoriaDemo.astro';
+import { whatsappUrl } from '../../lib/contact';
 
 /**
  * Seção Consultoria — posicionamento de serviço para o gestor de clínica.
@@ -8,6 +9,12 @@ import ConsultoriaDemo from '../demos/ConsultoriaDemo.astro';
  * de serviço não ficar só no texto.
  */
 const MEETING_URL = 'https://calendly.com/pedro-thetaharpia/30min';
+
+// Gestor de clínica costuma decidir no WhatsApp antes de abrir agenda: os dois
+// caminhos ficam lado a lado, e a mensagem já chega com o contexto de clínica.
+const WA_URL = whatsappUrl(
+  'Olá! Sou responsável por uma clínica e quero entender como a Cuidaty trabalha junto com a gestão.'
+);
 
 const results = [
   { value: 100, suffix: '%', label: 'de visibilidade financeira da clínica' },
@@ -91,10 +98,10 @@ const pillars = [
               target="_blank"
               rel="noopener"
               data-ga-event="generate_lead"
-              data-ga-location="consultoria_section"
+              data-ga-location="consultoria_agenda"
               class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-primary px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-hover hover:shadow-lifted"
             >
-              Conversar sobre a minha clínica
+              Agendar uma conversa
               <svg
                 class="h-5 w-5 transition-transform group-hover:translate-x-1"
                 fill="none"
@@ -108,8 +115,26 @@ const pillars = [
                 <path d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </svg>
             </a>
-            <p class="text-sm text-foreground/50">Trinta minutos, sem compromisso.</p>
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener"
+              data-ga-event="generate_lead"
+              data-ga-location="consultoria_whatsapp"
+              class="inline-flex items-center gap-2.5 rounded-md border border-cuidaty-dark/20 px-6 py-3.5 text-base font-semibold text-cuidaty-dark transition-colors hover:border-cuidaty-dark/40 hover:bg-cuidaty-dark/[0.03]"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"
+                ></path>
+              </svg>
+              Chamar no WhatsApp
+            </a>
           </div>
+
+          <p class="csr mt-4 text-sm text-foreground/50" style="--d:200ms">
+            Trinta minutos na agenda, ou uma mensagem agora. Sem compromisso nos dois.
+          </p>
         </div>
 
         <div class="csr flex w-full justify-center lg:justify-end" style="--d:240ms">
