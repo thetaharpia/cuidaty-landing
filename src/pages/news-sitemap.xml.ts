@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getAllPostsFlat, isNewsPost, isWithinNewsWindow } from '../lib/blog.server';
+import { getAllPostsFlat, isNewsPost, isWithinNewsWindow, type BlogPost } from '../lib/blog.server';
 
 const SITE = 'https://cuidaty.com';
 
@@ -8,6 +8,17 @@ const SITE = 'https://cuidaty.com';
 const PUBLICATION_NAME = 'Blog Cuidaty';
 // ISO 639-1 de duas letras: a spec do Google News não aceita 'pt-BR' aqui.
 const PUBLICATION_LANGUAGE = 'pt';
+
+// O Google só considera para a aba Notícias o que foi publicado nas últimas
+// 48h, mas mantém a URL indexada por 30 dias e ignora (sem penalizar) o que
+// estiver fora da janela. Usamos 30 dias para o arquivo não zerar entre
+// publicações.
+const NEWS_WINDOW_HOURS = 30 * 24;
+
+// Um `<urlset>` sem nenhuma `<url>` é reportado como sitemap vazio pelo Search
+// Console. Como a Cuidaty publica em ritmo de blog, e não de redação, o feed
+// cai para os posts mais recentes quando não há notícia dentro da janela.
+const FALLBACK_LIMIT = 5;
 
 function escapeXml(value: string): string {
   return value
@@ -18,20 +29,28 @@ function escapeXml(value: string): string {
     .replace(/'/g, '&apos;');
 }
 
+function hasValidDate(post: BlogPost): boolean {
+  return !Number.isNaN(new Date(post.published_at).getTime());
+}
+
 /**
- * Sitemap no formato do Google News. Diferente do sitemap comum, ele lista
- * apenas notícias publicadas nas últimas 48 horas: é um canal de descoberta
- * rápida, não um índice do site. Fora dessa janela o artigo continua no
- * `sitemap-index.xml` normal.
+ * Sitemap no formato do Google News: canal de descoberta rápida das
+ * publicações recentes, não um índice do site. O índice completo continua
+ * no `sitemap-index.xml`.
  *
  * Renderizado a cada requisição (output: 'server') para que a janela de tempo
  * seja sempre real, e não a do momento do build.
  */
 export const GET: APIRoute = async () => {
-  const posts = await getAllPostsFlat();
-  const news = posts.filter((post) => isNewsPost(post) && isWithinNewsWindow(post));
+  const posts = (await getAllPostsFlat()).filter(hasValidDate);
 
-  const urls = news
+  const news = posts.filter(
+    (post) => isNewsPost(post) && isWithinNewsWindow(post, NEWS_WINDOW_HOURS)
+  );
+  // `getAllPostsFlat` já devolve ordenado do mais novo para o mais antigo.
+  const entries = news.length > 0 ? news : posts.slice(0, FALLBACK_LIMIT);
+
+  const urls = entries
     .map((post) => {
       const loc = `${SITE}/blog/${post.slug}/`;
       const title = escapeXml(post.title);
@@ -61,7 +80,7 @@ ${urls}
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
-      // Janela de 48h muda sozinha: cache curto para o arquivo não envelhecer.
+      // A janela muda sozinha com o tempo: cache curto para não envelhecer.
       'Cache-Control': 'public, max-age=600',
     },
   });
