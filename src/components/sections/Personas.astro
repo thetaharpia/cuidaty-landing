@@ -105,13 +105,15 @@ const plans: Plan[] = [
 <section id="planos" class="bg-white py-24 md:py-32">
   <div class="container mx-auto px-5 md:px-8">
     <!-- Cabeçalho editorial -->
-    <div class="mx-auto mb-14 grid max-w-7xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16">
+    <div
+      class="mx-auto mb-14 grid max-w-7xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16"
+    >
       <div>
         <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
           Planos
         </p>
         <h2
-          class="font-serif text-4xl font-semibold leading-[1.03] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
+          class="font-serif text-4xl font-semibold leading-[1.15] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
         >
           Um plano que<br />
           <span class="italic text-cuidaty-dark/70">acompanha seu ritmo.</span>
@@ -179,7 +181,9 @@ const plans: Plan[] = [
                   {plan.price}
                 </span>
                 {plan.cycle && (
-                  <span class:list={['text-sm', plan.dark ? 'text-white/60' : 'text-foreground/60']}>
+                  <span
+                    class:list={['text-sm', plan.dark ? 'text-white/60' : 'text-foreground/60']}
+                  >
                     {plan.cycle}
                   </span>
                 )}
@@ -187,10 +191,7 @@ const plans: Plan[] = [
             </header>
 
             <div
-              class:list={[
-                'mt-6 border-t pt-6',
-                plan.dark ? 'border-white/15' : 'border-border',
-              ]}
+              class:list={['mt-6 border-t pt-6', plan.dark ? 'border-white/15' : 'border-border']}
             >
               {plan.inherits && (
                 <p
@@ -203,7 +204,12 @@ const plans: Plan[] = [
                 </p>
               )}
 
-              <ul class:list={['space-y-3 text-sm', plan.dark ? 'text-white/80' : 'text-foreground/75']}>
+              <ul
+                class:list={[
+                  'space-y-3 text-sm',
+                  plan.dark ? 'text-white/80' : 'text-foreground/75',
+                ]}
+              >
                 {plan.features.map((feature) => (
                   <li class="flex gap-2.5">
                     <svg

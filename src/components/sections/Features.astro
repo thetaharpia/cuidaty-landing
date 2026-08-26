@@ -81,13 +81,15 @@ const tabs = [
 
 <section id="funcionalidades" class="bg-white py-24 md:py-32">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto mb-12 grid max-w-6xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16">
+    <div
+      class="mx-auto mb-12 grid max-w-6xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16"
+    >
       <div>
         <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
           Entrega de valor
         </p>
         <h2
-          class="font-serif text-4xl font-semibold leading-[1.03] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
+          class="font-serif text-4xl font-semibold leading-[1.15] tracking-tight text-cuidaty-dark md:text-5xl lg:text-6xl"
         >
           Tecnologia que<br />
           <span class="italic text-cuidaty-dark/70">acolhe em silêncio.</span>
@@ -115,7 +117,7 @@ const tabs = [
               aria-selected={i === 0 ? 'true' : 'false'}
               tabindex={i === 0 ? 0 : -1}
               data-tab={tab.id}
-              class="tab inline-flex flex-shrink-0 items-center gap-2 rounded-full border border-cuidaty-dark/12 bg-white px-4 py-2.5 text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
+              class="tab border-cuidaty-dark/12 inline-flex flex-shrink-0 items-center gap-2 rounded-full border bg-white px-4 py-2.5 text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
             >
               <Icon name={tab.icon} size={16} />
               {tab.label}
@@ -160,12 +162,20 @@ const tabs = [
                   >
                     {tab.title}
                   </h3>
-                  <p class="mb-5 leading-relaxed text-foreground/70 lg:mb-8 lg:text-lg" data-anim style="--d:130ms">
+                  <p
+                    class="mb-5 leading-relaxed text-foreground/70 lg:mb-8 lg:text-lg"
+                    data-anim
+                    style="--d:130ms"
+                  >
                     {tab.desc}
                   </p>
                   <ul class="space-y-2.5 lg:space-y-3">
                     {tab.points.map((point, pi) => (
-                      <li class="flex gap-3 text-foreground/75" data-anim style={`--d:${190 + pi * 60}ms`}>
+                      <li
+                        class="flex gap-3 text-foreground/75"
+                        data-anim
+                        style={`--d:${190 + pi * 60}ms`}
+                      >
                         <span
                           class="mt-2.5 h-px w-4 flex-shrink-0 bg-cuidaty-secondary lg:mt-3 lg:w-5"
                           aria-hidden="true"
