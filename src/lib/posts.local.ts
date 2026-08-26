@@ -7,6 +7,112 @@ import type { BlogPostFull } from './blog.server';
  */
 export const localPosts: BlogPostFull[] = [
   {
+    id: -4,
+    title: 'O Convênio Te Deve Dinheiro, e Você Nem Sabe',
+    subtitle: 'A sessão que você atendeu, o plano negou e quase ninguém vai atrás de receber',
+    slug: 'como-reduzir-glosas-psicologia-ciencia-de-dados-guias-tiss',
+    excerpt:
+      'A maior parte das glosas de planos de saúde não é discordância clínica, é erro formal na guia. Veja o que as operadoras exigem na emissão, quais indicadores acompanhar e como um sistema de gestão com dados estruturados corta a perda de receita do consultório.',
+    cover_image_url: '/blog/convenio_te_deve_dinheiro.png',
+    published_at: '2026-08-25T00:00:00.000Z',
+    author: { name: 'Equipe Cuidaty' },
+    tags: [
+      { name: 'Gestão de Clínica', slug: 'gestao-de-clinica' },
+      { name: 'Convênios', slug: 'convenios' },
+      { name: 'Faturamento TISS', slug: 'faturamento-tiss' },
+      { name: 'Ciência de Dados', slug: 'ciencia-de-dados' },
+    ],
+    seo: {
+      meta_title: 'Como reduzir glosas em psicologia: guias TISS, dados e faturamento',
+      meta_description:
+        'Reduzir glosas de convênio em clínicas de psicologia: o que os planos exigem na emissão da guia SP/SADT, códigos TUSS, prazos de recurso e como análise de dados no prontuário eletrônico recupera receita.',
+      og_image_url: null,
+      canonical_url: null,
+    },
+    content_html: `
+<p>Uma sessão glosada parece pouco. Cento e vinte reais, cento e cinquenta, some da conta e ninguém percebe no mês. Agora multiplique por doze pacientes de convênio, quatro sessões cada, todo mês, e o número deixa de ser detalhe: vira a diferença entre a clínica fechar no azul ou no vermelho.</p>
+
+<p>E o pior é que quase nada disso é discordância clínica. É formulário.</p>
+
+<h2>A glosa é quase sempre um erro formal, não uma disputa técnica</h2>
+
+<p>Os dados hospitalares deixam isso evidente. O <a href="https://www.anahp.com.br/publicacoes/observatorio-anahp-2025/" target="_blank" rel="noopener noreferrer">Observatório Anahp 2025</a> acompanha dois indicadores que costumam ser confundidos. O primeiro é a <strong>glosa inicial</strong>, o que a operadora nega de largada, ainda em negociação: subiu de 11,89% em 2023 para 15,89% em 2024 entre os hospitais associados (Tabela 1, capítulo de Gestão Econômico-Financeira). O segundo é a <strong>glosa aceita</strong>, o valor que o hospital desistiu de cobrar e lançou como perda definitiva: ficou em 1,96% da receita bruta de convênios no mesmo ano (Gráfico 8).</p>
+
+<p>Os dois números têm bases de cálculo diferentes, então não dá para subtrair um do outro e cravar um percentual de recuperação. Mas a ordem de grandeza conta a história sozinha: o que é negado de saída é várias vezes maior do que o que vira prejuízo no fim da linha. A maior parte da glosa não sobrevive à contestação, porque nunca teve razão de existir.</p>
+
+<p>O custo dessa disputa aparece em outro indicador do mesmo relatório. O índice de recebimento caiu de 91,27% para 88,61% entre 2023 e 2024, e a inadimplência das operadoras saltou de 49,96% para 61,53%. O dinheiro até volta, mas volta tarde e depois de alguém provar que era devido. Num consultório sem estrutura de faturamento, esse alguém não existe, e a glosa indevida vira perda por desistência.</p>
+
+<p>As glosas se dividem em três tipos. A <strong>administrativa</strong> vem de falha formal: código errado, guia incompleta, senha vencida, prazo estourado. A <strong>técnica</strong> questiona a pertinência do procedimento. A <strong>linear</strong> é um corte percentual aplicado sem análise item a item. Em clínicas de psicologia, a esmagadora maioria é administrativa. Ou seja: evitável antes do envio, não depois.</p>
+
+<h2>O que o plano exige quando você emite a guia</h2>
+
+<p>O faturamento com operadoras segue o padrão TISS da ANS, hoje na versão 4.01.00. Para psicoterapia, o documento é a guia SP/SADT, que cobre consultas com procedimento, terapias e atendimentos de equipe não médica. Cada campo dela é um ponto potencial de glosa.</p>
+
+<p><strong>Elegibilidade do beneficiário.</strong> Número da carteirinha correto, plano ativo, validade dentro da data de atendimento. Paciente que trocou de plano no meio do tratamento e não avisou é causa clássica de guia negada em bloco.</p>
+
+<p><strong>Senha de autorização e validade.</strong> Consulta em psicologia e psicoterapia individual costumam exigir autorização prévia. A senha tem número, quantidade de sessões liberadas e prazo de validade. Em operadoras de alto volume na psicologia, como SulAmérica e Geap, é aqui que mora a maior parte da perda: o tratamento é contínuo e a autorização é finita. Executar a décima primeira sessão de um pacote de dez, ou atender três dias depois do vencimento da senha, gera glosa certa. Cada operadora tem sua própria regra de quantidade e renovação, e é responsabilidade da clínica acompanhar cada uma.</p>
+
+<p><strong>Código TUSS correto.</strong> Consulta em psicologia (50000462), sessão de psicoterapia individual por psicólogo (50000470), sessão de psicoterapia individual (20104219), psicoterapia de grupo por paciente (20104200). Trocar o código do procedimento pelo da consulta, ou usar um código que a operadora não contrata, derruba o item.</p>
+
+<p><strong>Dados de execução.</strong> Data de atendimento, número do conselho e CBO do profissional executante, quantidade executada compatível com a autorizada, CID quando o contrato exigir, assinatura do beneficiário comprovando a presença.</p>
+
+<p><strong>Prazo de envio do lote e prazo de recurso.</strong> Os dois são contratuais e correm em paralelo. Perder a janela de contestação transforma uma glosa recuperável em perda definitiva, mesmo quando você tinha razão.</p>
+
+<p>O consultório de psicologia sofre um agravante estrutural aqui. O faturamento é de alto volume e baixo valor unitário: dezenas de eventos semanais recorrentes, cada um com pouca receita. Conferir manualmente sessão por sessão custa mais caro que a própria sessão. É exatamente esse tipo de problema que dado estruturado resolve bem.</p>
+
+<h2>Onde entra a ciência de dados</h2>
+
+<p>Glosa é um evento altamente repetitivo, com causa codificada e histórico. Isso a torna previsível. Não no sentido de adivinhação, mas no sentido estatístico: a mesma operadora nega o mesmo campo, pelo mesmo motivo, mês após mês.</p>
+
+<p><strong>Classificação por motivo e por operadora.</strong> O primeiro passo é parar de tratar glosa como acidente isolado e começar a tabular. Motivo, operadora, profissional executante, procedimento, valor, data. Em três meses de registro, o padrão aparece sozinho. É comum descobrir que dois motivos concentram mais da metade da perda, e que uma única operadora responde pela maior parte do prejuízo.</p>
+
+<p><strong>Regras preventivas antes do envio.</strong> Uma vez que o padrão está mapeado, ele vira checagem automática. Senha próxima do vencimento, saldo de sessões autorizadas chegando a zero, carteirinha com validade expirando, procedimento sem código compatível com o contrato daquela operadora. O sistema avisa antes, não depois.</p>
+
+<p><strong>Monitoramento do saldo de autorização.</strong> Em psicoterapia, o tratamento é longo e a autorização é curta. Acompanhar quantas sessões restam em cada senha, por paciente, evita o cenário mais frustrante de todos: atender por semanas sem cobertura ativa e descobrir na hora do faturamento.</p>
+
+<p><strong>Indicadores de acompanhamento.</strong> Quatro números dizem quase tudo sobre a saúde do faturamento de convênio: taxa de glosa inicial, taxa de glosa final (o que sobrou depois dos recursos), percentual recuperado em contestação e prazo médio entre atendimento e recebimento. Sem esses quatro, gestão de convênio é palpite.</p>
+
+<p><strong>Renegociação com base em evidência.</strong> Esse é o uso menos óbvio e talvez o mais valioso. Chegar numa renegociação de contrato com a taxa de glosa daquela operadora, o motivo dominante e o valor retido no ano muda completamente a conversa. Sem dados, você reclama. Com dados, você negocia.</p>
+
+<h2>Todos os demonstrativos numa tela só</h2>
+
+<p>O obstáculo prático para tudo o que está acima é que cada operadora devolve seu demonstrativo do seu jeito, no seu portal, no seu prazo e no seu leiaute. Quem atende SulAmérica e Geap conhece bem a cena: dois acessos diferentes, dois arquivos que não conversam, duas lógicas de numeração de guia. Some mais três convênios e a clínica tem cinco planilhas e nenhuma visão do conjunto. É por isso que quase ninguém sabe responder quanto perdeu de glosa no ano passado.</p>
+
+<p>Consolidar esses retornos num só lugar muda a pergunta que você consegue fazer. Deixa de ser “essa guia foi negada?” e passa a ser “qual operadora está me custando mais caro?”. O painel abaixo é um exemplo do formato:</p>
+
+<figure>
+<div style="overflow-x:auto">
+<svg viewBox="0 0 720 404" width="100%" role="img" aria-labelledby="glosaTitulo glosaDesc" xmlns="http://www.w3.org/2000/svg" style="min-width:620px;font-family:Figtree, ui-sans-serif, system-ui, sans-serif"><title id="glosaTitulo">Demonstrativos consolidados de todas as operadoras</title><desc id="glosaDesc">Valor apresentado e valor glosado por operadora em um unico painel. Total apresentado de R$ 48.600, total glosado de R$ 6.620, taxa de glosa de 13.6 por cento.</desc><rect x="0.5" y="0.5" width="719" height="403" rx="12" fill="#ffffff" stroke="#e6e4df"/><text x="24" y="36" font-size="17" font-weight="600" fill="#0f1c26">Demonstrativos consolidados</text><text x="24" y="55" font-size="12" fill="#475569">Todas as operadoras, competência de agosto/2026</text><rect x="24" y="68" width="218" height="60" rx="8" fill="#f0f4f8"/><text x="38" y="91" font-size="10" font-weight="600" letter-spacing="0.08em" fill="#475569">APRESENTADO</text><text x="38" y="117" font-size="21" font-weight="600" fill="#0f1c26">R$ 48.600</text><rect x="251" y="68" width="218" height="60" rx="8" fill="#f0f4f8"/><rect x="265" y="83" width="8" height="8" rx="2" fill="#d9534f"/><text x="278" y="91" font-size="10" font-weight="600" letter-spacing="0.08em" fill="#475569">GLOSADO</text><text x="265" y="117" font-size="21" font-weight="600" fill="#0f1c26">R$ 6.620</text><rect x="478" y="68" width="218" height="60" rx="8" fill="#f0f4f8"/><text x="492" y="91" font-size="10" font-weight="600" letter-spacing="0.08em" fill="#475569">TAXA DE GLOSA</text><text x="492" y="117" font-size="21" font-weight="600" fill="#0f1c26">13,6%</text><text x="24" y="158" font-size="10" font-weight="600" letter-spacing="0.08em" fill="#475569">POR OPERADORA</text><line x1="142" y1="170" x2="142" y2="358" stroke="#e6e4df"/><g><title>SulAmérica: R$ 16.800 apresentado, R$ 2.520 glosado</title><text x="24" y="189.0" font-size="13" fill="#0f1c26">SulAmérica</text><rect x="150" y="176" width="373.7" height="16" rx="3" fill="#2b7fb8"/><rect x="525.7" y="176" width="66.3" height="16" rx="3" fill="#d9534f"/><text x="602.0" y="189.0" font-size="12" fill="#0f1c26">R$ 2.520 <tspan fill="#475569">(15%)</tspan></text></g><g><title>Geap: R$ 12.400 apresentado, R$ 2.480 glosado</title><text x="24" y="229.0" font-size="13" fill="#0f1c26">Geap</text><rect x="150" y="216" width="259.0" height="16" rx="3" fill="#2b7fb8"/><rect x="411.0" y="216" width="65.2" height="16" rx="3" fill="#d9534f"/><text x="486.2" y="229.0" font-size="12" fill="#0f1c26">R$ 2.480 <tspan fill="#475569">(20%)</tspan></text></g><g><title>Unimed: R$ 9.600 apresentado, R$ 960 glosado</title><text x="24" y="269.0" font-size="13" fill="#0f1c26">Unimed</text><rect x="150" y="256" width="225.3" height="16" rx="3" fill="#2b7fb8"/><rect x="377.3" y="256" width="25.3" height="16" rx="3" fill="#d9534f"/><text x="412.6" y="269.0" font-size="12" fill="#0f1c26">R$ 960 <tspan fill="#475569">(10%)</tspan></text></g><g><title>Bradesco Saúde: R$ 6.200 apresentado, R$ 372 glosado</title><text x="24" y="309.0" font-size="13" fill="#0f1c26">Bradesco Saúde</text><rect x="150" y="296" width="151.3" height="16" rx="3" fill="#2b7fb8"/><rect x="303.3" y="296" width="9.8" height="16" rx="3" fill="#d9534f"/><text x="323.1" y="309.0" font-size="12" fill="#0f1c26">R$ 372 <tspan fill="#475569">(6%)</tspan></text></g><g><title>Amil: R$ 3.600 apresentado, R$ 288 glosado</title><text x="24" y="349.0" font-size="13" fill="#0f1c26">Amil</text><rect x="150" y="336" width="85.1" height="16" rx="3" fill="#2b7fb8"/><rect x="237.1" y="336" width="7.6" height="16" rx="3" fill="#d9534f"/><text x="254.7" y="349.0" font-size="12" fill="#0f1c26">R$ 288 <tspan fill="#475569">(8%)</tspan></text></g><rect x="24" y="373" width="10" height="10" rx="2" fill="#2b7fb8"/><text x="40" y="382" font-size="12" fill="#475569">Recebido</text><rect x="114" y="373" width="10" height="10" rx="2" fill="#d9534f"/><text x="130" y="382" font-size="12" fill="#475569">Glosado</text><text x="696" y="382" font-size="11" text-anchor="end" fill="#94a3b8">Dados ilustrativos</text></svg>
+</div>
+<figcaption>Exemplo ilustrativo de consolidação de demonstrativos por operadora. Valores fictícios.</figcaption>
+</figure>
+
+<p>Compare as duas primeiras linhas e o problema fica evidente. A SulAmérica é o maior faturamento do mês e também a maior perda absoluta, R$ 2.520. Olhando só essa coluna, é nela que você mexe primeiro. Só que a Geap fatura 26% menos e glosa praticamente o mesmo valor, R$ 2.480, porque a taxa dela é de 20% contra 15% da SulAmérica. Proporcionalmente, a Geap é a pior conta da clínica, e ela some da vista de quem só olha valor absoluto.</p>
+
+<p>As duas leituras importam, e elas pedem ações diferentes. O volume absoluto da SulAmérica diz onde há mais dinheiro parado para recuperar em recurso, agora. A taxa da Geap diz que existe algo estruturalmente errado ali: ou o preenchimento da guia não atende ao que aquela operadora exige, ou o contrato precisa ser renegociado. Recorrer todo mês sem corrigir a causa é enxugar gelo.</p>
+
+<p>Com o histórico acumulado, esse mesmo painel responde se a taxa da Geap está subindo mês a mês, se um profissional específico concentra as glosas por preenchimento e quanto do total negado voltou depois do recurso. Sem consolidação, cada demonstrativo é um susto isolado. Com ela, viram série histórica.</p>
+
+<h2>O prontuário é a prova do recurso</h2>
+
+<p>Contestar glosa técnica sem registro clínico é discussão perdida. A operadora questiona a pertinência, e a resposta precisa ser documental: evolução da sessão registrada na data correta, indicação clínica, plano terapêutico, frequência justificada.</p>
+
+<p>Prontuário eletrônico estruturado resolve isso por consequência, não por esforço extra. Se o registro já é feito no dia, com campos organizados e vinculado ao paciente e ao convênio, montar um recurso deixa de ser garimpo em pastas e vira exportação de documento. A diferença entre recuperar o valor glosado e desistir dele geralmente está aí, no custo operacional de provar o óbvio.</p>
+
+<h2>O que um sistema de gestão precisa entregar</h2>
+
+<p>Nenhuma dessas análises acontece com dados espalhados entre caderno, planilha e memória. Elas dependem de uma base única onde paciente, convênio, agenda, atendimento e financeiro conversam.</p>
+
+<p>Na <a href="https://app.cuidaty.com/register" target="_blank" rel="noopener noreferrer">Cuidaty</a>, esse alicerce começa no plano Básico: cadastro de paciente com dados de convênio, agenda com recorrência, prontuário eletrônico completo, financeiro com faturas e dashboard, formulários e relatórios exportáveis em PDF. É o mínimo para que cada sessão vire um registro consultável, e não uma anotação solta.</p>
+
+<p>Para quem opera em escala, o plano Clínicas e Grupos adiciona a camada de inteligência de negócio: analytics avançado de operação, multiunidade, equipes com permissão por cargo e prontuário, migração de dados de outras plataformas. Uma rede com várias unidades e dezenas de profissionais precisa comparar taxa de glosa entre filiais e entre executantes para saber onde intervir. Isso é problema de dados agregados, não de esforço individual.</p>
+
+<p>Vale a ressalva honesta: a Cuidaty organiza a base clínica, financeira e de convênio que sustenta esse trabalho. A transmissão do lote no padrão TISS continua acontecendo no portal da operadora ou no faturador que a clínica já usa. O ponto é que a qualidade do que você envia, e a sua capacidade de contestar o que volta, dependem do que está registrado antes.</p>
+
+<p>Glosa não se ganha no recurso. Se ganha no cadastro, na senha conferida e no registro feito no dia certo.</p>
+`,
+  },
+  {
     id: -3,
     title: 'Antes de Terapeuta, Mulher: O Tabu do Assédio Cometido por Pacientes',
     subtitle: 'O que fazer quando quem deveria ser cuidado cruza o limite',
