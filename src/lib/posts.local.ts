@@ -14,7 +14,7 @@ export const localPosts: BlogPostFull[] = [
       'Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona? Lori Gottlieb respondeu isso num livro inteiro, e a resposta é o melhor jeito de comemorar o 27 de agosto',
     slug: 'dia-do-psicologo-27-de-agosto-homenagem-cuidaty',
     excerpt:
-      'Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona? Em "Talvez você deva conversar com alguém", Lori Gottlieb conta exatamente isso. No Dia do Psicólogo, 27 de agosto, a Cuidaty tira do livro quatro lições para levar para a vida e para o consultório, e se posiciona ao lado da categoria nas suas pautas de valorização.',
+      'Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona? Em "Talvez você deva conversar com alguém", Lori Gottlieb conta exatamente isso. No Dia do Psicólogo, 27 de agosto, a Cuidaty tira do livro quatro lições para levar para a vida e para o consultório.',
     cover_image_url: '/blog/4_licoes_dia_psicologo_capa.webp',
     published_at: '2026-08-27T00:00:00.000Z',
     author: { name: 'Equipe Cuidaty' },
@@ -27,7 +27,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Dia do Psicólogo (27/08): lições de "Talvez você deva conversar com alguém"',
       meta_description:
-        'Dia do Psicólogo, 27 de agosto: quatro lições do livro de Lori Gottlieb para levar para a vida e para o consultório. Sobre a humanidade do terapeuta, o cuidado com quem cuida e por que a Cuidaty apoia as pautas da saúde mental brasileira.',
+        'Dia do Psicólogo, 27 de agosto: quatro lições do livro de Lori Gottlieb para levar para a vida e para o consultório. Sobre a humanidade do terapeuta, o cuidado com quem cuida e o que sustenta o acolhimento na clínica.',
       og_image_url: '/blog/4_licoes_dia_psicologo_capa-og.jpg',
       canonical_url: null,
     },
@@ -59,9 +59,15 @@ export const localPosts: BlogPostFull[] = [
 
 <h2>Lição 2: quem faz alguém soltar as grades é uma pessoa, não uma técnica</h2>
 
-<p>Tem uma imagem no livro que virou quase um clichê justamente porque acerta demais. A pessoa está numa cela, segurando as grades com força, gritando por socorro. Só que a cela tem uma porta. A porta está aberta. E ninguém consegue enxergar isso enquanto estiver com as duas mãos ocupadas segurando as grades.</p>
+<p>Numa das sessões, Wendell descreve um desenho clássico que virou a imagem central do livro. Um prisioneiro sacode as grades da cela com toda a força, desesperado para sair. Só que as grades existem apenas na frente dele. Dos dois lados, a cela é aberta. Bastava contornar.</p>
 
-<p>Quem faz a pessoa soltar não é um protocolo. É outro ser humano, sentado ali, disposto a ficar na cela junto por um tempo até que dê para olhar em volta.</p>
+<p>Ninguém enxerga isso enquanto está com as duas mãos ocupadas segurando as grades. E quem faz a pessoa soltar não é um protocolo. É outro ser humano, sentado ali, disposto a ficar na cela junto por um tempo até que dê para olhar em volta.</p>
+<figure style="margin:2.5rem 0">
+<div style="overflow-x:auto">
+<svg viewBox="0 0 720 320" width="100%" role="img" aria-labelledby="celaTitulo celaDesc" xmlns="http://www.w3.org/2000/svg" style="min-width:520px;font-family:Figtree, ui-sans-serif, system-ui, sans-serif"><title id="celaTitulo">A cela com grades só na frente</title><desc id="celaDesc">Um prisioneiro segura as grades de uma cela. As grades existem apenas na frente dele. Dos dois lados a cela e aberta e ha passagem livre, indicada por setas.</desc><rect x="0.5" y="0.5" width="719" height="319" rx="12" fill="#ffffff" stroke="#e6e4df"/><line x1="70" y1="258" x2="650" y2="258" stroke="#e6e4df" stroke-width="2"/><g fill="#8b98a5"><circle cx="352" cy="136" r="16"/><path d="M322 258v-54q0-30 30-30t30 30v54z"/></g><g stroke="#8b98a5" stroke-width="9" stroke-linecap="round"><line x1="336" y1="188" x2="328" y2="170"/><line x1="368" y1="188" x2="376" y2="170"/></g><g stroke="#0f1c26" stroke-width="7" stroke-linecap="round"><line x1="280" y1="70" x2="280" y2="258"/><line x1="328" y1="70" x2="328" y2="258"/><line x1="376" y1="70" x2="376" y2="258"/><line x1="424" y1="70" x2="424" y2="258"/><line x1="276" y1="70" x2="428" y2="70"/></g><g fill="#8b98a5"><circle cx="328" cy="168" r="9"/><circle cx="376" cy="168" r="9"/></g><g stroke="#0f1c26" stroke-width="2" stroke-linecap="round" opacity="0.4"><line x1="316" y1="140" x2="308" y2="136"/><line x1="316" y1="152" x2="307" y2="152"/><line x1="388" y1="140" x2="396" y2="136"/><line x1="388" y1="152" x2="397" y2="152"/></g><g stroke="#5ac3b0" stroke-width="2.5" stroke-linecap="round" fill="none"><path d="M254 170q-48 0-48 42t0 34" stroke-dasharray="7 8"/><path d="M199 234l7 12 7-12"/><path d="M450 170q48 0 48 42t0 34" stroke-dasharray="7 8"/><path d="M491 234l7 12 7-12"/></g><text x="206" y="152" font-size="12" font-weight="600" letter-spacing="0.08em" text-anchor="middle" fill="#0f1c26">ABERTO</text><text x="498" y="152" font-size="12" font-weight="600" letter-spacing="0.08em" text-anchor="middle" fill="#0f1c26">ABERTO</text><text x="352" y="294" font-size="13" text-anchor="middle" fill="#475569">As grades existem só na frente. Dos dois lados, basta contornar.</text><text x="696" y="36" font-size="11" text-anchor="end" fill="#94a3b8">Capítulo 22, “Prisão”</text></svg>
+</div>
+<figcaption>Ilustração da Cuidaty a partir da imagem que Wendell descreve no capítulo 22 de <em>Talvez você deva conversar com alguém</em>.</figcaption>
+</figure>
 
 <p>O paciente não se sente acolhido porque a interpretação foi tecnicamente correta. Ele se sente acolhido porque percebe, de um jeito pré-verbal, que tem alguém inteiro na sala. Alguém que também já perdeu gente, também já teve medo do futuro, também já ficou sem saber o que fazer da própria vida num domingo à tarde. É essa presença que sustenta a aliança terapêutica. A técnica organiza o trabalho. A humanidade é o que faz o trabalho acontecer.</p>
 
@@ -86,18 +92,6 @@ export const localPosts: BlogPostFull[] = [
 <p>Ninguém entra numa sala de atendimento pela primeira vez se sentindo pronto. Gottlieb, veterana, descreve exatamente a mesma dúvida diante de casos difíceis. A diferença entre o estudante e o profissional experiente não é a ausência de dúvida. É o que cada um faz com ela: leva para a supervisão, estuda, discute, tolera não saber por mais tempo sem se desesperar.</p>
 
 <p>Vocês estão entrando numa profissão que o Brasil precisa com urgência. E vão entrar num mercado que ainda não paga o que essa urgência vale. As duas coisas são verdade ao mesmo tempo, e é bom saber disso desde já.</p>
-
-<h2>Onde a Cuidaty se posiciona</h2>
-
-<p>Homenagem que só distribui elogio no dia 27 e vira as costas no dia 28 é marketing. Então vamos ser específicos.</p>
-
-<p>A Cuidaty está ao lado da categoria nas suas reivindicações. Piso salarial digno. Jornada compatível com a natureza clínica do trabalho, porque escutar sofrimento não é atividade que se estica indefinidamente sem consequência. Remuneração justa nos convênios, onde o valor pago por sessão está congelado há tempo demais enquanto o custo de manter um consultório só sobe. Condições reais de trabalho na saúde pública, nos CAPS, nas unidades básicas, nas escolas, onde a demanda cresce muito mais rápido que a estrutura. Fim da precarização por plataformas que transformam atendimento clínico em corrida por volume.</p>
-
-<p>Essas pautas não são disputa corporativa. Psicólogo mal pago e sobrecarregado atende pior, adoece mais e abandona a profissão antes. Quem paga essa conta no fim é o paciente.</p>
-
-<p>E fazemos questão de deixar claro: esse apoio não é condicionado a você ser cliente nosso. Vale para quem usa a Cuidaty e para quem nunca ouviu falar da gente. Somos parceiros da comunidade de saúde mental brasileira inteira, não da nossa base de assinantes.</p>
-
-<p>O que a gente pode fazer, faz do nosso jeito: tirar do seu caminho a parte burocrática que consome tempo clínico. Agenda, prontuário, cobrança, guia de convênio, aquele bloco de horas que some com administração e nunca aparece na conta de ninguém. Não é o mais importante do seu trabalho. Mas é o que rouba a energia que deveria estar sobrando para o mais importante.</p>
 
 <h2>Feliz Dia do Psicólogo</h2>
 
