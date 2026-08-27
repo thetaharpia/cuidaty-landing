@@ -127,7 +127,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Dia do Psicólogo (27/08): lições de "Talvez você deva conversar com alguém"',
       meta_description:
-        'Dia do Psicólogo, 27 de agosto: quatro lições do livro de Lori Gottlieb para levar para a vida e para o consultório. Sobre a humanidade do terapeuta, o cuidado com quem cuida e o que sustenta o acolhimento na clínica.',
+        'Dia do Psicólogo: quatro lições de Lori Gottlieb sobre a humanidade do terapeuta, o afeto na clínica e por que cuidar de quem cuida não é luxo.',
       og_image_url: '/blog/4_licoes_dia_psicologo_capa-og.jpg',
       canonical_url: null,
     },
@@ -149,7 +149,7 @@ export const localPosts: BlogPostFull[] = [
 
 <p style="text-align:center;font-size:0.95rem"><a href="https://www.amazon.com.br/Talvez-voc%C3%AA-deva-conversar-algu%C3%A9m/dp/6599039812" target="_blank" rel="noopener noreferrer nofollow">Comprar impresso na Amazon</a> · <a href="https://www.kobo.com/br/pt/ebook/talvez-voce-deva-conversar-com-alguem" target="_blank" rel="noopener noreferrer nofollow">Comprar ebook na Kobo</a><br /><span style="color:#94a3b8;font-size:0.85rem">Links sem afiliação: a Cuidaty não ganha nada com a sua compra.</span></p>
 
-<p>Hoje é 27 de agosto, Dia do Psicólogo, data que marca a regulamentação da profissão no Brasil, em 1962. E a homenagem mais honesta que a gente consegue fazer não começa elogiando técnica, formação ou currículo. Começa exatamente onde a Gottlieb começa. Separamos quatro lições do livro para levar para a vida, e para dentro do consultório.</p>
+<p>Hoje é 27 de agosto, Dia do Psicólogo, data que marca a <a href="/blog/regulamentacao-da-psicoterapia-senado-cdh-fiscalizacao/">regulamentação da profissão</a> no Brasil, em 1962. E a homenagem mais honesta que a gente consegue fazer não começa elogiando técnica, formação ou currículo. Começa exatamente onde a Gottlieb começa. Separamos quatro lições do livro para levar para a vida, e para dentro do consultório.</p>
 
 <h2>Lição 1: a linha entre quem cuida e quem precisa de cuidado não existe</h2>
 
@@ -183,7 +183,7 @@ export const localPosts: BlogPostFull[] = [
 
 <p>Escutar dor alheia quarenta horas por semana cobra caro. Fadiga por compaixão, esgotamento, aquela sensação de estar drenado num nível que férias não resolvem. Psicólogo não é feito de material diferente do resto das pessoas.</p>
 
-<p>O livro é, no fundo, a demonstração prática disso: uma terapeuta experiente, com anos de clínica nas costas, que precisou de terapia para continuar exercendo. Supervisão, terapia própria, descanso, agenda que caiba num ser humano. Nada disso é mimo. É infraestrutura da profissão.</p>
+<p>E o desgaste nem sempre vem do volume. Às vezes vem de uma sessão só, como nos casos em que <a href="/blog/assedio-cometido-por-pacientes-tabu-psicologia/">é o paciente quem cruza o limite</a>. O livro é, no fundo, a demonstração prática disso: uma terapeuta experiente, com anos de clínica nas costas, que precisou de terapia para continuar exercendo. Supervisão, terapia própria, descanso, agenda que caiba num ser humano. Nada disso é mimo. É infraestrutura da profissão.</p>
 
 <h2>E aos estudantes de psicologia</h2>
 
@@ -221,7 +221,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Como reduzir glosas em psicologia: guias TISS, dados e faturamento',
       meta_description:
-        'Reduzir glosas de convênio em clínicas de psicologia: o que os planos exigem na emissão da guia SP/SADT, códigos TUSS, prazos de recurso e como análise de dados no prontuário eletrônico recupera receita.',
+        'Glosa de convênio quase sempre é erro de guia, não disputa clínica. O que os planos exigem, códigos TUSS, prazos de recurso e como recuperar a receita.',
       og_image_url: '/blog/convenio_te_deve_dinheiro-og.jpg',
       canonical_url: null,
     },
@@ -291,7 +291,7 @@ export const localPosts: BlogPostFull[] = [
 
 <h2>O prontuário é a prova do recurso</h2>
 
-<p>Contestar glosa técnica sem registro clínico é discussão perdida. A operadora questiona a pertinência, e a resposta precisa ser documental: evolução da sessão registrada na data correta, indicação clínica, plano terapêutico, frequência justificada.</p>
+<p>Contestar glosa técnica sem registro clínico é discussão perdida, e a lógica vale muito além do convênio: é a mesma prova que te defende numa <a href="/blog/regulamentacao-da-psicoterapia-senado-cdh-fiscalizacao/">fiscalização do conselho</a>. A operadora questiona a pertinência, e a resposta precisa ser documental: evolução da sessão registrada na data correta, indicação clínica, plano terapêutico, frequência justificada.</p>
 
 <p>Prontuário eletrônico estruturado resolve isso por consequência, não por esforço extra. Se o registro já é feito no dia, com campos organizados e vinculado ao paciente e ao convênio, montar um recurso deixa de ser garimpo em pastas e vira exportação de documento. A diferença entre recuperar o valor glosado e desistir dele geralmente está aí, no custo operacional de provar o óbvio.</p>
 
@@ -327,7 +327,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Assédio cometido por pacientes: o tabu que a psicologia não discute',
       meta_description:
-        'Assédio sexual cometido por pacientes contra psicólogas: por que a empatia profissional não pode custar a integridade da terapeuta, como identificar a escalada de desvios de limites e o que fazer diante de uma violação em sessão.',
+        'Quando é o paciente que cruza o limite: como identificar a escalada de desvios, o que fazer em sessão e por que a empatia não pode custar sua integridade.',
       og_image_url: '/blog/terapia_abuso_por_pacientes-og.jpg',
       canonical_url: null,
     },
@@ -358,7 +358,7 @@ export const localPosts: BlogPostFull[] = [
 
 <p>Interrompa na hora. Ao primeiro sinal de violação, o limite precisa ser verbalizado de forma assertiva e inegociável. Não tente analisar o assédio enquanto ele está acontecendo.</p>
 
-<p>Busque supervisão imediatamente. O choque costuma vir acompanhado de vergonha e da sensação de incompetência profissional. Levar o caso à supervisão clínica e à rede de apoio quebra o isolamento antes que ele se instale.</p>
+<p>Busque supervisão imediatamente. Isso vale para toda a profissão, e não só para o caso extremo: <a href="/blog/dia-do-psicologo-27-de-agosto-homenagem-cuidaty/">cuidar de quem cuida</a> é condição de trabalho, não recompensa por bom desempenho. O choque costuma vir acompanhado de vergonha e da sensação de incompetência profissional. Levar o caso à supervisão clínica e à rede de apoio quebra o isolamento antes que ele se instale.</p>
 
 <p>Você tem o direito de denunciar. As diretrizes de sigilo do <a href="https://site.cfp.org.br/legislacao/codigo-de-etica/" target="_blank" rel="noopener noreferrer">Conselho Federal de Psicologia</a> exigem não causar dano ao paciente, mas isso não anula o direito da profissional à justiça e ao autocuidado. Prestar queixa é uma opção legítima, e em muitos casos, necessária.</p>
 
@@ -366,7 +366,7 @@ export const localPosts: BlogPostFull[] = [
 
 <h2>Registro e gestão como proteção real</h2>
 
-<p>A organização da clínica funciona como escudo nesses casos. Manter registros rigorosos de cada sessão não é burocracia. É segurança jurídica e ética.</p>
+<p>A organização da clínica funciona como escudo nesses casos. Manter registros rigorosos de cada sessão não é burocracia. É segurança jurídica e ética, e é o mesmo princípio que sustenta a defesa do profissional diante de uma <a href="/blog/regulamentacao-da-psicoterapia-senado-cdh-fiscalizacao/">fiscalização do conselho</a>.</p>
 
 <p>Um sistema de gestão e prontuário eletrônico bem estruturado permite documentar os primeiros sinais de desvio de limites: falas literais do paciente, comportamentos inadequados, e as intervenções de limite que a profissional já fez antes da situação escalar. Se um dia isso vira denúncia formal ou justifica o rompimento forçado do vínculo, um prontuário bem mantido é prova da conduta correta da terapeuta.</p>
 
@@ -392,7 +392,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Ecoansiedade no RS: o medo por trás de cada previsão de chuva',
       meta_description:
-        'Ecoansiedade no Rio Grande do Sul: por que a previsão do tempo e a situação de inundação em rios como o Quaraí disparam ansiedade real. Entenda a resposta do corpo e como a psicologia pode ajudar.',
+        'Ecoansiedade no RS: por que a previsão de chuva dispara ansiedade real depois da enchente, o que acontece no corpo e como a psicologia atua nesses casos.',
       og_image_url: '/blog/ecoansiedade-rs-og.jpg',
       canonical_url: null,
     },
@@ -421,7 +421,7 @@ export const localPosts: BlogPostFull[] = [
 
 <p>Diante de uma ameaça estrutural e coletiva, reduzir o pavor de uma enchente a um simples desequilíbrio neuroquímico individual seria um erro clínico. O medo, aqui, é uma resposta proporcional à realidade, não uma distorção dela. E é esse o primeiro ajuste de postura que o profissional precisa fazer diante de um paciente com ecoansiedade: validar o sintoma antes de tratá-lo.</p>
 
-<p>Quando a apreensão com o próximo boletim da Defesa Civil passa a atrapalhar o sono, a concentração no trabalho ou a relação familiar do paciente, o papel do psicólogo não é prometer tirar o medo do mapa. É ajudar a reorganizar como o corpo desse paciente reage a ele, especialmente em regiões como o Rio Grande do Sul, onde esse tipo de demanda tende a crescer junto com a frequência dos alertas climáticos.</p>
+<p>Quando a apreensão com o próximo boletim da Defesa Civil passa a atrapalhar o sono, a concentração no trabalho ou a relação familiar do paciente, o papel do psicólogo não é prometer tirar o medo do mapa. É ajudar a reorganizar como o corpo desse paciente reage a ele, especialmente em regiões como o Rio Grande do Sul, onde esse tipo de demanda tende a crescer junto com a frequência dos alertas climáticos. Atender sofrimento coletivo em série cobra caro de quem escuta, e <a href="/blog/dia-do-psicologo-27-de-agosto-homenagem-cuidaty/">cuidar de quem cuida</a> deixa de ser detalhe nesse cenário.</p>
 
 <p>É por isso que profissionais da saúde mental têm recorrido a abordagens como <a href="https://www.simplepractice.com/blog/eco-anxiety-supporting-clients-through-climate-distress/" target="_blank" rel="noopener noreferrer">Terapias Somáticas e EMDR</a>. Essas técnicas ajudam o corpo a processar a energia de sobrevivência que ficou represada e reprocessam as memórias traumáticas de desastres, devolvendo alguma estabilidade ao sistema nervoso.</p>
 
@@ -452,7 +452,7 @@ export const localPosts: BlogPostFull[] = [
     seo: {
       meta_title: 'Psicologia Organizacional vs. Clínica: diferenças, salários e mercado',
       meta_description:
-        'Psicologia Organizacional vs. Clínica: diferenças de atuação, salários no Brasil, EUA e Portugal, e por que as duas áreas se tornaram complementares no combate ao burnout.',
+        'Psicologia Organizacional e Clínica: escopos, salários no Brasil, EUA e Portugal, e por que as duas viraram complementares no combate ao burnout.',
       og_image_url: '/blog/clinico_x_organizacional-og.jpg',
       canonical_url: null,
     },
@@ -477,7 +477,7 @@ export const localPosts: BlogPostFull[] = [
 
 <h3>Brasil</h3>
 
-<p>Tanto a atuação clínica quanto a organizacional exigem graduação de cinco anos em Psicologia e registro no Conselho Regional (CRP). No mercado formal via CLT, os salários iniciais são parecidos, mas a Psicologia Organizacional leva uma leve vantagem: média de R$ 4.017,60, contra R$ 3.766,05 na Clínica.</p>
+<p>Tanto a atuação clínica quanto a organizacional exigem graduação de cinco anos em Psicologia e registro no Conselho Regional (CRP), exigência que a <a href="/blog/regulamentacao-da-psicoterapia-senado-cdh-fiscalizacao/">proposta de regulamentação da psicoterapia</a> quer transformar em lei para o atendimento clínico. No mercado formal via CLT, os salários iniciais são parecidos, mas a Psicologia Organizacional leva uma leve vantagem: média de R$ 4.017,60, contra R$ 3.766,05 na Clínica.</p>
 
 <p>A progressão muda de figura em polos como Distrito Federal e São Paulo. Ali, psicólogos sêniores, tanto clínicos quanto organizacionais em grandes empresas, chegam a faixas entre R$ 6.231,00 e mais de R$ 13.900,00 mensais. A carreira clínica, porém, demanda mais tempo de maturação: construir uma carteira de pacientes até o teto salarial não é rápido.</p>
 

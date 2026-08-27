@@ -16,8 +16,10 @@ const PUBLICATION_LANGUAGE = 'pt';
 const NEWS_WINDOW_HOURS = 30 * 24;
 
 // Um `<urlset>` sem nenhuma `<url>` é reportado como sitemap vazio pelo Search
-// Console. Como a Cuidaty publica em ritmo de blog, e não de redação, o feed
-// cai para os posts mais recentes quando não há notícia dentro da janela.
+// Console, então o feed cai para as notícias mais recentes quando nenhuma está
+// dentro da janela. O fallback ignora o tempo, nunca o critério: publicar
+// conteúdo perene num feed de News é o que faz o Google descartar o feed
+// inteiro, o que sai mais caro que o aviso de sitemap vazio.
 const FALLBACK_LIMIT = 5;
 
 function escapeXml(value: string): string {
@@ -44,11 +46,10 @@ function hasValidDate(post: BlogPost): boolean {
 export const GET: APIRoute = async () => {
   const posts = (await getAllPostsFlat()).filter(hasValidDate);
 
-  const news = posts.filter(
-    (post) => isNewsPost(post) && isWithinNewsWindow(post, NEWS_WINDOW_HOURS)
-  );
+  const newsPosts = posts.filter(isNewsPost);
+  const withinWindow = newsPosts.filter((post) => isWithinNewsWindow(post, NEWS_WINDOW_HOURS));
   // `getAllPostsFlat` já devolve ordenado do mais novo para o mais antigo.
-  const entries = news.length > 0 ? news : posts.slice(0, FALLBACK_LIMIT);
+  const entries = withinWindow.length > 0 ? withinWindow : newsPosts.slice(0, FALLBACK_LIMIT);
 
   const urls = entries
     .map((post) => {

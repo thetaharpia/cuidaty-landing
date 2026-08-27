@@ -14,6 +14,17 @@ interface Props {
   noindex?: boolean;
   keywords?: string;
   canonical?: string;
+  /** `article` nos posts do blog: classifica o conteúdo como editorial. */
+  ogType?: 'website' | 'article';
+  /** Metadados de artigo (só usados quando `ogType` é `article`). */
+  publishedTime?: string;
+  modifiedTime?: string;
+  authorName?: string;
+  section?: string;
+  articleTags?: string[];
+  /** Dimensões reais da imagem de OG, quando conhecidas. */
+  imageWidth?: number;
+  imageHeight?: number;
 }
 
 const DEFAULT_IMAGE_ALT =
@@ -27,6 +38,14 @@ const {
   noindex = false,
   keywords = homeKeywords,
   canonical,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  authorName,
+  section,
+  articleTags = [],
+  imageWidth,
+  imageHeight,
 } = Astro.props;
 
 const googleSiteVerification =
@@ -404,7 +423,7 @@ const structuredData = [
       openGraph={{
         basic: {
           title: title,
-          type: 'website',
+          type: ogType,
           image: fullImageURL,
           url: canonicalURL.toString(),
         },
@@ -417,15 +436,26 @@ const structuredData = [
           url: fullImageURL,
           secureUrl: fullImageURL,
           type: imageType,
-          width: 1200,
-          height: 630,
+          // Só declara dimensão quando ela é conhecida: capa vinda do CMS não
+          // tem tamanho fixo, e anunciar 1200x630 para uma imagem 2000x1333
+          // faz o crawler reservar o quadro errado e cortar torto.
+          ...(imageWidth && imageHeight ? { width: imageWidth, height: imageHeight } : {}),
           alt: imageAlt,
         },
+        ...(ogType === 'article'
+          ? {
+              article: {
+                publishedTime,
+                modifiedTime: modifiedTime ?? publishedTime,
+                authors: authorName ? [authorName] : undefined,
+                section,
+                tags: articleTags.length > 0 ? articleTags : undefined,
+              },
+            }
+          : {}),
       }}
       twitter={{
         card: 'summary_large_image',
-        site: '@thetaharpia',
-        creator: '@thetaharpia',
         title: title,
         description: description,
         image: fullImageURL,

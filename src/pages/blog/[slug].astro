@@ -13,6 +13,8 @@ import {
   enhanceContent,
   isNewsPost,
   isOrganizationAuthor,
+  truncateAtWord,
+  DEFAULT_OG_IMAGE,
 } from '../../lib/blog.server';
 import { cuidatyAppSchema } from '../../lib/seo';
 
@@ -30,12 +32,20 @@ if (!post) {
 
 const mins = readingTime(post.content_html);
 const words = wordCount(post.content_html);
-const { html: contentHtml, toc } = enhanceContent(post.content_html);
+const { html: contentHtml, toc } = enhanceContent(post.content_html, post.title);
 const showToc = toc.length >= 3;
 
 const title = post.seo.meta_title || post.title;
-const description = post.seo.meta_description || post.excerpt?.slice(0, 160) || '';
-const ogImage = post.seo.og_image_url || post.cover_image_url || '';
+// O SERP corta a description por volta de 160 caracteres. Cortar aqui, na
+// última palavra inteira, evita tanto o fragmento no meio da palavra quanto o
+// texto longo que o Google trunca do jeito dele.
+const description = truncateAtWord(post.seo.meta_description || post.excerpt || '');
+// Sem capa, o fallback precisa ser uma imagem de verdade: string vazia vira a
+// URL da home e o preview social sai apontando para um HTML.
+const ogImage = post.seo.og_image_url || post.cover_image_url || DEFAULT_OG_IMAGE;
+// As capas geradas para OG neste repo são sempre 1200x630. As que vêm do CMS
+// não têm tamanho garantido, então ficam sem dimensão declarada.
+const isKnownOgSize = /^\/(blog\/.+-og\.jpg|default-blog-og\.jpg)$/.test(ogImage);
 // Alt específico do post: o preview social e os leitores de tela recebem o
 // assunto do artigo em vez da descrição genérica do produto.
 const ogImageAlt = post.subtitle
@@ -117,6 +127,14 @@ const structuredData = [articleData, cuidatyAppSchema];
   image={ogImage}
   imageAlt={ogImageAlt}
   canonical={canonicalUrl}
+  ogType="article"
+  publishedTime={post.published_at}
+  authorName={post.author?.name}
+  section={post.tags?.[0]?.name}
+  articleTags={post.tags?.map((tag) => tag.name) ?? []}
+  keywords={post.tags?.map((tag) => tag.name).join(', ')}
+  imageWidth={isKnownOgSize ? 1200 : undefined}
+  imageHeight={isKnownOgSize ? 630 : undefined}
 >
   {
     structuredData.map((schema) => (
