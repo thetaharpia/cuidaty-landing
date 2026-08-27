@@ -7,6 +7,108 @@ import type { BlogPostFull } from './blog.server';
  */
 export const localPosts: BlogPostFull[] = [
   {
+    id: -5,
+    title:
+      '"Talvez Você Deva Conversar com Alguém": as Lições de Lori Gottlieb para o Dia do Psicólogo',
+    subtitle:
+      'Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona? Lori Gottlieb respondeu isso num livro inteiro, e a resposta é o melhor jeito de comemorar o 27 de agosto',
+    slug: 'dia-do-psicologo-27-de-agosto-homenagem-cuidaty',
+    excerpt:
+      'Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona? Em "Talvez você deva conversar com alguém", Lori Gottlieb conta exatamente isso. No Dia do Psicólogo, 27 de agosto, a Cuidaty tira do livro quatro lições para levar para a vida e para o consultório, e se posiciona ao lado da categoria nas suas pautas de valorização.',
+    cover_image_url: '/blog/4_licoes_dia_psicologo_capa.webp',
+    published_at: '2026-08-27T00:00:00.000Z',
+    author: { name: 'Equipe Cuidaty' },
+    tags: [
+      { name: 'Dia do Psicólogo', slug: 'dia-do-psicologo' },
+      { name: 'Carreira', slug: 'carreira' },
+      { name: 'Psicologia Clínica', slug: 'psicologia-clinica' },
+      { name: 'Saúde Mental', slug: 'saude-mental' },
+    ],
+    seo: {
+      meta_title: 'Dia do Psicólogo (27/08): lições de "Talvez você deva conversar com alguém"',
+      meta_description:
+        'Dia do Psicólogo, 27 de agosto: quatro lições do livro de Lori Gottlieb para levar para a vida e para o consultório. Sobre a humanidade do terapeuta, o cuidado com quem cuida e por que a Cuidaty apoia as pautas da saúde mental brasileira.',
+      og_image_url: '/blog/4_licoes_dia_psicologo_capa-og.jpg',
+      canonical_url: null,
+    },
+    content_html: `
+<p>Você já parou para pensar o que acontece quando a vida do seu psicólogo desmorona?</p>
+
+<p>Não é pergunta retórica. Alguém sentou e escreveu um livro inteiro respondendo, e o livro virou fenômeno mundial justamente porque quase ninguém tinha coragem de abrir essa porta.</p>
+
+<h2>A terapeuta que precisou de terapeuta</h2>
+
+<p>Em <em>Talvez você deva conversar com alguém</em>, Lori Gottlieb faz uma coisa arriscada para uma psicoterapeuta. Ela conta que levou um fora, desmoronou e foi bater na porta de outro terapeuta, o Wendell. Enquanto isso, seguia atendendo os próprios pacientes: o roteirista cínico que chamava todo mundo de idiota, a jovem com câncer terminal, a idosa que achava que tinha desperdiçado a vida inteira.</p>
+
+<p>O livro alterna as duas cadeiras. Num capítulo ela é quem escuta. No outro, é quem chora no sofá e implora por uma resposta que ninguém pode dar.</p>
+
+<figure style="margin:2.5rem auto;max-width:290px">
+<img src="/blog/livro_talvez_voce_devesse_converssar_com_alguem.png" alt="Capa do livro Talvez Você Deva Conversar com Alguém, de Lori Gottlieb: fundo amarelo com uma caixa de lenços azul e lenços amassados." width="525" height="791" loading="lazy" decoding="async" style="width:100%;height:auto;margin:0;border-radius:0;box-shadow:none" />
+<figcaption>Capa da edição brasileira, publicada pela Vestígio. O subtítulo entrega a proposta: uma terapeuta, o terapeuta dela e a vida de todos nós.</figcaption>
+</figure>
+
+<p style="text-align:center;font-size:0.95rem"><a href="https://www.amazon.com.br/Talvez-voc%C3%AA-deva-conversar-algu%C3%A9m/dp/6599039812" target="_blank" rel="noopener noreferrer nofollow">Comprar impresso na Amazon</a> · <a href="https://www.kobo.com/br/pt/ebook/talvez-voce-deva-conversar-com-alguem" target="_blank" rel="noopener noreferrer nofollow">Comprar ebook na Kobo</a><br /><span style="color:#94a3b8;font-size:0.85rem">Links sem afiliação: a Cuidaty não ganha nada com a sua compra.</span></p>
+
+<p>Hoje é 27 de agosto, Dia do Psicólogo, data que marca a regulamentação da profissão no Brasil, em 1962. E a homenagem mais honesta que a gente consegue fazer não começa elogiando técnica, formação ou currículo. Começa exatamente onde a Gottlieb começa. Separamos quatro lições do livro para levar para a vida, e para dentro do consultório.</p>
+
+<h2>Lição 1: a linha entre quem cuida e quem precisa de cuidado não existe</h2>
+
+<p>É a tese que sustenta o livro inteiro, e ela é desconfortável. A graduação sugere uma fronteira nítida: de um lado o profissional, treinado e estável; do outro o paciente, em sofrimento. Gottlieb passa quatrocentas páginas mostrando que essa fronteira é uma convenção do setting, não um fato sobre as pessoas.</p>
+
+<p>Ela erra. Fica irritada com paciente. Se emociona junto. Julga alguém no primeiro encontro e descobre, capítulos depois, o tamanho da própria miopia. Nenhum desses momentos aparece no livro como fracasso profissional. Aparecem como o núcleo da coisa.</p>
+
+<h2>Lição 2: quem faz alguém soltar as grades é uma pessoa, não uma técnica</h2>
+
+<p>Tem uma imagem no livro que virou quase um clichê justamente porque acerta demais. A pessoa está numa cela, segurando as grades com força, gritando por socorro. Só que a cela tem uma porta. A porta está aberta. E ninguém consegue enxergar isso enquanto estiver com as duas mãos ocupadas segurando as grades.</p>
+
+<p>Quem faz a pessoa soltar não é um protocolo. É outro ser humano, sentado ali, disposto a ficar na cela junto por um tempo até que dê para olhar em volta.</p>
+
+<p>O paciente não se sente acolhido porque a interpretação foi tecnicamente correta. Ele se sente acolhido porque percebe, de um jeito pré-verbal, que tem alguém inteiro na sala. Alguém que também já perdeu gente, também já teve medo do futuro, também já ficou sem saber o que fazer da própria vida num domingo à tarde. É essa presença que sustenta a aliança terapêutica. A técnica organiza o trabalho. A humanidade é o que faz o trabalho acontecer.</p>
+
+<h2>Lição 3: se afetar não é falha de manejo</h2>
+
+<p>Existe um mito de formação que produz muito sofrimento em silêncio: o de que sentir alguma coisa com o paciente é erro. Que profissional bom é profissional que não se abala. Que se você saiu de uma sessão pensando naquilo no chuveiro, algo deu errado no seu setting.</p>
+
+<p>Não deu.</p>
+
+<p>Gottlieb escreve sobre chorar depois de uma sessão, sobre carregar a história de alguém pelo resto do dia, sobre não saber o que dizer e simplesmente ficar ali. O que ela mostra é que a diferença entre se afetar e se perder no caso não está em blindar o afeto. Está em ter onde levá-lo: supervisão, análise pessoal, pares. O afeto não é o problema. O afeto sozinho, sem lugar nenhum para ir, é.</p>
+
+<h2>Lição 4: cuidar de quem cuida é condição de trabalho, não luxo</h2>
+
+<p>Escutar dor alheia quarenta horas por semana cobra caro. Fadiga por compaixão, esgotamento, aquela sensação de estar drenado num nível que férias não resolvem. Psicólogo não é feito de material diferente do resto das pessoas.</p>
+
+<p>O livro é, no fundo, a demonstração prática disso: uma terapeuta experiente, com anos de clínica nas costas, que precisou de terapia para continuar exercendo. Supervisão, terapia própria, descanso, agenda que caiba num ser humano. Nada disso é mimo. É infraestrutura da profissão.</p>
+
+<h2>E aos estudantes de psicologia</h2>
+
+<p>Para quem ainda está na graduação, atravessando estágio, primeira supervisão, o pânico da primeira sessão de verdade: a insegurança que você sente não é sinal de que escolheu errado. É sinal de que entendeu o tamanho da responsabilidade.</p>
+
+<p>Ninguém entra numa sala de atendimento pela primeira vez se sentindo pronto. Gottlieb, veterana, descreve exatamente a mesma dúvida diante de casos difíceis. A diferença entre o estudante e o profissional experiente não é a ausência de dúvida. É o que cada um faz com ela: leva para a supervisão, estuda, discute, tolera não saber por mais tempo sem se desesperar.</p>
+
+<p>Vocês estão entrando numa profissão que o Brasil precisa com urgência. E vão entrar num mercado que ainda não paga o que essa urgência vale. As duas coisas são verdade ao mesmo tempo, e é bom saber disso desde já.</p>
+
+<h2>Onde a Cuidaty se posiciona</h2>
+
+<p>Homenagem que só distribui elogio no dia 27 e vira as costas no dia 28 é marketing. Então vamos ser específicos.</p>
+
+<p>A Cuidaty está ao lado da categoria nas suas reivindicações. Piso salarial digno. Jornada compatível com a natureza clínica do trabalho, porque escutar sofrimento não é atividade que se estica indefinidamente sem consequência. Remuneração justa nos convênios, onde o valor pago por sessão está congelado há tempo demais enquanto o custo de manter um consultório só sobe. Condições reais de trabalho na saúde pública, nos CAPS, nas unidades básicas, nas escolas, onde a demanda cresce muito mais rápido que a estrutura. Fim da precarização por plataformas que transformam atendimento clínico em corrida por volume.</p>
+
+<p>Essas pautas não são disputa corporativa. Psicólogo mal pago e sobrecarregado atende pior, adoece mais e abandona a profissão antes. Quem paga essa conta no fim é o paciente.</p>
+
+<p>E fazemos questão de deixar claro: esse apoio não é condicionado a você ser cliente nosso. Vale para quem usa a Cuidaty e para quem nunca ouviu falar da gente. Somos parceiros da comunidade de saúde mental brasileira inteira, não da nossa base de assinantes.</p>
+
+<p>O que a gente pode fazer, faz do nosso jeito: tirar do seu caminho a parte burocrática que consome tempo clínico. Agenda, prontuário, cobrança, guia de convênio, aquele bloco de horas que some com administração e nunca aparece na conta de ninguém. Não é o mais importante do seu trabalho. Mas é o que rouba a energia que deveria estar sobrando para o mais importante.</p>
+
+<h2>Feliz Dia do Psicólogo</h2>
+
+<p>Para quem atende no consultório, no SUS, na escola, na empresa, no hospital, no online. Para quem supervisiona, pesquisa e forma as próximas turmas. Para quem ainda está no quarto ano lendo caso clínico de madrugada e se perguntando se dá conta.</p>
+
+<p>O que vocês fazem sustenta gente de pé todo dia, e boa parte disso acontece sem ninguém ver.</p>
+
+<p>Parabéns pelo dia. Estaremos sempre do lado de vocês.</p>
+`,
+  },
+  {
     id: -4,
     title: 'O Convênio Te Deve Dinheiro, e Você Nem Sabe',
     subtitle: 'A sessão que você atendeu, o plano negou e quase ninguém vai atrás de receber',
