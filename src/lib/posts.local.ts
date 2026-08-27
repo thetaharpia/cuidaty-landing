@@ -7,6 +7,106 @@ import type { BlogPostFull } from './blog.server';
  */
 export const localPosts: BlogPostFull[] = [
   {
+    id: -6,
+    title: 'Regulamentação da Psicoterapia Avançou no Senado. Agora Vem a Parte Difícil',
+    subtitle:
+      'No Dia do Psicólogo, o relatório da senadora Mara Gabrilli entrou na CDH com voto favorável. O texto resolve metade do problema. A outra metade depende de fiscalização que hoje não existe',
+    slug: 'regulamentacao-da-psicoterapia-senado-cdh-fiscalizacao',
+    excerpt:
+      'Em 27 de agosto de 2026, o relatório da senadora Mara Gabrilli foi apresentado na Comissão de Direitos Humanos do Senado com voto favorável à regulamentação da psicoterapia, na forma de um projeto de lei. O que a proposta prevê, por que ela importa para quem atende e por que regra sem fiscalização não muda nada na prática.',
+    cover_image_url: '/blog/regulamentacao-psicoterapia.webp',
+    published_at: '2026-08-27T12:00:00.000Z',
+    author: { name: 'Equipe Cuidaty' },
+    tags: [
+      { name: 'Regulamentação', slug: 'regulamentacao' },
+      { name: 'Psicoterapia', slug: 'psicoterapia' },
+      { name: 'CFP', slug: 'cfp' },
+      { name: 'Ética Profissional', slug: 'etica-profissional' },
+      { name: 'Psicologia Clínica', slug: 'psicologia-clinica' },
+    ],
+    seo: {
+      meta_title: 'Regulamentação da psicoterapia no Senado: o que muda para o psicólogo',
+      meta_description:
+        'Relatório favorável à regulamentação da psicoterapia chegou à CDH do Senado. O que a proposta prevê, quem fica de fora e por que fiscalização decide tudo.',
+      og_image_url: '/blog/regulamentacao-psicoterapia-og.jpg',
+      canonical_url: null,
+    },
+    content_html: `
+<p>Em 27 de agosto de 2026, enquanto a categoria comemorava o Dia do Psicólogo, o relatório da senadora Mara Gabrilli foi apresentado na Comissão de Direitos Humanos do Senado com voto favorável à regulamentação da psicoterapia, na forma de um projeto de lei elaborado por ela. A matéria está pronta para a pauta da comissão.</p>
+
+<p>A data não foi coincidência. O <a href="/blog/dia-do-psicologo-27-de-agosto-homenagem-cuidaty/">Dia do Psicólogo</a> existe porque a Lei 4.119 foi sancionada em 27 de agosto de 1962, criando a profissão no Brasil. Sessenta e quatro anos depois, a prática que mais define o trabalho clínico continua sem lei própria. E quem paga a conta desse vazio não é a categoria. É quem procura ajuda sem nenhuma forma de saber se encontrou.</p>
+
+<h2>Onde a proposta está, exatamente</h2>
+
+<p>O caminho é o da legislação participativa, e isso explica por que o texto não nasceu como projeto de lei. Tudo começou em sugestões enviadas pela sociedade ao Senado: a <strong>SUG 40/2019</strong>, que propunha a psicoterapia como prática privativa de psicólogos com CRP ativo, e a <strong>SUG 1/2024</strong>, que amplia a exclusividade para psicólogos e médicos psiquiatras. Uma sugestão aprovada na CDH se transforma em projeto e passa a tramitar como qualquer outro.</p>
+
+<figure>
+<div style="overflow-x:auto">
+<svg viewBox="0 0 720 216" width="100%" role="img" aria-labelledby="tramTitulo tramDesc" xmlns="http://www.w3.org/2000/svg" style="min-width:640px;font-family:Figtree, ui-sans-serif, system-ui, sans-serif"><title id="tramTitulo">Linha do tempo da regulamentação da psicoterapia no Senado</title><desc id="tramDesc">Marco 2019 e 2024, sugestoes legislativas. Marco de marco de 2025, relatoria com Mara Gabrilli. Junho de 2025, parecer do CFP protocolado. Agosto de 2025, audiencia publica na CDH. Agosto de 2026, relatorio com voto favoravel, pronto para a pauta.</desc><rect x="0.5" y="0.5" width="719" height="215" rx="12" fill="#ffffff" stroke="#e6e4df"/><text x="24" y="34" font-size="10" font-weight="600" letter-spacing="0.08em" fill="#475569">TRAMITAÇÃO DA SUG 1/2024</text><line x1="60" y1="104" x2="660" y2="104" stroke="#e6e4df" stroke-width="3"/><line x1="60" y1="104" x2="660" y2="104" stroke="#5ac3b0" stroke-width="3" stroke-dasharray="0 0"/><g fill="#0f1c26" font-size="12"><text x="60" y="74" text-anchor="middle" font-weight="600">2019 e 2024</text><text x="210" y="74" text-anchor="middle" font-weight="600">mar/2025</text><text x="360" y="74" text-anchor="middle" font-weight="600">jun/2025</text><text x="510" y="74" text-anchor="middle" font-weight="600">ago/2025</text><text x="660" y="74" text-anchor="middle" font-weight="600">27/ago/2026</text></g><g fill="#5ac3b0"><circle cx="60" cy="104" r="8"/><circle cx="210" cy="104" r="8"/><circle cx="360" cy="104" r="8"/><circle cx="510" cy="104" r="8"/></g><circle cx="660" cy="104" r="11" fill="#ffffff" stroke="#2b7fb8" stroke-width="4"/><g font-size="11.5" fill="#475569"><text x="60" y="136" text-anchor="middle">Sugestões SUG</text><text x="60" y="152" text-anchor="middle">40/2019 e 1/2024</text><text x="210" y="136" text-anchor="middle">Relatoria com</text><text x="210" y="152" text-anchor="middle">Mara Gabrilli</text><text x="360" y="136" text-anchor="middle">Parecer CFP</text><text x="360" y="152" text-anchor="middle">01/2025 protocolado</text><text x="510" y="136" text-anchor="middle">Audiência pública</text><text x="510" y="152" text-anchor="middle">na CDH</text><text x="660" y="136" text-anchor="middle" fill="#0f1c26" font-weight="600">Relatório favorável</text><text x="660" y="152" text-anchor="middle" fill="#0f1c26" font-weight="600">Pronto para a pauta</text></g><text x="696" y="196" font-size="11" text-anchor="end" fill="#94a3b8">Fonte: Portal de Atividade Legislativa do Senado</text></svg>
+</div>
+<figcaption>A votação na CDH ainda não aconteceu. Depois dela, o texto vira projeto de lei e começa a tramitação normal, com Câmara pela frente.</figcaption>
+</figure>
+
+<p>Entre uma coisa e outra houve bastante disputa. A relatoria foi redistribuída à senadora Mara Gabrilli em março de 2025, o <a href="https://site.cfp.org.br/cfp-envia-ao-senado-parecer-em-defesa-do-exercicio-da-psicoterapia-exclusivamente-por-profissionais-de-psicologia-e-psiquiatria/" target="_blank" rel="noopener noreferrer">Parecer CFP 01/2025</a> foi protocolado em junho, e a <a href="https://www12.senado.leg.br/noticias/materias/2025/08/05/exclusividade-para-exercicio-da-psicoterapia-divide-debatedores-na-cdh" target="_blank" rel="noopener noreferrer">audiência pública de agosto de 2025</a> deixou claro que o assunto racha opiniões. Poucos dias depois da audiência, entidades ligadas a terapias alternativas e a segmentos da psicanálise protocolaram moções contrárias. Segundo o CFP, o relatório apresentado agora incorpora integralmente os subsídios que o conselho enviou.</p>
+
+<h2>O que o texto propõe</h2>
+
+<p>A espinha da proposta é tornar a psicoterapia atividade privativa de duas categorias: profissionais de Psicologia com registro ativo no CRP e médicos com especialização em Psiquiatria. O argumento do CFP é de formação. São os dois únicos percursos formativos regulados no país que atravessam psicopatologia, avaliação, técnica clínica e supervisão prática, e cujos profissionais respondem a um conselho com poder de fiscalizar e punir.</p>
+
+<p>Esse segundo ponto costuma passar batido e é o mais importante de todos. Não se trata só de quem estudou o suficiente. Trata-se de quem tem endereço quando algo dá errado.</p>
+
+<h2>Por que isso virou urgente</h2>
+
+<p>A demanda explodiu. Dados da Agência Nacional de Saúde Suplementar citados pelo CFP mostram que as sessões de psicoterapia com psicólogos cresceram mais de 208% em 2023 na comparação com 2019. Os afastamentos do trabalho por transtornos mentais dobraram na última década. Terapia deixou de ser assunto de nicho e virou consumo de massa.</p>
+
+<p>Todo mercado que cresce rápido atrai oferta que não acompanha a exigência. Hoje qualquer pessoa pode se anunciar como "terapeuta", vender pacote de sessões, montar consultório, atender adolescente em crise e fazer manejo de risco de suicídio sem nunca ter passado por uma supervisão. Não existe crime específico. Não existe conselho. Não existe, na maior parte dos casos, sequer um registro do que foi feito.</p>
+
+<p>O argumento de que o mercado se corrige sozinho não sobrevive ao teste aqui, e o motivo é técnico, não ideológico. Correção por escolha do consumidor depende de o consumidor conseguir avaliar o que comprou. Em psicoterapia ele chega fragilizado, sem repertório para distinguir abordagem de improviso, e o dano de um atendimento ruim é invisível e tardio: aparece meses depois e quase sempre é atribuído à "terapia que não funcionou", nunca a quem a conduziu. Sob assimetria de informação desse tamanho, o mercado não seleciona o melhor profissional. Seleciona o melhor anunciante.</p>
+
+<p>É por isso que a discussão sobre formação, no fundo, é uma discussão sobre responsabilização. Não se trata só de quem estudou o suficiente. Trata-se de quem tem endereço quando algo dá errado.</p>
+
+<h2>O contra-argumento que merece resposta</h2>
+
+<p>Existe um campo legítimo de psicanálise laica no Brasil, com formação em instituição séria, análise pessoal e supervisão, que ficou de fora do desenho atual. Foi essa a voz mais forte na audiência pública, ao lado de entidades de terapias alternativas que protocolaram moções contrárias dias depois. Reserva de mercado mal calibrada é risco real, e o texto vai precisar de regra de transição decente para quem já exerce.</p>
+
+<p>Só que isso é objeção ao recorte, não ao princípio. A alternativa de não regulamentar não protege o psicanalista laico com trinta anos de formação. Protege quem fez curso de fim de semana e anuncia atendimento de depressão no Instagram, porque é exatamente esse perfil que depende do vazio para operar. Quando a régua não existe, quem ganha não é o mais bem formado. É o menos exposto.</p>
+
+<h2>Regra sem fiscalização é decoração</h2>
+
+<p>O CFP já regula a psicoterapia para quem tem CRP, inclusive pela Resolução CFP 13/2022. Só que resolução de conselho alcança exatamente quem o conselho registra. Quem nunca se registrou está fora do alcance, e é justamente aí que mora o problema que a lei quer resolver.</p>
+
+<p>Uma lei que declare a exclusividade e pare por aí repete o mesmo vazio num papel de hierarquia maior. Para funcionar, ela precisa de coisas concretas:</p>
+
+<p><strong>Tipificação e sanção aplicável a quem não tem registro.</strong> Sem previsão clara de infração por exercício ilegal, com quem aciona e qual a pena, o resto é declaração de princípios.</p>
+
+<p><strong>Responsabilidade das plataformas.</strong> Boa parte da oferta hoje passa por marketplace de terapia, aplicativo de agendamento e anúncio pago em rede social. Verificar registro ativo antes de listar alguém é trivial tecnicamente. Se a plataforma lucra com o encaminhamento, ela responde pelo encaminhamento.</p>
+
+<p><strong>Publicidade.</strong> O título genérico de "terapeuta" em anúncio, sem número de conselho visível, é o principal vetor de confusão para o paciente. Regra de identificação profissional em publicidade resolve mais que qualquer campanha educativa.</p>
+
+<p><strong>Estrutura para os CRPs fiscalizarem.</strong> Fiscalização custa dinheiro, equipe e canal de denúncia que funcione. Ampliar a competência de um conselho sem ampliar a capacidade dele é criar uma regra que ninguém vai aplicar.</p>
+
+<p>E fiscalização que só olha para fora não é fiscalização, é proteção de mercado. Ela tem que valer para dentro na mesma intensidade: registro do atendimento em dia, contrato de prestação de serviço, guarda adequada de prontuário, publicidade dentro do código de ética. Regulamentação que funciona incomoda os dois lados. A que só incomoda o concorrente tem outro nome.</p>
+
+<h2>O que muda no seu consultório</h2>
+
+<p>Se o texto avançar, o principal efeito prático não é sobre quem você atende. É sobre o que você consegue comprovar.</p>
+
+<p>Exercício regulamentado significa exercício documentado. Numa fiscalização, numa reclamação ética ou numa ação judicial, a defesa do psicólogo é o registro: prontuário com evolução feita na data correta, consentimento formalizado, contrato assinado, documentos emitidos dentro do que as resoluções do CFP exigem, incluindo a guarda mínima de cinco anos. Quem mantém isso organizado responde em um dia. Quem depende de caderno, memória e conversa de WhatsApp passa semanas remontando o que aconteceu, e às vezes não consegue. É o mesmo registro que sustenta um <a href="/blog/como-reduzir-glosas-psicologia-ciencia-de-dados-guias-tiss/">recurso de glosa contra uma operadora</a>, com a diferença de que ali o prejuízo é só financeiro.</p>
+
+<p>É o pé mais chato da profissão, e é também o que separa quem tem prova de quem tem versão.</p>
+
+<p>Na <a href="https://app.cuidaty.com/register" target="_blank" rel="noopener noreferrer">Cuidaty</a>, essa parte é o alicerce do produto desde o plano Básico: prontuário eletrônico com registro datado, cadastro completo do paciente, agenda, financeiro e exportação de documentos em PDF. Não porque burocracia seja virtude, mas porque profissão que a lei leva a sério exige rastro. Quanto mais forte a fiscalização, menos isso é zelo pessoal e mais vira condição de trabalho.</p>
+
+<h2>O que acompanhar daqui pra frente</h2>
+
+<p>O relatório está pronto para a pauta, não votado. O próximo passo é a deliberação na CDH. Aprovado ali, o texto vira projeto de lei e enfrenta a tramitação inteira, com Câmara dos Deputados pela frente e todo o lobby que já se organizou contra na audiência pública.</p>
+
+<p>Dá para acompanhar direto na fonte, pela página da <a href="https://www25.senado.leg.br/web/atividade/materias/-/materia/163640" target="_blank" rel="noopener noreferrer">SUG 1/2024 no Portal de Atividade Legislativa do Senado</a>, sem depender de recorte de rede social.</p>
+
+<p>Sessenta e quatro anos para chegar à porta da comissão. O que decide o resto não é a redação do artigo primeiro. É quanto dinheiro e quantos fiscais existirem para fazer valer o que ele diz.</p>
+`,
+  },
+  {
     id: -5,
     title:
       '"Talvez Você Deva Conversar com Alguém": as Lições de Lori Gottlieb para o Dia do Psicólogo',
