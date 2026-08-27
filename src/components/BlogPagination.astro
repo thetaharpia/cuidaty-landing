@@ -6,28 +6,51 @@ interface Props {
 
 const { currentPage, lastPage } = Astro.props;
 const pageHref = (n: number) => (n <= 1 ? '/blog/' : `/blog/page/${n}/`);
+const linkClass =
+  'focus-ring inline-flex items-center gap-2 rounded-full border border-cuidaty-dark/15 px-5 py-2.5 text-sm font-semibold text-cuidaty-dark transition-colors hover:border-cuidaty-dark/25 hover:bg-cuidaty-accent-light';
 ---
 
 {
   lastPage > 1 && (
-    <nav aria-label="Paginação do blog" class="mt-12 flex items-center justify-center gap-2">
+    <nav
+      aria-label="Paginação do blog"
+      class="mt-16 flex items-center justify-center gap-3 border-t border-cuidaty-dark/[0.08] pt-10"
+    >
       {currentPage > 1 && (
-        <a
-          href={pageHref(currentPage - 1)}
-          class="focus-ring rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-cuidaty-dark transition-colors hover:border-cuidaty-primary hover:text-cuidaty-primary"
-        >
+        <a href={pageHref(currentPage - 1)} class={linkClass}>
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M16 10H4.5M9 5.5 4.5 10 9 14.5" />
+          </svg>
           Anterior
         </a>
       )}
-      <span class="px-3 text-sm text-gray-500">
-        Página {currentPage} de {lastPage}
+      <span class="px-2 text-sm text-cuidaty-dark/45">
+        {currentPage} de {lastPage}
       </span>
       {currentPage < lastPage && (
-        <a
-          href={pageHref(currentPage + 1)}
-          class="focus-ring rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-cuidaty-dark transition-colors hover:border-cuidaty-primary hover:text-cuidaty-primary"
-        >
+        <a href={pageHref(currentPage + 1)} class={linkClass}>
           Próxima
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M4 10h11.5M11 5.5 15.5 10 11 14.5" />
+          </svg>
         </a>
       )}
     </nav>

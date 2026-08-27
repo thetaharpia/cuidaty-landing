@@ -127,49 +127,60 @@ const structuredData = [articleData, cuidatyAppSchema];
 
   <main class="bg-white pb-16 pt-24">
     <!-- Hero -->
-    <section class="bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover py-14 md:py-20">
+    <section class="bg-cuidaty-accent-light py-14 md:py-20">
       <div class="container mx-auto px-4 md:px-6">
-        <div class="mx-auto max-w-3xl text-white">
+        <div class="mx-auto max-w-3xl text-cuidaty-dark">
           <a
             href="/blog/"
-            class="mb-6 inline-flex items-center gap-1 text-sm opacity-75 transition-opacity hover:opacity-100"
+            class="focus-ring group mb-8 inline-flex items-center gap-2 rounded-sm text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cuidaty-dark/55 transition-colors hover:text-cuidaty-dark"
           >
-            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"></path>
+            <svg
+              class="h-4 w-4 transition-transform duration-300 ease-out group-hover:-translate-x-1"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M16 10H4.5M9 5.5 4.5 10 9 14.5"></path>
             </svg>
             Voltar ao blog
           </a>
 
           {
             post.tags && post.tags.length > 0 && (
-              <div class="mb-4 flex flex-wrap gap-2">
-                {post.tags.slice(0, 3).map((tag) => (
-                  <span class="rounded-full bg-white/20 px-3 py-0.5 text-xs font-medium backdrop-blur-sm">
-                    {tag.name}
-                  </span>
-                ))}
-              </div>
+              <p class="mb-5 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cuidaty-dark/50">
+                {post.tags
+                  .slice(0, 3)
+                  .map((tag) => tag.name)
+                  .join(' · ')}
+              </p>
             )
           }
 
-          <h1 class="mb-4 font-serif text-3xl font-semibold leading-tight md:text-4xl lg:text-5xl">
+          <h1
+            class="mb-5 font-serif text-3xl font-semibold leading-[1.25] md:text-4xl md:leading-[1.2] lg:text-[2.7rem]"
+          >
             {post.title}
           </h1>
 
           {
             post.subtitle && (
-              <p class="mb-6 text-lg leading-relaxed opacity-90 md:text-xl">{post.subtitle}</p>
+              <p class="mb-8 text-lg leading-relaxed text-cuidaty-dark/70 md:text-xl">
+                {post.subtitle}
+              </p>
             )
           }
 
-          <div class="flex flex-wrap items-center gap-4 text-sm opacity-80">
-            <span>{post.author.name}</span>
-            <span>·</span>
+          <div
+            class="flex flex-wrap items-center gap-3 border-t border-cuidaty-dark/10 pt-5 text-sm text-cuidaty-dark/55"
+          >
+            <span class="font-medium text-cuidaty-dark/80">{post.author.name}</span>
+            <span aria-hidden="true">·</span>
             <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
-            <span>·</span>
+            <span aria-hidden="true">·</span>
             <span>{mins} min de leitura</span>
           </div>
         </div>
@@ -183,17 +194,17 @@ const structuredData = [articleData, cuidatyAppSchema];
           showToc && (
             <nav
               aria-label="Sumário do artigo"
-              class="mb-12 rounded-2xl border border-gray-100 bg-gray-50/70 p-6"
+              class="mb-14 rounded-2xl bg-cuidaty-accent-light/60 p-7"
             >
-              <p class="mb-4 text-xs font-semibold uppercase tracking-widest text-cuidaty-primary">
+              <p class="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cuidaty-dark/55">
                 Neste artigo
               </p>
-              <ul class="space-y-2.5 text-sm">
+              <ul class="space-y-3 text-[0.95rem]">
                 {toc.map((item) => (
                   <li class={item.level === 3 ? 'pl-4' : ''}>
                     <a
                       href={`#${item.id}`}
-                      class="text-gray-600 transition-colors hover:text-cuidaty-primary"
+                      class="text-cuidaty-dark/75 underline decoration-cuidaty-dark/15 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:decoration-cuidaty-secondary"
                     >
                       {item.text}
                     </a>
@@ -205,15 +216,15 @@ const structuredData = [articleData, cuidatyAppSchema];
         }
 
         <div
-          class="prose prose-lg max-w-none prose-headings:scroll-mt-28 prose-headings:font-serif prose-headings:text-cuidaty-dark prose-h2:mb-5 prose-h2:mt-14 prose-h2:text-[1.7rem] prose-h2:leading-tight prose-h3:mb-4 prose-h3:mt-10 prose-h3:text-xl prose-p:my-6 prose-p:text-[1.075rem] prose-p:leading-[1.85] prose-p:text-gray-700 prose-a:font-medium prose-a:text-cuidaty-primary prose-a:underline prose-a:decoration-cuidaty-primary/30 prose-a:underline-offset-2 hover:prose-a:decoration-cuidaty-primary prose-blockquote:rounded-r-xl prose-blockquote:border-l-4 prose-blockquote:border-cuidaty-primary prose-blockquote:bg-cuidaty-primary/5 prose-blockquote:px-6 prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-gray-600 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:text-gray-400 prose-strong:font-semibold prose-strong:text-cuidaty-dark prose-code:rounded prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-normal prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:rounded-xl prose-pre:bg-cuidaty-dark prose-ol:my-6 prose-ol:text-gray-700 prose-ul:my-6 prose-ul:text-gray-700 prose-li:my-2 prose-li:leading-relaxed prose-li:marker:text-cuidaty-primary prose-table:text-sm prose-th:bg-gray-50 prose-th:text-cuidaty-dark prose-td:border-gray-100 prose-img:my-8 prose-img:rounded-xl prose-img:shadow-md prose-hr:my-12 prose-hr:border-gray-200"
+          class="prose prose-lg max-w-none prose-headings:scroll-mt-28 prose-headings:font-serif prose-headings:font-semibold prose-headings:text-cuidaty-dark prose-h2:mb-5 prose-h2:mt-16 prose-h2:text-[1.75rem] prose-h2:leading-tight prose-h3:mb-4 prose-h3:mt-10 prose-h3:text-xl prose-p:my-6 prose-p:text-[1.1rem] prose-p:leading-[1.9] prose-p:text-cuidaty-dark/80 prose-a:font-medium prose-a:text-cuidaty-dark prose-a:underline prose-a:decoration-cuidaty-secondary prose-a:decoration-2 prose-a:underline-offset-4 hover:prose-a:bg-cuidaty-accent-light prose-blockquote:rounded-r-xl prose-blockquote:border-l-4 prose-blockquote:border-cuidaty-secondary prose-blockquote:bg-cuidaty-accent-light/50 prose-blockquote:px-7 prose-blockquote:py-1 prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-cuidaty-dark/75 prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:text-sm prose-figcaption:leading-relaxed prose-figcaption:text-cuidaty-dark/45 prose-strong:font-semibold prose-strong:text-cuidaty-dark prose-code:rounded prose-code:bg-cuidaty-accent-light prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[0.9em] prose-code:font-normal prose-code:before:content-[''] prose-code:after:content-[''] prose-pre:rounded-xl prose-pre:bg-cuidaty-dark prose-ol:my-6 prose-ol:text-cuidaty-dark/80 prose-ul:my-6 prose-ul:text-cuidaty-dark/80 prose-li:my-2 prose-li:leading-[1.8] prose-li:marker:text-cuidaty-secondary prose-table:text-sm prose-th:bg-cuidaty-accent-light/60 prose-th:text-cuidaty-dark prose-td:border-cuidaty-dark/10 prose-img:my-8 prose-img:rounded-xl prose-hr:my-14 prose-hr:border-cuidaty-dark/10"
           set:html={contentHtml}
         />
 
         <!-- Sobre a Cuidaty (contexto para leitor e mecanismos de IA) -->
-        <aside
-          class="mt-16 rounded-2xl bg-gradient-to-br from-cuidaty-primary to-cuidaty-primary-hover p-8 text-white"
-        >
-          <p class="text-xs font-semibold uppercase tracking-widest text-white/70">
+        <aside class="mt-20 rounded-2xl bg-cuidaty-dark p-8 text-white md:p-10">
+          <p
+            class="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cuidaty-accent-light"
+          >
             Sobre a Cuidaty
           </p>
           <p class="mt-3 text-lg leading-relaxed">
@@ -228,14 +239,20 @@ const structuredData = [articleData, cuidatyAppSchema];
             rel="noopener noreferrer"
             data-ga-event="generate_lead"
             data-ga-location="blog_post"
-            class="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-cuidaty-primary transition-transform hover:scale-[1.02]"
+            class="group mt-7 inline-flex items-center gap-2 rounded-full bg-cuidaty-accent-light px-6 py-3 text-sm font-semibold text-cuidaty-dark transition-transform hover:scale-[1.02]"
           >
             Começar grátis
-            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                clip-rule="evenodd"></path>
+            <svg
+              class="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-1"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M4 10h11.5M11 5.5 15.5 10 11 14.5"></path>
             </svg>
           </a>
           <p class="mt-5 text-sm text-white/80">
@@ -252,15 +269,15 @@ const structuredData = [articleData, cuidatyAppSchema];
         </aside>
 
         <!-- Author box -->
-        <div class="mt-8 flex items-center gap-4 rounded-2xl bg-gray-50 p-6">
+        <div class="mt-8 flex items-center gap-4 rounded-2xl border border-cuidaty-dark/[0.08] p-6">
           <div
-            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-cuidaty-primary/20 text-lg font-semibold text-cuidaty-primary"
+            class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-cuidaty-accent-light font-serif text-lg font-semibold text-cuidaty-dark"
           >
             {post.author.name.charAt(0)}
           </div>
           <div>
             <p class="font-semibold text-cuidaty-dark">{post.author.name}</p>
-            <p class="text-sm text-gray-500">Equipe Cuidaty</p>
+            <p class="text-sm text-cuidaty-dark/50">Equipe Cuidaty</p>
           </div>
         </div>
 
@@ -268,13 +285,19 @@ const structuredData = [articleData, cuidatyAppSchema];
         <div class="mt-10">
           <a
             href="/blog/"
-            class="inline-flex items-center gap-2 rounded-full border border-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-cuidaty-primary transition-all hover:bg-cuidaty-primary hover:text-white"
+            class="group inline-flex items-center gap-2 rounded-full border border-cuidaty-dark/15 px-5 py-2.5 text-sm font-semibold text-cuidaty-dark transition-colors hover:bg-cuidaty-accent-light"
           >
-            <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"></path>
+            <svg
+              class="h-4 w-4 transition-transform duration-300 ease-out group-hover:-translate-x-1"
+              viewBox="0 0 20 20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M16 10H4.5M9 5.5 4.5 10 9 14.5"></path>
             </svg>
             Ver todos os artigos
           </a>

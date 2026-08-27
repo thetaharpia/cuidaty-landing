@@ -5,84 +5,104 @@ import type { BlogPost } from '../lib/blog.server';
 interface Props {
   post: BlogPost;
   headingLevel?: 'h2' | 'h3';
+  /** Primeiro post da primeira página: card largo, com a capa ao lado do texto. */
+  featured?: boolean;
 }
 
-const { post, headingLevel = 'h2' } = Astro.props;
+const { post, headingLevel = 'h2', featured = false } = Astro.props;
 const Heading = headingLevel;
 const coverImage = post.cover_image_url || DEFAULT_COVER;
+const href = `/blog/${post.slug}/`;
 ---
 
 <article
-  class="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-gray-100 transition-[transform,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5 hover:shadow-lifted hover:ring-cuidaty-primary/15"
+  class:list={[
+    'group relative flex flex-col overflow-hidden rounded-2xl transition-[transform,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-soft',
+    featured
+      ? 'bg-cuidaty-accent-light md:grid md:grid-cols-[1.05fr_1fr] md:items-center md:gap-0'
+      : 'border border-cuidaty-dark/[0.07] bg-white',
+  ]}
 >
-  <a
-    href={`/blog/${post.slug}/`}
-    class="focus-ring relative block h-48 overflow-hidden bg-gray-100"
-    tabindex="-1"
+  <div
+    class:list={[
+      'overflow-hidden bg-beige',
+      // A capa é desenhada em 16:9 e tem texto dentro: qualquer recorte come palavra.
+      'aspect-[16/9]',
+      featured && 'md:m-7 md:mr-0 md:rounded-xl',
+    ]}
   >
     <img
       src={coverImage}
-      alt={post.title}
+      alt=""
       loading="lazy"
       referrerpolicy="no-referrer"
-      class="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
+      class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
     />
-  </a>
-  <div class="flex flex-1 flex-col p-6">
+  </div>
+
+  <div class:list={['flex flex-1 flex-col', featured ? 'p-7 md:p-10' : 'p-6']}>
     {
       post.tags && post.tags.length > 0 && (
-        <div class="mb-3 flex flex-wrap gap-2">
-          {post.tags.slice(0, 2).map((tag) => (
-            <span class="rounded-full bg-cuidaty-primary/10 px-3 py-0.5 text-xs font-medium text-cuidaty-primary">
-              {tag.name}
-            </span>
-          ))}
-        </div>
+        <p class="mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-cuidaty-dark/45">
+          {post.tags
+            .slice(0, 2)
+            .map((tag) => tag.name)
+            .join(' · ')}
+        </p>
       )
     }
 
     <Heading
-      class="mb-3 line-clamp-2 font-serif text-xl font-semibold leading-snug text-cuidaty-dark"
+      class:list={[
+        'font-serif font-semibold leading-[1.2] text-cuidaty-dark',
+        featured ? 'text-2xl md:text-[2rem]' : 'line-clamp-3 text-xl',
+      ]}
     >
+      <!-- O link cobre o card inteiro: uma única área clicável, sem CTA repetido. -->
       <a
-        href={`/blog/${post.slug}/`}
-        class="focus-ring rounded-sm transition-colors hover:text-cuidaty-primary"
+        href={href}
+        class="focus-ring rounded-sm before:absolute before:inset-0 before:content-['']"
+        >{post.title}</a
       >
-        {post.title}
-      </a>
     </Heading>
 
     {
       post.excerpt && (
         <p
-          class="mb-4 line-clamp-2 text-sm leading-relaxed text-gray-600"
-          style="mask-image: linear-gradient(to bottom, black 65%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);"
+          class:list={[
+            'mt-3 leading-relaxed text-cuidaty-dark/65',
+            featured ? 'line-clamp-3 text-[0.95rem] md:text-base' : 'line-clamp-2 text-sm',
+          ]}
         >
           {post.excerpt}
         </p>
       )
     }
 
-    <div class="mt-auto flex items-center justify-between text-sm text-gray-500">
-      <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
-      {post.author?.name && <span class="text-xs text-gray-400">{post.author.name}</span>}
-    </div>
-
-    <a
-      href={`/blog/${post.slug}/`}
-      class="link-underline focus-ring mt-4 inline-flex w-fit items-center gap-1 rounded-sm text-sm font-semibold text-cuidaty-primary transition-colors hover:text-cuidaty-primary-hover"
+    <div
+      class="mt-6 flex items-center gap-3 pt-5 text-xs text-cuidaty-dark/50 md:mt-auto"
+      style="border-top: 1px solid rgb(12 32 47 / 0.08)"
     >
-      Ler artigo completo
-      <svg
-        class="h-4 w-4 transition-transform duration-200 ease-out group-hover:translate-x-1"
-        fill="currentColor"
-        viewBox="0 0 20 20"
+      <time datetime={post.published_at}>{formatDate(post.published_at)}</time>
+      {post.author?.name && <span aria-hidden="true">·</span>}
+      {post.author?.name && <span>{post.author.name}</span>}
+      <span
+        class="ml-auto inline-flex items-center gap-1.5 font-semibold text-cuidaty-dark transition-transform duration-300 ease-out group-hover:translate-x-0.5"
       >
-        <path
-          fill-rule="evenodd"
-          d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-          clip-rule="evenodd"></path>
-      </svg>
-    </a>
+        Ler
+        <svg
+          class="h-4 w-4"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M4 10h11.5M11 5.5 15.5 10 11 14.5"></path>
+        </svg>
+      </span>
+    </div>
   </div>
 </article>
