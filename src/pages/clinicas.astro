@@ -10,7 +10,26 @@ import { getDirectoryClinics, groupByState } from '../lib/clinics.server';
  * atrapalha o resto do site no Google.
  */
 const clinics = await getDirectoryClinics();
-const groups = groupByState(clinics);
+const sorted = groupByState(clinics).flatMap((group) => group.clinics);
+const states = [...new Set(sorted.map((clinic) => clinic.state).filter(Boolean))] as string[];
+const specialties = [...new Set(sorted.flatMap((clinic) => clinic.specialties))].sort((a, b) =>
+  a.localeCompare(b, 'pt-BR')
+);
+const CARD_SPECIALTIES = 3;
+
+/** Normaliza para a busca ignorar acento e caixa. */
+const fold = (value: string) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter((word) => word.length > 2)
+    .slice(0, 2)
+    .map((word) => word[0].toUpperCase())
+    .join('') || name[0].toUpperCase();
 
 Astro.response.headers.set('Cache-Control', 'public, s-maxage=600, stale-while-revalidate=3600');
 
@@ -31,6 +50,7 @@ const structuredData = {
         '@type': 'MedicalClinic',
         name: clinic.name,
         url: clinic.url,
+        ...(clinic.description ? { description: clinic.description } : {}),
         ...(clinic.city || clinic.state
           ? {
               address: {
@@ -56,85 +76,253 @@ const structuredData = {
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(structuredData)} />
 
   <Header />
-  <main class="bg-white">
-    <header class="border-b border-border">
-      <div class="container mx-auto px-5 md:px-8">
-        <div class="mx-auto max-w-3xl pb-12 pt-32 md:pb-16 md:pt-40">
-          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cuidaty-primary">
+  <main class="bg-background">
+    <header class="relative overflow-hidden border-b border-border bg-beige/60">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div
+          class="animate-float absolute -right-24 top-10 size-96 rounded-full bg-cuidaty-secondary/20 blur-3xl"
+        >
+        </div>
+        <div
+          class="animate-float absolute -left-32 bottom-0 size-80 rounded-full bg-cuidaty-accent/30 blur-3xl [animation-delay:-3s]"
+        >
+        </div>
+      </div>
+      <div class="container relative mx-auto px-5 md:px-8">
+        <div class="mx-auto max-w-3xl pb-14 pt-32 text-center md:pb-20 md:pt-40">
+          <p
+            class="clinic-rise mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cuidaty-primary"
+          >
             Quem usa a Cuidaty
           </p>
           <h1
-            class="font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-cuidaty-dark md:text-7xl"
+            class="clinic-rise font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-cuidaty-dark [animation-delay:80ms] md:text-7xl"
           >
-            Clínicas
+            Encontre uma clínica e <span class="italic text-cuidaty-primary">agende</span> sua consulta
           </h1>
-          <p class="mt-6 max-w-xl text-lg leading-relaxed text-foreground/70">
-            Consultórios e clínicas que agendam online pelo próprio site, feito na Cuidaty. Escolha
-            a sua cidade e abra o site da clínica.
+          <p
+            class="clinic-rise mx-auto mt-6 max-w-xl text-lg leading-relaxed text-foreground/70 [animation-delay:160ms]"
+          >
+            Consultórios e clínicas que atendem com agendamento online, direto pelo site de cada um.
+            Busque pelo nome ou pela cidade.
           </p>
+
+          {
+            clinics.length > 0 && (
+              <div class="clinic-rise mt-10 [animation-delay:240ms]">
+                <label for="clinic-search" class="sr-only">
+                  Buscar clínica por nome, cidade ou especialidade
+                </label>
+                <div class="group relative mx-auto max-w-xl rounded-full bg-white shadow-lifted ring-1 ring-border transition-shadow focus-within:ring-2 focus-within:ring-cuidaty-primary">
+                  <svg
+                    class="pointer-events-none absolute left-5 top-1/2 size-5 -translate-y-1/2 text-cuidaty-primary"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <path d="m20 20-3.5-3.5" />
+                  </svg>
+                  <input
+                    id="clinic-search"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Buscar por clínica, cidade ou especialidade"
+                    class="w-full rounded-full border-0 bg-transparent py-4 pl-14 pr-5 text-base text-cuidaty-dark placeholder:text-foreground/45 focus:ring-0"
+                  />
+                </div>
+
+                {states.length > 1 && (
+                  <div
+                    class="mt-5 flex flex-wrap justify-center gap-2"
+                    role="group"
+                    aria-label="Filtrar por estado"
+                  >
+                    <button type="button" class="clinic-chip" data-state="" aria-pressed="true">
+                      Todos
+                    </button>
+                    {states.map((state) => (
+                      <button
+                        type="button"
+                        class="clinic-chip"
+                        data-state={state}
+                        aria-pressed="false"
+                      >
+                        {state}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {specialties.length > 1 && (
+                  <div
+                    class="mt-3 flex flex-wrap justify-center gap-2"
+                    role="group"
+                    aria-label="Filtrar por especialidade"
+                  >
+                    <button type="button" class="clinic-chip" data-specialty="" aria-pressed="true">
+                      Todas as especialidades
+                    </button>
+                    {specialties.map((specialty) => (
+                      <button
+                        type="button"
+                        class="clinic-chip"
+                        data-specialty={specialty}
+                        aria-pressed="false"
+                      >
+                        {specialty}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <p class="mt-6 text-sm text-foreground/55">
+                  <span id="clinic-count" aria-live="polite">
+                    {clinics.length} {clinics.length === 1 ? 'clínica' : 'clínicas'}
+                  </span>
+                </p>
+              </div>
+            )
+          }
         </div>
       </div>
     </header>
 
-    <section class="bg-white">
-      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
-        <div class="mx-auto max-w-3xl">
+    <section>
+      <div class="container mx-auto px-5 py-14 md:px-8 md:py-20">
+        <div class="mx-auto max-w-6xl">
           {
-            groups.length === 0 ? (
-              <p class="text-lg leading-relaxed text-foreground/70">
+            sorted.length === 0 ? (
+              <p class="text-center text-lg leading-relaxed text-foreground/70">
                 As primeiras clínicas aparecem aqui em breve.
               </p>
             ) : (
-              groups.map((group) => (
-                <section class="mb-14 last:mb-0" aria-labelledby={`uf-${group.state}`}>
-                  <h2
-                    id={`uf-${group.state}`}
-                    class="border-b border-border pb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-secondary"
-                  >
-                    {group.state}
-                  </h2>
-                  <ul class="divide-y divide-border">
-                    {group.clinics.map((clinic) => (
-                      <li>
-                        <a
-                          href={clinic.url}
-                          rel="noopener"
-                          class="group flex items-center gap-4 py-5 transition-colors hover:bg-beige/50"
-                        >
+              <>
+                <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="clinic-grid">
+                  {sorted.map((clinic, index) => (
+                    <li
+                      class="clinic-card"
+                      style={`--i:${Math.min(index, 8)}`}
+                      data-state={clinic.state ?? ''}
+                      data-specialties={JSON.stringify(clinic.specialties)}
+                      data-search={fold(
+                        `${clinic.name} ${clinic.city ?? ''} ${clinic.state ?? ''} ${clinic.description ?? ''} ${clinic.specialties.join(' ')}`
+                      )}
+                    >
+                      <article class="group relative flex h-full flex-col rounded-2xl border border-border bg-white p-6 shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:border-cuidaty-secondary/60 hover:shadow-lifted">
+                        <div class="flex items-start gap-4">
                           {clinic.logoUrl ? (
                             <img
                               src={clinic.logoUrl}
                               alt=""
-                              width="40"
-                              height="40"
+                              width="56"
+                              height="56"
                               loading="lazy"
                               decoding="async"
-                              class="size-10 shrink-0 object-contain"
+                              class="size-14 shrink-0 rounded-xl bg-beige object-contain p-1.5"
                             />
                           ) : (
-                            <span class="size-10 shrink-0" aria-hidden="true" />
-                          )}
-                          <span class="min-w-0 flex-1">
-                            <span class="block truncate font-serif text-xl font-semibold text-cuidaty-dark">
-                              {clinic.name}
+                            <span
+                              class="flex size-14 shrink-0 items-center justify-center rounded-xl bg-teal-light font-serif text-xl font-semibold text-cuidaty-primary"
+                              aria-hidden="true"
+                            >
+                              {initials(clinic.name)}
                             </span>
-                            {clinic.city && (
-                              <span class="block text-sm text-foreground/60">{clinic.city}</span>
+                          )}
+                          <div class="min-w-0">
+                            <h2 class="font-serif text-xl font-semibold leading-snug text-cuidaty-dark">
+                              {clinic.name}
+                            </h2>
+                            {(clinic.city || clinic.state) && (
+                              <p class="mt-1 flex items-center gap-1.5 text-sm text-foreground/60">
+                                <svg
+                                  class="size-3.5 shrink-0 text-cuidaty-secondary"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z" />
+                                  <circle cx="12" cy="10" r="3" />
+                                </svg>
+                                {[clinic.city, clinic.state].filter(Boolean).join(' · ')}
+                              </p>
                             )}
-                          </span>
+                          </div>
+                        </div>
+
+                        {clinic.description && (
+                          <p class="mt-5 line-clamp-3 text-sm leading-relaxed text-foreground/70">
+                            {clinic.description}
+                          </p>
+                        )}
+
+                        {clinic.specialties.length > 0 && (
+                          <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Especialidades">
+                            {clinic.specialties.slice(0, CARD_SPECIALTIES).map((specialty) => (
+                              <li class="rounded-full bg-teal-light px-2.5 py-1 text-xs font-medium text-cuidaty-dark">
+                                {specialty}
+                              </li>
+                            ))}
+                            {clinic.specialties.length > CARD_SPECIALTIES && (
+                              <li class="rounded-full bg-beige px-2.5 py-1 text-xs font-medium text-foreground/60">
+                                {`+${clinic.specialties.length - CARD_SPECIALTIES}`}
+                              </li>
+                            )}
+                          </ul>
+                        )}
+
+                        <p class="mt-auto flex items-center gap-2 pt-5 text-sm text-foreground/60">
                           <span
-                            class="text-sm font-medium text-cuidaty-primary transition-transform group-hover:translate-x-0.5"
+                            class="size-1.5 rounded-full bg-cuidaty-secondary"
+                            aria-hidden="true"
+                          />
+                          Agendamento online
+                        </p>
+
+                        <a
+                          href={clinic.url}
+                          rel="noopener"
+                          class="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-cuidaty-primary px-5 py-3 text-sm font-semibold text-white transition-colors after:absolute after:inset-0 after:content-[''] hover:bg-cuidaty-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cuidaty-primary focus-visible:ring-offset-2"
+                        >
+                          Agendar consulta
+                          <span class="sr-only">{`com ${clinic.name}`}</span>
+                          <svg
+                            class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
                             aria-hidden="true"
                           >
-                            Abrir site
-                          </span>
-                          <span class="sr-only">{`Abrir o site de ${clinic.name}`}</span>
+                            <path d="M5 12h14m-6-6 6 6-6 6" />
+                          </svg>
                         </a>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))
+                      </article>
+                    </li>
+                  ))}
+                </ul>
+
+                <div id="clinic-empty" hidden class="mx-auto max-w-md py-12 text-center">
+                  <p class="font-serif text-2xl font-semibold text-cuidaty-dark">
+                    Nenhuma clínica encontrada
+                  </p>
+                  <p class="mt-3 text-foreground/65">
+                    Tente outro nome, cidade ou especialidade, ou limpe os filtros para ver todas.
+                  </p>
+                  <button type="button" id="clinic-reset" class="clinic-chip mt-6">
+                    Limpar filtros
+                  </button>
+                </div>
+              </>
             )
           }
         </div>
@@ -143,17 +331,21 @@ const structuredData = {
 
     <section class="bg-cuidaty-dark py-16 md:py-24">
       <div class="container mx-auto px-5 md:px-8">
-        <div class="mx-auto max-w-3xl">
-          <h2 class="font-serif text-3xl font-semibold leading-tight text-white md:text-4xl">
-            Quer o site da sua clínica aqui?
-          </h2>
-          <p class="mt-4 max-w-xl text-lg leading-relaxed text-white/75">
-            Crie o site da clínica com a Cuidaty, com agendamento online, e escolha aparecer nesta
-            lista nas configurações do portal.
-          </p>
+        <div
+          class="mx-auto flex max-w-6xl flex-col items-start justify-between gap-8 md:flex-row md:items-center"
+        >
+          <div class="max-w-xl">
+            <h2 class="font-serif text-3xl font-semibold leading-tight text-white md:text-4xl">
+              Quer o site da sua clínica aqui?
+            </h2>
+            <p class="mt-4 text-lg leading-relaxed text-white/75">
+              Crie o site da clínica com a Cuidaty, com agendamento online, e escolha aparecer nesta
+              lista nas configurações do portal.
+            </p>
+          </div>
           <a
-            href="https://app.cuidaty.com"
-            class="mt-8 inline-flex rounded-lg bg-white px-6 py-3 text-sm font-semibold text-cuidaty-dark transition-opacity hover:opacity-90"
+            href="https://app.cuidaty.com/register"
+            class="inline-flex shrink-0 rounded-lg bg-cuidaty-secondary px-6 py-3 text-sm font-semibold text-cuidaty-dark transition-colors hover:bg-cuidaty-accent"
           >
             Começar grátis
           </a>
@@ -163,3 +355,128 @@ const structuredData = {
   </main>
   <Footer />
 </Layout>
+
+<style is:global>
+  .clinic-chip {
+    border-radius: 9999px;
+    border: 1px solid #e6e4df;
+    background: #fff;
+    padding: 0.375rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #356588;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .clinic-chip:hover {
+    border-color: #5ac3b0;
+  }
+  .clinic-chip[aria-pressed='true'] {
+    background: #356588;
+    border-color: #356588;
+    color: #fff;
+  }
+  .clinic-chip:focus-visible {
+    outline: 2px solid #356588;
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes clinic-rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .clinic-rise {
+      animation: clinic-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .clinic-card {
+      animation: clinic-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: calc(var(--i, 0) * 60ms + 300ms);
+    }
+  }
+</style>
+
+<script>
+  const input = document.querySelector<HTMLInputElement>('#clinic-search');
+  const cards = [...document.querySelectorAll<HTMLElement>('.clinic-card')];
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('button.clinic-chip[data-state]')];
+  const specialtyChips = [
+    ...document.querySelectorAll<HTMLButtonElement>('button.clinic-chip[data-specialty]'),
+  ];
+  const empty = document.querySelector<HTMLElement>('#clinic-empty');
+  const count = document.querySelector<HTMLElement>('#clinic-count');
+  const reset = document.querySelector<HTMLButtonElement>('#clinic-reset');
+
+  const fold = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+
+  let state = '';
+  let specialty = '';
+
+  function apply() {
+    const query = fold(input?.value ?? '');
+    let visible = 0;
+
+    for (const card of cards) {
+      const match =
+        (state === '' || card.dataset.state === state) &&
+        (specialty === '' ||
+          (JSON.parse(card.dataset.specialties ?? '[]') as string[]).includes(specialty)) &&
+        (query === '' || (card.dataset.search ?? '').includes(query));
+      if (match && card.hidden) {
+        // reinicia a animação ao reaparecer
+        card.style.animation = 'none';
+        void card.offsetWidth;
+        card.style.animation = '';
+        card.style.setProperty('--i', String(Math.min(visible, 8)));
+      }
+      card.hidden = !match;
+      if (match) visible++;
+    }
+
+    if (empty) empty.hidden = visible > 0;
+    if (count) count.textContent = `${visible} ${visible === 1 ? 'clínica' : 'clínicas'}`;
+  }
+
+  input?.addEventListener('input', apply);
+
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      state = chip.dataset.state ?? '';
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      apply();
+    });
+  }
+
+  for (const chip of specialtyChips) {
+    chip.addEventListener('click', () => {
+      specialty = chip.dataset.specialty ?? '';
+      specialtyChips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      apply();
+    });
+  }
+
+  reset?.addEventListener('click', () => {
+    if (input) input.value = '';
+    state = '';
+    specialty = '';
+    chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.state === '')));
+    specialtyChips.forEach((c) =>
+      c.setAttribute('aria-pressed', String(c.dataset.specialty === ''))
+    );
+    apply();
+    input?.focus();
+  });
+</script>

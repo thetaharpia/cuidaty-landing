@@ -9,6 +9,9 @@ export interface DirectoryClinic {
   state: string | null;
   url: string;
   logoUrl: string | null;
+  /** Opcionais na API: clínicas sem texto ou sem profissionais com especialidade vêm vazias. */
+  description: string | null;
+  specialties: string[];
 }
 
 export interface ClinicGroup {
@@ -44,6 +47,14 @@ function webUrl(value: unknown): string | null {
   }
 }
 
+const MAX_SPECIALTIES = 6;
+
+function textList(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const items = value.map(text).filter((item): item is string => item !== null);
+  return [...new Set(items)].slice(0, MAX_SPECIALTIES);
+}
+
 /** Descarta o que não tem nome ou endereço utilizável: a página nunca quebra por um item. */
 function normalize(item: unknown): DirectoryClinic | null {
   if (typeof item !== 'object' || item === null) return null;
@@ -58,6 +69,8 @@ function normalize(item: unknown): DirectoryClinic | null {
     state: text(raw.state)?.toUpperCase() ?? null,
     url,
     logoUrl: webUrl(raw.logo_url),
+    description: text(raw.description),
+    specialties: textList(raw.specialties),
   };
 }
 
