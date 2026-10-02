@@ -37,6 +37,7 @@ Substitui três ou quatro ferramentas soltas por uma só. Menos tempo no operaci
 - Diagnóstico gratuito: https://diagnostico.cuidaty.com
 - Central de ajuda (tutoriais passo a passo): https://ajuda.cuidaty.com
 - Time: https://cuidaty.com/time
+- Clínicas que usam a Cuidaty (sites de clínicas com agendamento online): https://cuidaty.com/clinicas
 
 ## Central de Ajuda por assunto
 Use estes links quando alguém perguntar como fazer algo na Cuidaty.

@@ -49,6 +49,8 @@ export default defineConfig({
       customPages: [
         'https://app.cuidaty.com/',
         'https://diagnostico.cuidaty.com/',
+        // Página SSR: o sitemap só inclui rotas estáticas por conta própria.
+        'https://cuidaty.com/clinicas',
         // Central de Ajuda: home + hubs de categoria (cross-submission; ambos os
         // domínios precisam estar verificados no mesmo Search Console).
         'https://ajuda.cuidaty.com/',
