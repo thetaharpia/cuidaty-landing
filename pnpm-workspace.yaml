@@ -1,3 +1,29 @@
 onlyBuiltDependencies:
   - esbuild
   - sharp
+
+# O @playform/compress aceita qualquer astro ("*"), mas o lockfile tinha travado o 5.x para ele,
+# o que trazia a árvore vulnerável do Astro 5 (vite 6, rollup, h3...). Usa o mesmo do projeto.
+overrides:
+  '@playform/compress>astro': '$astro'
+  '@playform/compress>sharp': '$sharp'
+  # Correções de segurança em dependências indiretas, dentro da mesma versão maior.
+  'picomatch@<2.3.2': '^2.3.2'
+  'picomatch@>=4.0.0 <4.0.4': '^4.0.4'
+  'postcss@<8.5.23': '^8.5.23'
+  'nanoid@<3.3.18': '^3.3.18'
+  'svgo@>=4.0.0 <4.1.0': '^4.1.0'
+  'source-map-js@>=1.0.0 <1.2.2': '^1.2.2'
+  # Estes dois sobem de versão maior; o build da home e do blog saiu idêntico byte a byte.
+  'deepmerge-ts@<8.0.0': '^8.0.0'
+  'postcss-selector-parser@<7.1.6': '^7.1.6'
+
+# Sem versão corrigida publicada; revisar e tirar daqui quando sair correção.
+auditConfig:
+  ignoreGhsas:
+    # braces (via @playform/compress > fast-glob): DoS com entrada muito aninhada. Só roda no
+    # build, sobre os globs da nossa própria configuração; não recebe entrada de visitantes.
+    - GHSA-vfj7-8cjw-p6xm
+    # http-cache-semantics (via astro): afeta o cache de imagens remotas e de rotas. O site não
+    # usa nenhum dos dois (só imagens locais, sem routeRules).
+    - GHSA-ch52-4w7c-c8xp

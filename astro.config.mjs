@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import compress from '@playform/compress';
 import node from '@astrojs/node';
@@ -12,6 +11,9 @@ export default defineConfig({
     mode: 'standalone',
   }),
   trailingSlash: 'ignore',
+  // O compilador do Astro 7 apara o espaço entre texto e tag em linhas diferentes ("conversar?\n<a>"
+  // vira "conversar?<a>"). O @playform/compress já minifica o HTML mantendo esses espaços.
+  compressHTML: false,
   server: {
     port: 4321,
     host: true,
@@ -43,7 +45,6 @@ export default defineConfig({
     },
   },
   integrations: [
-    tailwind(),
     sitemap({
       changefreq: 'weekly',
       priority: 1.0,
