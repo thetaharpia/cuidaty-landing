@@ -250,6 +250,9 @@ const urls = {
                   <span class="hs-st-b">Concluída</span>
                 </span>
               </div>
+              <p class="hs-draft" data-at="21200">
+                Rascunho da IA: revise e aprove antes de salvar.
+              </p>
               <div class="hs-soap">
                 {
                   soap.map(([at, label, text]) => (
@@ -341,6 +344,7 @@ const urls = {
     ))
   }
 </div>
+<p class="hs-demo-note">Demonstração · nomes e dados fictícios</p>
 
 <style>
   .hs {
@@ -785,6 +789,11 @@ const urls = {
     border-radius: 50%;
     animation: hs-rot 0.8s linear infinite;
   }
+  .hs-draft {
+    margin-top: 1.2cqw;
+    color: var(--muted);
+    font-size: 1.5cqw;
+  }
   .hs-soap {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1134,6 +1143,12 @@ const urls = {
   }
 
   /* ================= Passos ================= */
+  .hs-demo-note {
+    margin-top: 0.6rem;
+    color: rgb(12 32 47 / 0.7);
+    font-size: 0.75rem;
+    text-align: center;
+  }
   .hs-steps {
     display: flex;
     flex-wrap: wrap;
