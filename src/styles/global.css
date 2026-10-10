@@ -1,4 +1,24 @@
 @tailwind base;
+
+/* Fontes reserva com as medidas da Geist e da Bricolage (tamanho e alturas calculados dos arquivos
+   das fontes contra a Arial). Enquanto a fonte web carrega, o texto já ocupa o mesmo espaço, então a
+   troca não mexe no layout: era o CLS de 0,14 no PageSpeed, vindo do aviso de cookies. */
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Helvetica');
+  size-adjust: 102.34%;
+  ascent-override: 98.2%;
+  descent-override: 28.83%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Bricolage Fallback';
+  src: local('Arial'), local('Liberation Sans'), local('Helvetica');
+  size-adjust: 96.33%;
+  ascent-override: 96.54%;
+  descent-override: 28.03%;
+  line-gap-override: 0%;
+}
 @tailwind components;
 @tailwind utilities;
 
