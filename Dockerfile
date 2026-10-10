@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apk add --no-cache curl wget && npm install -g pnpm@10.27.0
 
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # GA Measurement ID (público). Injetado via build-arg pelo Coolify.
