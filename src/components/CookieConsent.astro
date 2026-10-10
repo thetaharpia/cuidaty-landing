@@ -36,8 +36,15 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
 
         gtag('js', new Date());
         gtag('config', gaId, { anonymize_ip: true });
+
+        // gtag.js só depois do load, fora da cadeia crítica. Os eventos ficam no dataLayer.
+        window.addEventListener('load', function () {
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+        });
       </script>
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
 
       {/* Banner */}
       <div
@@ -60,14 +67,14 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
             <button
               id="cookie-decline"
               type="button"
-              class="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-100"
+              class="rounded-md border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-100"
             >
               Recusar
             </button>
             <button
               id="cookie-accept"
               type="button"
-              class="rounded-full bg-cuidaty-primary-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-ink-hover"
+              class="rounded-md bg-cuidaty-primary-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-ink-hover"
             >
               Aceitar
             </button>
