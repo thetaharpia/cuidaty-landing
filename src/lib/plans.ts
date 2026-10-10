@@ -34,7 +34,6 @@ export const plans: Plan[] = [
       'Prontuário eletrônico completo, com imagens e resumo clínico',
       'Gestão de pacientes: cadastro, saúde, convênio e importação',
       'Formulários e relatórios, com exportação em PDF',
-      'Financeiro completo: dashboard, caixa, faturas e checkout',
       'Portal de agendamento online + portal do paciente',
     ],
     exclusions: ['Sem comunicação por WhatsApp', 'Sem Cuty AI'],
@@ -83,6 +82,8 @@ export const plans: Plan[] = [
     cycle: '',
     inherits: 'Tudo do Plus, mais:',
     features: [
+      'Financeiro completo: dashboard, caixa, faturas, checkout e metas de receita',
+      'Integração com convênios (Geap e SulAmérica): emissão e conferência de guias',
       'Multiunidade: várias filiais e grupos em uma conta',
       'Equipes e permissões avançadas por cargo e prontuário',
       'Analytics avançado: portal, comunicação e operação',

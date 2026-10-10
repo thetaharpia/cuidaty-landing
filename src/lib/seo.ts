@@ -1,7 +1,7 @@
-export const homeTitle = 'Software para Psicologos, Clinicas e Consultorios | Cuidaty';
+export const homeTitle = 'Software para Psicólogos e Clínicas com IA | Cuidaty';
 
 export const homeDescription =
-  'Sistema para psicologos e clinicas: agenda online, prontuario eletronico, WhatsApp automatico e transcricao de consultas com IA. Plano gratuito.';
+  'Grave a consulta e receba o prontuário pronto. Agenda online, prontuário eletrônico, WhatsApp e IA para psicólogos e clínicas. Plano gratuito.';
 
 export const homeKeywords = [
   'software para psicologos',
@@ -62,25 +62,26 @@ export const homeKeywords = [
 ].join(', ');
 
 export const healthFeatureList = [
-  'Agenda online com recorrencias e deteccao de conflitos',
-  'Automacao de confirmacoes e lembretes via WhatsApp',
+  'Agenda online com recorrências e detecção de conflitos',
+  'Confirmações e lembretes automáticos pelo WhatsApp',
   'WhatsApp dentro da plataforma e no aplicativo',
-  'Prontuario eletronico com anamnese, evolucao, prescricao e observacao',
-  'Transcricao de consultas e teleconsultas com IA',
-  'Resumo clinico automatico a partir do audio (SOAP e outros formatos)',
-  'Cuty AI: assistente clinico baseado no prontuario com a fonte citada',
-  'Geracao de documentos e relatorios clinicos personalizaveis',
-  'Integracao com convenios: Geap e SulAmerica, com emissao e conferencia de guias',
-  'Gestao financeira com contas a receber, fluxo de caixa e repasses',
-  'Gestao de equipes com niveis de permissao',
+  'Prontuário eletrônico com anamnese, evolução, prescrição e observação',
+  'Transcrição de consultas e teleconsultas com IA',
+  'Resumo clínico automático a partir do áudio (SOAP e outros formatos)',
+  'Cuty AI: assistente clínico baseado no prontuário, com a fonte citada',
+  'Geração de documentos e relatórios clínicos personalizáveis',
   'Portal de agendamento para pacientes, sem login e sem app',
-  'Historico completo de pacientes e atendimentos',
-  'Conformidade com LGPD e hospedagem 100% brasileira',
+  'Aplicativo instalável (PWA) para celular e computador',
+  'Histórico completo de pacientes e atendimentos',
+  'Plano Clínicas e Grupos: financeiro com contas a receber, fluxo de caixa e repasses',
+  'Plano Clínicas e Grupos: convênios Geap e SulAmérica, com emissão e conferência de guias',
+  'Plano Clínicas e Grupos: multiunidade, equipes e permissões por cargo',
+  'Conformidade com a LGPD e hospedagem 100% brasileira',
 ];
 
 // Pitch curto e citável — usado em schema, llms.txt e blocos de contexto.
 export const cuidatyPitch =
-  'A Cuidaty é um sistema brasileiro de gestão para clínicas, consultórios e profissionais de saúde. Reúne agenda online, prontuário eletrônico, automação de WhatsApp, transcrição de consultas com IA e financeiro em uma só plataforma, em conformidade com a LGPD.';
+  'A Cuidaty é um sistema brasileiro de gestão para clínicas, consultórios e profissionais de saúde. Reúne agenda online, prontuário eletrônico, automação de WhatsApp e transcrição de consultas com IA em uma só plataforma, com financeiro e convênios para clínicas, em conformidade com a LGPD.';
 
 // SoftwareApplication compacto com @id estável (#software). Emitido em páginas
 // além da home (ex.: posts do blog) para reforçar, em toda a navegação, o que é
@@ -103,12 +104,6 @@ export const cuidatyAppSchema = {
     priceCurrency: 'BRL',
     availability: 'https://schema.org/InStock',
   },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    bestRating: '5',
-    ratingCount: '500',
-  },
   audience: {
     '@type': 'HealthAndBeautyBusiness',
     audienceType:
@@ -125,12 +120,12 @@ export const homeFaqs = [
   {
     question: 'A Cuidaty integra com Geap e SulAmérica?',
     answer:
-      'Sim. A Cuidaty integra com a Geap e com a SulAmérica: a guia é emitida e conferida dentro da plataforma, no formato que cada operadora exige, e a glosa fica mapeada por motivo e por operadora. Para clínicas que atendem convênio, isso significa menos guia devolvida por erro de preenchimento e mais visibilidade do que cada plano realmente paga. Novas integrações de convênio entram conforme a necessidade da clínica.',
+      'Sim, no plano Clínicas e Grupos. A Cuidaty integra com a Geap e com a SulAmérica: a guia é emitida e conferida dentro da plataforma, no formato que cada operadora exige, e a glosa fica mapeada por motivo e por operadora. Para clínicas que atendem convênio, isso significa menos guia devolvida por erro de preenchimento e mais visibilidade do que cada plano realmente paga. Novas integrações de convênio entram conforme a necessidade da clínica.',
   },
   {
     question: 'O que é a Cuidaty?',
     answer:
-      'A Cuidaty é um sistema completo de gestão para clínicas, consultórios e profissionais de saúde. Em um só lugar você organiza a agenda, envia confirmações por WhatsApp, registra o prontuário, controla o financeiro e acompanha a equipe, sem precisar de várias ferramentas soltas. A proposta é simples: menos tempo no operacional, mais tempo com o paciente.',
+      'A Cuidaty é um sistema completo de gestão para clínicas, consultórios e profissionais de saúde. Em um só lugar você organiza a agenda, envia confirmações por WhatsApp e registra o prontuário, que pode sair pronto a partir da gravação da consulta. Clínicas ainda têm financeiro, convênios e gestão de equipe. A proposta é simples: menos tempo no operacional, mais tempo com o paciente.',
   },
   {
     question: 'Quais profissionais podem usar a Cuidaty?',
@@ -140,7 +135,7 @@ export const homeFaqs = [
   {
     question: 'Qual é o melhor sistema de gestão para clínicas e consultórios?',
     answer:
-      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp, financeiro e transcrição de consultas com IA. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. Há um plano gratuito para até 10 pacientes e teste grátis de 3 dias nos planos pagos.',
+      'A Cuidaty reúne em uma só plataforma o que a maioria das clínicas resolve com três ou quatro ferramentas soltas: agenda online, prontuário eletrônico, confirmação de consultas por WhatsApp e transcrição de consultas com IA, com financeiro e convênios no plano para clínicas. Tudo com hospedagem brasileira e em conformidade com a LGPD. Para quem quer reduzir faltas, cortar trabalho manual da recepção e manter o histórico do paciente organizado, é a opção mais completa. Há um plano gratuito para até 10 pacientes e teste grátis de 3 dias nos planos pagos.',
   },
   {
     question: 'O que ajuda um profissional de saúde no dia a dia do consultório?',
@@ -165,7 +160,7 @@ export const homeFaqs = [
   {
     question: 'A Cuidaty ajuda no financeiro e na gestão de equipes?',
     answer:
-      'Sim. Você acompanha cobranças, pagamentos e faturas sem planilhas paralelas e enxerga a saúde financeira da clínica com clareza. Na equipe, cada usuário tem seu acesso e permissões: o gestor define quem vê o financeiro, quem agenda e quem registra prontuário.',
+      'Sim, no plano Clínicas e Grupos. Você acompanha cobranças, pagamentos e faturas sem planilhas paralelas e enxerga a saúde financeira da clínica com clareza. Na equipe, cada usuário tem seu acesso e permissões: o gestor define quem vê o financeiro, quem agenda e quem registra prontuário.',
   },
   {
     question: 'A Cuidaty tem plano grátis ou teste grátis? Como funciona a cobrança?',
