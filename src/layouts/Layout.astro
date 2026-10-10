@@ -1,9 +1,14 @@
 ---
 import { SEO } from 'astro-seo';
+import '@fontsource-variable/bricolage-grotesque/opsz.css';
+import '@fontsource-variable/geist/wght.css';
+import bricolageLatin from '@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2?url';
+import geistLatin from '@fontsource-variable/geist/files/geist-latin-wght-normal.woff2?url';
 import '../styles/global.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import MobileCTABar from '../components/MobileCTABar.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import FallingLeaves from '../components/FallingLeaves.astro';
 import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
@@ -110,12 +115,12 @@ const organizationData = {
   image: fullImageURL,
   slogan: 'Menos burocracia. Mais escuta.',
   description: 'Tecnologia que devolve o respiro à rotina clínica de profissionais da saúde.',
-  email: 'contato@thetaharpia.com',
+  email: 'contato@cuidaty.com',
   contactPoint: [
     {
       '@type': 'ContactPoint',
       contactType: 'sales',
-      email: 'contato@thetaharpia.com',
+      email: 'contato@cuidaty.com',
       telephone: '+55-96-9100-3520',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
@@ -123,7 +128,7 @@ const organizationData = {
     {
       '@type': 'ContactPoint',
       contactType: 'customer support',
-      email: 'contato@thetaharpia.com',
+      email: 'contato@cuidaty.com',
       availableLanguage: 'Portuguese',
       areaServed: 'BR',
     },
@@ -164,7 +169,7 @@ const softwareData = {
       priceValidUntil: '2026-12-31',
       availability: 'https://schema.org/InStock',
       description:
-        'Gestão completa do consultório: agenda inteligente, prontuário eletrônico, gestão de pacientes, formulários, relatórios, financeiro e portal de agendamento.',
+        'Gestão do consultório: agenda inteligente, prontuário eletrônico, gestão de pacientes, formulários, relatórios e portal de agendamento.',
     },
     {
       '@type': 'Offer',
@@ -192,16 +197,9 @@ const softwareData = {
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
       description:
-        'Para clínicas, redes e grupos: multiunidade, equipes e permissões avançadas, analytics, migração de dados e limites customizáveis. Preço sob consulta.',
+        'Para clínicas, redes e grupos: financeiro, convênios Geap e SulAmérica, multiunidade, equipes e permissões avançadas, analytics, migração de dados e limites customizáveis. Preço sob consulta.',
     },
   ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    bestRating: '5',
-    worstRating: '1',
-    ratingCount: '500',
-  },
   description: description,
   url: siteUrl,
   featureList: healthFeatureList,
@@ -332,20 +330,9 @@ const structuredData = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <!-- DNS Prefetch and Preconnect for Performance -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" fetchpriority="high" />
-
-    <!-- Critical font loading - synchronous for consistency -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Figtree:wght@400;500;600;700&display=swap"
-    />
+    <!-- Fontes servidas do próprio domínio (latin); preload do que aparece no topo -->
+    <link rel="preload" href={bricolageLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={geistLatin} as="font" type="font/woff2" crossorigin />
 
     <!-- Central de Ajuda (subdomínio) -->
     <link rel="help" href={helpCenterUrl} title="Central de Ajuda Cuidaty" />
@@ -370,6 +357,8 @@ const structuredData = [
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#356588" />
+    <!-- Impede o modo escuro automático do navegador de escurecer o fundo branco -->
+    <meta name="color-scheme" content="only light" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Cuidaty" />
@@ -487,7 +476,7 @@ const structuredData = [
         margin: 0;
         padding: 0;
         font-family:
-          'Figtree',
+          'Geist Variable',
           -apple-system,
           BlinkMacSystemFont,
           'Segoe UI',
@@ -587,6 +576,7 @@ const structuredData = [
     <slot name="head" />
   </head>
   <body class="pb-[92px] lg:pb-0">
+    <FallingLeaves />
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />

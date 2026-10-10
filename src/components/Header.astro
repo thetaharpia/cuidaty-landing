@@ -10,7 +10,14 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
       id="nav-bar"
     >
       <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
-        <img src="/logo-written.svg" alt="Cuidaty" class="h-8 w-auto sm:h-9" loading="eager" />
+        <img
+          src="/logo-written.svg"
+          alt="Cuidaty"
+          width="314"
+          height="82"
+          class="h-8 w-auto sm:h-9"
+          loading="eager"
+        />
       </a>
 
       <div class="hidden items-center gap-6 md:flex">
@@ -21,16 +28,16 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           Início
         </a>
         <a
+          href="/#sobre"
+          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
+        >
+          Sobre
+        </a>
+        <a
           href="/#funcionalidades"
           class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
         >
           Funcionalidades
-        </a>
-        <a
-          href="/#consultoria"
-          class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
-        >
-          Para clínicas
         </a>
         <a
           href="/#planos"
@@ -39,10 +46,10 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           Preços
         </a>
         <a
-          href="/#sobre"
+          href="/#clinicas"
           class="text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline"
         >
-          Sobre
+          Para clínicas
         </a>
         <a
           href="/#contato"
@@ -50,14 +57,48 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
         >
           Contato
         </a>
-        <a
-          href="https://ajuda.cuidaty.com"
-          rel="noopener"
-          title="Central de Ajuda da Cuidaty: tutoriais de agenda, prontuário e WhatsApp"
-          class="hidden text-sm font-medium text-cuidaty-dark/70 underline-offset-4 transition-colors hover:text-cuidaty-dark hover:underline lg:inline-flex"
-        >
-          Ajuda
-        </a>
+        <!-- Ajuda: dúvidas da home ou a Central de Ajuda. <details> nativo, fecha ao clicar fora (script abaixo). -->
+        <details class="help-menu relative hidden lg:block" data-help-menu>
+          <summary
+            class="flex cursor-pointer list-none items-center gap-1 text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
+          >
+            Ajuda
+            <svg
+              class="help-caret h-3.5 w-3.5 transition-transform"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 9l6 6 6-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </summary>
+          <div
+            class="absolute left-1/2 top-full z-10 mt-3 w-64 -translate-x-1/2 rounded-md border border-border bg-white p-1.5 shadow-lifted"
+          >
+            <a href="/#faq" class="block rounded px-3 py-2.5 hover:bg-cuidaty-dark/5">
+              <span class="block text-sm font-semibold text-cuidaty-dark">Dúvidas frequentes</span>
+              <span class="block text-xs text-cuidaty-dark/70"
+                >Plano grátis, WhatsApp, IA e LGPD</span
+              >
+            </a>
+            <a
+              href="https://ajuda.cuidaty.com"
+              rel="noopener"
+              title="Central de Ajuda da Cuidaty: tutoriais de agenda, prontuário e WhatsApp"
+              class="block rounded px-3 py-2.5 hover:bg-cuidaty-dark/5"
+            >
+              <span class="block text-sm font-semibold text-cuidaty-dark">Central de Ajuda</span>
+              <span class="block text-xs text-cuidaty-dark/70"
+                >Tutoriais passo a passo da plataforma</span
+              >
+            </a>
+          </div>
+        </details>
         <a
           href="https://cuidaty.com/blog"
           aria-current={isBlog ? 'page' : undefined}
@@ -91,7 +132,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           rel="noopener noreferrer"
           data-ga-event="login_click"
           data-ga-location="header_desktop"
-          class="hidden items-center rounded-md border border-cuidaty-primary bg-transparent px-5 py-2 text-sm font-semibold text-cuidaty-primary transition-colors hover:bg-cuidaty-primary/10 sm:inline-flex"
+          class="hidden items-center rounded-md border border-cuidaty-primary bg-transparent px-5 py-2 text-sm font-semibold text-cuidaty-primary-ink transition-colors hover:bg-cuidaty-primary/10 sm:inline-flex"
         >
           Entrar
         </a>
@@ -101,7 +142,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           rel="noopener noreferrer"
           data-ga-event="generate_lead"
           data-ga-location="header_desktop"
-          class="hidden items-center gap-1.5 rounded-md bg-cuidaty-primary px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-cuidaty-primary-hover sm:inline-flex"
+          class="hidden items-center gap-1.5 rounded-md bg-cuidaty-primary-ink px-5 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-cuidaty-primary-ink-hover sm:inline-flex"
         >
           Começar grátis
         </a>
@@ -138,18 +179,18 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           Início
         </a>
         <a
+          href="/#sobre"
+          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          Sobre
+        </a>
+        <a
           href="/#funcionalidades"
           class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
           style="min-height: 44px;"
         >
           Funcionalidades
-        </a>
-        <a
-          href="/#consultoria"
-          class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
-          style="min-height: 44px;"
-        >
-          Para clínicas
         </a>
         <a
           href="/#planos"
@@ -159,11 +200,11 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           Preços
         </a>
         <a
-          href="/#sobre"
+          href="/#clinicas"
           class="flex items-center rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
           style="min-height: 44px;"
         >
-          Sobre
+          Para clínicas
         </a>
         <a
           href="/#contato"
@@ -171,6 +212,26 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           style="min-height: 44px;"
         >
           Contato
+        </a>
+        <a
+          href="/#faq"
+          class="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
+          style="min-height: 44px;"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h8M8 14h5M5 5h14v11H9l-4 3z"></path>
+          </svg>
+          Dúvidas frequentes
         </a>
         <a
           href="https://ajuda.cuidaty.com"
@@ -225,7 +286,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           rel="noopener noreferrer"
           data-ga-event="login_click"
           data-ga-location="header_mobile"
-          class="mt-1 flex items-center justify-center rounded-xl border border-cuidaty-primary bg-transparent px-3 py-3 text-base font-semibold text-cuidaty-primary transition-colors hover:bg-cuidaty-primary/10"
+          class="mt-1 flex items-center justify-center rounded-xl border border-cuidaty-primary bg-transparent px-3 py-3 text-base font-semibold text-cuidaty-primary-ink transition-colors hover:bg-cuidaty-primary/10"
           style="min-height: 44px;"
         >
           Entrar
@@ -236,7 +297,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           rel="noopener noreferrer"
           data-ga-event="generate_lead"
           data-ga-location="header_mobile"
-          class="flex items-center justify-center gap-2 rounded-xl bg-cuidaty-primary px-3 py-3 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
+          class="flex items-center justify-center gap-2 rounded-xl bg-cuidaty-primary-ink px-3 py-3 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-ink-hover"
           style="min-height: 44px;"
         >
           Começar grátis
@@ -260,9 +321,31 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
     font-weight: 600;
     background-color: #f4f1ea;
   }
+  .help-menu summary::-webkit-details-marker {
+    display: none;
+  }
+  .help-menu[open] .help-caret {
+    transform: rotate(180deg);
+  }
 </style>
 
 <script>
+  // Menu "Ajuda": fecha ao clicar fora, ao escolher um item ou com Esc.
+  document.querySelectorAll<HTMLDetailsElement>('[data-help-menu]').forEach((menu) => {
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target as Node)) menu.open = false;
+    });
+    menu
+      .querySelectorAll('a')
+      .forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  });
+
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const desktopMedia = window.matchMedia('(min-width: 768px)');

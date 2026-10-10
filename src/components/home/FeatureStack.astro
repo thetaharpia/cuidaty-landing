@@ -1,0 +1,604 @@
+---
+// Funcionalidades em pilha: o card do meio abre e mostra a funcionalidade, os vizinhos ficam como
+// pílulas em cima e embaixo, e a pilha gira sozinha (pausa com o mouse em cima). Clicar numa pílula
+// abre ela. Âncora #funcionalidades. Com movimento reduzido não gira; as pílulas continuam clicáveis.
+const features = [
+  {
+    id: 'agenda',
+    title: 'Agenda',
+    meta: 'Recorrência e conflitos',
+    text: 'Marque com recorrência e a Cuidaty avisa quando dois horários batem.',
+    icon: 'M7 3v3M17 3v3M4 8h16M5 5h14v15H5z',
+  },
+  {
+    id: 'whats',
+    title: 'Lembrete no WhatsApp',
+    meta: '24h antes',
+    text: 'O paciente recebe o lembrete e confirma ali mesmo. A agenda atualiza sozinha.',
+    icon: 'M5 19l1.4-3.6A7.5 7.5 0 1 1 9 18.6z',
+  },
+  {
+    id: 'transc',
+    title: 'Transcrição',
+    meta: 'Presencial ou teleconsulta',
+    text: 'Grave a consulta e receba o texto separado por quem falou, sem digitar nada.',
+    icon: 'M12 4a3 3 0 0 1 3 3v5a3 3 0 0 1-6 0V7a3 3 0 0 1 3-3zM6 11a6 6 0 0 0 12 0M12 17v3',
+  },
+  {
+    id: 'soap',
+    title: 'Resumo clínico',
+    meta: 'SOAP e outros formatos',
+    text: 'O resumo sai pronto a partir do áudio. Você revisa e salva no prontuário.',
+    icon: 'M7 4h10v16H7zM10 9h4M10 13h4',
+  },
+  {
+    id: 'cuty',
+    title: 'Cuty AI',
+    meta: 'Com a fonte citada',
+    text: 'Pergunte sobre o paciente e a resposta vem com o trecho do prontuário de onde saiu.',
+    icon: 'M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z',
+  },
+  {
+    id: 'portal',
+    title: 'Portal de agendamento',
+    meta: 'Sem login e sem app',
+    text: 'O paciente escolhe o horário pelo link, e ele já cai na sua agenda.',
+    icon: 'M4 5h16v14H4zM4 9h16M9 13h2M13 13h2M9 16h2',
+  },
+];
+---
+
+<section id="funcionalidades" class="bg-white py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16"
+      data-fs
+    >
+      <div>
+        <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          Do agendamento ao prontuário.
+        </h2>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-cuidaty-dark/70">
+          Cada etapa do seu dia no mesmo sistema, sem planilha, sem aba aberta, sem copiar e colar.
+        </p>
+        <div class="fs-copy mt-10" aria-live="polite">
+          {
+            features.map((f, i) => (
+              <div class:list={['fs-copy-item', i === 0 && 'on']}>
+                <p class="text-sm font-semibold text-primary-ink">
+                  {String(i + 1).padStart(2, '0')} / {String(features.length).padStart(2, '0')}
+                </p>
+                <h3 class="mt-2 font-sans text-2xl font-semibold text-cuidaty-dark">{f.title}</h3>
+                <p class="mt-2 max-w-md leading-relaxed text-cuidaty-dark/70">{f.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <ol class="fs-stack" aria-label="Funcionalidades">
+        {
+          features.map((f, i) => (
+            <li
+              class="fs-card"
+              data-i={i}
+              data-o={i === 0 ? 0 : i === 1 ? 1 : i === features.length - 1 ? -1 : 9}
+            >
+              <button type="button" class="fs-head" aria-label={`Ver ${f.title}`}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d={f.icon}
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                <span class="fs-title">{f.title}</span>
+                <span class="fs-meta">{f.meta}</span>
+              </button>
+              <div class="fs-body" aria-hidden="true">
+                {f.id === 'agenda' && (
+                  <div class="fs-week">
+                    {['Seg', 'Ter', 'Qua', 'Qui', 'Sex'].map((d, n) => (
+                      <div>
+                        <span class="fs-day">{d}</span>
+                        <i class="fs-slot" style={`--n:${n};--top:${[10, 40, 22, 55, 30][n]}%`}>
+                          {['9h', '14h', '10h', '16h', '11h'][n]}
+                        </i>
+                        {n === 3 && (
+                          <i class="fs-slot fs-clash" style="--n:6;--top:55%">
+                            16h
+                          </i>
+                        )}
+                      </div>
+                    ))}
+                    <span class="fs-alert">Conflito na quinta às 16h</span>
+                  </div>
+                )}
+                {f.id === 'whats' && (
+                  <div class="fs-chat">
+                    <p class="fs-in">Oi, Maria! Sua consulta é amanhã às 14h. Confirma?</p>
+                    <p class="fs-out">Confirmo</p>
+                    <p class="fs-row">
+                      <span>Qui 14h · Maria Souza</span>
+                      <b>Confirmado</b>
+                    </p>
+                  </div>
+                )}
+                {f.id === 'transc' && (
+                  <div class="fs-transc">
+                    <div class="fs-wave">
+                      {Array.from({ length: 28 }, (_, n) => (
+                        <i
+                          style={`--h:${20 + Math.round(70 * Math.abs(Math.sin(n * 1.7)))}%;--n:${n}`}
+                        />
+                      ))}
+                    </div>
+                    <p>
+                      <span>Profissional:</span> Como foi a semana?
+                    </p>
+                    <p>
+                      <span>Paciente:</span> Fiquei ansioso antes da reunião e dormi mal.
+                    </p>
+                  </div>
+                )}
+                {f.id === 'soap' && (
+                  <ul class="fs-soap">
+                    {[
+                      ['S', 'Ansiedade antes de reuniões, sono irregular.'],
+                      ['O', 'Discurso organizado, humor ansioso.'],
+                      ['A', 'Ansiedade situacional.'],
+                      ['P', 'Sessões semanais e respiração.'],
+                    ].map(([k, v], n) => (
+                      <li style={`--n:${n}`}>
+                        <b>{k}</b>
+                        {v}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {f.id === 'cuty' && (
+                  <div class="fs-cuty">
+                    <p class="fs-ask">O que combinamos na última sessão?</p>
+                    <p class="fs-answer">
+                      Treino de respiração e revisar o sono.
+                      <small>Fonte: sessão de 12/06, trecho 3</small>
+                    </p>
+                  </div>
+                )}
+                {f.id === 'portal' && (
+                  <div class="fs-portal">
+                    <div class="fs-days">
+                      {['Seg 13', 'Ter 14', 'Qua 15'].map((d, n) => (
+                        <span class:list={[n === 1 && 'on']}>{d}</span>
+                      ))}
+                    </div>
+                    <div class="fs-times">
+                      {['08:00', '09:30', '11:00', '14:00', '15:30', '17:00'].map((t) => (
+                        <span class:list={[t === '14:00' && 'on']}>{t}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fs-copy {
+    display: grid;
+  }
+  .fs-copy-item {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition:
+      opacity 0.45s,
+      transform 0.45s,
+      visibility 0.45s;
+  }
+  .fs-copy-item.on {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* ---------- Pilha ---------- */
+  .fs-stack {
+    --pill: 3.25rem;
+    --open: 16rem;
+    --gap: 0.75rem;
+    position: relative;
+    height: calc(var(--pill) * 2 + var(--open) + var(--gap) * 2);
+  }
+  .fs-card {
+    position: absolute;
+    left: 6%;
+    right: 6%;
+    top: 0;
+    height: var(--pill);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    background: #fff;
+    box-shadow: 0 6px 18px -12px rgb(12 32 47 / 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      height 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      left 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      right 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.5s;
+  }
+  .fs-card[data-o='-1'] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .fs-card[data-o='0'] {
+    left: 0;
+    right: 0;
+    height: var(--open);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(calc(var(--pill) + var(--gap)));
+    box-shadow: 0 30px 60px -30px rgb(12 32 47 / 0.4);
+    z-index: 2;
+  }
+  .fs-card[data-o='1'] {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(calc(var(--pill) + var(--open) + var(--gap) * 2));
+  }
+  .fs-card[data-o='-2'],
+  .fs-card[data-o='-9'] {
+    transform: translateY(-1.5rem) scale(0.92);
+  }
+  .fs-card[data-o='2'],
+  .fs-card[data-o='9'] {
+    transform: translateY(calc(var(--pill) * 2 + var(--open) + var(--gap) * 2)) scale(0.92);
+  }
+
+  .fs-head {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    height: var(--pill);
+    padding: 0 1rem;
+    color: #0c202f;
+    text-align: left;
+  }
+  .fs-head svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+    color: #0c202f;
+  }
+  .fs-title {
+    overflow: hidden;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .fs-meta {
+      display: none;
+    }
+  }
+  .fs-meta {
+    margin-left: auto;
+    color: #64748b;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  .fs-body {
+    height: calc(var(--open) - var(--pill));
+    padding: 0.25rem 1rem 1rem;
+    font-size: 0.85rem;
+    color: #0c202f;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .fs-card[data-o='0'] .fs-body {
+    opacity: 1;
+    transition-delay: 0.25s;
+  }
+
+  /* ---------- Mini telas ---------- */
+  .fs-week {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+    height: 100%;
+  }
+  .fs-week > div {
+    position: relative;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+  }
+  .fs-day {
+    display: block;
+    padding: 0.35rem;
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .fs-slot {
+    position: absolute;
+    left: 0.3rem;
+    right: 0.3rem;
+    top: var(--top);
+    padding: 0.3rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.35rem;
+    background: #fff;
+    color: #0c202f;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .fs-clash {
+    border-color: #f87171;
+    color: #b91c1c;
+    translate: 0.4rem 0.6rem;
+  }
+  .fs-alert {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.35rem;
+    color: #b91c1c;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .fs-chat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .fs-in,
+  .fs-out {
+    max-width: 80%;
+    padding: 0.55rem 0.8rem;
+    border-radius: 0.9rem;
+  }
+  .fs-in {
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 0.25rem;
+  }
+  .fs-out {
+    align-self: flex-end;
+    background: #0c202f;
+    color: #fff;
+    border-bottom-right-radius: 0.25rem;
+  }
+  .fs-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.8rem;
+  }
+  .fs-row b {
+    color: #0c202f;
+  }
+  .fs-transc p {
+    margin-top: 0.5rem;
+  }
+  .fs-transc span,
+  .fs-soap b {
+    color: #64748b;
+    font-weight: 600;
+  }
+  .fs-wave {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+  }
+  .fs-wave i {
+    width: 4px;
+    height: var(--h);
+    border-radius: 99px;
+    background: #0c202f;
+  }
+  .fs-soap {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .fs-soap li {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+  }
+  .fs-soap b {
+    color: #0c202f;
+  }
+  .fs-cuty {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .fs-ask {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.6rem;
+  }
+  .fs-ask::before {
+    content: 'Cuty AI  ';
+    color: #64748b;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: pre;
+  }
+  .fs-answer {
+    max-width: 85%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.6rem;
+  }
+  .fs-answer small {
+    display: block;
+    margin-top: 0.35rem;
+    color: #64748b;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .fs-days,
+  .fs-times {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .fs-days {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .fs-times {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 0.7rem;
+  }
+  .fs-days span,
+  .fs-times span {
+    padding: 0.45rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .fs-days span.on,
+  .fs-times span.on {
+    border-color: #0c202f;
+    background: #0c202f;
+    color: #fff;
+  }
+
+  /* Cada mini tela se monta quando o card abre. */
+  @media (prefers-reduced-motion: no-preference) {
+    .fs-card[data-o='0']
+      :is(
+        .fs-slot,
+        .fs-soap li,
+        .fs-in,
+        .fs-out,
+        .fs-row,
+        .fs-ask,
+        .fs-answer,
+        .fs-transc p,
+        .fs-alert,
+        .fs-times span
+      ) {
+      animation: fs-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .fs-card[data-o='0'] .fs-slot {
+      animation-delay: calc(0.3s + var(--n) * 0.08s);
+    }
+    .fs-card[data-o='0'] .fs-alert {
+      animation-delay: 1s;
+    }
+    .fs-card[data-o='0'] .fs-soap li {
+      animation-delay: calc(0.3s + var(--n) * 0.12s);
+    }
+    .fs-card[data-o='0'] .fs-out {
+      animation-delay: 0.9s;
+    }
+    .fs-card[data-o='0'] .fs-row {
+      animation-delay: 1.3s;
+    }
+    .fs-card[data-o='0'] .fs-answer {
+      animation-delay: 0.9s;
+    }
+    .fs-card[data-o='0'] .fs-transc p:nth-of-type(2) {
+      animation-delay: 0.8s;
+    }
+    .fs-card[data-o='0'] .fs-times span {
+      animation-delay: 0.4s;
+    }
+    .fs-card[data-o='0'] .fs-wave i {
+      animation: fs-wave 0.9s ease-in-out infinite alternate;
+      animation-delay: calc(var(--n) * -0.11s);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fs-card,
+    .fs-body,
+    .fs-copy-item {
+      transition: none;
+    }
+  }
+  @keyframes fs-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+      filter: blur(4px);
+    }
+  }
+  @keyframes fs-wave {
+    from {
+      transform: scaleY(0.35);
+    }
+  }
+</style>
+
+<script>
+  // Gira a pilha a cada 3,8s enquanto está na tela; pausa com o mouse em cima.
+  const root = document.querySelector<HTMLElement>('[data-fs]');
+  if (root) {
+    const cards = Array.from(root.querySelectorAll<HTMLElement>('.fs-card'));
+    const copies = Array.from(root.querySelectorAll<HTMLElement>('.fs-copy-item'));
+    const stack = root.querySelector<HTMLElement>('.fs-stack')!;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const N = cards.length;
+    const DUR = 3800;
+    let active = 0;
+    let timer = 0;
+    let inView = false;
+    let hold = false;
+
+    const show = (i: number) => {
+      active = (i + N) % N;
+      cards.forEach((card, n) => {
+        // Distância até o ativo, dando a volta: -1 em cima, 0 aberto, 1 embaixo; o resto escondido.
+        let o = (n - active + N) % N;
+        if (o > N / 2) o -= N;
+        card.dataset.o = Math.abs(o) <= 2 ? String(o) : o < 0 ? '-9' : '9';
+        card.querySelector('.fs-body')!.setAttribute('aria-hidden', String(o !== 0));
+      });
+      copies.forEach((c, n) => c.classList.toggle('on', n === active));
+      schedule();
+    };
+    const schedule = () => {
+      clearTimeout(timer);
+      if (inView && !hold && !reduce) timer = window.setTimeout(() => show(active + 1), DUR);
+    };
+
+    cards.forEach((card, n) =>
+      card.querySelector('.fs-head')!.addEventListener('click', () => show(n))
+    );
+    stack.addEventListener('pointerenter', () => ((hold = true), clearTimeout(timer)));
+    stack.addEventListener('pointerleave', () => ((hold = false), schedule()));
+    new IntersectionObserver(([e]) => {
+      inView = e.isIntersecting;
+      schedule();
+    }).observe(stack);
+    show(0);
+  }
+</script>

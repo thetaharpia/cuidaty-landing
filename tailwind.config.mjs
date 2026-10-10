@@ -8,7 +8,10 @@ export default {
           dark: '#0c202f',
           primary: '#356588',
           'primary-hover': '#2a5070',
-          secondary: '#5ac3b0',
+          // Azul da Cuidaty (6,2:1 no branco): serve para texto, botões e detalhes.
+          'primary-ink': '#356588',
+          'primary-ink-hover': '#2a5070',
+          secondary: '#356588',
           accent: '#a7e9a5',
           'accent-light': '#ddfdbe',
           light: '#f8fafc',
@@ -20,10 +23,10 @@ export default {
         },
         'mission-blue': '#0C202F',
         'teal-light': '#CEEDE8',
-        background: '#fbfbf9',
+        background: '#ffffff',
         foreground: '#0f1c26',
         border: '#e6e4df',
-        input: '#fbfbf9',
+        input: '#ffffff',
         ring: '#356588',
         card: {
           DEFAULT: '#ffffff',
@@ -37,11 +40,13 @@ export default {
           DEFAULT: '#356588',
           foreground: '#ffffff',
           hover: '#2a5070',
+          ink: '#356588',
+          'ink-hover': '#2a5070',
         },
         secondary: {
-          DEFAULT: '#5ac3b0',
-          foreground: '#0c202f',
-          hover: '#4ab3a0',
+          DEFAULT: '#356588',
+          foreground: '#ffffff',
+          hover: '#2a5070',
         },
         muted: {
           DEFAULT: '#f0f4f8',
@@ -65,7 +70,7 @@ export default {
         },
         chart: {
           1: '#356588',
-          2: '#5ac3b0',
+          2: '#356588',
           3: '#a7e9a5',
           4: '#2a5070',
           5: '#ddfdbe',
@@ -83,14 +88,28 @@ export default {
       },
       fontFamily: {
         sans: [
-          'Figtree',
+          '"Geist Variable"',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
           'Apple Color Emoji',
           'Segoe UI Emoji',
         ],
-        serif: ['Besley', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        // `serif` é o token dos títulos (h1–h3 e font-serif). Agora aponta para a fonte de exibição.
+        serif: [
+          '"Bricolage Grotesque Variable"',
+          '"Geist Variable"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        display: [
+          '"Bricolage Grotesque Variable"',
+          '"Geist Variable"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         sm: '0.25rem',

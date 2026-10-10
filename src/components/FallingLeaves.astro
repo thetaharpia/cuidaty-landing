@@ -1,0 +1,99 @@
+---
+// Folhas caindo no fundo do site inteiro (a folha é do leaves-bg.png do app, vetorizada).
+// Camada fixa, sem eventos, abaixo do menu; com movimento reduzido não aparece.
+---
+
+<div class="fl-layer" aria-hidden="true">
+  <svg class="fl" style="--x:6%;--d:0s;--w:18s;--s:1" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:22%;--d:-9s;--w:23s;--s:0.65" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:41%;--d:-4s;--w:20s;--s:0.85" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:58%;--d:-14s;--w:26s;--s:0.55" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:73%;--d:-2s;--w:21s;--s:0.75" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:88%;--d:-11s;--w:24s;--s:0.9" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  ><svg class="fl" style="--x:95%;--d:-17s;--w:28s;--s:0.6" viewBox="1226 341 91 78"
+    ><path
+      d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"
+    ></path></svg
+  >
+</div>
+
+<style>
+  .fl-layer {
+    --dx: -7rem;
+    --size: 1.5rem;
+    --alpha: 0.55;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .fl {
+    position: absolute;
+    top: -3rem;
+    left: var(--x);
+    width: calc(var(--size) * var(--s));
+    fill: #c9f5a8;
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .fl {
+      animation:
+        fl-fall var(--w) linear var(--d) infinite,
+        fl-flutter 2.8s ease-in-out var(--d) infinite alternate;
+    }
+  }
+  /* Celular: folhas maiores e mais visíveis, desvio curto para não sair da tela. */
+  @media (max-width: 640px) {
+    .fl-layer {
+      --dx: -2.5rem;
+      --size: 2rem;
+      --alpha: 0.7;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fl-layer {
+      display: none;
+    }
+  }
+  @keyframes fl-fall {
+    0% {
+      opacity: 0;
+      transform: translate(0, 0) rotate(0deg);
+    }
+    8%,
+    88% {
+      opacity: var(--alpha);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--dx), calc(100vh + 6rem)) rotate(560deg);
+    }
+  }
+  @keyframes fl-flutter {
+    from {
+      translate: -1.4rem 0;
+    }
+    to {
+      translate: 1.4rem 0;
+    }
+  }
+</style>

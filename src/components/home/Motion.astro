@@ -1,0 +1,477 @@
+---
+/**
+ * Motion compartilhado das demos da home. Incluir uma vez em index.astro.
+ *
+ * Como funciona: cada demo é um elemento [data-demo]. Ao entrar na tela o script
+ * adiciona .is-playing e os filhos .a ("aparece") rodam a animação com atraso
+ * --d. Sem JS, ou com movimento reduzido, tudo fica no estado final (visível).
+ */
+---
+
+<style is:global>
+  /* ── Janela de exemplo do produto ─────────────────────────────── */
+  .mock-window {
+    border: 1px solid theme('colors.border');
+    border-radius: 1rem;
+    background: #fff;
+    overflow: hidden;
+  }
+  .mock-bar {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid theme('colors.border');
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: rgba(12, 32, 47, 0.6);
+  }
+
+  /* Balões */
+  .bubble-in {
+    width: fit-content;
+    max-width: 19rem;
+    border: 1px solid theme('colors.border');
+    border-radius: 1rem;
+    background: #fff;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .bubble-out {
+    width: fit-content;
+    max-width: 19rem;
+    margin-left: auto;
+    border-radius: 1rem;
+    background: theme('colors.primary.ink');
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: #fff;
+  }
+
+  /* Linha de lista plana, com fio. */
+  .mock-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-bottom: 1px solid theme('colors.border');
+    padding: 0.75rem 0;
+    font-size: 0.875rem;
+  }
+  .mock-row .lbl {
+    margin-right: 0.75rem;
+    font-size: 0.75rem;
+    color: rgba(12, 32, 47, 0.55);
+  }
+  .mock-row .nm {
+    font-weight: 600;
+  }
+  /* Status que "vira": dois textos sobrepostos. */
+  .st {
+    position: relative;
+    display: inline-block;
+    min-width: 6.5rem;
+    text-align: right;
+    font-size: 0.75rem;
+  }
+  .st-a {
+    color: rgba(12, 32, 47, 0.55);
+  }
+  .st-b {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-weight: 600;
+    color: theme('colors.primary.DEFAULT');
+  }
+
+  /* Planos: check discreto só nos itens incluídos. */
+  .check-list li {
+    position: relative;
+    padding-left: 1.6rem;
+  }
+  .check-list li.no-check {
+    padding-left: 0;
+  }
+  .check-list li:not(.no-check)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 1rem;
+    height: 1rem;
+    background: theme('colors.primary.ink');
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-7'/%3E%3C/svg%3E")
+      center / contain no-repeat;
+  }
+
+  /* Barra de onda de áudio */
+  .wave {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 2.25rem;
+  }
+  .wave i {
+    display: block;
+    width: 4px;
+    height: var(--h);
+    border-radius: 2px;
+    background: theme('colors.primary.DEFAULT');
+  }
+
+  /* Digitando: invisível por padrão (sem JS/movimento reduzido só aparece a resposta). */
+  .a-typing {
+    opacity: 0;
+  }
+  .typing {
+    display: inline-flex;
+    gap: 4px;
+    border: 1px solid theme('colors.border');
+    border-radius: 1rem;
+    background: #fff;
+    padding: 0.9rem 1rem;
+  }
+  .typing i {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: rgba(12, 32, 47, 0.45);
+  }
+
+  /* Hub */
+  .hub-line {
+    stroke: theme('colors.cuidaty.gray');
+    stroke-width: 0.4;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .hub-ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 8.25rem;
+    height: 8.25rem;
+    margin: -4.125rem 0 0 -4.125rem;
+    border: 2px solid theme('colors.primary.DEFAULT');
+    border-radius: 9999px;
+    opacity: 0;
+  }
+
+  /* ── Animações (só com movimento permitido e JS ativo) ─────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-ready [data-demo]:not(.is-playing) .a {
+      opacity: 0;
+    }
+    .reveal-ready [data-demo].is-playing .a {
+      animation: demo-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-pop {
+      animation-name: demo-pop;
+    }
+    .reveal-ready [data-demo].is-playing .a-left {
+      animation-name: demo-left;
+    }
+    .reveal-ready [data-demo].is-playing .a-out {
+      animation: demo-out 0.25s ease both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-flash {
+      animation: demo-flash 1.1s ease both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-type {
+      animation: demo-type 1.5s steps(32, end) both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-typing {
+      animation: demo-typing 0.95s ease both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-typing i {
+      animation: demo-dot 0.6s ease-in-out infinite;
+    }
+    .reveal-ready [data-demo].is-playing .a-typing i:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+    .reveal-ready [data-demo].is-playing .a-typing i:nth-child(3) {
+      animation-delay: 0.24s;
+    }
+    .reveal-ready [data-demo].is-playing .wave i {
+      animation: demo-wave 0.9s ease-in-out infinite alternate;
+      animation-delay: calc(var(--i) * -0.07s);
+    }
+    .reveal-ready [data-demo].is-playing .wave-end {
+      animation: demo-wave-end 0.5s ease both;
+      animation-delay: var(--d, 3s);
+    }
+    .reveal-ready [data-demo].is-playing .a-press {
+      animation: demo-press 0.7s ease both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .a-fill {
+      animation: demo-fill 1.4s cubic-bezier(0.65, 0, 0.35, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo].is-playing .hub-line {
+      animation: demo-draw 0.8s cubic-bezier(0.65, 0, 0.35, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .reveal-ready [data-demo]:not(.is-playing) .hub-line {
+      stroke-dashoffset: 1;
+    }
+    .reveal-ready [data-demo].is-playing .hub-ring {
+      animation: demo-ring 2.8s ease-out infinite;
+      animation-delay: calc(1.2s + var(--r, 0) * 0.6s);
+    }
+    .reveal-ready [data-demo].is-playing .hub-core {
+      animation: demo-breathe 3.6s ease-in-out 0.9s infinite;
+    }
+
+    @keyframes demo-rise {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes demo-pop {
+      from {
+        opacity: 0;
+        transform: scale(0.88);
+      }
+      60% {
+        transform: scale(1.03);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes demo-left {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    @keyframes demo-out {
+      to {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+    }
+    @keyframes demo-flash {
+      0%,
+      100% {
+        border-bottom-color: theme('colors.border');
+      }
+      25%,
+      60% {
+        border-bottom-color: theme('colors.primary.DEFAULT');
+      }
+    }
+    @keyframes demo-type {
+      from {
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        clip-path: inset(0 0 0 0);
+      }
+    }
+    @keyframes demo-typing {
+      0% {
+        opacity: 0;
+      }
+      12%,
+      88% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+    @keyframes demo-dot {
+      0%,
+      100% {
+        transform: none;
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+    @keyframes demo-wave {
+      from {
+        transform: scaleY(0.35);
+      }
+      to {
+        transform: scaleY(1);
+      }
+    }
+    @keyframes demo-wave-end {
+      to {
+        opacity: 0.3;
+        transform: scaleY(0.2);
+      }
+    }
+    @keyframes demo-press {
+      0%,
+      100% {
+        transform: none;
+      }
+      30% {
+        transform: scale(0.95);
+      }
+      40%,
+      100% {
+        background-color: theme('colors.primary.DEFAULT');
+      }
+    }
+    @keyframes demo-fill {
+      from {
+        transform: scaleX(0.02);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+    @keyframes demo-draw {
+      from {
+        stroke-dashoffset: 1;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    @keyframes demo-ring {
+      0% {
+        opacity: 0.55;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2.6);
+      }
+    }
+    @keyframes demo-breathe {
+      0%,
+      100% {
+        transform: none;
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  /* ── Efeitos ligados ao scroll (CSS puro; sem suporte, tudo fica visível) ─ */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      /* Barra de progresso da página */
+      .scroll-progress {
+        position: fixed;
+        inset: 0 0 auto 0;
+        z-index: 70;
+        height: 3px;
+        background: theme('colors.primary.DEFAULT');
+        transform-origin: 0 50%;
+        animation: sp-progress linear both;
+        animation-timeline: scroll(root);
+      }
+      @keyframes sp-progress {
+        from {
+          transform: scaleX(0);
+        }
+        to {
+          transform: scaleX(1);
+        }
+      }
+
+      /* Parágrafo que "acende" palavra por palavra enquanto você rola */
+      .scroll-words .w {
+        opacity: 0.16;
+        animation: sp-word linear both;
+        animation-timeline: view();
+        animation-range: cover calc(8% + var(--i) * 0.55%) cover calc(26% + var(--i) * 0.55%);
+      }
+      @keyframes sp-word {
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Parallax leve: a demo do hero sobe mais devagar que a página */
+      .sp-parallax {
+        animation: sp-parallax linear both;
+        animation-timeline: scroll(root);
+        animation-range: 0 70vh;
+      }
+      @keyframes sp-parallax {
+        to {
+          transform: translateY(48px);
+        }
+      }
+
+      /* Entrada escalonada de cards: sobem enquanto entram na tela */
+      .sp-rise {
+        animation: sp-rise linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 55%;
+      }
+      .sp-rise:nth-child(2) {
+        animation-range: entry 8% entry 63%;
+      }
+      .sp-rise:nth-child(3) {
+        animation-range: entry 16% entry 71%;
+      }
+      .sp-rise:nth-child(4) {
+        animation-range: entry 24% entry 79%;
+      }
+      @keyframes sp-rise {
+        from {
+          opacity: 0;
+          transform: translateY(36px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    }
+  }
+</style>
+
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<script>
+  // Dispara cada demo uma vez, quando ela entra na tela.
+  const demos = document.querySelectorAll<HTMLElement>('[data-demo]');
+  if (demos.length) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-playing');
+              io.unobserve(e.target);
+            }
+          }
+        },
+        { threshold: 0.35 }
+      );
+      demos.forEach((d) => io.observe(d));
+    } else {
+      demos.forEach((d) => d.classList.add('is-playing'));
+    }
+  }
+</script>

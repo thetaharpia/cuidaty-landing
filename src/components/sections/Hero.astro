@@ -23,7 +23,7 @@ const WA_URL = whatsappUrl();
         height="82"
         loading="eager"
         class="mb-6 w-auto self-start"
-        style="height: clamp(2.75rem, 11vw, 4rem);"
+        style="height: clamp(3.5rem, 15vw, 5rem);"
       />
 
       <p class="mb-7 font-serif text-xl italic leading-snug text-cuidaty-dark/75" data-typewriter>
@@ -45,7 +45,7 @@ const WA_URL = whatsappUrl();
         rel="noopener"
         data-ga-event="generate_lead"
         data-ga-location="hero_mobile"
-        class="group flex items-center justify-center gap-2 rounded-md bg-cuidaty-primary px-6 text-base font-semibold text-white transition-all active:bg-cuidaty-primary-hover"
+        class="group flex items-center justify-center gap-2 rounded-md bg-cuidaty-primary-ink px-6 text-base font-semibold text-white transition-all active:bg-cuidaty-primary-hover"
         style="min-height: 52px;"
       >
         Falar com a gente
@@ -87,7 +87,7 @@ const WA_URL = whatsappUrl();
         height="82"
         loading="eager"
         class="mb-8 w-auto self-start"
-        style="height: clamp(3.25rem, 6vw, 5.5rem);"
+        style="height: clamp(4.5rem, 9vw, 7rem);"
       />
 
       <p
@@ -115,7 +115,7 @@ const WA_URL = whatsappUrl();
           rel="noopener"
           data-ga-event="generate_lead"
           data-ga-location="hero"
-          class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-primary px-8 py-4 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-hover"
+          class="group inline-flex items-center gap-3 rounded-md bg-cuidaty-primary-ink px-8 py-4 text-base font-semibold text-white transition-all hover:bg-cuidaty-primary-ink-hover"
         >
           Falar com a gente
           <svg
@@ -147,37 +147,27 @@ const WA_URL = whatsappUrl();
 </section>
 
 <style>
+  /* Animação de entrada toca sozinha via CSS (sem depender de JS) e termina
+     visível graças ao fill-mode "both". Assim o Hero nunca fica branco caso o
+     JS não rode ou o renderizador capture cedo (ex.: screenshot do Googlebot). */
   .hero-fade {
-    opacity: 0;
     will-change: opacity, transform;
+    animation: heroFadeIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .hero-fade-left {
-    transform: translateX(-24px);
+    animation-name: heroFadeInLeft;
+    animation-duration: 1s;
   }
 
   .hero-fade-right {
-    transform: translateX(24px);
+    animation-name: heroFadeInRight;
+    animation-duration: 1s;
   }
 
   .hero-fade-up {
-    transform: translateY(16px);
-  }
-
-  .hero-fade.is-visible {
-    animation: heroFadeIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .hero-fade-left.is-visible {
-    animation: heroFadeInLeft 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .hero-fade-right.is-visible {
-    animation: heroFadeInRight 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  .hero-fade-up.is-visible {
-    animation: heroFadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-name: heroFadeInUp;
+    animation-duration: 0.8s;
   }
 
   @keyframes heroFadeIn {
@@ -263,16 +253,6 @@ const WA_URL = whatsappUrl();
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.hero-fade');
-    fadeElements.forEach((el, index) => {
-      setTimeout(
-        () => {
-          el.classList.add('is-visible');
-        },
-        100 + index * 120
-      );
-    });
-
     // Typewriter de "Menos burocracia. Mais escuta."
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     document.querySelectorAll<HTMLElement>('[data-typewriter]').forEach((el) => {

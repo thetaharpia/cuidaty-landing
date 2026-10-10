@@ -1,0 +1,30 @@
+---
+// Por que a Cuidaty existe: a dor, logo depois do hero. Âncora #sobre.
+// A psicóloga na poltrona abre a ideia de "quem cuida".
+import Psychologist from './Psychologist.astro';
+const text =
+  'Você cuida o dia todo, mas quando o último paciente sai, o trabalho continua: confirmar consultas, atualizar prontuários, enviar lembretes, calcular repasses, responder mensagens. E parece que nunca para. Não precisa ser assim: existe ferramenta que cuida de quem cuida.';
+const words = text.split(' ');
+---
+
+<section id="sobre" class="bg-white py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-3xl text-center">
+      <Psychologist class="mx-auto mb-8 max-w-[16rem]" />
+      <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+        A carga invisível que ninguém vê.
+      </h2>
+      <p class="scroll-words mt-6 text-lg leading-relaxed text-cuidaty-dark md:text-xl">
+        {
+          words.map((w, i) => (
+            <>
+              <span class="w" style={`--i:${i}`}>
+                {w}
+              </span>{' '}
+            </>
+          ))
+        }
+      </p>
+    </div>
+  </div>
+</section>

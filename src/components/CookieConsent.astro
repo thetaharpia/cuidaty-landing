@@ -36,8 +36,21 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
 
         gtag('js', new Date());
         gtag('config', gaId, { anonymize_ip: true });
+
+        // gtag.js fora da cadeia crítica: no load ou em até 3s, o que vier primeiro, para não perder
+        // quem sai antes da página terminar de carregar. Os eventos ficam no dataLayer até lá.
+        var gaLoaded = false;
+        function loadGa() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+          document.head.appendChild(s);
+        }
+        window.addEventListener('load', loadGa);
+        setTimeout(loadGa, 3000);
       </script>
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
 
       {/* Banner */}
       <div
@@ -51,7 +64,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           <p class="text-sm leading-relaxed text-gray-700">
             Usamos cookies para entender como você usa o site e melhorar sua experiência. Você pode
             aceitar ou recusar a coleta de dados de análise.{' '}
-            <a href="/politica-privacidade" class="font-semibold text-cuidaty-primary underline">
+            <a href="/politica-privacidade" class="font-semibold text-cuidaty-primary-ink underline">
               Saiba mais
             </a>
             .
@@ -60,14 +73,14 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
             <button
               id="cookie-decline"
               type="button"
-              class="rounded-full border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-100"
+              class="rounded-md border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-600 transition-colors hover:bg-gray-100"
             >
               Recusar
             </button>
             <button
               id="cookie-accept"
               type="button"
-              class="rounded-full bg-cuidaty-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-hover"
+              class="rounded-md bg-cuidaty-primary-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cuidaty-primary-ink-hover"
             >
               Aceitar
             </button>

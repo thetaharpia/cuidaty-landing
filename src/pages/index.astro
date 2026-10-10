@@ -4,54 +4,47 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Hero from '../components/sections/Hero.astro';
-import StatsBar from '../components/sections/StatsBar.astro';
-import Pain from '../components/sections/Pain.astro';
-import Features from '../components/sections/Features.astro';
-import Metas from '../components/sections/Metas.astro';
-import Contratos from '../components/sections/Contratos.astro';
-import Consultoria from '../components/sections/Consultoria.astro';
-import Parceria from '../components/sections/Parceria.astro';
-import Diagnostico from '../components/sections/Diagnostico.astro';
-import NacaoCuidaty from '../components/sections/NacaoCuidaty.astro';
-import Personas from '../components/sections/Personas.astro';
+import Motion from '../components/home/Motion.astro';
+import Hero from '../components/home/Hero.astro';
+import Pain from '../components/home/Pain.astro';
+import FeatureStack from '../components/home/FeatureStack.astro';
+import Hub from '../components/home/Hub.astro';
+import Trust from '../components/home/Trust.astro';
+import Proof from '../components/home/Proof.astro';
+import Clinics from '../components/home/Clinics.astro';
+import Plans from '../components/home/Plans.astro';
+import Faq from '../components/home/Faq.astro';
 import BlogSection from '../components/sections/BlogSection.astro';
-import CTA from '../components/sections/CTA.astro';
-import FAQSection from '../components/sections/FAQSection.astro';
+import Closing from '../components/home/Closing.astro';
 import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 ---
 
 <Layout title={homeTitle} description={homeDescription} keywords={homeKeywords}>
   <Header />
   <main>
-    <!-- 1. Hook: captura + CTA primário -->
+    <!-- 1. Oferta: o que é, para quem, um CTA, e a sessão virando prontuário -->
     <Hero />
-    <!-- 1.5. Números animados (count-up) -->
-    <StatsBar />
-    <!-- 3. Entrega de valor + confiança e segurança -->
-    <Features />
-    <!-- 3.2. Metas: inteligência de dados financeiros (novo) -->
-    <Metas />
-    <!-- 3.3. Contratos: gestão automatizada de contratos (novo) -->
-    <Contratos />
-    <!-- 3.5. Diagnóstico gratuito da clínica -->
-    <Consultoria />
-
-    <Parceria />
-
-    <Diagnostico />
-    <!-- 4. Planos / preços -->
-    <Personas />
-    <!-- 5. Resultados: prova social — depoimentos + clínicas -->
-    <NacaoCuidaty />
-    <!-- 7. Sobre: por que a Cuidaty existe + missão + valores -->
+    <!-- 2. A dor, curta -->
     <Pain />
-    <!-- 10. FAQ indexável e visível -->
-    <FAQSection />
-    <!-- 11. Momento de contato — Calendly / WhatsApp / e-mail -->
-    <CTA />
-    <!-- 12. Retenção: conteúdo para quem não converteu ainda -->
+    <!-- 3. Funcionalidades em pilha: uma abre por vez -->
+    <FeatureStack />
+    <!-- 4. Integrações, com a logo no centro -->
+    <Hub />
+    <!-- 5. Promessas de confiança -->
+    <Trust />
+    <!-- 6. Prova social: números e depoimentos -->
+    <Proof />
+    <!-- 7. Planos: comece grátis -->
+    <Plans />
+    <!-- 8. Para clínicas: recursos em carrossel e implantação acompanhada -->
+    <Clinics />
+    <!-- 9. FAQ indexável e visível -->
+    <Faq />
+    <!-- 10. Conteúdo: últimos artigos do blog -->
     <BlogSection />
+    <!-- 11. Fechamento: um único CTA -->
+    <Closing />
   </main>
   <Footer />
+  <Motion />
 </Layout>

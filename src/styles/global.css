@@ -16,7 +16,8 @@
   }
 
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth bg-white;
+    color-scheme: only light;
   }
 
   body {
@@ -28,8 +29,9 @@
   h1,
   h2,
   h3 {
-    @apply font-serif font-semibold tracking-tight;
-    font-feature-settings: 'kern', 'liga', 'onum';
+    @apply font-serif font-extrabold;
+    letter-spacing: -0.01em;
+    font-feature-settings: 'kern', 'liga';
   }
 
   h4,
@@ -39,13 +41,30 @@
   }
 
   body {
-    font-feature-settings: 'kern', 'ss01', 'cv11';
+    font-feature-settings: 'kern';
   }
 }
 
 @layer components {
+  /* Rótulo de seção: traço fino + texto, no lugar da pílula tonal. */
+  .kicker {
+    @apply inline-flex items-center gap-3 text-[0.95rem] font-semibold text-primary-ink;
+  }
+  .kicker::before {
+    content: '';
+    @apply block h-0.5 w-6 bg-primary;
+  }
+
+  /* Botões da home: primário sólido e contorno, sempre arredondados. */
+  .btn-solid {
+    @apply inline-flex items-center justify-center rounded-md bg-primary-ink px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-colors duration-200 hover:bg-primary-ink-hover;
+  }
+  .btn-line {
+    @apply inline-flex items-center justify-center rounded-md border-[1.5px] border-primary px-7 py-3.5 text-[0.95rem] font-semibold text-primary-ink transition-colors duration-200 hover:bg-primary/5;
+  }
+
   .btn-primary {
-    @apply bg-primary text-primary-foreground transition-colors duration-200 hover:bg-cuidaty-primary-hover;
+    @apply bg-primary-ink text-primary-foreground transition-colors duration-200 hover:bg-cuidaty-primary-ink-hover;
   }
 
   .btn-secondary {
@@ -57,7 +76,7 @@
   }
 
   .btn-outline {
-    @apply border border-primary bg-transparent text-primary transition-colors duration-200 hover:bg-primary/10;
+    @apply border border-primary bg-transparent text-primary-ink transition-colors duration-200 hover:bg-primary/10;
   }
 
   .card-elevated {

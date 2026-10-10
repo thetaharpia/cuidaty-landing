@@ -109,7 +109,7 @@ const plans: Plan[] = [
       class="mx-auto mb-14 grid max-w-7xl gap-8 md:mb-16 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-16"
     >
       <div>
-        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary">
+        <p class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-cuidaty-primary-ink">
           Planos
         </p>
         <h2
@@ -140,7 +140,7 @@ const plans: Plan[] = [
             ]}
           >
             {plan.recommended && (
-              <span class="absolute -top-3 left-6 inline-flex items-center rounded-full bg-cuidaty-primary px-3 py-1 text-xs font-semibold text-white shadow-soft">
+              <span class="absolute -top-3 left-6 inline-flex items-center rounded-full bg-cuidaty-primary-ink px-3 py-1 text-xs font-semibold text-white shadow-soft">
                 Recomendado
               </span>
             )}
@@ -157,7 +157,7 @@ const plans: Plan[] = [
               <p
                 class:list={[
                   'mt-1 text-sm font-medium',
-                  plan.dark ? 'text-white/75' : 'text-cuidaty-primary',
+                  plan.dark ? 'text-white/75' : 'text-cuidaty-primary-ink',
                 ]}
               >
                 {plan.subtitle}
@@ -197,7 +197,7 @@ const plans: Plan[] = [
                 <p
                   class:list={[
                     'mb-4 text-xs font-semibold uppercase tracking-[0.1em]',
-                    plan.dark ? 'text-cuidaty-accent' : 'text-cuidaty-primary',
+                    plan.dark ? 'text-cuidaty-accent' : 'text-cuidaty-primary-ink',
                   ]}
                 >
                   {plan.inherits}
@@ -263,7 +263,7 @@ const plans: Plan[] = [
                 ) : (
                   <a
                     href="/#funcionalidades"
-                    class="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-cuidaty-primary transition-colors hover:text-cuidaty-dark"
+                    class="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-cuidaty-primary-ink transition-colors hover:text-cuidaty-dark"
                   >
                     {plan.featuresNote}
                     <svg
@@ -291,7 +291,7 @@ const plans: Plan[] = [
                   'flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-all',
                   plan.dark
                     ? 'bg-white text-cuidaty-dark hover:bg-beige'
-                    : 'bg-cuidaty-primary text-white hover:bg-cuidaty-primary-hover',
+                    : 'bg-cuidaty-primary-ink text-white hover:bg-cuidaty-primary-ink-hover',
                 ]}
               >
                 {plan.cta.label}

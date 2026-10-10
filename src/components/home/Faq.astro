@@ -1,0 +1,43 @@
+---
+// FAQ visível: usa a mesma fonte (homeFaqs) do FAQPage em JSON-LD, para os dois nunca divergirem.
+import { homeFaqs } from '../../lib/seo';
+---
+
+<section id="faq" class="bg-white py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          Dúvidas comuns.
+        </h2>
+        <p class="mt-5 leading-relaxed text-cuidaty-dark/70">
+          Respostas rápidas sobre plano grátis, WhatsApp, prontuário, IA e conformidade.
+        </p>
+        <a
+          href="https://ajuda.cuidaty.com"
+          rel="noopener"
+          class="mt-6 inline-block text-sm font-semibold text-primary-ink underline underline-offset-4"
+        >
+          Central de Ajuda: tutoriais da plataforma
+        </a>
+      </div>
+
+      <div class="divide-y divide-border border-y border-border">
+        {
+          homeFaqs.map((f, i) => (
+            <details name="faq" class="faq group py-1" open={i === 0}>
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-[1.02rem] font-semibold text-cuidaty-dark [&::-webkit-details-marker]:hidden">
+                <span>{f.question}</span>
+                <span
+                  aria-hidden="true"
+                  class="relative block size-4 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-0.5 before:w-full before:-translate-y-1/2 before:bg-cuidaty-dark after:absolute after:left-1/2 after:top-0 after:h-full after:w-0.5 after:-translate-x-1/2 after:bg-cuidaty-dark after:transition-transform group-open:after:scale-y-0"
+                />
+              </summary>
+              <p class="pb-6 pr-10 leading-relaxed text-cuidaty-dark/70">{f.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

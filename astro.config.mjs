@@ -18,6 +18,8 @@ export default defineConfig({
   },
   build: {
     assets: '_astro',
+    // CSS dentro do HTML: tira as idas ao servidor que bloqueavam a primeira pintura (PageSpeed).
+    inlineStylesheets: 'always',
   },
   image: {
     domains: ['cuidaty.com'],
