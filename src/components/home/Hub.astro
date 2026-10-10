@@ -1,0 +1,104 @@
+---
+// Integrações: a Cuidaty no centro (logo), ligada ao que a pessoa já usa.
+// Animação: logo respira, ondas saem do centro, linhas se desenham, selos entram.
+const tiles = [
+  { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 20, y: 18, label: true },
+  { name: 'Google Agenda', icon: '/integracoes/google-agenda.svg', x: 80, y: 18, label: true },
+  { name: 'Geap Saúde', icon: '/convenios/geap.webp', x: 20, y: 82, label: false },
+  { name: 'SulAmérica Saúde', icon: '/convenios/sulamerica.webp', x: 80, y: 82, label: false },
+];
+---
+
+<section id="integracoes" class="bg-cuidaty-light py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
+        <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          Conecta com o que você já usa.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
+          O paciente continua no WhatsApp. Os convênios continuam nas operadoras. A Cuidaty liga
+          tudo.
+        </p>
+      </div>
+
+      <div
+        class="relative mx-auto mt-12 aspect-[1/1] w-full max-w-3xl sm:aspect-[9/5]"
+        data-demo
+        role="img"
+        aria-label="A Cuidaty no centro, conectada ao WhatsApp, ao Google Agenda, à Geap e à SulAmérica"
+      >
+        <svg
+          class="absolute inset-0 size-full"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          {
+            tiles.map((t, i) => (
+              <line
+                class="hub-line"
+                x1={t.x}
+                y1={t.y}
+                x2="50"
+                y2="50"
+                pathLength="1"
+                style={`--d:${0.6 + i * 0.25}s`}
+              />
+            ))
+          }
+        </svg>
+
+        <span class="hub-ring" style="--r:0"></span>
+        <span class="hub-ring" style="--r:1"></span>
+
+        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div
+            class="hub-core grid size-[8.25rem] place-items-center rounded-full border border-border bg-white shadow-soft"
+          >
+            <img
+              src="/logo-mark.png"
+              alt=""
+              width="62"
+              height="81"
+              loading="lazy"
+              class="h-[5rem] w-auto"
+            />
+          </div>
+        </div>
+
+        <ul>
+          {
+            tiles.map((t, i) => (
+              <li
+                class="absolute -translate-x-1/2 -translate-y-1/2"
+                style={`left:${t.x}%;top:${t.y}%`}
+              >
+                <div
+                  class="a a-pop flex items-center gap-2.5 rounded-2xl border border-border bg-white px-3.5 py-2.5 shadow-soft sm:px-5 sm:py-3"
+                  style={`--d:${1.2 + i * 0.25}s`}
+                >
+                  <img
+                    src={t.icon}
+                    alt={t.label ? '' : t.name}
+                    loading="lazy"
+                    class={t.label ? 'size-6 sm:size-7' : 'h-8 w-auto max-w-[6.5rem] sm:h-10 sm:max-w-[8rem]'}
+                  />
+                  {t.label && (
+                    <span class="whitespace-nowrap text-xs font-semibold text-cuidaty-dark sm:text-sm">
+                      {t.name}
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <p class="mt-8 text-center text-sm text-cuidaty-dark/60">
+        Novas integrações de convênio entram conforme a necessidade da sua clínica.
+      </p>
+    </div>
+  </div>
+</section>

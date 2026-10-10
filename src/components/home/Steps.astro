@@ -1,0 +1,57 @@
+---
+// Implantação: implantação acompanhada. O diferencial é ter uma pessoa com nome.
+const steps = [
+  {
+    n: '1',
+    title: 'Diagnóstico',
+    text: 'Antes de configurar qualquer coisa, mapeamos a operação: como a agenda funciona, onde o dinheiro trava e o que cada convênio exige de você.',
+    who: 'Time de implantação',
+  },
+  {
+    n: '2',
+    title: 'Implantação adaptada',
+    text: 'O sistema é montado em cima da sua rotina: seus fluxos, seus modelos de documento, suas regras de convênio. Seus dados vêm junto da plataforma anterior.',
+    who: 'Time técnico e recepção',
+  },
+  {
+    n: '3',
+    title: 'Automação contínua',
+    text: 'A cada rodada, mais trabalho manual sai da mesa. Confirmação, cobrança, envio de documento, conferência antes do faturamento.',
+    who: 'Produto e coordenação',
+  },
+  {
+    n: '4',
+    title: 'Acompanhamento direto',
+    text: 'Revisões periódicas com números na mesa: ocupação da agenda, faturamento por operadora e glosa por motivo.',
+    who: 'Seu contato fixo na Cuidaty',
+  },
+];
+---
+
+<section id="implantacao" class="bg-white py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
+        <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          Ninguém some depois de a conta ser criada.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
+          Todo fornecedor promete atendimento próximo. O que muda aqui é ter uma pessoa com nome
+          acompanhando a sua clínica, e um processo que continua depois da implantação.
+        </p>
+      </div>
+      <ol class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          steps.map((s) => (
+            <li class="sp-rise border-t-2 border-cuidaty-dark pt-5">
+              <span class="font-serif text-3xl font-extrabold text-primary-ink">{s.n}</span>
+              <h3 class="mt-3 text-xl leading-snug text-cuidaty-dark">{s.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-cuidaty-dark/70">{s.text}</p>
+              <p class="mt-4 text-xs font-semibold text-primary-ink">{s.who}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

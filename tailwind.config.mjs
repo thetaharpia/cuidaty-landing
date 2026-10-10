@@ -6,8 +6,11 @@ export default {
       colors: {
         cuidaty: {
           dark: '#0c202f',
-          primary: '#356588',
-          'primary-hover': '#2a5070',
+          primary: '#5ac3b0',
+          'primary-hover': '#4ab3a0',
+          // Verde da logo, usado em texto e preenchimentos.
+          'primary-ink': '#5ac3b0',
+          'primary-ink-hover': '#4ab3a0',
           secondary: '#5ac3b0',
           accent: '#a7e9a5',
           'accent-light': '#ddfdbe',
@@ -20,11 +23,11 @@ export default {
         },
         'mission-blue': '#0C202F',
         'teal-light': '#CEEDE8',
-        background: '#fbfbf9',
+        background: '#ffffff',
         foreground: '#0f1c26',
         border: '#e6e4df',
-        input: '#fbfbf9',
-        ring: '#356588',
+        input: '#ffffff',
+        ring: '#5ac3b0',
         card: {
           DEFAULT: '#ffffff',
           foreground: '#0f1c26',
@@ -34,9 +37,11 @@ export default {
           foreground: '#0f1c26',
         },
         primary: {
-          DEFAULT: '#356588',
+          DEFAULT: '#5ac3b0',
           foreground: '#ffffff',
-          hover: '#2a5070',
+          hover: '#4ab3a0',
+          ink: '#5ac3b0',
+          'ink-hover': '#4ab3a0',
         },
         secondary: {
           DEFAULT: '#5ac3b0',
@@ -73,24 +78,26 @@ export default {
         sidebar: {
           DEFAULT: '#ffffff',
           foreground: '#0c202f',
-          primary: '#356588',
+          primary: '#5ac3b0',
           'primary-foreground': '#ffffff',
           accent: '#f8fafc',
-          'accent-foreground': '#356588',
+          'accent-foreground': '#5ac3b0',
           border: '#e2e8f0',
-          ring: '#356588',
+          ring: '#5ac3b0',
         },
       },
       fontFamily: {
         sans: [
-          'Figtree',
+          'Geist',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
           'Apple Color Emoji',
           'Segoe UI Emoji',
         ],
-        serif: ['Besley', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
+        // `serif` é o token dos títulos (h1–h3 e font-serif). Agora aponta para a fonte de exibição.
+        serif: ['"Bricolage Grotesque"', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         sm: '0.25rem',

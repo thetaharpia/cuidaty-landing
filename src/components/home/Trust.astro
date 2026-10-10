@@ -1,0 +1,28 @@
+---
+// Promessas de confiança, explícitas (não só um selo de LGPD).
+const promises = [
+  'Hospedagem 100% brasileira, auditoria de segurança semestral e criptografia AES-256 em trânsito e em repouso.',
+  'Em conformidade com a LGPD, com acesso por perfil: cada profissional vê só o que precisa ver.',
+  'O áudio da sessão é descartado após o processamento.',
+  'A IA auxilia e nunca substitui o seu julgamento clínico.',
+  'Suporte humano, em horário comercial, com resposta média em até 4 horas.',
+];
+---
+
+<section id="seguranca" class="bg-white py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          O que a gente promete.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
+          Dados de paciente exigem cuidado. Estas são as regras da casa.
+        </p>
+      </div>
+      <ul class="divide-y divide-border border-y border-border text-[1.02rem] leading-relaxed text-cuidaty-dark">
+        {promises.map((p) => <li class="py-4">{p}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

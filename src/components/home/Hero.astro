@@ -1,0 +1,84 @@
+---
+const REGISTER_URL = 'https://app.cuidaty.com/register';
+
+// Onda de áudio: alturas fixas (render idêntico a cada build).
+const bars = Array.from({ length: 30 }, (_, i) => ({
+  h: 8 + Math.round(26 * Math.abs(Math.sin(i * 1.7))),
+  i,
+}));
+const soap = [
+  ['S', 'Relata ansiedade antes de reuniões e sono irregular.'],
+  ['O', 'Discurso organizado, humor ansioso.'],
+  ['A', 'Sintomas compatíveis com ansiedade situacional.'],
+  ['P', 'Manter sessões semanais e treino de respiração.'],
+];
+---
+
+<section id="hero" class="bg-white pb-16 pt-32 md:pb-24 md:pt-40">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+      <div>
+        <p class="kicker">Software para psicólogos e clínicas</p>
+        <h1
+          class="mt-6 text-balance text-[2.5rem] leading-[1.05] text-cuidaty-dark sm:text-5xl lg:text-[3.4rem]"
+        >
+          Você cuida do paciente.
+          <span class="mt-1 block text-primary-ink">A Cuidaty cuida do resto.</span>
+        </h1>
+        <p class="mt-6 max-w-[34rem] text-lg leading-relaxed text-cuidaty-dark/70 md:text-xl">
+          Agenda, prontuário, financeiro e WhatsApp num só lugar. E uma IA que transcreve a sessão e
+          deixa o prontuário pronto para você só revisar.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a href={REGISTER_URL} class="btn-solid" data-cta-location="hero">Começar grátis</a>
+          <span class="text-sm text-cuidaty-dark/70">Plano gratuito até 10 pacientes</span>
+        </div>
+        <p class="mt-5 text-sm text-cuidaty-dark/60">
+          Mais de 500 profissionais já confiam na Cuidaty.
+        </p>
+      </div>
+
+      <!-- Demo: a sessão vira prontuário -->
+      <div class="sp-parallax">
+      <div class="mock-window" data-demo aria-label="Demonstração: sessão gravada vira resumo clínico">
+        <div class="mock-bar"><span>Cuidaty · Sessão com João Lima</span></div>
+        <div class="space-y-4 p-6">
+          <div class="flex items-center gap-4">
+            <span class="whitespace-nowrap text-sm font-semibold text-cuidaty-dark">
+              Gravando · 42:10
+            </span>
+            <div class="wave wave-end flex-1" style="--d:.8s">
+              {bars.map((b) => <i style={`--h:${b.h}px;--i:${b.i}`} />)}
+            </div>
+          </div>
+          <p class="a text-sm font-semibold text-primary-ink" style="--d:1s">
+            Resumo clínico pronto
+          </p>
+          <div class="a rounded-xl border border-border p-4" style="--d:1.1s">
+            <ul class="space-y-3 text-sm">
+              {
+                soap.map(([k, v], n) => (
+                  <li class="a a-left flex gap-3" style={`--d:${1.3 + n * 0.2}s`}>
+                    <span class="font-semibold text-primary-ink">{k}</span>
+                    <span>{v}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div class="a flex flex-wrap gap-2" style="--d:2.2s">
+            <span class="btn-line !px-5 !py-2.5 !text-sm">Editar</span>
+            <span class="btn-solid a-press !px-5 !py-2.5 !text-sm" style="--d:2.8s">
+              Salvar no prontuário
+            </span>
+          </div>
+          <p class="a text-xs font-medium text-primary-ink" style="--d:3.2s">
+            Salvo no prontuário de João Lima
+          </p>
+          <p class="text-xs text-cuidaty-dark/50">Demonstração ilustrativa · Cuidaty</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

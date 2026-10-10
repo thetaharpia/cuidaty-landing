@@ -1,0 +1,31 @@
+---
+// Fechamento: um único CTA. Âncora #contato.
+import { REGISTER_URL } from '../../lib/plans';
+---
+
+<section id="contato" class="bg-white py-24 md:py-32">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-6xl">
+        Pronto para ter mais tempo
+        <span class="mt-1 block text-primary-ink">para escutar?</span>
+      </h2>
+      <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-cuidaty-dark/70">
+        Comece pelo plano gratuito, com até 10 pacientes. Sem trocar de sistema de uma vez: a gente
+        ajuda na implantação.
+      </p>
+      <div class="mt-8">
+        <a href={REGISTER_URL} class="btn-solid" data-cta-location="closing">Começar grátis</a>
+      </div>
+      <p class="mt-5 text-sm text-cuidaty-dark/60">
+        Prefere conversar?
+        <a
+          href="mailto:contato@thetaharpia.com"
+          class="font-semibold text-primary-ink underline underline-offset-4"
+        >
+          contato@thetaharpia.com
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
