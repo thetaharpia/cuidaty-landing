@@ -6,12 +6,12 @@ export default {
       colors: {
         cuidaty: {
           dark: '#0c202f',
-          primary: '#5ac3b0',
-          'primary-hover': '#4ab3a0',
-          // Verde da logo, usado em texto e preenchimentos.
-          'primary-ink': '#5ac3b0',
-          'primary-ink-hover': '#4ab3a0',
-          secondary: '#5ac3b0',
+          primary: '#356588',
+          'primary-hover': '#2a5070',
+          // Azul da Cuidaty (6,2:1 no branco): serve para texto, botões e detalhes.
+          'primary-ink': '#356588',
+          'primary-ink-hover': '#2a5070',
+          secondary: '#356588',
           accent: '#a7e9a5',
           'accent-light': '#ddfdbe',
           light: '#f8fafc',
@@ -27,7 +27,7 @@ export default {
         foreground: '#0f1c26',
         border: '#e6e4df',
         input: '#ffffff',
-        ring: '#5ac3b0',
+        ring: '#356588',
         card: {
           DEFAULT: '#ffffff',
           foreground: '#0f1c26',
@@ -37,16 +37,16 @@ export default {
           foreground: '#0f1c26',
         },
         primary: {
-          DEFAULT: '#5ac3b0',
+          DEFAULT: '#356588',
           foreground: '#ffffff',
-          hover: '#4ab3a0',
-          ink: '#5ac3b0',
-          'ink-hover': '#4ab3a0',
+          hover: '#2a5070',
+          ink: '#356588',
+          'ink-hover': '#2a5070',
         },
         secondary: {
-          DEFAULT: '#5ac3b0',
+          DEFAULT: '#356588',
           foreground: '#0c202f',
-          hover: '#4ab3a0',
+          hover: '#2a5070',
         },
         muted: {
           DEFAULT: '#f0f4f8',
@@ -70,7 +70,7 @@ export default {
         },
         chart: {
           1: '#356588',
-          2: '#5ac3b0',
+          2: '#356588',
           3: '#a7e9a5',
           4: '#2a5070',
           5: '#ddfdbe',
@@ -78,17 +78,17 @@ export default {
         sidebar: {
           DEFAULT: '#ffffff',
           foreground: '#0c202f',
-          primary: '#5ac3b0',
+          primary: '#356588',
           'primary-foreground': '#ffffff',
           accent: '#f8fafc',
-          'accent-foreground': '#5ac3b0',
+          'accent-foreground': '#356588',
           border: '#e2e8f0',
-          ring: '#5ac3b0',
+          ring: '#356588',
         },
       },
       fontFamily: {
         sans: [
-          'Geist',
+          '"Geist Variable"',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
@@ -96,8 +96,8 @@ export default {
           'Segoe UI Emoji',
         ],
         // `serif` é o token dos títulos (h1–h3 e font-serif). Agora aponta para a fonte de exibição.
-        serif: ['"Bricolage Grotesque"', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Bricolage Grotesque"', 'Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: ['"Bricolage Grotesque Variable"', '"Geist Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Bricolage Grotesque Variable"', '"Geist Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         sm: '0.25rem',

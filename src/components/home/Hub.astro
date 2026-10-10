@@ -2,14 +2,14 @@
 // Integrações: a Cuidaty no centro (logo), ligada ao que a pessoa já usa.
 // Animação: logo respira, ondas saem do centro, linhas se desenham, selos entram.
 const tiles = [
-  { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 20, y: 18, label: true },
-  { name: 'Google Agenda', icon: '/integracoes/google-agenda.svg', x: 80, y: 18, label: true },
-  { name: 'Geap Saúde', icon: '/convenios/geap.webp', x: 20, y: 82, label: false },
-  { name: 'SulAmérica Saúde', icon: '/convenios/sulamerica.webp', x: 80, y: 82, label: false },
+  { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 20, y: 18, label: true, w: 28, h: 28 },
+  { name: 'Google Agenda', icon: '/integracoes/google-agenda.svg', x: 80, y: 18, label: true, w: 28, h: 28 },
+  { name: 'Geap Saúde', icon: '/convenios/geap.webp', x: 20, y: 82, label: false, w: 488, h: 150 },
+  { name: 'SulAmérica Saúde', icon: '/convenios/sulamerica.webp', x: 80, y: 82, label: false, w: 417, h: 143 },
 ];
 ---
 
-<section id="integracoes" class="bg-cuidaty-light py-20 md:py-28">
+<section id="integracoes" class="bg-white py-20 md:py-28">
   <div class="container mx-auto px-5 md:px-8">
     <div class="mx-auto max-w-7xl">
       <div class="max-w-2xl">
@@ -81,6 +81,8 @@ const tiles = [
                   <img
                     src={t.icon}
                     alt={t.label ? '' : t.name}
+                    width={t.w}
+                    height={t.h}
                     loading="lazy"
                     class={t.label ? 'size-6 sm:size-7' : 'h-8 w-auto max-w-[6.5rem] sm:h-10 sm:max-w-[8rem]'}
                   />
@@ -96,8 +98,9 @@ const tiles = [
         </ul>
       </div>
 
-      <p class="mt-8 text-center text-sm text-cuidaty-dark/60">
-        Novas integrações de convênio entram conforme a necessidade da sua clínica.
+      <p class="mt-8 text-center text-sm text-cuidaty-dark/70">
+        Integração com convênios disponível no plano Clínicas e Grupos. Novas operadoras entram
+        conforme a necessidade da sua clínica.
       </p>
     </div>
   </div>

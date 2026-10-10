@@ -16,7 +16,8 @@
   }
 
   html {
-    @apply scroll-smooth;
+    @apply scroll-smooth bg-white;
+    color-scheme: only light;
   }
 
   body {
@@ -56,10 +57,10 @@
 
   /* Botões da home: primário sólido e contorno, sempre arredondados. */
   .btn-solid {
-    @apply inline-flex items-center justify-center rounded-full bg-primary-ink px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-colors duration-200 hover:bg-primary-ink-hover;
+    @apply inline-flex items-center justify-center rounded-md bg-primary-ink px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-colors duration-200 hover:bg-primary-ink-hover;
   }
   .btn-line {
-    @apply inline-flex items-center justify-center rounded-full border-[1.5px] border-primary px-7 py-3.5 text-[0.95rem] font-semibold text-primary-ink transition-colors duration-200 hover:bg-primary/5;
+    @apply inline-flex items-center justify-center rounded-md border-[1.5px] border-primary px-7 py-3.5 text-[0.95rem] font-semibold text-primary-ink transition-colors duration-200 hover:bg-primary/5;
   }
 
   .btn-primary {

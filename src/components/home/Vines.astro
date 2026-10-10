@@ -1,0 +1,128 @@
+---
+// Ramos de folhas nos cantos da seção (leaves-bg.png do app, vetorizado com potrace)
+// Ao entrar na tela o caule cresce e as folhas brotam; depois o ramo balança preso ao pé do
+// caule e as folhas tremulam com rajadas irregulares. Decorativo: aria-hidden, sem eventos.
+---
+
+<svg class="vn vn-tr" viewBox="1102 -22 320 529" aria-hidden="true" data-vn><g class="vn-sway"><path class="vn-stem" d="M1298 485C1295 484 1293 483 1293 482C1293 482 1305 458 1320 428C1350 368 1350 368 1348 354C1345 336 1334 319 1306 288C1268 248 1266 245 1267 221C1267 202 1268 192 1277 162C1284 138 1306 79 1308 76C1309 76 1311 77 1313 78L1318 80L1315 86C1306 106 1291 149 1285 172C1278 195 1277 206 1277 221C1276 241 1279 245 1308 276C1351 320 1363 344 1358 370C1356 378 1329 435 1308 475L1302 487L1298 485Z"></path><path class="vn-leaf" style="--n:0" d="M1289 417C1261 413 1254 410 1245 400C1234 388 1226 366 1226 347C1226 341 1226 341 1240 344C1271 350 1284 355 1290 364C1294 370 1308 399 1314 412L1317 419L1309 419C1305 419 1296 418 1289 417Z"></path><path class="vn-leaf" style="--n:1" d="M1310 271C1310 264 1319 228 1323 216C1328 202 1333 197 1357 185C1370 179 1396 167 1400 166L1402 166L1402 175C1400 197 1394 228 1390 237C1381 255 1359 267 1329 272C1317 274 1310 273 1310 271Z"></path><path class="vn-leaf" style="--n:2" d="M1197 231C1180 230 1169 226 1158 217C1142 203 1128 175 1123 145L1122 141L1139 141C1167 142 1190 146 1202 150C1209 153 1217 161 1230 178C1238 190 1262 228 1262 229C1262 231 1218 232 1197 231Z"></path><path class="vn-leaf" style="--n:3" d="M1248 73C1226 67 1209 47 1200 13C1197 -2 1196 -0 1212 0C1237 2 1257 4 1265 8C1270 11 1276 17 1286 31C1296 46 1312 72 1312 73C1310 74 1255 74 1248 73Z"></path></g></svg>
+<svg class="vn vn-bl" viewBox="-20 863 267 538" aria-hidden="true" data-vn><g class="vn-sway"><path class="vn-stem" d="M155 1342C111 1299 108 1297 104 1283C97 1262 99 1238 115 1190C125 1157 126 1153 126 1141C126 1131 126 1130 123 1122C112 1097 78 1050 44 1014L38 1007L41 1003C43 1002 45 1000 45 1000C46 1000 64 1021 77 1036C99 1063 118 1090 127 1108C141 1135 141 1143 123 1198C107 1249 106 1274 120 1293C122 1296 142 1315 163 1336C185 1356 203 1373 203 1374C203 1374 202 1376 200 1378L196 1381L155 1342Z"></path><path class="vn-leaf" style="--n:0" d="M160 1300C162 1257 162 1254 176 1241C187 1230 207 1215 208 1216C209 1216 210 1221 211 1226C220 1257 217 1282 201 1296C191 1305 164 1324 161 1324C160 1324 160 1314 160 1300Z"></path><path class="vn-leaf" style="--n:1" d="M56 1195C42 1191 33 1183 22 1166C14 1152 0 1124 0 1122C-0 1121 3 1121 25 1121C65 1122 70 1123 80 1133C90 1144 115 1183 113 1185C112 1186 102 1190 93 1193C82 1196 64 1197 56 1195Z"></path><path class="vn-leaf" style="--n:2" d="M138 1118C141 1093 148 1051 152 1039C156 1027 162 1021 182 1007C195 1000 221 985 222 985C224 987 227 1014 227 1028C227 1056 220 1075 206 1089C199 1096 197 1098 181 1106C163 1115 148 1122 142 1124L138 1125L138 1118Z"></path><path class="vn-leaf" style="--n:3" d="M41 991C43 970 50 935 53 926C54 922 57 918 60 915C70 906 108 883 109 885C113 892 114 931 111 944C105 963 97 972 72 984C58 992 44 998 41 998C41 998 41 995 41 991Z"></path></g></svg>
+
+<style>
+  .vn {
+    position: absolute;
+    z-index: 0;
+    width: clamp(7rem, 16vw, 13rem);
+    height: auto;
+    overflow: visible;
+    fill: #ddfdbe;
+    pointer-events: none;
+  }
+  .vn-tr {
+    top: 2rem;
+    right: 0;
+  }
+  .vn-bl {
+    bottom: 1rem;
+    left: 0;
+  }
+  .vn-sway,
+  .vn-leaf,
+  .vn-stem {
+    transform-box: fill-box;
+  }
+  /* O ramo de cima nasce embaixo; o de baixo, no pé direito. */
+  .vn-tr .vn-sway {
+    transform-origin: 70% 100%;
+  }
+  .vn-bl .vn-sway {
+    transform-origin: 80% 100%;
+  }
+  .vn-leaf {
+    transform-origin: center;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .vn:not(.is-in) .vn-stem {
+      clip-path: inset(100% 0 0 0);
+    }
+    .vn:not(.is-in) .vn-leaf {
+      transform: scale(0);
+    }
+    .vn.is-in .vn-stem {
+      animation: vn-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .vn.is-in .vn-sway {
+      animation: vn-branch 7s ease-in-out 1.4s infinite alternate;
+    }
+    .vn.is-in .vn-leaf {
+      animation:
+        vn-sprout 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+        vn-gust 5.5s ease-in-out infinite;
+      animation-delay: calc(0.5s + var(--n) * 0.18s), calc(1.5s + var(--n) * -1.3s);
+    }
+    .vn-bl.is-in .vn-leaf {
+      animation-duration: 0.7s, 6.3s;
+    }
+  }
+
+  @keyframes vn-grow {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+  @keyframes vn-sprout {
+    from {
+      transform: scale(0);
+    }
+  }
+  @keyframes vn-branch {
+    from {
+      rotate: -2.5deg;
+    }
+    to {
+      rotate: 2deg;
+    }
+  }
+  /* Rajada: balança pouco, dá um tranco e volta, como vento de verdade. */
+  @keyframes vn-gust {
+    0%,
+    100% {
+      rotate: 0deg;
+      scale: 1;
+    }
+    20% {
+      rotate: -5deg;
+    }
+    34% {
+      rotate: 9deg;
+      scale: 1.05;
+    }
+    42% {
+      rotate: -3deg;
+    }
+    55% {
+      rotate: 4deg;
+    }
+    75% {
+      rotate: -2deg;
+    }
+  }
+</style>
+
+<script>
+  // Os ramos crescem quando entram na tela.
+  document.querySelectorAll<SVGElement>('[data-vn]').forEach((el) => {
+    new IntersectionObserver(
+      ([e], io) => {
+        if (e.isIntersecting) {
+          el.classList.add('is-in');
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    ).observe(el);
+  });
+</script>

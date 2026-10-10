@@ -235,11 +235,11 @@ const { class: className = '' } = Astro.props;
 
 <style is:global>
   .agd {
-    --bg: #f8fafc;
+    --bg: #ffffff;
     --fg: #0c202f;
     --card: #fff;
-    --primary: #5ac3b0;
-    --secondary: #5ac3b0;
+    --primary: #356588;
+    --secondary: #356588;
     --muted: #e2e8f0;
     --mf: #64748b;
     --destructive: #ef4444;
@@ -385,7 +385,7 @@ const { class: className = '' } = Astro.props;
     height: 30px;
     padding: 0 10px;
     border-radius: var(--r-sm);
-    background: #5ac3b0;
+    background: #356588;
     color: #fff;
     font-size: 12px;
     font-weight: 500;
@@ -469,9 +469,9 @@ const { class: className = '' } = Astro.props;
     flex: 0 0 auto;
   }
   .agd .badge.confirmed {
-    background: rgba(90, 195, 176, 0.12);
+    background: rgba(53, 101, 136, 0.12);
     color: #2f8b7a;
-    border: 1px solid rgba(90, 195, 176, 0.3);
+    border: 1px solid rgba(53, 101, 136, 0.3);
   }
   .agd .badge.pending {
     background: rgba(217, 119, 6, 0.1);
@@ -563,7 +563,7 @@ const { class: className = '' } = Astro.props;
     box-shadow: var(--sh-xs);
   }
   .agd .btn.primary {
-    background: #5ac3b0;
+    background: #356588;
     color: #fff;
   }
   .agd .btn.outline {
@@ -626,7 +626,7 @@ const { class: className = '' } = Astro.props;
   }
   .agd .fcontrol.focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(90, 195, 176, 0.12);
+    box-shadow: 0 0 0 3px rgba(53, 101, 136, 0.12);
   }
   .agd .fcontrol svg {
     color: var(--mf);
@@ -651,7 +651,7 @@ const { class: className = '' } = Astro.props;
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: rgba(90, 195, 176, 0.12);
+    background: rgba(53, 101, 136, 0.12);
     color: var(--primary);
     display: flex;
     align-items: center;
@@ -775,8 +775,8 @@ const { class: className = '' } = Astro.props;
     font-size: 12px;
   }
   .agd .radio-opt.sel {
-    border-color: rgba(90, 195, 176, 0.4);
-    background: rgba(90, 195, 176, 0.05);
+    border-color: rgba(53, 101, 136, 0.4);
+    background: rgba(53, 101, 136, 0.05);
   }
   .agd .dot {
     width: 14px;
@@ -866,10 +866,10 @@ const { class: className = '' } = Astro.props;
     font-family: ui-monospace, Menlo, monospace;
     font-size: 11px;
     color: var(--primary);
-    border: 1px solid rgba(90, 195, 176, 0.2);
+    border: 1px solid rgba(53, 101, 136, 0.2);
     border-radius: var(--r-sm);
     padding: 3px 7px;
-    background: rgba(90, 195, 176, 0.06);
+    background: rgba(53, 101, 136, 0.06);
   }
   .agd .crow svg {
     color: var(--mf);
@@ -1165,7 +1165,7 @@ const { class: className = '' } = Astro.props;
         status: 'confirmed',
       });
       setAgenda('Quinta · 12 jun', '3 consultas');
-      novo.style.boxShadow = '0 0 0 2px rgba(90,195,176,.45)';
+      novo.style.boxShadow = '0 0 0 2px rgba(53, 101, 136,.45)';
       await sleep(1200);
       novo.style.boxShadow = '';
 
@@ -1232,7 +1232,7 @@ const { class: className = '' } = Astro.props;
       maria.style.transform = '';
       maria.classList.remove('moving');
       setAgenda('Quinta · 12 jun', '4 consultas');
-      carlos.style.boxShadow = '0 0 0 2px rgba(90,195,176,.45)';
+      carlos.style.boxShadow = '0 0 0 2px rgba(53, 101, 136,.45)';
       await sleep(1500);
       carlos.style.boxShadow = '';
       await sleep(800);

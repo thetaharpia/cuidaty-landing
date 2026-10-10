@@ -1,11 +1,15 @@
 ---
 // Fechamento: um único CTA. Âncora #contato.
 import { REGISTER_URL } from '../../lib/plans';
+import Mascot from './Mascot.astro';
+import Vines from './Vines.astro';
 ---
 
-<section id="contato" class="bg-white py-24 md:py-32">
-  <div class="container mx-auto px-5 md:px-8">
+<section id="contato" class="relative overflow-hidden bg-white py-24 md:py-32">
+  <Vines />
+  <div class="container relative z-10 mx-auto px-5 md:px-8">
     <div class="mx-auto max-w-2xl text-center">
+      <Mascot class="mb-8" />
       <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-6xl">
         Pronto para ter mais tempo
         <span class="mt-1 block text-primary-ink">para escutar?</span>
@@ -17,13 +21,13 @@ import { REGISTER_URL } from '../../lib/plans';
       <div class="mt-8">
         <a href={REGISTER_URL} class="btn-solid" data-cta-location="closing">Começar grátis</a>
       </div>
-      <p class="mt-5 text-sm text-cuidaty-dark/60">
+      <p class="mt-5 text-sm text-cuidaty-dark/70">
         Prefere conversar?
         <a
-          href="mailto:contato@thetaharpia.com"
+          href="mailto:contato@cuidaty.com"
           class="font-semibold text-primary-ink underline underline-offset-4"
         >
-          contato@thetaharpia.com
+          contato@cuidaty.com
         </a>
       </p>
     </div>
