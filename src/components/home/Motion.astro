@@ -397,9 +397,10 @@
         }
       }
 
-      /* Parágrafo que "acende" palavra por palavra enquanto você rola */
+      /* Parágrafo que "acende" palavra por palavra enquanto você rola. Começa em 0,62, o mínimo
+         para o texto ainda apagado ter contraste AA (4,5:1). */
       .scroll-words .w {
-        opacity: 0.16;
+        opacity: 0.62;
         animation: sp-word linear both;
         animation-timeline: view();
         animation-range: cover calc(8% + var(--i) * 0.55%) cover calc(26% + var(--i) * 0.55%);

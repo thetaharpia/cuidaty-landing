@@ -89,6 +89,7 @@ export default {
       fontFamily: {
         sans: [
           '"Geist Variable"',
+          '"Geist Fallback"',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
@@ -98,14 +99,16 @@ export default {
         // `serif` é o token dos títulos (h1–h3 e font-serif). Agora aponta para a fonte de exibição.
         serif: [
           '"Bricolage Grotesque Variable"',
-          '"Geist Variable"',
+          '"Bricolage Fallback"',
+          '"Geist Fallback"',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
         ],
         display: [
           '"Bricolage Grotesque Variable"',
-          '"Geist Variable"',
+          '"Bricolage Fallback"',
+          '"Geist Fallback"',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
