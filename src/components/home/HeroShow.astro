@@ -37,7 +37,10 @@ const rings = Array.from({ length: RINGS }, (_, i) => {
   const light = Math.round(60 + 70 * Math.sin(Math.PI * t));
   return { t, color: `rgb(${light}, ${light}, ${light})` };
 });
-const bars = Array.from({ length: 22 }, (_, i) => 18 + Math.round(70 * Math.abs(Math.sin(i * 1.9))));
+const bars = Array.from(
+  { length: 22 },
+  (_, i) => 18 + Math.round(70 * Math.abs(Math.sin(i * 1.9)))
+);
 const fields = [
   [600, 'Nome completo', 'João Lima', 9],
   [1200, 'Celular', '(11) 98765-4321', 15],
@@ -45,11 +48,35 @@ const fields = [
   [2400, 'E-mail', 'joao@email.com', 14],
 ];
 const week = [
-  ['Seg', [['9h', 'Maria S.', 8], ['15h', 'Ana P.', 58]]],
-  ['Ter', [['10h', 'Carlos M.', 20], ['16h', 'Beatriz R.', 66]]],
-  ['Qua', [['8h', 'Rafael D.', 4], ['11h', 'Maria S.', 30]]],
+  [
+    'Seg',
+    [
+      ['9h', 'Maria S.', 8],
+      ['15h', 'Ana P.', 58],
+    ],
+  ],
+  [
+    'Ter',
+    [
+      ['10h', 'Carlos M.', 20],
+      ['16h', 'Beatriz R.', 66],
+    ],
+  ],
+  [
+    'Qua',
+    [
+      ['8h', 'Rafael D.', 4],
+      ['11h', 'Maria S.', 30],
+    ],
+  ],
   ['Qui', [['9h', 'Ana P.', 8]]],
-  ['Sex', [['10h', 'Carlos M.', 20], ['17h', 'Beatriz R.', 74]]],
+  [
+    'Sex',
+    [
+      ['10h', 'Carlos M.', 20],
+      ['17h', 'Beatriz R.', 74],
+    ],
+  ],
 ];
 const chats = [
   ['Maria Souza', 'Obrigada! Até lá.'],
@@ -76,24 +103,56 @@ const urls = {
 };
 ---
 
-<div class="hs" data-hs data-scene="cel" data-loop={LOOP} data-leave={LEAVE} role="img" aria-label="Demonstração da Cuidaty: consulta gravada no celular, depois cadastro do paciente, agenda, confirmação pelo WhatsApp e prontuário pronto na web">
+<div
+  class="hs"
+  data-hs
+  data-scene="cel"
+  data-loop={LOOP}
+  data-leave={LEAVE}
+  role="img"
+  aria-label="Demonstração da Cuidaty: consulta gravada no celular, depois cadastro do paciente, agenda, confirmação pelo WhatsApp e prontuário pronto na web"
+>
   <!-- ================= Janela da web ================= -->
   <div class="hs-win">
     <div class="hs-chrome">
       <span class="hs-url">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg>
-        {Object.entries(urls).map(([id, url]) => <span class="hs-for" data-for={id}>{url}</span>)}
+        <svg viewBox="0 0 24 24" aria-hidden="true"
+          ><path
+            d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"></path></svg
+        >
+        {
+          Object.entries(urls).map(([id, url]) => (
+            <span class="hs-for" data-for={id}>
+              {url}
+            </span>
+          ))
+        }
       </span>
     </div>
     <div class="hs-app">
       <aside class="hs-side" aria-hidden="true">
         <img src="/logo-mark.png" alt="" width="62" height="81" />
-        {nav.map(([id, label, d]) => (
-          <span class="hs-nav" data-for={id}>
-            <svg viewBox="0 0 24 24"><path d={d} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"></path></svg>
-            {label}
-          </span>
-        ))}
+        {
+          nav.map(([id, label, d]) => (
+            <span class="hs-nav" data-for={id}>
+              <svg viewBox="0 0 24 24">
+                <path
+                  d={d}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                />
+              </svg>
+              {label}
+            </span>
+          ))
+        }
       </aside>
 
       <div class="hs-view">
@@ -102,15 +161,25 @@ const urls = {
           <section class="hs-scene" data-for="cad">
             <p class="hs-crumb">Pacientes / <b>Novo paciente</b></p>
             <div class="hs-form">
-              {fields.map(([at, label, value, chars]) => (
-                <label class="hs-field">
-                  <span>{label}</span>
-                  <i class="hs-input"><b class="hs-type" data-at={at} style={`--s:${chars}`}>{value}</b></i>
-                </label>
-              ))}
+              {
+                fields.map(([at, label, value, chars]) => (
+                  <label class="hs-field">
+                    <span>{label}</span>
+                    <i class="hs-input">
+                      <b class="hs-type" data-at={at} style={`--s:${chars}`}>
+                        {value}
+                      </b>
+                    </i>
+                  </label>
+                ))
+              }
               <div class="hs-field">
                 <span>Atendimento</span>
-                <i class="hs-chips"><b class="hs-chip" data-at="2900">Particular</b><b class="hs-chip hs-chip-off">Convênio</b></i>
+                <i class="hs-chips"
+                  ><b class="hs-chip" data-at="2900">Particular</b><b class="hs-chip hs-chip-off"
+                    >Convênio</b
+                  ></i
+                >
               </div>
             </div>
             <span class="hs-btn hs-press" data-press="3300">Salvar paciente</span>
@@ -120,20 +189,26 @@ const urls = {
           <section class="hs-scene" data-for="agenda">
             <p class="hs-crumb">Agenda · <b>semana de 13/10</b></p>
             <div class="hs-week">
-              {week.map(([day, slots]) => (
-                <div class="hs-col">
-                  <span class="hs-day">{day}</span>
-                  {(slots as [string, string, number][]).map(([h, who, top]) => (
-                    <i class="hs-slot" style={`top:${top}%`}><b>{h}</b> {who}</i>
-                  ))}
-                  {day === 'Qui' && (
-                    <i class="hs-slot hs-new" data-at="4900" style="top:46%">
-                      <b>14h</b> João Lima
-                      <small class="hs-remind" data-at="6700">Lembrete no WhatsApp</small>
-                    </i>
-                  )}
-                </div>
-              ))}
+              {
+                week.map(([day, slots]) => (
+                  <div class="hs-col">
+                    <span class="hs-day">{day}</span>
+                    {(slots as [string, string, number][]).map(([h, who, top]) => (
+                      <i class="hs-slot" style={`top:${top}%`}>
+                        <b>{h}</b> {who}
+                      </i>
+                    ))}
+                    {day === 'Qui' && (
+                      <i class="hs-slot hs-new" data-at="4900" style="top:46%">
+                        <b>14h</b> João Lima
+                        <small class="hs-remind" data-at="6700">
+                          Lembrete no WhatsApp
+                        </small>
+                      </i>
+                    )}
+                  </div>
+                ))
+              }
             </div>
             <p class="hs-note" data-at="5900">Sem conflito de horário</p>
           </section>
@@ -141,13 +216,22 @@ const urls = {
           <!-- WhatsApp -->
           <section class="hs-scene hs-wa" data-for="whats">
             <div class="hs-list">
-              {chats.map(([who, last], i) => (
-                <p class:list={['hs-conv', i === 1 && 'on']}><b>{who}</b><span>{last}</span></p>
-              ))}
+              {
+                chats.map(([who, last], i) => (
+                  <p class:list={['hs-conv', i === 1 && 'on']}>
+                    <>
+                      <b>{who}</b>
+                      <span>{last}</span>
+                    </>
+                  </p>
+                ))
+              }
             </div>
             <div class="hs-chat">
               <p class="hs-chat-head"><b>João Lima</b> · WhatsApp</p>
-              <p class="hs-out" data-at="9200">Oi, João! Sua consulta com a Dra. Ana é quinta às 14h. Confirma?</p>
+              <p class="hs-out" data-at="9200">
+                Oi, João! Sua consulta com a Dra. Ana é quinta às 14h. Confirma?
+              </p>
               <p class="hs-typing" data-at="9900"><i></i><i></i><i></i></p>
               <p class="hs-in" data-at="10800">Confirmo, obrigado!</p>
               <p class="hs-sys" data-at="11500">Consulta confirmada na agenda</p>
@@ -167,9 +251,14 @@ const urls = {
                 </span>
               </div>
               <div class="hs-soap">
-                {soap.map(([at, label, text]) => (
-                  <div class="hs-sf" data-at={at}><span>{label}</span>{text}</div>
-                ))}
+                {
+                  soap.map(([at, label, text]) => (
+                    <div class="hs-sf" data-at={at}>
+                      <span>{label}</span>
+                      {text}
+                    </div>
+                  ))
+                }
               </div>
               <span class="hs-btn hs-press" data-press="23200">Usar no novo registro</span>
             </div>
@@ -183,51 +272,74 @@ const urls = {
 
   <!-- ================= Celular ================= -->
   <div class="hs-phone">
-   <div class="hs-body">
-    <div class="hs-rim" aria-hidden="true">{rings.map((r) => <i style={`--t:${r.t};border-color:${r.color}`}></i>)}</div>
-    <span class="hs-btns" aria-hidden="true"><i></i><i></i><i></i></span>
-    <div class="hs-back" aria-hidden="true"><i></i></div>
-    <div class="hs-front">
-      <div class="hs-screen">
-        <div class="hs-status" aria-hidden="true"><span>9:41</span><span class="hs-island"></span><span>●●●</span></div>
+    <div class="hs-body">
+      <div class="hs-rim" aria-hidden="true">
+        {rings.map((r) => <i style={`--t:${r.t};border-color:${r.color}`} />)}
+      </div>
+      <span class="hs-btns" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div class="hs-back" aria-hidden="true"><i></i></div>
+      <div class="hs-front">
+        <div class="hs-screen">
+          <div class="hs-status" aria-hidden="true">
+            <span>9:41</span><span class="hs-island"></span><span>●●●</span>
+          </div>
 
-        <!-- Tela 1: agenda do dia, rola até o João -->
-        <div class="hs-ps hs-ps-today">
-          <p class="hs-ph-title">Hoje<small>sexta, 10 de outubro</small></p>
-          <div class="hs-today">
-            <div class="hs-today-list">
-              {today.map(([h, who]) => (
-                <p class:list={['hs-appt', who === 'João Lima' && 'hs-appt-target']}><b>{h}</b>{who}<span>Presencial</span></p>
-              ))}
+          <!-- Tela 1: agenda do dia, rola até o João -->
+          <div class="hs-ps hs-ps-today">
+            <p class="hs-ph-title">Hoje<small>sexta, 10 de outubro</small></p>
+            <div class="hs-today">
+              <div class="hs-today-list">
+                {
+                  today.map(([h, who]) => (
+                    <p class:list={['hs-appt', who === 'João Lima' && 'hs-appt-target']}>
+                      <b>{h}</b>
+                      {who}
+                      <span>Presencial</span>
+                    </p>
+                  ))
+                }
+              </div>
+            </div>
+          </div>
+
+          <!-- Tela 2: gravação -->
+          <div class="hs-ps hs-ps-rec">
+            <p class="hs-ph-title">João Lima<small>Presencial · gravando</small></p>
+            <div class="hs-rec">
+              <span class="hs-dot"></span><span class="hs-timer" data-timer>00:00</span>
+            </div>
+            <div class="hs-wave" aria-hidden="true">
+              {bars.map((h, i) => <i style={`--h:${h}%;--i:${i}`} />)}
+            </div>
+            <div class="hs-live">{live.map(([at, text]) => <p data-at={at}>{text}</p>)}</div>
+            <div class="hs-ph-foot">
+              <span class="hs-stop hs-press" data-press="18800"><i></i></span>
+              <span class="hs-sent" data-at="19000">Enviado para transcrição</span>
+              <span class="hs-sent hs-ready" data-at="21000">Resumo pronto no prontuário</span>
             </div>
           </div>
         </div>
-
-        <!-- Tela 2: gravação -->
-        <div class="hs-ps hs-ps-rec">
-          <p class="hs-ph-title">João Lima<small>Presencial · gravando</small></p>
-          <div class="hs-rec"><span class="hs-dot"></span><span class="hs-timer" data-timer>00:00</span></div>
-          <div class="hs-wave" aria-hidden="true">{bars.map((h, i) => <i style={`--h:${h}%;--i:${i}`}></i>)}</div>
-          <div class="hs-live">{live.map(([at, text]) => <p data-at={at}>{text}</p>)}</div>
-          <div class="hs-ph-foot">
-            <span class="hs-stop hs-press" data-press="18800"><i></i></span>
-            <span class="hs-sent" data-at="19000">Enviado para transcrição</span>
-            <span class="hs-sent hs-ready" data-at="21000">Resumo pronto no prontuário</span>
-          </div>
-        </div>
+        <span class="hs-tap" aria-hidden="true"></span>
       </div>
-      <span class="hs-tap" aria-hidden="true"></span>
     </div>
-   </div>
   </div>
 </div>
 
 <div class="hs-steps" role="tablist" aria-label="Etapas da demonstração">
-  {scenes.map((s, i) => (
-    <button type="button" role="tab" class="hs-step" data-step={s.id} data-start={s.start} data-end={scenes[i + 1]?.start ?? LEAVE}>
-      {s.label}
-    </button>
-  ))}
+  {
+    scenes.map((s, i) => (
+      <button
+        type="button"
+        role="tab"
+        class="hs-step"
+        data-step={s.id}
+        data-start={s.start}
+        data-end={scenes[i + 1]?.start ?? LEAVE}
+      >
+        {s.label}
+      </button>
+    ))
+  }
 </div>
 
 <style>
@@ -1160,7 +1272,11 @@ const urls = {
     const LOOP = Number(root.dataset.loop);
     const LEAVE = Number(root.dataset.leave);
     const steps = Array.from(document.querySelectorAll<HTMLButtonElement>('.hs-step'));
-    const SCENES = steps.map((s) => ({ id: s.dataset.step!, start: Number(s.dataset.start), end: Number(s.dataset.end) }));
+    const SCENES = steps.map((s) => ({
+      id: s.dataset.step!,
+      start: Number(s.dataset.start),
+      end: Number(s.dataset.end),
+    }));
     // Janela de zoom de cada cena: entra depois do começo e sai antes do fim.
     const ZOOM: Record<string, [number, number]> = {
       cad: [400, 3000],

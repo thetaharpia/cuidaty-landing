@@ -50,7 +50,10 @@ const features = [
 
 <section id="funcionalidades" class="bg-white py-20 md:py-28">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16" data-fs>
+    <div
+      class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16"
+      data-fs
+    >
       <div>
         <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
           Do agendamento ao prontuário.
@@ -76,10 +79,21 @@ const features = [
       <ol class="fs-stack" aria-label="Funcionalidades">
         {
           features.map((f, i) => (
-            <li class="fs-card" data-i={i} data-o={i === 0 ? 0 : i === 1 ? 1 : i === features.length - 1 ? -1 : 9}>
+            <li
+              class="fs-card"
+              data-i={i}
+              data-o={i === 0 ? 0 : i === 1 ? 1 : i === features.length - 1 ? -1 : 9}
+            >
               <button type="button" class="fs-head" aria-label={`Ver ${f.title}`}>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <path d={f.icon} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" />
+                  <path
+                    d={f.icon}
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                  />
                 </svg>
                 <span class="fs-title">{f.title}</span>
                 <span class="fs-meta">{f.meta}</span>
@@ -90,8 +104,14 @@ const features = [
                     {['Seg', 'Ter', 'Qua', 'Qui', 'Sex'].map((d, n) => (
                       <div>
                         <span class="fs-day">{d}</span>
-                        <i class="fs-slot" style={`--n:${n};--top:${[10, 40, 22, 55, 30][n]}%`}>{['9h', '14h', '10h', '16h', '11h'][n]}</i>
-                        {n === 3 && <i class="fs-slot fs-clash" style="--n:6;--top:55%">16h</i>}
+                        <i class="fs-slot" style={`--n:${n};--top:${[10, 40, 22, 55, 30][n]}%`}>
+                          {['9h', '14h', '10h', '16h', '11h'][n]}
+                        </i>
+                        {n === 3 && (
+                          <i class="fs-slot fs-clash" style="--n:6;--top:55%">
+                            16h
+                          </i>
+                        )}
                       </div>
                     ))}
                     <span class="fs-alert">Conflito na quinta às 16h</span>
@@ -101,16 +121,27 @@ const features = [
                   <div class="fs-chat">
                     <p class="fs-in">Oi, Maria! Sua consulta é amanhã às 14h. Confirma?</p>
                     <p class="fs-out">Confirmo</p>
-                    <p class="fs-row"><span>Qui 14h · Maria Souza</span><b>Confirmado</b></p>
+                    <p class="fs-row">
+                      <span>Qui 14h · Maria Souza</span>
+                      <b>Confirmado</b>
+                    </p>
                   </div>
                 )}
                 {f.id === 'transc' && (
                   <div class="fs-transc">
                     <div class="fs-wave">
-                      {Array.from({ length: 28 }, (_, n) => <i style={`--h:${20 + Math.round(70 * Math.abs(Math.sin(n * 1.7)))}%;--n:${n}`} />)}
+                      {Array.from({ length: 28 }, (_, n) => (
+                        <i
+                          style={`--h:${20 + Math.round(70 * Math.abs(Math.sin(n * 1.7)))}%;--n:${n}`}
+                        />
+                      ))}
                     </div>
-                    <p><span>Profissional:</span> Como foi a semana?</p>
-                    <p><span>Paciente:</span> Fiquei ansioso antes da reunião e dormi mal.</p>
+                    <p>
+                      <span>Profissional:</span> Como foi a semana?
+                    </p>
+                    <p>
+                      <span>Paciente:</span> Fiquei ansioso antes da reunião e dormi mal.
+                    </p>
                   </div>
                 )}
                 {f.id === 'soap' && (
@@ -121,7 +152,10 @@ const features = [
                       ['A', 'Ansiedade situacional.'],
                       ['P', 'Sessões semanais e respiração.'],
                     ].map(([k, v], n) => (
-                      <li style={`--n:${n}`}><b>{k}</b>{v}</li>
+                      <li style={`--n:${n}`}>
+                        <b>{k}</b>
+                        {v}
+                      </li>
                     ))}
                   </ul>
                 )}
@@ -137,10 +171,14 @@ const features = [
                 {f.id === 'portal' && (
                   <div class="fs-portal">
                     <div class="fs-days">
-                      {['Seg 13', 'Ter 14', 'Qua 15'].map((d, n) => <span class:list={[n === 1 && 'on']}>{d}</span>)}
+                      {['Seg 13', 'Ter 14', 'Qua 15'].map((d, n) => (
+                        <span class:list={[n === 1 && 'on']}>{d}</span>
+                      ))}
                     </div>
                     <div class="fs-times">
-                      {['08:00', '09:30', '11:00', '14:00', '15:30', '17:00'].map((t) => <span class:list={[t === '14:00' && 'on']}>{t}</span>)}
+                      {['08:00', '09:30', '11:00', '14:00', '15:30', '17:00'].map((t) => (
+                        <span class:list={[t === '14:00' && 'on']}>{t}</span>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -455,7 +493,19 @@ const features = [
 
   /* Cada mini tela se monta quando o card abre. */
   @media (prefers-reduced-motion: no-preference) {
-    .fs-card[data-o='0'] :is(.fs-slot, .fs-soap li, .fs-in, .fs-out, .fs-row, .fs-ask, .fs-answer, .fs-transc p, .fs-alert, .fs-times span) {
+    .fs-card[data-o='0']
+      :is(
+        .fs-slot,
+        .fs-soap li,
+        .fs-in,
+        .fs-out,
+        .fs-row,
+        .fs-ask,
+        .fs-answer,
+        .fs-transc p,
+        .fs-alert,
+        .fs-times span
+      ) {
       animation: fs-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .fs-card[data-o='0'] .fs-slot {
@@ -540,7 +590,9 @@ const features = [
       if (inView && !hold && !reduce) timer = window.setTimeout(() => show(active + 1), DUR);
     };
 
-    cards.forEach((card, n) => card.querySelector('.fs-head')!.addEventListener('click', () => show(n)));
+    cards.forEach((card, n) =>
+      card.querySelector('.fs-head')!.addEventListener('click', () => show(n))
+    );
     stack.addEventListener('pointerenter', () => ((hold = true), clearTimeout(timer)));
     stack.addEventListener('pointerleave', () => ((hold = false), schedule()));
     new IntersectionObserver(([e]) => {

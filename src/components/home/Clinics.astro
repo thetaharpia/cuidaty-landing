@@ -6,19 +6,41 @@ import { PROPOSAL_URL } from '../../lib/plans';
 
 const features = [
   { title: 'Financeiro completo', text: 'Caixa, faturas e checkout, sem planilha paralela.' },
-  { title: 'Convênios', text: 'Guias Geap e SulAmérica emitidas e conferidas, com a glosa mapeada.' },
+  {
+    title: 'Convênios',
+    text: 'Guias Geap e SulAmérica emitidas e conferidas, com a glosa mapeada.',
+  },
   { title: 'Contratos', text: 'Preenchidos com os dados do prontuário e assinados pelo celular.' },
   { title: 'Metas de receita', text: 'Calculadas a partir do financeiro real da clínica.' },
   { title: 'Multiunidade', text: 'Várias filiais e grupos em uma conta só.' },
-  { title: 'Equipes e permissões', text: 'Cada cargo vê só o que precisa, do prontuário ao caixa.' },
+  {
+    title: 'Equipes e permissões',
+    text: 'Cada cargo vê só o que precisa, do prontuário ao caixa.',
+  },
   { title: 'Analytics', text: 'Ocupação da agenda, faturamento por operadora e comunicação.' },
   { title: 'Migração de dados', text: 'Seus pacientes e históricos vêm da plataforma anterior.' },
 ];
 const steps = [
-  { n: '1', title: 'Diagnóstico', text: 'Mapeamos como a agenda funciona, onde o dinheiro trava e o que cada convênio exige.' },
-  { n: '2', title: 'Implantação adaptada', text: 'O sistema é montado na sua rotina, com seus modelos e regras de convênio.' },
-  { n: '3', title: 'Automação contínua', text: 'Confirmação, cobrança e conferência saem da mesa a cada rodada.' },
-  { n: '4', title: 'Acompanhamento direto', text: 'Revisões com números na mesa e um contato fixo na Cuidaty.' },
+  {
+    n: '1',
+    title: 'Diagnóstico',
+    text: 'Mapeamos como a agenda funciona, onde o dinheiro trava e o que cada convênio exige.',
+  },
+  {
+    n: '2',
+    title: 'Implantação adaptada',
+    text: 'O sistema é montado na sua rotina, com seus modelos e regras de convênio.',
+  },
+  {
+    n: '3',
+    title: 'Automação contínua',
+    text: 'Confirmação, cobrança e conferência saem da mesa a cada rodada.',
+  },
+  {
+    n: '4',
+    title: 'Acompanhamento direto',
+    text: 'Revisões com números na mesa e um contato fixo na Cuidaty.',
+  },
 ];
 ---
 
@@ -49,7 +71,12 @@ const steps = [
     </div>
   </div>
 
-  <div class="clinic-marquee mt-12" role="region" aria-label="Recursos do plano Clínicas e Grupos" tabindex="0">
+  <div
+    class="clinic-marquee mt-12"
+    role="region"
+    aria-label="Recursos do plano Clínicas e Grupos"
+    tabindex="0"
+  >
     <div class="clinic-track">
       {
         [false, true].map((copy) => (

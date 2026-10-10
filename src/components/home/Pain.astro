@@ -15,7 +15,15 @@ const words = text.split(' ');
         A carga invisível que ninguém vê.
       </h2>
       <p class="scroll-words mt-6 text-lg leading-relaxed text-cuidaty-dark md:text-xl">
-        {words.map((w, i) => <><span class="w" style={`--i:${i}`}>{w}</span>{' '}</>)}
+        {
+          words.map((w, i) => (
+            <>
+              <span class="w" style={`--i:${i}`}>
+                {w}
+              </span>{' '}
+            </>
+          ))
+        }
       </p>
     </div>
   </div>

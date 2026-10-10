@@ -7,7 +7,11 @@ const stats = [
   { value: '+80', label: 'profissionais usando a Cuidaty' },
   { value: '+1.000', label: 'pacientes acompanhados' },
   { value: '+1.000h', label: 'de áudio clínico transcrito e organizado' },
-  { value: '750+', label: 'registros clínicos que cada profissional pesquisa com o Cuty AI, só nos próprios pacientes' },
+  {
+    value: '750+',
+    label:
+      'registros clínicos que cada profissional pesquisa com o Cuty AI, só nos próprios pacientes',
+  },
 ];
 const statsUpdatedAt = '10/10/2026';
 const testimonials = [
@@ -70,7 +74,7 @@ const clinics = [
         </p>
       </div>
 
-      <dl class="mt-12 grid gap-8 border-y border-border py-10 grid-cols-2 lg:grid-cols-4">
+      <dl class="mt-12 grid grid-cols-2 gap-8 border-y border-border py-10 lg:grid-cols-4">
         {
           stats.map((st) => (
             <div>
@@ -89,9 +93,16 @@ const clinics = [
         <div class="tst-quotes">
           {
             testimonials.map((t, i) => (
-              <figure class:list={['tst-q', i === 0 && 'on']} aria-hidden={i === 0 ? undefined : 'true'}>
+              <figure
+                class:list={['tst-q', i === 0 && 'on']}
+                aria-hidden={i === 0 ? undefined : 'true'}
+              >
                 <blockquote class="text-balance font-serif text-2xl font-semibold leading-snug text-cuidaty-dark md:text-[2rem]">
-                  “{t.quote.split(' ').map((w, n, all) => <span style={`--i:${n}`}>{n < all.length - 1 ? `${w} ` : w}</span>)}”
+                  “
+                  {t.quote.split(' ').map((w, n, all) => (
+                    <span style={`--i:${n}`}>{n < all.length - 1 ? `${w} ` : w}</span>
+                  ))}
+                  ”
                 </blockquote>
                 <figcaption class="mt-6 text-sm text-cuidaty-dark/70">
                   <b class="font-semibold text-cuidaty-dark">{t.name}</b> · {t.role}
@@ -133,7 +144,9 @@ const clinics = [
                     height={48}
                     loading="lazy"
                     decoding="async"
-                    class={c.round ? 'size-12 rounded-full object-cover' : 'h-12 w-24 object-contain'}
+                    class={
+                      c.round ? 'size-12 rounded-full object-cover' : 'h-12 w-24 object-contain'
+                    }
                   />
                 </span>
                 <span>
@@ -187,7 +200,9 @@ const clinics = [
     object-fit: cover;
     filter: grayscale(1);
     opacity: 0.55;
-    transition: filter 0.4s, opacity 0.4s;
+    transition:
+      filter 0.4s,
+      opacity 0.4s;
   }
   .tst-av:hover img,
   .tst-av.on img {
@@ -274,7 +289,12 @@ const clinics = [
     };
 
     avatars.forEach((a, n) => a.addEventListener('click', () => show(n)));
-    root.addEventListener('pointerenter', () => ((hold = true), root.classList.add('paused'), clearTimeout(timer)));
+    const holdOn = () => ((hold = true), root.classList.add('paused'), clearTimeout(timer));
+    root.addEventListener('pointerenter', holdOn);
+    root.addEventListener('focusin', holdOn);
+    root.addEventListener('focusout', (e) => {
+      if (!root.contains(e.relatedTarget as Node)) root.dispatchEvent(new Event('pointerleave'));
+    });
     root.addEventListener('pointerleave', () => {
       hold = false;
       // Recomeça a barra junto com o relógio.

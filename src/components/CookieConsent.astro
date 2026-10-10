@@ -37,13 +37,19 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
         gtag('js', new Date());
         gtag('config', gaId, { anonymize_ip: true });
 
-        // gtag.js só depois do load, fora da cadeia crítica. Os eventos ficam no dataLayer.
-        window.addEventListener('load', function () {
+        // gtag.js fora da cadeia crítica: no load ou em até 3s, o que vier primeiro, para não perder
+        // quem sai antes da página terminar de carregar. Os eventos ficam no dataLayer até lá.
+        var gaLoaded = false;
+        function loadGa() {
+          if (gaLoaded) return;
+          gaLoaded = true;
           var s = document.createElement('script');
           s.async = true;
           s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
           document.head.appendChild(s);
-        });
+        }
+        window.addEventListener('load', loadGa);
+        setTimeout(loadGa, 3000);
       </script>
 
       {/* Banner */}

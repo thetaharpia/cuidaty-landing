@@ -45,7 +45,7 @@ export default {
         },
         secondary: {
           DEFAULT: '#356588',
-          foreground: '#0c202f',
+          foreground: '#ffffff',
           hover: '#2a5070',
         },
         muted: {
@@ -96,8 +96,20 @@ export default {
           'Segoe UI Emoji',
         ],
         // `serif` é o token dos títulos (h1–h3 e font-serif). Agora aponta para a fonte de exibição.
-        serif: ['"Bricolage Grotesque Variable"', '"Geist Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Bricolage Grotesque Variable"', '"Geist Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        serif: [
+          '"Bricolage Grotesque Variable"',
+          '"Geist Variable"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        display: [
+          '"Bricolage Grotesque Variable"',
+          '"Geist Variable"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       borderRadius: {
         sm: '0.25rem',

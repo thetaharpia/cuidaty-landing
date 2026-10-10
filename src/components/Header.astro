@@ -10,7 +10,14 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
       id="nav-bar"
     >
       <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
-        <img src="/logo-written.svg" alt="Cuidaty" width="314" height="82" class="h-8 w-auto sm:h-9" loading="eager" />
+        <img
+          src="/logo-written.svg"
+          alt="Cuidaty"
+          width="314"
+          height="82"
+          class="h-8 w-auto sm:h-9"
+          loading="eager"
+        />
       </a>
 
       <div class="hidden items-center gap-6 md:flex">
@@ -56,8 +63,18 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
             class="flex cursor-pointer list-none items-center gap-1 text-sm font-medium text-cuidaty-dark/70 transition-colors hover:text-cuidaty-dark"
           >
             Ajuda
-            <svg class="help-caret h-3.5 w-3.5 transition-transform" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <svg
+              class="help-caret h-3.5 w-3.5 transition-transform"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M6 9l6 6 6-6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
             </svg>
           </summary>
           <div
@@ -65,7 +82,9 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           >
             <a href="/#faq" class="block rounded px-3 py-2.5 hover:bg-cuidaty-dark/5">
               <span class="block text-sm font-semibold text-cuidaty-dark">Dúvidas frequentes</span>
-              <span class="block text-xs text-cuidaty-dark/70">Plano grátis, WhatsApp, IA e LGPD</span>
+              <span class="block text-xs text-cuidaty-dark/70"
+                >Plano grátis, WhatsApp, IA e LGPD</span
+              >
             </a>
             <a
               href="https://ajuda.cuidaty.com"
@@ -74,7 +93,9 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
               class="block rounded px-3 py-2.5 hover:bg-cuidaty-dark/5"
             >
               <span class="block text-sm font-semibold text-cuidaty-dark">Central de Ajuda</span>
-              <span class="block text-xs text-cuidaty-dark/70">Tutoriais passo a passo da plataforma</span>
+              <span class="block text-xs text-cuidaty-dark/70"
+                >Tutoriais passo a passo da plataforma</span
+              >
             </a>
           </div>
         </details>
@@ -197,8 +218,18 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
           class="flex items-center gap-2 rounded-xl px-3 py-3 text-base font-medium text-cuidaty-dark/80 transition-colors hover:bg-beige hover:text-cuidaty-dark"
           style="min-height: 44px;"
         >
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h8M8 14h5M5 5h14v11H9l-4 3z"></path>
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 10h8M8 14h5M5 5h14v11H9l-4 3z"></path>
           </svg>
           Dúvidas frequentes
         </a>
@@ -304,7 +335,9 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target as Node)) menu.open = false;
     });
-    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (menu.open = false)));
+    menu
+      .querySelectorAll('a')
+      .forEach((a) => a.addEventListener('click', () => (menu.open = false)));
     menu.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         menu.open = false;

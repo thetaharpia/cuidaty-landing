@@ -163,7 +163,9 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
     <header class="border-b border-border">
       <div class="container mx-auto px-5 md:px-8">
         <div class="mx-auto max-w-3xl pb-12 pt-32 md:pb-16 md:pt-40">
-          <p class="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cuidaty-primary-ink">
+          <p
+            class="mb-5 text-xs font-semibold uppercase tracking-[0.22em] text-cuidaty-primary-ink"
+          >
             Privacidade e dados
           </p>
           <h1
@@ -212,7 +214,9 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
                       data-toc={clause.id}
                       class="toc-link group flex gap-2.5 text-sm leading-snug text-foreground/55 transition-colors hover:text-cuidaty-dark"
                     >
-                      <span class="font-serif tabular-nums text-cuidaty-primary-ink/60">{num(i)}</span>
+                      <span class="font-serif tabular-nums text-cuidaty-primary-ink/60">
+                        {num(i)}
+                      </span>
                       <span>{clause.title}</span>
                     </a>
                   </li>

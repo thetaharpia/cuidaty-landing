@@ -3,9 +3,25 @@
 // Animação: logo respira, ondas saem do centro, linhas se desenham, selos entram.
 const tiles = [
   { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 20, y: 18, label: true, w: 28, h: 28 },
-  { name: 'Google Agenda', icon: '/integracoes/google-agenda.svg', x: 80, y: 18, label: true, w: 28, h: 28 },
+  {
+    name: 'Google Agenda',
+    icon: '/integracoes/google-agenda.svg',
+    x: 80,
+    y: 18,
+    label: true,
+    w: 28,
+    h: 28,
+  },
   { name: 'Geap Saúde', icon: '/convenios/geap.webp', x: 20, y: 82, label: false, w: 488, h: 150 },
-  { name: 'SulAmérica Saúde', icon: '/convenios/sulamerica.webp', x: 80, y: 82, label: false, w: 417, h: 143 },
+  {
+    name: 'SulAmérica Saúde',
+    icon: '/convenios/sulamerica.webp',
+    x: 80,
+    y: 82,
+    label: false,
+    w: 417,
+    h: 143,
+  },
 ];
 ---
 
@@ -84,7 +100,11 @@ const tiles = [
                     width={t.w}
                     height={t.h}
                     loading="lazy"
-                    class={t.label ? 'size-6 sm:size-7' : 'h-8 w-auto max-w-[6.5rem] sm:h-10 sm:max-w-[8rem]'}
+                    class={
+                      t.label
+                        ? 'size-6 sm:size-7'
+                        : 'h-8 w-auto max-w-[6.5rem] sm:h-10 sm:max-w-[8rem]'
+                    }
                   />
                   {t.label && (
                     <span class="whitespace-nowrap text-xs font-semibold text-cuidaty-dark sm:text-sm">
