@@ -8,7 +8,6 @@ import '../styles/global.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import MobileCTABar from '../components/MobileCTABar.astro';
 import CookieConsent from '../components/CookieConsent.astro';
-import FallingLeaves from '../components/FallingLeaves.astro';
 import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
@@ -577,7 +576,6 @@ const structuredData = [
     <slot name="head" />
   </head>
   <body class="pb-[92px] lg:pb-0">
-    <FallingLeaves />
     <slot />
     <FloatingWhatsApp />
     <MobileCTABar />

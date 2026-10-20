@@ -1,6 +1,6 @@
 ---
-// Folhas caindo no fundo do site inteiro (a folha é do leaves-bg.png do app, vetorizada).
-// Camada fixa, sem eventos, abaixo do menu; com movimento reduzido não aparece.
+// Folhas caindo no fundo do CTA final (a folha é do leaves-bg.png do app, vetorizada).
+// Camada absoluta dentro da seção (que corta o excesso), sem eventos; com movimento reduzido não aparece.
 ---
 
 <div class="fl-layer" aria-hidden="true">
@@ -40,9 +40,10 @@
     --dx: -7rem;
     --size: 1.5rem;
     --alpha: 0.55;
-    position: fixed;
+    position: absolute;
     inset: 0;
-    z-index: 30;
+    z-index: 0;
+    container-type: size;
     overflow: hidden;
     pointer-events: none;
   }
@@ -85,7 +86,7 @@
     }
     100% {
       opacity: 0;
-      transform: translate(var(--dx), calc(100vh + 6rem)) rotate(560deg);
+      transform: translate(var(--dx), calc(100cqh + 6rem)) rotate(560deg);
     }
   }
   @keyframes fl-flutter {
