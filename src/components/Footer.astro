@@ -1,4 +1,5 @@
 ---
+import logoWritten from '../assets/logo-written.webp';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,7 +8,7 @@ const currentYear = new Date().getFullYear();
     <div class="grid gap-8 md:grid-cols-4">
       <div class="col-span-2 md:col-span-1">
         <img
-          src="/logo-written.svg"
+          src={logoWritten.src}
           alt="Cuidaty"
           width="314"
           height="82"
