@@ -13,6 +13,7 @@ export interface Plan {
   tagline: string;
   price: string;
   cycle: string;
+  users: string;
   inherits?: string;
   features: string[];
   exclusions?: string[];
@@ -29,6 +30,7 @@ export const plans: Plan[] = [
     tagline: 'Gestão completa do consultório para organizar toda a sua rotina.',
     price: 'R$ 69,90',
     cycle: '/mês',
+    users: '1 profissional + 1 secretária',
     features: [
       'Agenda inteligente, recorrências e detecção de conflitos',
       'Prontuário eletrônico completo, com imagens e resumo clínico',
@@ -47,6 +49,7 @@ export const plans: Plan[] = [
     tagline: 'Tudo do Básico, agora com WhatsApp, Cuty AI e geração de documentos.',
     price: 'R$ 89,90',
     cycle: '/mês',
+    users: '1 profissional + 1 secretária',
     inherits: 'Tudo do Básico, mais:',
     features: [
       'Cuty AI: assistente clínico baseado no prontuário',
@@ -65,6 +68,7 @@ export const plans: Plan[] = [
     tagline: 'Tudo do Premium, agora com transcrição e resumo automático das sessões.',
     price: 'R$ 159,90',
     cycle: '/mês',
+    users: '1 profissional + 1 secretária',
     inherits: 'Tudo do Premium, mais:',
     features: [
       'Transcrição de consultas e teleconsulta, com captura de áudio',
@@ -80,6 +84,7 @@ export const plans: Plan[] = [
     tagline: 'Para clínicas, redes e grupos que precisam crescer com gestão.',
     price: 'Sob consulta',
     cycle: '',
+    users: 'Usuários sob demanda',
     inherits: 'Tudo do Plus, mais:',
     features: [
       'Financeiro completo: dashboard, caixa, faturas, checkout e metas de receita',
