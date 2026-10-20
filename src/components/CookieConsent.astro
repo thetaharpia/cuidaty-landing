@@ -114,7 +114,15 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
             document.cookie = KEY + '=' + value + '; path=/; max-age=31536000; SameSite=Lax' + domain + secure;
           }
 
-          if (!readConsent()) banner.classList.remove('hidden');
+          // Só mostra depois das fontes web: se aparecer antes, a troca de fonte muda a quebra do texto e a
+          // altura do aviso (preso no rodapé), e o PageSpeed mobile conta isso como CLS (~0,10).
+          function show() {
+            banner.classList.remove('hidden');
+          }
+          if (!readConsent()) {
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(show, show);
+            else show();
+          }
 
           function close() {
             banner.classList.add('hidden');
