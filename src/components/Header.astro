@@ -1,4 +1,5 @@
 ---
+import logoWritten from '../assets/logo-written.webp';
 const isBlog = Astro.url.pathname.startsWith('/blog');
 ---
 
@@ -11,7 +12,7 @@ const isBlog = Astro.url.pathname.startsWith('/blog');
     >
       <a href="/" class="flex items-center gap-2" aria-label="Cuidaty">
         <img
-          src="/logo-written.svg"
+          src={logoWritten.src}
           alt="Cuidaty"
           width="314"
           height="82"
