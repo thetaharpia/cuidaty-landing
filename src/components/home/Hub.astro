@@ -1,26 +1,21 @@
 ---
-// Integrações: a Cuidaty no centro (logo), ligada ao que a pessoa já usa.
+// Integrações: a Cuidaty no centro (logo), ligada às ferramentas do dia a dia.
+// Convênios ficam na seção própria (Convenios.astro).
 // Animação: logo respira, ondas saem do centro, linhas se desenham, selos entram.
 const tiles = [
-  { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 20, y: 18, label: true, w: 28, h: 28 },
+  { name: 'WhatsApp', icon: '/integracoes/whatsapp.svg', x: 27, y: 24 },
+  { name: 'Google Agenda', icon: '/integracoes/google-agenda.svg', x: 73, y: 76 },
+];
+const uses = [
+  {
+    name: 'WhatsApp',
+    icon: '/integracoes/whatsapp.svg',
+    text: 'Confirmação, lembrete e conversa com o paciente saem da Cuidaty, sem copiar e colar. Menos falta, nenhuma mensagem esquecida.',
+  },
   {
     name: 'Google Agenda',
     icon: '/integracoes/google-agenda.svg',
-    x: 80,
-    y: 18,
-    label: true,
-    w: 28,
-    h: 28,
-  },
-  { name: 'Geap Saúde', icon: '/convenios/geap.webp', x: 20, y: 82, label: false, w: 488, h: 150 },
-  {
-    name: 'SulAmérica Saúde',
-    icon: '/convenios/sulamerica.webp',
-    x: 80,
-    y: 82,
-    label: false,
-    w: 417,
-    h: 143,
+    text: 'Sessões sincronizadas com o Google Agenda. Compromisso pessoal e atendimento no mesmo lugar, sem horário duplicado.',
   },
 ];
 ---
@@ -33,95 +28,106 @@ const tiles = [
           Conecta com o que você já usa.
         </h2>
         <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
-          O paciente continua no WhatsApp. Os convênios continuam nas operadoras. A Cuidaty liga
-          tudo.
+          O paciente continua no WhatsApp. Sua agenda continua no Google. A Cuidaty liga tudo.
         </p>
       </div>
 
-      <div
-        class="relative mx-auto mt-12 aspect-[1/1] w-full max-w-3xl sm:aspect-[9/5]"
-        data-demo
-        role="img"
-        aria-label="A Cuidaty no centro, conectada ao WhatsApp, ao Google Agenda, à Geap e à SulAmérica"
-      >
-        <svg
-          class="absolute inset-0 size-full"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
+      <div class="mt-12 grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <div
+          class="relative mx-auto aspect-[1/1] w-full max-w-xl sm:aspect-[9/6]"
+          data-demo
+          role="img"
+          aria-label="A Cuidaty no centro, conectada ao WhatsApp e ao Google Agenda"
         >
-          {
-            tiles.map((t, i) => (
-              <line
-                class="hub-line"
-                x1={t.x}
-                y1={t.y}
-                x2="50"
-                y2="50"
-                pathLength="1"
-                style={`--d:${0.6 + i * 0.25}s`}
-              />
-            ))
-          }
-        </svg>
-
-        <span class="hub-ring" style="--r:0"></span>
-        <span class="hub-ring" style="--r:1"></span>
-
-        <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div
-            class="hub-core grid size-[8.25rem] place-items-center rounded-full border border-border bg-white shadow-soft"
+          <svg
+            class="absolute inset-0 size-full"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
           >
-            <img
-              src="/logo-mark.png"
-              alt=""
-              width="62"
-              height="81"
-              loading="lazy"
-              class="h-[5rem] w-auto"
-            />
-          </div>
-        </div>
+            {
+              tiles.map((t, i) => (
+                <line
+                  class="hub-line"
+                  x1={t.x}
+                  y1={t.y}
+                  x2="50"
+                  y2="50"
+                  pathLength="1"
+                  style={`--d:${0.6 + i * 0.25}s`}
+                />
+              ))
+            }
+          </svg>
 
-        <ul>
-          {
-            tiles.map((t, i) => (
-              <li
-                class="absolute -translate-x-1/2 -translate-y-1/2"
-                style={`left:${t.x}%;top:${t.y}%`}
-              >
-                <div
-                  class="a a-pop flex items-center gap-2.5 rounded-2xl border border-border bg-white px-3.5 py-2.5 shadow-soft sm:px-5 sm:py-3"
-                  style={`--d:${1.2 + i * 0.25}s`}
+          <span class="hub-ring" style="--r:0"></span>
+          <span class="hub-ring" style="--r:1"></span>
+
+          <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div
+              class="hub-core grid size-[8.25rem] place-items-center rounded-full border border-border bg-white shadow-soft"
+            >
+              <img
+                src="/logo-mark.png"
+                alt=""
+                width="62"
+                height="81"
+                loading="lazy"
+                class="h-[5rem] w-auto"
+              />
+            </div>
+          </div>
+
+          <ul>
+            {
+              tiles.map((t, i) => (
+                <li
+                  class="absolute w-max -translate-x-1/2 -translate-y-1/2"
+                  style={`left:${t.x}%;top:${t.y}%`}
                 >
-                  <img
-                    src={t.icon}
-                    alt={t.label ? '' : t.name}
-                    width={t.w}
-                    height={t.h}
-                    loading="lazy"
-                    class={
-                      t.label
-                        ? 'size-6 sm:size-7'
-                        : 'h-8 w-auto max-w-[6.5rem] sm:h-10 sm:max-w-[8rem]'
-                    }
-                  />
-                  {t.label && (
+                  <div
+                    class="a a-pop flex items-center gap-2.5 rounded-2xl border border-border bg-white px-3.5 py-2.5 shadow-soft sm:px-5 sm:py-3"
+                    style={`--d:${1.2 + i * 0.25}s`}
+                  >
+                    <img
+                      src={t.icon}
+                      alt=""
+                      width="28"
+                      height="28"
+                      loading="lazy"
+                      class="size-6 sm:size-7"
+                    />
                     <span class="whitespace-nowrap text-xs font-semibold text-cuidaty-dark sm:text-sm">
                       {t.name}
                     </span>
-                  )}
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <ul class="divide-y divide-border border-y border-border">
+          {
+            uses.map((u) => (
+              <li class="flex gap-4 py-6">
+                <img
+                  src={u.icon}
+                  alt=""
+                  width="28"
+                  height="28"
+                  loading="lazy"
+                  class="mt-0.5 size-7 shrink-0"
+                />
+                <div>
+                  <h3 class="font-sans text-lg font-semibold text-cuidaty-dark">{u.name}</h3>
+                  <p class="mt-1.5 leading-relaxed text-cuidaty-dark/70">{u.text}</p>
                 </div>
               </li>
             ))
           }
         </ul>
       </div>
-
-      <p class="mt-8 text-center text-sm text-cuidaty-dark/70">
-        Integração com convênios disponível no plano Clínicas e Grupos. Novas operadoras entram
-        conforme a necessidade da sua clínica.
-      </p>
     </div>
   </div>
 </section>

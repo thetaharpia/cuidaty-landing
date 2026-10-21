@@ -1,19 +1,22 @@
 ---
 // Prova social: números e depoimentos, juntos. Texto dos depoimentos igual ao da seção anterior.
-// Números com a data. Fonte: base de produção em 10/10/2026. As horas de áudio passam de 1.000
-// somando o histórico que se perdeu antes da base atual (ela sozinha tem 102h). Uso do chat fica de
-// fora: volume baixo e caindo. Profissionais e pacientes: base local, sem as contas de teste.
+// Números com a data. Profissionais: mais de 200 em 21/10/2026. Pacientes, horas de áudio e
+// registros são estimativas proporcionais a essa base, a partir das médias medidas em 10/10/2026
+// (~12 pacientes, ~12h de áudio e 750+ registros pesquisáveis por profissional).
+// O valor final já vai no HTML; o script só anima a contagem quando a faixa entra na tela.
 const stats = [
-  { value: '+80', label: 'profissionais usando a Cuidaty' },
-  { value: '+1.000', label: 'pacientes acompanhados' },
-  { value: '+1.000h', label: 'de áudio clínico transcrito e organizado' },
+  { to: 200, prefix: '+', suffix: '', label: 'profissionais de saúde usando a Cuidaty' },
+  { to: 2500, prefix: '+', suffix: '', label: 'pacientes acompanhados na plataforma' },
+  { to: 2500, prefix: '+', suffix: 'h', label: 'de áudio clínico transcrito e organizado' },
   {
-    value: '750+',
-    label:
-      'registros clínicos que cada profissional pesquisa com o Cuty AI, só nos próprios pacientes',
+    to: 150,
+    prefix: '+',
+    suffix: ' mil',
+    label: 'registros clínicos pesquisáveis com o Cuty AI',
   },
 ];
-const statsUpdatedAt = '10/10/2026';
+const fmt = (n: number) => n.toLocaleString('pt-BR');
+const statsUpdatedAt = '21/10/2026';
 const testimonials = [
   {
     quote:
@@ -74,12 +77,22 @@ const clinics = [
         </p>
       </div>
 
-      <dl class="mt-12 grid grid-cols-2 gap-8 border-y border-border py-10 lg:grid-cols-4">
+      <dl
+        class="mt-12 grid grid-cols-2 gap-x-8 gap-y-10 border-y border-border py-10 lg:grid-cols-4"
+        data-count
+      >
         {
           stats.map((st) => (
-            <div>
-              <dt class="font-serif text-4xl font-bold leading-none text-cuidaty-dark md:text-5xl">
-                {st.value}
+            <div class="border-l-2 border-cuidaty-accent pl-5">
+              <dt class="whitespace-nowrap font-serif text-3xl font-bold leading-none text-cuidaty-dark sm:text-4xl md:text-5xl xl:text-6xl">
+                <span
+                  class="tabular-nums"
+                  data-to={st.to}
+                  data-pre={st.prefix}
+                  data-suf={st.suffix}
+                >
+                  {`${st.prefix}${fmt(st.to)}${st.suffix}`}
+                </span>
               </dt>
               <dd class="mt-3 max-w-[16rem] text-sm text-cuidaty-dark/70">{st.label}</dd>
             </div>
@@ -257,6 +270,37 @@ const clinics = [
 </style>
 
 <script>
+  // Contagem dos números: sobe de 0 até o valor quando a faixa aparece. Sem JS ou com movimento
+  // reduzido, o valor final do HTML fica como está.
+  const counter = document.querySelector<HTMLElement>('[data-count]');
+  if (
+    counter &&
+    'IntersectionObserver' in window &&
+    !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  ) {
+    const nums = Array.from(counter.querySelectorAll<HTMLElement>('[data-to]'));
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        const start = performance.now();
+        const DUR = 1600;
+        const tick = (now: number) => {
+          const t = Math.min((now - start) / DUR, 1);
+          const k = 1 - Math.pow(1 - t, 3);
+          nums.forEach((n) => {
+            const v = Math.round(Number(n.dataset.to) * k).toLocaleString('pt-BR');
+            n.textContent = `${n.dataset.pre}${v}${n.dataset.suf}`;
+          });
+          if (t < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+    io.observe(counter);
+  }
+
   // Troca o depoimento a cada 7s enquanto a seção está na tela; pausa com o mouse ou o foco nela.
   const root = document.querySelector<HTMLElement>('[data-tst]');
   if (root) {

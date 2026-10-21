@@ -1,0 +1,140 @@
+---
+// Convênios: integração com operadoras, separada das integrações do dia a dia (Hub.astro).
+// Disponível só no plano Clínicas e Grupos, por isso o CTA vai para a proposta.
+// Animação: cada operadora entra e a guia dela aparece conferida.
+import { PROPOSAL_URL } from '../../lib/plans';
+
+const operators = [
+  { name: 'Geap Saúde', logo: '/convenios/geap.webp', w: 488, h: 150, guide: 'Guia emitida' },
+  {
+    name: 'SulAmérica Saúde',
+    logo: '/convenios/sulamerica.webp',
+    w: 417,
+    h: 143,
+    guide: 'Guia emitida',
+  },
+];
+const gains = [
+  {
+    title: 'Guia no formato da operadora',
+    text: 'Emitida dentro da Cuidaty com os campos que cada convênio exige, sem portal paralelo.',
+  },
+  {
+    title: 'Conferência antes do envio',
+    text: 'Senha, validade e quantidade de sessões checadas antes da guia sair. Erro de preenchimento não vira glosa.',
+  },
+  {
+    title: 'Glosa mapeada',
+    text: 'O que voltou aparece por motivo e por operadora. Você sabe onde o dinheiro está travando.',
+  },
+];
+---
+
+<section id="convenios" class="scroll-mt-24 bg-beige py-20 md:py-28">
+  <div class="container mx-auto px-5 md:px-8">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div>
+        <p class="kicker">Convênios</p>
+        <h2 class="mt-4 text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
+          Atenda convênio sem perder receita em glosa.
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
+          A Cuidaty integra com a Geap e com a SulAmérica. A guia sai certa da primeira vez e o
+          faturamento do convênio para de depender de planilha.
+        </p>
+
+        <ul class="mt-8 space-y-5">
+          {
+            gains.map((g) => (
+              <li class="flex gap-3">
+                <svg
+                  class="mt-1 size-5 shrink-0 text-primary-ink"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m5 12 5 5 9-10"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <div>
+                  <h3 class="font-sans text-base font-semibold text-cuidaty-dark">{g.title}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-cuidaty-dark/70">{g.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+          <a
+            href={PROPOSAL_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-solid"
+            data-ga-event="contact_click"
+            data-ga-location="convenios">Falar com a gente</a
+          >
+          <p class="text-sm text-cuidaty-dark/70">No plano Clínicas e Grupos.</p>
+        </div>
+      </div>
+
+      <div data-demo class="space-y-5">
+        {
+          operators.map((o, i) => (
+            <div
+              class="a rounded-2xl border border-border bg-white p-6 shadow-soft sm:p-8"
+              style={`--d:${0.2 + i * 0.45}s`}
+            >
+              <div class="flex items-center justify-between gap-4">
+                <img
+                  src={o.logo}
+                  alt={o.name}
+                  width={o.w}
+                  height={o.h}
+                  loading="lazy"
+                  class="h-10 w-auto max-w-[9rem] object-contain sm:h-12 sm:max-w-[11rem]"
+                />
+                <span
+                  class="a a-pop inline-flex items-center gap-1.5 rounded-full bg-teal-light px-3 py-1 text-xs font-semibold text-cuidaty-dark"
+                  style={`--d:${0.9 + i * 0.45}s`}
+                >
+                  <svg class="size-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="m5 12 5 5 9-10"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  Conferida
+                </span>
+              </div>
+              <div class="mt-6 border-t border-border pt-5 text-sm">
+                <div class="flex justify-between text-cuidaty-dark/70">
+                  <span>{o.guide}</span>
+                  <span>Senha válida</span>
+                </div>
+                <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-beige-dark">
+                  <div
+                    class="a a-fill h-full origin-left rounded-full bg-cuidaty-accent"
+                    style={`--d:${0.5 + i * 0.45}s`}
+                  />
+                </div>
+              </div>
+            </div>
+          ))
+        }
+        <p class="text-center text-sm text-cuidaty-dark/70">
+          Novas operadoras entram conforme a necessidade da sua clínica.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
