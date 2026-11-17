@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { COMPANY_CNPJ, COMPANY_LEGAL_NAME } from '../lib/contact';
 
 const lastUpdated = '20 de junho de 2026';
 
@@ -243,6 +244,14 @@ const num = (i: number) => String(i + 1).padStart(2, '0');
                   >
                     (38) 98422-1855
                   </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-foreground/45">
+                  Empresa
+                </dt>
+                <dd class="mt-1.5 font-medium text-cuidaty-dark">
+                  {COMPANY_LEGAL_NAME}<br />CNPJ {COMPANY_CNPJ}
                 </dd>
               </div>
             </dl>

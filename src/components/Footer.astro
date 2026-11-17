@@ -1,5 +1,6 @@
 ---
 import logoWritten from '../assets/logo-written.webp';
+import { COMPANY_CNPJ, COMPANY_LEGAL_NAME } from '../lib/contact';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -314,7 +315,10 @@ const currentYear = new Date().getFullYear();
           </svg>
         </a>
       </div>
-      <p>&copy; {currentYear} Cuidaty. Todos os direitos reservados.</p>
+      <p>
+        &copy; {currentYear} Cuidaty. Todos os direitos reservados.
+        <span class="block sm:inline">{COMPANY_LEGAL_NAME} · CNPJ {COMPANY_CNPJ}</span>
+      </p>
     </div>
   </div>
 </footer>

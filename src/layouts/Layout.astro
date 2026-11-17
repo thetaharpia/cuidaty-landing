@@ -8,6 +8,7 @@ import '../styles/global.css';
 import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
 import MobileCTABar from '../components/MobileCTABar.astro';
 import CookieConsent from '../components/CookieConsent.astro';
+import { COMPANY_CNPJ, COMPANY_LEGAL_NAME } from '../lib/contact';
 import { healthFeatureList, homeDescription, homeFaqs, homeKeywords, homeTitle } from '../lib/seo';
 
 interface Props {
@@ -104,6 +105,8 @@ const organizationData = {
   '@type': 'Organization',
   '@id': `${siteUrl}#organization`,
   name: 'Cuidaty',
+  legalName: COMPANY_LEGAL_NAME,
+  taxID: COMPANY_CNPJ,
   url: siteUrl,
   logo: {
     '@type': 'ImageObject',
