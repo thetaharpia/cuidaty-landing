@@ -43,39 +43,63 @@ const midas = {
     'Mensalidade e comissão sobre as vendas novas. Não há tabela pública: os valores saem depois do diagnóstico.',
 };
 
-// Caminho do paciente, do anúncio ao financeiro, e qual produto cuida de cada etapa.
-const stages = [
+// Caminho do paciente, do anúncio ao financeiro. Cada grupo é um produto e
+// `at` é a posição da etapa na linha (0 a 5), usada para sincronizar a animação.
+const journey = [
   {
-    stage: 'Anúncio',
     product: 'MIDAS',
-    text: 'Campanhas no Meta e no Google, avaliadas pela venda e não pelo clique.',
+    caption: 'até o paciente fechar',
+    stages: [
+      {
+        at: 0,
+        stage: 'Anúncio',
+        text: 'Campanhas no Meta e no Google, avaliadas pela venda que trazem.',
+        icon: 'M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1zM15 9a3 3 0 0 1 0 6M18 6a7 7 0 0 1 0 12',
+      },
+      {
+        at: 1,
+        stage: 'Primeiro contato',
+        text: 'Roteiro de WhatsApp e telefone para quem atende, com meta individual.',
+        icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
+      },
+      {
+        at: 2,
+        stage: 'Orçamento',
+        text: 'Cada orçamento parado tem um responsável e uma data para o retorno.',
+        icon: 'M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h4',
+      },
+    ],
   },
   {
-    stage: 'Primeiro contato',
-    product: 'MIDAS',
-    text: 'Roteiro de WhatsApp e telefone para quem atende, com meta individual.',
-  },
-  {
-    stage: 'Orçamento',
-    product: 'MIDAS',
-    text: 'Cada orçamento parado tem um responsável e uma data para o retorno.',
-  },
-  {
-    stage: 'Agendamento',
     product: 'Cuidaty',
-    text: 'Agenda online, com confirmação e lembrete enviados no WhatsApp.',
+    caption: 'do agendamento em diante',
+    stages: [
+      {
+        at: 3,
+        stage: 'Agendamento',
+        text: 'Agenda online, com confirmação e lembrete enviados no WhatsApp.',
+        icon: 'M4 6h16v15H4zM4 10h16M8 3v4M16 3v4M9 15l2 2 4-4',
+      },
+      {
+        at: 4,
+        stage: 'Consulta',
+        text: 'Prontuário eletrônico e transcrição da consulta com IA.',
+        icon: 'M9 4h6v3H9zM7 5H5v16h14V5h-2M9 12h6M9 16h4',
+      },
+      {
+        at: 5,
+        stage: 'Financeiro',
+        text: 'Faturas, caixa e guias de convênio conferidas antes do envio.',
+        icon: 'M12 3v18M16 7.5c0-1.7-1.8-2.5-4-2.5s-4 1-4 2.8c0 4 8 2 8 6 0 1.8-1.8 2.7-4 2.7s-4-1-4-2.7',
+      },
+    ],
   },
-  {
-    stage: 'Consulta',
-    product: 'Cuidaty',
-    text: 'Prontuário eletrônico e transcrição da consulta com IA.',
-  },
-  {
-    stage: 'Financeiro',
-    product: 'Cuidaty',
-    text: 'Faturas, caixa e guias de convênio conferidas antes do envio.',
-  },
-];
+] as const;
+
+// A linha leva LINE_SECONDS para ir da primeira à última etapa: cada etapa
+// aparece quando a linha chega nela.
+const LINE_SECONDS = 2.4;
+const stageDelay = (at: number) => `${(0.2 + (at / 5) * LINE_SECONDS).toFixed(2)}s`;
 
 const faqs = [
   {
@@ -154,208 +178,751 @@ const structuredData = [
   keywords="Cuidaty e MIDAS, MIDAS Cuidaty, gestão comercial para clínicas, sistema de gestão para clínicas, como vender mais na clínica, CRM para clínicas, software para clínicas"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(structuredData)} />
+  {
+    /* Liga o motion antes da primeira pintura (sem piscar) e revela cada bloco
+       quando ele entra na tela. Sem JS ou com movimento reduzido, nada fica oculto. */
+  }
+  <script is:inline slot="head">
+    (function () {
+      if (!('IntersectionObserver' in window)) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.documentElement.classList.add('cm-js');
+      document.addEventListener('DOMContentLoaded', function () {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-in');
+              io.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.2, rootMargin: '0px 0px -6% 0px' }
+        );
+        document.querySelectorAll('[data-cm]').forEach(function (el) {
+          io.observe(el);
+        });
+      });
+    })();
+  </script>
 
   <Header />
   <main class="bg-white">
-    <header class="border-b border-border">
+    <!-- 1. Abertura: as duas marcas e uma única pergunta para o visitante se localizar -->
+    <header>
       <div class="container mx-auto px-5 md:px-8">
-        <div class="mx-auto max-w-7xl pb-14 pt-32 md:pb-20 md:pt-40">
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-            <img
-              src={logoWritten.src}
-              alt="Cuidaty"
-              width="314"
-              height="82"
-              class="h-10 w-auto md:h-12"
-              loading="eager"
-            />
-            <span class="h-8 w-px bg-cuidaty-dark/20" aria-hidden="true"></span>
-            <MidasLogo size={44} id="midas-top" />
+        <div
+          class="mx-auto grid max-w-7xl gap-12 pb-16 pt-32 md:pt-40 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-16 lg:pb-24"
+        >
+          <div>
+            <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <img
+                src={logoWritten.src}
+                alt="Cuidaty"
+                width="314"
+                height="82"
+                class="cm-load cm-load-left h-10 w-auto md:h-12"
+                loading="eager"
+              />
+              <span
+                class="cm-load cm-load-grow h-8 w-px bg-cuidaty-dark/20"
+                style="--d:0.25s"
+                aria-hidden="true"></span>
+              <MidasLogo size={44} id="midas-top" class="cm-load cm-load-right" />
+            </div>
+            <h1
+              class="mt-10 text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl lg:text-[2.4rem] xl:text-5xl"
+            >
+              <span class="cm-load block" style="--d:0.15s">Cuidaty organiza a clínica.</span>
+              <span class="cm-load block" style="--d:0.3s">MIDAS cuida das vendas.</span>
+            </h1>
+            <p
+              class="cm-load mt-6 max-w-xl text-lg leading-relaxed text-cuidaty-dark/70"
+              style="--d:0.45s"
+            >
+              São dois produtos do mesmo time: um sistema de gestão para a clínica e um serviço de
+              gestão comercial. Dá para contratar um, o outro ou os dois.
+            </p>
           </div>
-          <h1
-            class="mt-10 max-w-4xl text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-6xl"
-          >
-            Um sistema para atender. Um time para vender.
-          </h1>
-          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-cuidaty-dark/70">
-            A Cuidaty e o MIDAS são dois produtos do mesmo time. A Cuidaty é o sistema de gestão da
-            clínica, da agenda ao financeiro. O MIDAS é a gestão comercial, do anúncio ao orçamento
-            fechado. Dá para contratar um, o outro ou os dois.
-          </p>
+
+          <nav class="cm-load" style="--d:0.6s" aria-labelledby="escolha-title">
+            <p id="escolha-title" class="text-[0.95rem] font-semibold text-cuidaty-dark">
+              O que a clínica precisa agora?
+            </p>
+            <a
+              href="#cuidaty"
+              class="cm-choice mt-4 flex items-center justify-between gap-4 rounded-2xl bg-[#e3edf4] p-5 sm:p-6"
+            >
+              <span>
+                <span class="block font-serif text-xl font-extrabold text-cuidaty-dark">
+                  Organizar o atendimento
+                </span>
+                <span class="mt-1 block text-sm text-cuidaty-dark/70">
+                  Cuidaty: agenda, prontuário e financeiro
+                </span>
+              </span>
+              <span class="cm-choice-arrow text-2xl text-primary-ink" aria-hidden="true">↓</span>
+            </a>
+            <a
+              href="#midas"
+              class="cm-choice mt-3 flex items-center justify-between gap-4 rounded-2xl bg-[#fbf0d2] p-5 sm:p-6"
+            >
+              <span>
+                <span class="block font-serif text-xl font-extrabold text-cuidaty-dark">
+                  Vender mais
+                </span>
+                <span class="mt-1 block text-sm text-cuidaty-dark/70">
+                  MIDAS: atendimento comercial, orçamentos e anúncios
+                </span>
+              </span>
+              <span class="cm-choice-arrow text-2xl text-[#8f5d0d]" aria-hidden="true">↓</span>
+            </a>
+          </nav>
         </div>
       </div>
     </header>
 
-    <!-- Os dois produtos lado a lado -->
-    <section aria-label="Os dois produtos">
-      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
-        <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
-          <article class="flex flex-col rounded-2xl bg-[#e3edf4] p-7 sm:p-10">
-            <img
-              src={logoWritten.src}
-              alt=""
-              width="314"
-              height="82"
-              class="h-10 w-auto self-start"
-              loading="lazy"
-            />
-            <p class="mt-8 text-[0.95rem] font-semibold text-primary-ink">Sistema de gestão</p>
-            <h2 class="mt-2 text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl">
-              Cuidaty: a rotina da clínica em um lugar só
-            </h2>
-            <p class="mt-4 leading-relaxed text-cuidaty-dark/70">
-              Software que você mesmo usa. A consulta gravada vira prontuário, a agenda confirma o
-              paciente sozinha e o financeiro para de depender de planilha.
-            </p>
-            <ul class="mt-6 border-b border-cuidaty-dark/15">
-              {
-                cuidaty.does.map((item) => (
-                  <li class="border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark">
-                    {item}
-                  </li>
-                ))
-              }
-            </ul>
-            <dl class="mt-6 space-y-4 text-sm">
-              <div>
-                <dt class="font-semibold text-cuidaty-dark">Para quem</dt>
-                <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{cuidaty.audience}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold text-cuidaty-dark">Quanto custa</dt>
-                <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{cuidaty.pricing}</dd>
-              </div>
-            </dl>
-            <div class="mt-auto flex flex-wrap items-center gap-x-6 gap-y-4 pt-8">
-              <a
-                href={REGISTER_URL}
-                class="btn-solid"
-                data-ga-event="generate_lead"
-                data-ga-location="cuidaty_e_midas">Começar grátis</a
-              >
-              <a href="/" class="font-semibold text-primary-ink underline underline-offset-4"
-                >Ver a Cuidaty</a
-              >
-            </div>
-          </article>
-
-          <article class="flex flex-col rounded-2xl bg-[#fdf8ec] p-7 sm:p-10">
-            <MidasLogo size={40} id="midas-card" class="self-start" />
-            <p class="mt-8 text-[0.95rem] font-semibold text-[#8f5d0d]">Gestão comercial</p>
-            <h2 class="mt-2 text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl">
-              MIDAS: um time cuidando das vendas da clínica
-            </h2>
-            <p class="mt-4 leading-relaxed text-cuidaty-dark/70">
-              Serviço, não só software. Um time nosso trabalha dentro da clínica no dia a dia: quem
-              responde o WhatsApp, quando ligar para o orçamento parado e onde investir em anúncio.
-            </p>
-            <ul class="mt-6 border-b border-cuidaty-dark/15">
-              {
-                midas.does.map((item) => (
-                  <li class="border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark">
-                    {item}
-                  </li>
-                ))
-              }
-            </ul>
-            <dl class="mt-6 space-y-4 text-sm">
-              <div>
-                <dt class="font-semibold text-cuidaty-dark">Para quem</dt>
-                <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{midas.audience}</dd>
-              </div>
-              <div>
-                <dt class="font-semibold text-cuidaty-dark">Quanto custa</dt>
-                <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{midas.pricing}</dd>
-              </div>
-            </dl>
-            <div class="mt-auto flex flex-wrap items-center gap-x-6 gap-y-4 pt-8">
-              <a
-                href={MIDAS_URL}
-                target="_blank"
-                rel="noopener"
-                class="btn-solid"
-                data-ga-event="midas_click"
-                data-ga-location="cuidaty_e_midas"
-                >Conhecer o MIDAS <span class="ml-2" aria-hidden="true">→</span></a
-              >
-              <a
-                href={MIDAS_WA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="font-semibold text-primary-ink underline underline-offset-4"
-                data-ga-event="contact_click"
-                data-ga-location="cuidaty_e_midas_whatsapp">Pedir diagnóstico</a
-              >
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quem cuida de quê -->
-    <section class="bg-beige" aria-labelledby="etapas-title">
-      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
+    <!-- 2. O caminho do paciente: uma linha só, metade de cada produto -->
+    <section aria-labelledby="etapas-title">
+      <div class="container mx-auto px-5 pb-16 md:px-8 md:pb-24">
         <div class="mx-auto max-w-7xl">
-          <div class="max-w-2xl">
+          <div class="max-w-2xl" data-cm>
             <h2
               id="etapas-title"
-              class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl"
+              class="cm-a text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
             >
               Do anúncio ao financeiro, quem cuida de quê
             </h2>
-            <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
-              O MIDAS fica com o caminho até o paciente fechar. A Cuidaty assume do agendamento em
-              diante.
+            <p class="cm-a mt-5 text-lg leading-relaxed text-cuidaty-dark/70" style="--d:0.1s">
+              Acompanhe um paciente pela clínica. O MIDAS fica com o caminho até ele fechar. A
+              Cuidaty assume do agendamento em diante.
             </p>
           </div>
-          <ol class="mt-12 border-b border-cuidaty-dark/15">
+
+          <div class="mt-12 grid lg:grid-cols-2">
             {
-              stages.map((s, i) => (
-                <li class="grid gap-x-8 gap-y-1 border-t border-cuidaty-dark/15 py-5 md:grid-cols-[3rem_14rem_8rem_1fr] md:items-baseline">
-                  <span class="font-serif text-lg font-extrabold text-cuidaty-dark/40">
-                    {i + 1}
-                  </span>
-                  <h3 class="font-sans text-lg font-semibold text-cuidaty-dark">{s.stage}</h3>
-                  <span
+              journey.map((group, g) => (
+                <>
+                  {g === 1 && (
+                    <p class="cm-handoff-row hidden" data-cm>
+                      <span class="cm-a cm-a-pop cm-handoff">
+                        <svg class="size-3.5" viewBox="0 0 24 24" aria-hidden="true">
+                          <path
+                            d="m5 12 5 5 9-10"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                        Paciente fechou
+                      </span>
+                    </p>
+                  )}
+                  <div
                     class:list={[
-                      'text-sm font-semibold',
-                      s.product === 'MIDAS' ? 'text-[#8f5d0d]' : 'text-primary-ink',
+                      'cm-group rounded-2xl px-6 py-8 lg:px-0 lg:py-10',
+                      g === 0
+                        ? 'cm-group--midas bg-[#fdf8ec] lg:rounded-r-none'
+                        : 'cm-group--cuidaty bg-[#e3edf4] lg:rounded-l-none',
                     ]}
                   >
-                    {s.product}
-                  </span>
-                  <p class="leading-relaxed text-cuidaty-dark/70">{s.text}</p>
-                </li>
+                    <div class="flex flex-wrap items-center gap-x-3 gap-y-2 lg:px-8">
+                      {g === 0 ? (
+                        <MidasLogo size={28} id="midas-journey" />
+                      ) : (
+                        <img
+                          src={logoWritten.src}
+                          alt="Cuidaty"
+                          width="314"
+                          height="82"
+                          class="h-7 w-auto"
+                          loading="lazy"
+                        />
+                      )}
+                      <span class="text-sm text-cuidaty-dark/70">{group.caption}</span>
+                    </div>
+
+                    <div class="cm-rail relative mt-8" data-cm>
+                      <span
+                        class="cm-seg hidden lg:block"
+                        style={`--d:${stageDelay(group.stages[0].at - (g === 1 ? 0.5 : 0))}`}
+                        aria-hidden="true"
+                      >
+                        <span class="cm-seg-fill" />
+                        <i class="cm-dot" />
+                      </span>
+                      {g === 1 && (
+                        <span
+                          class="cm-handoff cm-handoff--line cm-a cm-a-pop"
+                          style={`--d:${stageDelay(2.5)}`}
+                          aria-hidden="true"
+                        >
+                          <svg class="size-3.5" viewBox="0 0 24 24">
+                            <path
+                              d="m5 12 5 5 9-10"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                          Fechou
+                        </span>
+                      )}
+                      <ol class="relative grid lg:grid-cols-3" start={group.stages[0].at + 1}>
+                        {group.stages.map((s) => (
+                          <li class="cm-stage" style={`--d:${stageDelay(s.at)}`} data-cm>
+                            <span class="cm-node cm-a cm-a-pop">
+                              <svg class="size-6" viewBox="0 0 24 24" aria-hidden="true">
+                                <path
+                                  d={s.icon}
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="1.8"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </svg>
+                            </span>
+                            <div class="cm-a cm-stage-text">
+                              <p class="text-xs font-semibold text-cuidaty-dark/50">
+                                Etapa {s.at + 1}
+                              </p>
+                              <h3 class="mt-1 font-sans text-lg font-semibold text-cuidaty-dark">
+                                {s.stage}
+                              </h3>
+                              <p class="mt-1.5 text-sm leading-relaxed text-cuidaty-dark/70">
+                                {s.text}
+                              </p>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  </div>
+                </>
               ))
             }
-          </ol>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Perguntas -->
-    <section aria-labelledby="duvidas-title">
+    <!-- 3. Os dois produtos lado a lado -->
+    <section class="border-t border-border" aria-labelledby="produtos-title">
+      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
+        <div class="mx-auto max-w-7xl">
+          <h2
+            id="produtos-title"
+            class="max-w-2xl text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
+          >
+            O que cada um entrega
+          </h2>
+          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+            <article
+              id="cuidaty"
+              class="flex scroll-mt-28 flex-col rounded-2xl bg-[#e3edf4] p-7 sm:p-10"
+              data-cm
+            >
+              <img
+                src={logoWritten.src}
+                alt=""
+                width="314"
+                height="82"
+                class="cm-a h-10 w-auto self-start"
+                loading="lazy"
+              />
+              <p class="cm-a mt-8 text-[0.95rem] font-semibold text-primary-ink" style="--d:0.05s">
+                Sistema de gestão
+              </p>
+              <h3
+                class="cm-a mt-2 text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
+                style="--d:0.1s"
+              >
+                Cuidaty: a rotina da clínica em um lugar só
+              </h3>
+              <p class="cm-a mt-4 leading-relaxed text-cuidaty-dark/70" style="--d:0.15s">
+                É um software, usado pela própria equipe da clínica. A consulta gravada vira
+                prontuário e a agenda confirma o paciente pelo WhatsApp.
+              </p>
+              <ul class="mt-6 border-b border-cuidaty-dark/15">
+                {
+                  cuidaty.does.map((item, i) => (
+                    <li
+                      class="cm-a border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark"
+                      style={`--d:${0.25 + i * 0.08}s`}
+                    >
+                      {item}
+                    </li>
+                  ))
+                }
+              </ul>
+              <dl class="cm-a mt-6 space-y-4 text-sm" style="--d:0.6s">
+                <div>
+                  <dt class="font-semibold text-cuidaty-dark">Para quem</dt>
+                  <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{cuidaty.audience}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-cuidaty-dark">Quanto custa</dt>
+                  <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{cuidaty.pricing}</dd>
+                </div>
+              </dl>
+              <div
+                class="cm-a mt-auto flex flex-wrap items-center gap-x-6 gap-y-4 pt-8"
+                style="--d:0.7s"
+              >
+                <a
+                  href={REGISTER_URL}
+                  class="btn-solid"
+                  data-ga-event="generate_lead"
+                  data-ga-location="cuidaty_e_midas">Começar grátis</a
+                >
+                <a href="/" class="font-semibold text-primary-ink underline underline-offset-4"
+                  >Ver a Cuidaty</a
+                >
+              </div>
+            </article>
+
+            <article
+              id="midas"
+              class="flex scroll-mt-28 flex-col rounded-2xl bg-[#fdf8ec] p-7 sm:p-10"
+              data-cm
+            >
+              <MidasLogo size={40} id="midas-card" class="cm-a self-start" />
+              <p class="cm-a mt-8 text-[0.95rem] font-semibold text-[#8f5d0d]" style="--d:0.05s">
+                Gestão comercial
+              </p>
+              <h3
+                class="cm-a mt-2 text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
+                style="--d:0.1s"
+              >
+                MIDAS: um time cuidando das vendas da clínica
+              </h3>
+              <p class="cm-a mt-4 leading-relaxed text-cuidaty-dark/70" style="--d:0.15s">
+                É um serviço. Um time nosso trabalha dentro da clínica no dia a dia e define quem
+                responde o WhatsApp, quando ligar para o orçamento parado e onde investir em
+                anúncio.
+              </p>
+              <ul class="mt-6 border-b border-cuidaty-dark/15">
+                {
+                  midas.does.map((item, i) => (
+                    <li
+                      class="cm-a border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark"
+                      style={`--d:${0.25 + i * 0.08}s`}
+                    >
+                      {item}
+                    </li>
+                  ))
+                }
+              </ul>
+              <dl class="cm-a mt-6 space-y-4 text-sm" style="--d:0.6s">
+                <div>
+                  <dt class="font-semibold text-cuidaty-dark">Para quem</dt>
+                  <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{midas.audience}</dd>
+                </div>
+                <div>
+                  <dt class="font-semibold text-cuidaty-dark">Quanto custa</dt>
+                  <dd class="mt-1 leading-relaxed text-cuidaty-dark/70">{midas.pricing}</dd>
+                </div>
+              </dl>
+              <div
+                class="cm-a mt-auto flex flex-wrap items-center gap-x-6 gap-y-4 pt-8"
+                style="--d:0.7s"
+              >
+                <a
+                  href={MIDAS_URL}
+                  target="_blank"
+                  rel="noopener"
+                  class="btn-solid cm-go"
+                  data-ga-event="midas_click"
+                  data-ga-location="cuidaty_e_midas"
+                  >Conhecer o MIDAS <span class="cm-go-arrow ml-2" aria-hidden="true">→</span></a
+                >
+                <a
+                  href={MIDAS_WA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-semibold text-primary-ink underline underline-offset-4"
+                  data-ga-event="contact_click"
+                  data-ga-location="cuidaty_e_midas_whatsapp">Pedir diagnóstico</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Perguntas: uma aberta por vez, todas no HTML para o buscador -->
+    <section class="border-t border-border" aria-labelledby="duvidas-title">
       <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
         <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
           <h2
             id="duvidas-title"
-            class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl"
+            class="text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
           >
             Dúvidas sobre os dois
           </h2>
-          <dl class="border-b border-border">
+          <div class="border-b border-border">
             {
-              faqs.map((faq) => (
-                <div class="border-t border-border py-6">
-                  <dt class="font-sans text-lg font-semibold text-cuidaty-dark">{faq.question}</dt>
-                  <dd class="mt-2 leading-relaxed text-cuidaty-dark/70">{faq.answer}</dd>
-                </div>
+              faqs.map((faq, i) => (
+                <details class="cm-faq group border-t border-border" name="cm-faq" open={i === 0}>
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden">
+                    <h3 class="font-sans text-lg font-semibold text-cuidaty-dark">
+                      {faq.question}
+                    </h3>
+                    <span
+                      class="relative size-5 shrink-0 text-primary-ink transition-transform duration-300 group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      <span class="absolute left-0 top-1/2 h-0.5 w-full -translate-y-1/2 bg-current" />
+                      <span class="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-current" />
+                    </span>
+                  </summary>
+                  <p class="max-w-3xl pb-6 leading-relaxed text-cuidaty-dark/70">{faq.answer}</p>
+                </details>
               ))
             }
-          </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Fechamento: a mesma escolha do topo, agora com os botões de ação -->
+    <section class="bg-beige" aria-labelledby="comecar-title">
+      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
+        <div
+          class="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
+          data-cm
+        >
+          <h2
+            id="comecar-title"
+            class="cm-a text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
+          >
+            Por onde a clínica começa?
+          </h2>
+          <div class="cm-a flex flex-wrap gap-3" style="--d:0.12s">
+            <a
+              href={REGISTER_URL}
+              class="btn-solid"
+              data-ga-event="generate_lead"
+              data-ga-location="cuidaty_e_midas_fechamento">Começar grátis na Cuidaty</a
+            >
+            <a
+              href={MIDAS_WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-line"
+              data-ga-event="contact_click"
+              data-ga-location="cuidaty_e_midas_fechamento">Pedir diagnóstico do MIDAS</a
+            >
+          </div>
         </div>
       </div>
     </section>
   </main>
   <Footer />
 </Layout>
+
+<style is:global>
+  /* ── Caminho do paciente ──────────────────────────────────────── */
+  .cm-group--midas {
+    --cm-ink: #8f5d0d;
+    --cm-line: #e9a93a;
+    --cm-node: #fbf0d2;
+  }
+  .cm-group--cuidaty {
+    --cm-ink: #2d6389;
+    --cm-line: #356588;
+    --cm-node: #cfe0ec;
+  }
+  .cm-node {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    width: 3.5rem;
+    height: 3.5rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--cm-line);
+    border-radius: 9999px;
+    background: var(--cm-node);
+    color: var(--cm-ink);
+  }
+  .cm-handoff {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border: 1.5px solid #0c202f;
+    border-radius: 9999px;
+    background: #fff;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #0c202f;
+    white-space: nowrap;
+  }
+
+  /* Celular: etapas empilhadas, com um fio ligando um nó ao seguinte. */
+  @media (max-width: 1023px) {
+    .cm-handoff--line {
+      display: none;
+    }
+    .cm-handoff-row {
+      display: flex;
+      justify-content: center;
+      padding-block: 0.75rem;
+    }
+    .cm-stage {
+      --d: 0s !important;
+      position: relative;
+      display: grid;
+      grid-template-columns: 3.5rem 1fr;
+      gap: 1rem;
+      padding-bottom: 1.75rem;
+    }
+    .cm-stage:last-child {
+      padding-bottom: 0;
+    }
+    .cm-stage:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: calc(1.75rem - 1px);
+      top: 3.5rem;
+      bottom: 0;
+      width: 2px;
+      background: var(--cm-line);
+      opacity: 0.45;
+    }
+    .cm-stage-text {
+      --d: 0.12s !important;
+      padding-top: 0.15rem;
+    }
+  }
+
+  /* Desktop: seis colunas numa linha só. O segmento de cada produto vai do
+     centro da coluna da ponta até a emenda entre os dois painéis. */
+  @media (min-width: 1024px) {
+    .cm-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-inline: 1rem;
+      text-align: center;
+    }
+    .cm-stage-text {
+      margin-top: 1.25rem;
+    }
+    .cm-seg {
+      position: absolute;
+      top: calc(1.75rem - 1.5px);
+      height: 3px;
+      background: color-mix(in srgb, var(--cm-line) 25%, transparent);
+    }
+    .cm-group--midas .cm-seg {
+      left: calc(100% / 6);
+      right: 0;
+    }
+    .cm-group--cuidaty .cm-seg {
+      left: 0;
+      right: calc(100% / 6);
+    }
+    .cm-seg-fill {
+      position: absolute;
+      inset: 0;
+      background: var(--cm-line);
+      transform-origin: left;
+    }
+    .cm-dot {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0.75rem;
+      height: 0.75rem;
+      margin: -0.375rem 0 0 -0.375rem;
+      border-radius: 9999px;
+      background: var(--cm-ink);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--cm-line) 35%, transparent);
+      opacity: 0;
+    }
+    .cm-handoff--line {
+      position: absolute;
+      left: 0;
+      top: 1.75rem;
+      z-index: 2;
+      translate: -50% -50%;
+    }
+  }
+
+  /* ── Detalhes de interação ────────────────────────────────────── */
+  .cm-choice {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s ease;
+  }
+  .cm-choice:hover,
+  .cm-choice:focus-visible {
+    transform: translateY(-2px);
+    box-shadow:
+      0 2px 4px rgba(12, 32, 47, 0.05),
+      0 12px 32px rgba(12, 32, 47, 0.08);
+  }
+  .cm-choice-arrow,
+  .cm-go-arrow {
+    display: inline-block;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .cm-choice:hover .cm-choice-arrow,
+  .cm-choice:focus-visible .cm-choice-arrow {
+    transform: translateY(4px);
+  }
+  .cm-go:hover .cm-go-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Motion (só com movimento permitido) ──────────────────────── */
+  @media (prefers-reduced-motion: no-preference) {
+    /* Abertura: roda no carregamento, sem depender de JS. */
+    .cm-load {
+      animation: cm-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .cm-load-left {
+      animation-name: cm-from-left;
+    }
+    .cm-load-right {
+      animation-name: cm-from-right;
+      animation-delay: 0.1s;
+    }
+    .cm-load-grow {
+      animation-name: cm-grow;
+    }
+
+    /* Blocos [data-cm]: os filhos .cm-a aparecem quando o bloco entra na tela. */
+    .cm-js [data-cm]:not(.is-in) .cm-a {
+      opacity: 0;
+    }
+    .cm-js [data-cm].is-in .cm-a {
+      animation: cm-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .cm-js [data-cm].is-in .cm-a-pop {
+      animation-name: cm-pop;
+    }
+    .cm-js [data-cm].is-in .cm-handoff--line {
+      animation-name: cm-pop-centered;
+    }
+
+    /* A linha é desenhada e, depois, um ponto (o paciente) percorre os dois
+       segmentos em sequência: metade do ciclo em cada produto. */
+    .cm-js .cm-rail:not(.is-in) .cm-seg-fill {
+      transform: scaleX(0);
+    }
+    .cm-js .cm-rail.is-in .cm-seg-fill {
+      animation: cm-draw 1.2s linear both;
+      animation-delay: var(--d, 0s);
+    }
+    .cm-js .cm-rail.is-in .cm-dot {
+      animation: cm-travel-first 6s linear 3.2s infinite;
+    }
+    .cm-js .cm-group--cuidaty .cm-rail.is-in .cm-dot {
+      animation-name: cm-travel-second;
+    }
+
+    .cm-faq {
+      interpolate-size: allow-keywords;
+    }
+    .cm-faq::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition:
+        block-size 0.3s ease,
+        content-visibility 0.3s allow-discrete;
+    }
+    .cm-faq[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  @keyframes cm-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes cm-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+  }
+  @keyframes cm-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+  }
+  @keyframes cm-grow {
+    from {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+  }
+  @keyframes cm-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    60% {
+      transform: scale(1.08);
+    }
+  }
+  @keyframes cm-pop-centered {
+    from {
+      opacity: 0;
+      scale: 0.6;
+    }
+    60% {
+      scale: 1.08;
+    }
+  }
+  @keyframes cm-draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes cm-travel-first {
+    0% {
+      left: 0;
+      opacity: 0;
+    }
+    3%,
+    47% {
+      opacity: 1;
+    }
+    50%,
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+  @keyframes cm-travel-second {
+    0%,
+    50% {
+      left: 0;
+      opacity: 0;
+    }
+    53%,
+    97% {
+      opacity: 1;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
+    }
+  }
+</style>
