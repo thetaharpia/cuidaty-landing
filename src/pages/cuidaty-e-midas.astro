@@ -7,7 +7,7 @@ import Footer from '../components/Footer.astro';
 import MidasLogo from '../components/MidasLogo.astro';
 import logoWritten from '../assets/logo-written.webp';
 import { MIDAS_URL, whatsappUrl } from '../lib/contact';
-import { REGISTER_URL } from '../lib/plans';
+import { PROPOSAL_URL, REGISTER_URL } from '../lib/plans';
 
 /**
  * Os dois produtos da casa lado a lado: a Cuidaty (sistema de gestão) e o
@@ -100,6 +100,65 @@ const journey = [
 // aparece quando a linha chega nela.
 const LINE_SECONDS = 2.4;
 const stageDelay = (at: number) => `${(0.2 + (at / 5) * LINE_SECONDS).toFixed(2)}s`;
+
+// Um caso real de cada produto. O da Cuidaty vem da home (Proof.astro) e o do
+// MIDAS do site dele (src/data/proof.ts): só entra aqui o que já está publicado lá.
+const proofs = [
+  {
+    product: 'Cuidaty',
+    metric: '+200',
+    metricLabel: 'profissionais de saúde usando a Cuidaty',
+    quote:
+      'A Cuidaty trouxe organização para a gestão da nossa clínica, assertividade e agilidade.',
+    photo: '/testimonials/giovana.webp',
+    name: 'Giovana Ferreira',
+    role: 'Gestora de atividades clínicas, Startuppsi',
+  },
+  {
+    product: 'MIDAS',
+    metric: 'R$ 170 mil',
+    metricLabel: 'a mais no faturamento em um mês, na Sal Clinic',
+    quote:
+      'Nós tivemos um valor de 170 mil reais a mais no nosso faturamento, por uma estratégia exclusiva que nós tivemos dentro do sistema.',
+    photo: '/testimonials/bruna-sal-clinic.webp',
+    name: 'Bruna',
+    role: 'Sal Clinic, São Paulo',
+  },
+] as const;
+
+// O que acontece depois do clique, em cada produto.
+const cuidatySteps = [
+  {
+    title: 'Crie a conta',
+    text: 'O plano gratuito atende até 10 pacientes e não tem prazo para acabar.',
+  },
+  {
+    title: 'Monte a agenda',
+    text: 'Cadastre os pacientes e os horários de atendimento.',
+  },
+  {
+    title: 'Atenda',
+    text: 'Registre a consulta no prontuário. No plano Plus, a gravação vira o prontuário.',
+  },
+];
+const midasSteps = [
+  {
+    title: 'Diagnóstico',
+    text: 'O time entende a operação, os canais de captação e onde as vendas se perdem.',
+  },
+  {
+    title: 'Planejamento',
+    text: 'Prioridades, responsáveis e indicadores. As condições comerciais saem daqui.',
+  },
+  {
+    title: 'Organização e ativação',
+    text: 'Equipe treinada, campanhas no ar e o MIDAS Vision com os dados da clínica.',
+  },
+  {
+    title: 'Gestão contínua',
+    text: 'O time acompanha a execução e ajusta as ações. Você vê tudo no painel.',
+  },
+];
 
 const faqs = [
   {
@@ -555,7 +614,72 @@ const structuredData = [
       </div>
     </section>
 
-    <!-- 4. Perguntas: uma aberta por vez, todas no HTML para o buscador -->
+    <!-- 4. Prova: um caso de cada produto -->
+    <section class="border-t border-border" aria-labelledby="prova-title">
+      <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
+        <div class="mx-auto max-w-7xl">
+          <h2
+            id="prova-title"
+            class="max-w-2xl text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
+          >
+            Quem já usa
+          </h2>
+          <div class="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+            {
+              proofs.map((p) => (
+                <figure
+                  class:list={[
+                    'border-t-2 pt-6',
+                    p.product === 'MIDAS' ? 'border-[#e9a93a]' : 'border-primary',
+                  ]}
+                  data-cm
+                >
+                  <p
+                    class:list={[
+                      'cm-a text-[0.95rem] font-semibold',
+                      p.product === 'MIDAS' ? 'text-[#8f5d0d]' : 'text-primary-ink',
+                    ]}
+                  >
+                    {p.product}
+                  </p>
+                  <p
+                    class="cm-a mt-3 font-serif text-5xl font-extrabold leading-none text-cuidaty-dark md:text-6xl"
+                    style="--d:0.08s"
+                  >
+                    {p.metric}
+                  </p>
+                  <p class="cm-a mt-3 text-cuidaty-dark/70" style="--d:0.14s">
+                    {p.metricLabel}
+                  </p>
+                  <blockquote
+                    class="cm-a mt-8 text-lg leading-relaxed text-cuidaty-dark"
+                    style="--d:0.22s"
+                  >
+                    “{p.quote}”
+                  </blockquote>
+                  <figcaption class="cm-a mt-6 flex items-center gap-3" style="--d:0.3s">
+                    <img
+                      src={p.photo}
+                      alt=""
+                      width="48"
+                      height="48"
+                      class="size-12 rounded-full object-cover"
+                      loading="lazy"
+                    />
+                    <span class="text-sm">
+                      <span class="block font-semibold text-cuidaty-dark">{p.name}</span>
+                      <span class="block text-cuidaty-dark/70">{p.role}</span>
+                    </span>
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Perguntas: uma aberta por vez, todas no HTML para o buscador -->
     <section class="border-t border-border" aria-labelledby="duvidas-title">
       <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
         <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
@@ -590,34 +714,108 @@ const structuredData = [
       </div>
     </section>
 
-    <!-- 5. Fechamento: a mesma escolha do topo, agora com os botões de ação -->
-    <section class="bg-beige" aria-labelledby="comecar-title">
+    <!-- 6. Fechamento: o que acontece depois do clique, em cada produto -->
+    <section class="border-t border-border" aria-labelledby="comecar-title">
       <div class="container mx-auto px-5 py-16 md:px-8 md:py-24">
-        <div
-          class="mx-auto flex max-w-7xl flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
-          data-cm
-        >
-          <h2
-            id="comecar-title"
-            class="cm-a text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
-          >
-            Por onde a clínica começa?
-          </h2>
-          <div class="cm-a flex flex-wrap gap-3" style="--d:0.12s">
-            <a
-              href={REGISTER_URL}
-              class="btn-solid"
-              data-ga-event="generate_lead"
-              data-ga-location="cuidaty_e_midas_fechamento">Começar grátis na Cuidaty</a
+        <div class="mx-auto max-w-7xl">
+          <div class="max-w-2xl">
+            <h2
+              id="comecar-title"
+              class="text-balance text-3xl leading-[1.1] text-cuidaty-dark md:text-4xl"
             >
-            <a
-              href={MIDAS_WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-line"
-              data-ga-event="contact_click"
-              data-ga-location="cuidaty_e_midas_fechamento">Pedir diagnóstico do MIDAS</a
+              Como começar com cada um
+            </h2>
+            <p class="mt-5 text-lg leading-relaxed text-cuidaty-dark/70">
+              Na Cuidaty você entra sozinho e usa hoje. No MIDAS a primeira conversa é um
+              diagnóstico da clínica.
+            </p>
+          </div>
+
+          <div class="mt-12 grid gap-6 lg:grid-cols-2">
+            <div
+              class="cm-group--cuidaty flex flex-col rounded-2xl bg-[#e3edf4] p-7 sm:p-10"
+              data-cm
             >
+              <img
+                src={logoWritten.src}
+                alt="Cuidaty"
+                width="314"
+                height="82"
+                class="cm-a h-9 w-auto self-start"
+                loading="lazy"
+              />
+              <ol class="cm-steps mt-8">
+                {
+                  cuidatySteps.map((step, i) => (
+                    <li class="cm-a" style={`--d:${0.1 + i * 0.12}s`}>
+                      <span class="cm-step-n" aria-hidden="true">
+                        {i + 1}
+                      </span>
+                      <div>
+                        <h3 class="font-sans text-lg font-semibold text-cuidaty-dark">
+                          {step.title}
+                        </h3>
+                        <p class="mt-1 text-sm leading-relaxed text-cuidaty-dark/70">{step.text}</p>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ol>
+              <div class="cm-a mt-auto pt-8" style="--d:0.5s">
+                <a
+                  href={REGISTER_URL}
+                  class="btn-solid"
+                  data-ga-event="generate_lead"
+                  data-ga-location="cuidaty_e_midas_fechamento">Começar grátis</a
+                >
+                <p class="mt-4 text-sm text-cuidaty-dark/70">
+                  Clínica com equipe? A implantação é acompanhada e os dados vêm do sistema
+                  anterior.
+                  <a
+                    href={PROPOSAL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-semibold text-primary-ink underline underline-offset-4"
+                    data-ga-event="contact_click"
+                    data-ga-location="cuidaty_e_midas_fechamento">Falar com a gente</a
+                  >.
+                </p>
+              </div>
+            </div>
+
+            <div class="cm-group--midas flex flex-col rounded-2xl bg-[#fdf8ec] p-7 sm:p-10" data-cm>
+              <MidasLogo size={36} id="midas-start" class="cm-a self-start" />
+              <ol class="cm-steps mt-8">
+                {
+                  midasSteps.map((step, i) => (
+                    <li class="cm-a" style={`--d:${0.1 + i * 0.12}s`}>
+                      <span class="cm-step-n" aria-hidden="true">
+                        {i + 1}
+                      </span>
+                      <div>
+                        <h3 class="font-sans text-lg font-semibold text-cuidaty-dark">
+                          {step.title}
+                        </h3>
+                        <p class="mt-1 text-sm leading-relaxed text-cuidaty-dark/70">{step.text}</p>
+                      </div>
+                    </li>
+                  ))
+                }
+              </ol>
+              <div class="cm-a mt-auto pt-8" style="--d:0.6s">
+                <a
+                  href={MIDAS_WA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-solid"
+                  data-ga-event="contact_click"
+                  data-ga-location="cuidaty_e_midas_fechamento_midas">Pedir diagnóstico</a
+                >
+                <p class="mt-4 text-sm text-cuidaty-dark/70">
+                  O diagnóstico não obriga a contratar.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -756,6 +954,41 @@ const structuredData = [
       z-index: 2;
       translate: -50% -50%;
     }
+  }
+
+  /* ── Passos para começar ──────────────────────────────────────── */
+  .cm-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  .cm-steps li:last-child {
+    padding-bottom: 0;
+  }
+  .cm-steps li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: calc(1.125rem - 1px);
+    top: 2.25rem;
+    bottom: 0;
+    width: 2px;
+    background: var(--cm-line);
+    opacity: 0.45;
+  }
+  .cm-step-n {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--cm-line);
+    border-radius: 9999px;
+    background: var(--cm-node);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--cm-ink);
   }
 
   /* ── Detalhes de interação ────────────────────────────────────── */
