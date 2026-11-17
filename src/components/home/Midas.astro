@@ -1,6 +1,8 @@
 ---
-// MIDAS: produto à parte (gestão comercial para clínicas), com site próprio.
-// Aqui fica só o pitch da proposta comercial; o detalhe mora em midas.cuidaty.com.
+// MIDAS: o outro produto da casa (gestão comercial para clínicas), com site próprio.
+// Espelha a seção "Cuidaty" de midas.cuidaty.com: lá o fundo é o azul que as marcas
+// dividem, aqui é o ouro do MIDAS.
+import MidasLogo from '../MidasLogo.astro';
 import { MIDAS_URL, whatsappUrl } from '../../lib/contact';
 
 const WA_URL = whatsappUrl(
@@ -8,83 +10,65 @@ const WA_URL = whatsappUrl(
 );
 
 const fronts = [
-  {
-    title: 'Gestão comercial',
-    text: 'Roteiros de WhatsApp e telefone, treino de avaliação e fechamento, metas individuais e cada orçamento em aberto com dono e prazo.',
-  },
-  {
-    title: 'Anúncios e captação',
-    text: 'Campanhas no Meta e no Google medidas pela venda que trazem, não pelo clique. Inclui reativação de pacientes antigos.',
-  },
-  {
-    title: 'MIDAS Vision',
-    text: 'CRM e funil da clínica: origem de cada paciente, confirmação automática e alerta quando um orçamento fica sem contato.',
-  },
+  'Roteiros de WhatsApp e telefone para a recepção',
+  'Orçamentos em aberto com responsável e prazo',
+  'Anúncios no Meta e no Google medidos pela venda',
+  'MIDAS Vision: CRM e funil da clínica',
 ];
 ---
 
-<section id="midas" class="scroll-mt-24 bg-cuidaty-dark py-20 text-white md:py-28">
+<section id="midas" class="scroll-mt-24 bg-[#fdf8ec] py-20 md:py-28" aria-labelledby="midas-title">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-2 lg:gap-16">
-      <div>
-        <p
-          class="inline-flex items-center gap-3 text-[0.95rem] font-semibold text-cuidaty-secondary"
+    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:gap-24">
+      <header>
+        <MidasLogo size={52} />
+        <p class="mt-8 text-[0.95rem] font-semibold text-[#8f5d0d]">Do mesmo time da Cuidaty</p>
+        <h2
+          id="midas-title"
+          class="mt-3 text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl"
         >
-          <span class="block h-0.5 w-6 bg-cuidaty-secondary" aria-hidden="true"></span>
-          MIDAS · Gestão comercial para clínicas
-        </p>
-        <h2 class="mt-4 text-balance text-4xl leading-[1.05] text-white md:text-5xl">
-          A agenda está organizada. Falta encher.
+          Quer vender mais na clínica?
         </h2>
-        <p class="mt-5 text-lg leading-relaxed text-white/75">
-          O MIDAS assume o comercial da sua clínica: quem responde o WhatsApp, o que é dito na
-          avaliação, quando ligar para o orçamento parado e onde investir em anúncio. Um time nosso
-          trabalha dentro da operação, no dia a dia.
+      </header>
+
+      <div>
+        <p class="text-lg leading-relaxed text-cuidaty-dark/70">
+          A Cuidaty cuida do atendimento, do prontuário ao financeiro. Para as vendas existe o
+          MIDAS: um time nosso que trabalha dentro da clínica, do primeiro contato no WhatsApp ao
+          orçamento fechado.
         </p>
-
-        <div class="mt-8 border-l-2 border-cuidaty-secondary pl-5">
-          <p class="font-serif text-2xl leading-snug text-white">
-            A proposta: mensalidade fixa e comissão sobre venda nova.
-          </p>
-          <p class="mt-2 text-sm leading-relaxed text-white/70">
-            Só entra na comissão a venda nova e rastreável. O que a clínica já vendia fica de fora.
-            O MIDAS ganha quando você vende mais.
-          </p>
-        </div>
-
-        <div class="mt-10 flex flex-wrap items-center gap-3">
+        <ul class="mb-8 mt-6 border-b border-cuidaty-dark/15">
+          {
+            fronts.map((f) => (
+              <li class="border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark">
+                {f}
+              </li>
+            ))
+          }
+        </ul>
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
           <a
             href={MIDAS_URL}
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center justify-center rounded-md bg-cuidaty-secondary px-7 py-3.5 text-[0.95rem] font-semibold text-cuidaty-dark transition-colors duration-200 hover:bg-cuidaty-accent"
+            class="btn-solid"
             data-ga-event="midas_click"
-            data-ga-location="midas_site">Conhecer o MIDAS</a
+            data-ga-location="midas_site"
+            >Conhecer o MIDAS <span class="ml-2" aria-hidden="true">→</span></a
           >
           <a
             href={WA_URL}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center justify-center rounded-md border-[1.5px] border-white/40 px-7 py-3.5 text-[0.95rem] font-semibold text-white transition-colors duration-200 hover:border-white hover:bg-white/5"
+            class="font-semibold text-primary-ink underline underline-offset-4"
             data-ga-event="contact_click"
             data-ga-location="midas_whatsapp">Pedir diagnóstico no WhatsApp</a
           >
         </div>
-        <p class="mt-4 text-sm text-white/60">
-          Para clínicas e consultórios de qualquer área da saúde. Começa por um diagnóstico.
+        <p class="mt-5 text-sm text-cuidaty-dark/70">
+          Mensalidade e comissão sobre as vendas novas. Os valores saem depois do diagnóstico.
         </p>
       </div>
-
-      <ul class="space-y-4 self-center">
-        {
-          fronts.map((f) => (
-            <li class="rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-7">
-              <h3 class="font-sans text-lg font-semibold text-white">{f.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-white/70">{f.text}</p>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </div>
 </section>
