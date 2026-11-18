@@ -185,27 +185,20 @@ const delay = (i: number) => `${(0.25 + i * 0.3).toFixed(2)}s`;
 
       <div class="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
         <a
-          href={MIDAS_URL}
-          target="_blank"
-          rel="noopener"
-          class="hero-btn hero-btn--midas"
-          data-ga-event="midas_click"
-          data-ga-location="midas_site"
-          >Conhecer o MIDAS <span class="ml-2" aria-hidden="true">→</span></a
-        >
-        <a
           href={WA_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="font-semibold text-cuidaty-dark underline decoration-[#e9a93a] underline-offset-4"
+          class="hero-btn hero-btn--midas"
           data-ga-event="contact_click"
           data-ga-location="midas_whatsapp">Pedir diagnóstico no WhatsApp</a
         >
         <a
-          href="/cuidaty-e-midas"
-          class="font-semibold text-cuidaty-dark/75 underline decoration-cuidaty-dark/30 underline-offset-4 hover:text-cuidaty-dark"
+          href={MIDAS_URL}
+          target="_blank"
+          rel="noopener"
+          class="font-semibold text-cuidaty-dark underline decoration-[#e9a93a] underline-offset-4"
           data-ga-event="midas_click"
-          data-ga-location="midas_compare">Comparar os dois produtos</a
+          data-ga-location="midas_site">Ver o site do MIDAS</a
         >
       </div>
       <p class="mt-5 max-w-2xl text-sm text-cuidaty-dark/60">

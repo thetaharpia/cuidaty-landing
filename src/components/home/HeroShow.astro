@@ -1,5 +1,5 @@
 ---
-// Hero em sequência, na ordem do atendimento, com "câmera":
+// Hero em sequência, na ordem do atendimento, com "câmera". A primeira volta começa na consulta (2):
 //   1. Na web, com zoom em cada tela: cadastro do paciente, agenda e confirmação pelo WhatsApp.
 //   2. Consulta: a janela sai e o celular entra grande; a agenda do dia rola até o paciente e a
 //      consulta é gravada. Ele dá uma volta (com espessura e costas) e vai para o canto.
@@ -1371,7 +1371,9 @@ const urls = {
       })
     );
 
-    t = reduce ? LOOP - 1500 : 0;
+    // Abre pela consulta gravada virando prontuário, que é o que vende; cadastro e agenda vêm depois.
+    const FIRST = SCENES.find((s) => s.id === 'cel')?.start ?? 0;
+    t = reduce ? LOOP - 1500 : FIRST;
     render();
     new IntersectionObserver(([e]) => {
       inView = e.isIntersecting;

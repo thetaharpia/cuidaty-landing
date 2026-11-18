@@ -6,9 +6,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Motion from '../components/home/Motion.astro';
 import Hero from '../components/home/Hero.astro';
-import Pain from '../components/home/Pain.astro';
 import FeatureStack from '../components/home/FeatureStack.astro';
-import Hub from '../components/home/Hub.astro';
 import Convenios from '../components/home/Convenios.astro';
 import Trust from '../components/home/Trust.astro';
 import Proof from '../components/home/Proof.astro';
@@ -16,7 +14,6 @@ import Clinics from '../components/home/Clinics.astro';
 import Midas from '../components/home/Midas.astro';
 import Plans from '../components/home/Plans.astro';
 import Faq from '../components/home/Faq.astro';
-import BlogSection from '../components/sections/BlogSection.astro';
 import Closing from '../components/home/Closing.astro';
 import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 ---
@@ -29,31 +26,26 @@ import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 >
   <Header />
   <main>
-    <!-- 1. Oferta: os dois produtos do time, um CTA para cada, e a demo da Cuidaty -->
+    <!-- 1. Pitch dos dois produtos e uma pergunta: falta tempo (Cuidaty) ou vender mais (MIDAS) -->
     <Hero />
-    <!-- 1b. Cuidaty + MIDAS: os dois produtos no caminho do paciente -->
-    <Midas />
-    <!-- 2. A dor, curta -->
-    <Pain />
-    <!-- 3. Funcionalidades em pilha: uma abre por vez -->
+    <!-- 2. Funcionalidades da Cuidaty em pilha: uma abre por vez -->
     <FeatureStack />
-    <!-- 4. Integrações do dia a dia, com a logo no centro -->
-    <Hub />
-    <!-- 4b. Convênios: Geap e SulAmérica, do plano Clínicas -->
+    <!-- 3. Convênios: Geap e SulAmérica, do plano Clínicas -->
     <Convenios />
-    <!-- 5. Promessas de confiança -->
+    <!-- 4. Promessas de segurança -->
     <Trust />
-    <!-- 6. Prova social: números e depoimentos -->
+    <!-- 5. Prova social: números e depoimentos -->
     <Proof />
-    <!-- 7. Planos: comece grátis -->
+    <!-- 6. Planos: comece grátis -->
     <Plans />
-    <!-- 8. Para clínicas: recursos em carrossel e implantação acompanhada -->
+    <!-- 7. Para clínicas: recursos e implantação acompanhada -->
     <Clinics />
+    <!-- 8. MIDAS + Cuidaty: o caminho da paciente. Sobe para depois do hero quando a pessoa
+         escolhe "a clínica precisa vender mais" (script em Hero.astro). -->
+    <Midas />
     <!-- 9. FAQ indexável e visível -->
     <Faq />
-    <!-- 10. Conteúdo: últimos artigos do blog -->
-    <BlogSection />
-    <!-- 11. Fechamento: um único CTA -->
+    <!-- 10. Fechamento: um único CTA -->
     <Closing />
   </main>
   <Footer />
