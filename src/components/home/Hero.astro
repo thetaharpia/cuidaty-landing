@@ -1,54 +1,359 @@
 ---
+// Hero claro: primeiro o que é (o pitch dos dois produtos), depois uma pergunta.
+// Quem marca "falta tempo" vê a Cuidaty; quem marca "a clínica precisa vender mais"
+// vê o MIDAS, e a seção do MIDAS sobe para logo abaixo do hero (script no fim).
+// A troca de painel é só CSS (:has sobre os radios). Teal é Cuidaty, ouro é MIDAS.
 import HeroShow from './HeroShow.astro';
-
+import HeroMidasShow from './HeroMidasShow.astro';
 import { REGISTER_URL } from '../../lib/plans';
+import { whatsappUrl } from '../../lib/contact';
+
+const MIDAS_WA_URL = whatsappUrl(
+  'Olá! Quero um diagnóstico do MIDAS para a minha clínica vender mais.'
+);
 ---
 
-<section id="hero" class="bg-white pb-16 pt-32 md:pb-24 md:pt-40">
-  <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
+<section id="hero" class="hero relative overflow-hidden bg-white text-cuidaty-dark">
+  <div class="hero-glow hero-glow--cuidaty" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow--midas" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <div class="container relative mx-auto px-5 pb-16 pt-28 md:px-8 md:pb-24 md:pt-40">
+    <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
       <div>
-        <p class="kicker">Software para psicólogos e clínicas</p>
         <h1
-          class="mt-6 text-balance text-[2.5rem] leading-[1.05] text-cuidaty-dark sm:text-5xl lg:text-[3.4rem]"
+          class="hero-rise text-balance text-[2.3rem] font-bold leading-[1.02] tracking-tight sm:text-5xl lg:text-[3.1rem] xl:text-[3.6rem]"
         >
-          Suas consultas viram
-          <span class="mt-1 block text-primary-ink">registros clínicos organizados.</span>
+          Sistema para psicólogos e clínicas.
+          <span class="mt-1 block text-[#a8690b]">E um time para a clínica vender mais.</span>
         </h1>
-        <p class="mt-6 max-w-[34rem] text-lg leading-relaxed text-cuidaty-dark/70 md:text-xl">
-          Grave a consulta e a IA transcreve e organiza o registro. Você revisa e aprova antes de
-          salvar. Com agenda, prontuário e WhatsApp no mesmo lugar.
-        </p>
-        <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
-          <a
-            href={REGISTER_URL}
-            class="btn-solid"
-            data-ga-event="generate_lead"
-            data-ga-location="hero">Começar grátis</a
-          >
-          <span class="text-sm text-cuidaty-dark/70">Plano gratuito até 10 pacientes</span>
+
+        <fieldset class="hero-rise mt-8 md:mt-10" style="--d:0.1s">
+          <legend class="text-sm font-semibold text-cuidaty-dark/70">O que pesa mais hoje?</legend>
+          <div class="mt-3 grid gap-3 sm:grid-cols-2">
+            <label class="hero-pick hero-pick--cuidaty">
+              <input type="radio" name="hero-pick" id="hero-pick-cuidaty" class="sr-only" checked />
+              <span class="hero-pick-title">Falta tempo</span>
+              <span class="hero-pick-text">Passo a noite no prontuário e confirmando consulta.</span
+              >
+            </label>
+            <label class="hero-pick hero-pick--midas">
+              <input type="radio" name="hero-pick" id="hero-pick-midas" class="sr-only" />
+              <span class="hero-pick-title">A clínica precisa vender mais</span>
+              <span class="hero-pick-text">Horário vago na agenda e orçamento sem resposta.</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Resposta: Cuidaty -->
+        <div class="hero-pane hero-pane--cuidaty mt-7">
+          <p class="max-w-[32rem] leading-relaxed text-cuidaty-dark/75">
+            <b class="font-semibold text-cuidaty-dark">Cuidaty.</b> Você grava a consulta, a IA monta
+            o registro e você só revisa. A agenda confirma sozinha pelo WhatsApp.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href={REGISTER_URL}
+              class="hero-btn hero-btn--cuidaty"
+              data-ga-event="generate_lead"
+              data-ga-location="hero">Começar grátis</a
+            >
+            <span class="text-sm text-cuidaty-dark/65">Grátis até 10 pacientes, sem prazo.</span>
+          </div>
+          <figure class="mt-7 flex max-w-[32rem] items-start gap-3">
+            <img
+              src="/testimonials/huini.webp"
+              alt=""
+              width="40"
+              height="40"
+              class="size-10 shrink-0 rounded-full object-cover"
+              loading="eager"
+              decoding="async"
+            />
+            <div class="text-sm leading-snug">
+              <blockquote class="text-cuidaty-dark/80">
+                “Antes era um caos responder mensagens no WhatsApp entre sessões.”
+              </blockquote>
+              <figcaption class="mt-1 text-cuidaty-dark/60">
+                Huini Coelho, psicóloga · CRP AP 10/06891
+              </figcaption>
+            </div>
+          </figure>
         </div>
-        <p class="mt-4 flex items-center gap-2 text-sm text-cuidaty-dark/70">
-          <svg class="size-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linejoin="round"></path>
-          </svg>
-          Dados clínicos protegidos conforme a LGPD, com hospedagem no Brasil.
-        </p>
-        <p class="mt-5 text-sm text-cuidaty-dark/70">
-          Mais de <b class="font-semibold text-cuidaty-dark">200 profissionais</b> e
-          <b class="font-semibold text-cuidaty-dark">2.500 pacientes</b> já estão na Cuidaty.
-        </p>
+
+        <!-- Resposta: MIDAS -->
+        <div class="hero-pane hero-pane--midas mt-7">
+          <p class="max-w-[32rem] leading-relaxed text-cuidaty-dark/75">
+            <b class="font-semibold text-cuidaty-dark">MIDAS.</b> Um time nosso trabalha dentro da clínica:
+            anúncios, roteiro de atendimento e retorno de cada orçamento em aberto.
+          </p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a
+              href={MIDAS_WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hero-btn hero-btn--midas"
+              data-ga-event="contact_click"
+              data-ga-location="hero_midas">Pedir diagnóstico</a
+            >
+            <span class="text-sm text-cuidaty-dark/65">Começa por um diagnóstico da clínica.</span>
+          </div>
+          <p class="mt-7 text-sm text-cuidaty-dark/70">
+            <a
+              href="#midas"
+              class="font-semibold text-cuidaty-dark underline decoration-[#e9a93a] underline-offset-4"
+              >Como a Sal Clinic faturou R$ 170 mil a mais em um mês</a
+            >.
+          </p>
+        </div>
       </div>
 
-      <!-- Demo: celular grava a consulta, depois cadastro, agenda, WhatsApp e prontuário na web -->
-      <div>
-        <HeroShow />
+      <!-- Demos: a Cuidaty (abre na consulta virando prontuário) ou o funil do MIDAS -->
+      <div class="hero-rise hero-stage" style="--d:0.2s">
+        <div class="hero-pane hero-pane--cuidaty">
+          <HeroShow />
+        </div>
+        <div class="hero-pane hero-pane--midas">
+          <HeroMidasShow />
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  // A seção do MIDAS mora mais abaixo na página (para quem gere clínica). Quem marca
+  // "a clínica precisa vender mais" a vê logo depois do hero; o nó é movido no DOM,
+  // então a ordem de leitura e de foco acompanha o que aparece na tela.
+  function heroPick() {
+    var hero = document.getElementById('hero');
+    var midas = document.getElementById('midas');
+    if (!hero || !midas) return;
+    var home = document.createComment('midas');
+    midas.parentNode.insertBefore(home, midas);
+    document.querySelectorAll('input[name="hero-pick"]').forEach(function (input) {
+      input.addEventListener('change', function () {
+        hero.setAttribute('data-swapped', '');
+        if (input.id === 'hero-pick-midas') {
+          hero.parentNode.insertBefore(midas, hero.nextSibling);
+        } else {
+          home.parentNode.insertBefore(midas, home.nextSibling);
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', heroPick);
+  } else {
+    heroPick();
+  }
+</script>
+
+<style is:global>
+  /* ── Fundo claro: brilho suave da cor do produto escolhido e uma grade discreta ── */
+  .hero-glow {
+    position: absolute;
+    inset: -25% -12% auto auto;
+    width: 70rem;
+    height: 46rem;
+    max-width: 130vw;
+    border-radius: 50%;
+    filter: blur(50px);
+    pointer-events: none;
+    transition: opacity 0.7s ease;
+  }
+  .hero-glow--cuidaty {
+    background: radial-gradient(
+      closest-side,
+      rgb(90 195 176 / 0.28),
+      rgb(53 101 136 / 0.1) 55%,
+      transparent
+    );
+  }
+  .hero-glow--midas {
+    background: radial-gradient(
+      closest-side,
+      rgb(240 185 85 / 0.38),
+      rgb(233 169 58 / 0.12) 55%,
+      transparent
+    );
+    opacity: 0;
+  }
+  .hero:has(#hero-pick-midas:checked) .hero-glow--cuidaty {
+    opacity: 0;
+  }
+  .hero:has(#hero-pick-midas:checked) .hero-glow--midas {
+    opacity: 1;
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(12 32 47 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(12 32 47 / 0.05) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
+    pointer-events: none;
+  }
+
+  /* ── As duas respostas ── */
+  .hero-pick {
+    --tone: #3aa894;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.1rem 1.1rem;
+    border: 1px solid rgb(12 32 47 / 0.12);
+    border-radius: 0.9rem;
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease,
+      box-shadow 0.35s ease,
+      transform 0.25s ease;
+  }
+  .hero-pick--midas {
+    --tone: #e9a93a;
+  }
+  .hero-pick:hover {
+    border-color: rgb(12 32 47 / 0.3);
+    transform: translateY(-2px);
+  }
+  .hero-pick:has(:checked) {
+    border-color: var(--tone);
+    background: color-mix(in srgb, var(--tone) 10%, white);
+    box-shadow:
+      0 0 0 1px var(--tone),
+      0 18px 40px -22px var(--tone);
+  }
+  .hero-pick:has(:focus-visible) {
+    outline: 2px solid #0c202f;
+    outline-offset: 3px;
+  }
+  .hero-pick-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #0c202f;
+  }
+  .hero-pick-title::before {
+    content: '';
+    flex: none;
+    width: 0.95rem;
+    height: 0.95rem;
+    border: 2px solid rgb(12 32 47 / 0.3);
+    border-radius: 50%;
+    transition:
+      border-color 0.25s ease,
+      box-shadow 0.25s ease,
+      background-color 0.25s ease;
+  }
+  .hero-pick:has(:checked) .hero-pick-title::before {
+    border-color: var(--tone);
+    background: var(--tone);
+    box-shadow: inset 0 0 0 3px #fff;
+  }
+  .hero-pick-text {
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: rgb(12 32 47 / 0.65);
+  }
+
+  /* No celular, só o título de cada resposta: o botão precisa caber na primeira tela. */
+  @media (max-width: 639px) {
+    .hero-pick {
+      padding: 0.8rem 1rem;
+    }
+    .hero-pick-text {
+      display: none;
+    }
+    .hero-pick-title {
+      font-size: 1.05rem;
+    }
+  }
+
+  /* ── Painéis: só o do produto escolhido aparece ── */
+  .hero-pane--midas {
+    display: none;
+  }
+  .hero:has(#hero-pick-midas:checked) .hero-pane--midas {
+    display: block;
+  }
+  .hero:has(#hero-pick-midas:checked) .hero-pane--cuidaty {
+    display: none;
+  }
+
+  /* Altura fixa no desktop, para a troca de painel não empurrar o resto. */
+  @media (min-width: 1024px) {
+    .hero-stage {
+      display: grid;
+      align-content: center;
+      min-height: 36rem;
+    }
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 1.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.25s ease,
+      filter 0.2s ease;
+  }
+  .hero-btn--cuidaty {
+    background: #356588;
+    box-shadow: 0 12px 30px -14px rgb(53 101 136 / 0.7);
+  }
+  .hero-btn--midas {
+    background: #e9a93a;
+    color: #0c202f;
+    box-shadow: 0 12px 30px -14px rgb(233 169 58 / 0.9);
+  }
+  .hero-btn:hover {
+    filter: brightness(1.06);
+    transform: translateY(-2px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-rise {
+      animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-delay: var(--d, 0s);
+    }
+    .hero[data-swapped] .hero-pane {
+      animation: hero-swap 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .hero-glow {
+      animation: hero-drift 14s ease-in-out infinite alternate;
+    }
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+  @keyframes hero-swap {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.985);
+    }
+  }
+  @keyframes hero-drift {
+    to {
+      transform: translate(-6%, 8%) scale(1.08);
+    }
+  }
+</style>

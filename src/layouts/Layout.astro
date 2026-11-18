@@ -38,7 +38,7 @@ const DEFAULT_IMAGE_ALT =
 const {
   title = homeTitle,
   description = homeDescription,
-  image = '/screenshot.png',
+  image = '/og/default.png',
   imageAlt = DEFAULT_IMAGE_ALT,
   noindex = false,
   keywords = homeKeywords,
@@ -49,9 +49,14 @@ const {
   authorName,
   section,
   articleTags = [],
-  imageWidth,
-  imageHeight,
+  imageWidth: imageWidthProp,
+  imageHeight: imageHeightProp,
 } = Astro.props;
+
+// Os cartões de public/og/ (gerados por scripts/og/template.html) têm tamanho fixo.
+const isOgCard = image.startsWith('/og/');
+const imageWidth = imageWidthProp ?? (isOgCard ? 1200 : undefined);
+const imageHeight = imageHeightProp ?? (isOgCard ? 630 : undefined);
 
 const googleSiteVerification =
   import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? 'CuQ7uBwOoGiZimHGFB_WF-rWulUEtnNMyjfq_Vs6VqQ';
@@ -205,7 +210,8 @@ const softwareData = {
   description: description,
   url: siteUrl,
   featureList: healthFeatureList,
-  screenshot: fullImageURL,
+  // Aqui vai um print do produto, não o cartão de compartilhamento.
+  screenshot: new URL('/screenshot.png', siteUrl).toString(),
   softwareVersion: '2.0',
   softwareHelp: {
     '@id': `${helpCenterUrl}#website`,

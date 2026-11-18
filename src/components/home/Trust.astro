@@ -1,18 +1,39 @@
 ---
-// Promessas de confiança, explícitas (não só um selo de LGPD).
+// Promessas de confiança, explícitas (não só um selo de LGPD). Fundo azul claro para
+// separar das seções brancas em volta; cada promessa com o assunto em destaque.
 const promises = [
-  'Hospedagem 100% brasileira, auditoria de segurança semestral e criptografia AES-256 em trânsito e em repouso.',
-  'Em conformidade com a LGPD, com acesso por perfil: cada profissional vê só o que precisa ver.',
-  'O áudio da sessão é descartado após o processamento.',
-  'A IA auxilia e nunca substitui o seu julgamento clínico.',
-  'Suporte humano, em horário comercial, com resposta média em até 4 horas.',
+  {
+    title: 'Dados no Brasil',
+    text: 'Hospedagem 100% brasileira, auditoria de segurança semestral e criptografia AES-256 em trânsito e em repouso.',
+    icon: 'M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z',
+  },
+  {
+    title: 'LGPD e acesso por perfil',
+    text: 'Cada profissional vê só o que precisa ver.',
+    icon: 'M7 11V8a5 5 0 0 1 10 0v3M6 11h12v9H6z',
+  },
+  {
+    title: 'Áudio descartado',
+    text: 'A gravação da consulta é apagada depois que o registro fica pronto.',
+    icon: 'M12 4a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V7a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M4 4l16 16',
+  },
+  {
+    title: 'Você decide',
+    text: 'A IA auxilia e nunca substitui o seu julgamento clínico. Nada entra no prontuário sem a sua revisão.',
+    icon: 'M5 12l4 4 10-10',
+  },
+  {
+    title: 'Gente para ajudar',
+    text: 'Suporte humano, em horário comercial, com resposta média em até 4 horas.',
+    icon: 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
+  },
 ];
 ---
 
-<section id="seguranca" class="bg-white py-20 md:py-28">
+<section id="seguranca" class="bg-[#e3edf4] py-20 md:py-28">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:gap-16">
-      <div>
+    <div class="mx-auto max-w-7xl">
+      <div class="max-w-2xl">
         <h2 class="text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl">
           O que a gente promete.
         </h2>
@@ -20,10 +41,28 @@ const promises = [
           Dados de paciente exigem cuidado. Estas são as regras da casa.
         </p>
       </div>
-      <ul
-        class="divide-y divide-border border-y border-border text-[1.02rem] leading-relaxed text-cuidaty-dark"
-      >
-        {promises.map((p) => <li class="py-4">{p}</li>)}
+      <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5" data-demo>
+        {
+          promises.map((p, i) => (
+            <li
+              class="a rounded-xl border border-cuidaty-dark/10 bg-white p-5"
+              style={`--d:${(i * 0.08).toFixed(2)}s`}
+            >
+              <svg class="size-6 text-primary-ink" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d={p.icon}
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <h3 class="mt-4 font-sans text-base font-semibold text-cuidaty-dark">{p.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-cuidaty-dark/70">{p.text}</p>
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>

@@ -1,0 +1,379 @@
+<!doctype html>
+<!--
+  Molde das imagens de compartilhamento (og:image) do site, 1200x630.
+
+  Não vai para produção: serve só para gerar os PNGs de public/og/.
+  Para regerar, sirva a raiz do repositório (python3 -m http.server 4400) e
+  tire um print de 1200x630 de cada cartão:
+    http://localhost:4400/scripts/og/template.html?card=blog
+  Cartões: default, blog, time, clinicas, cuidaty-e-midas.
+  Salve em public/og/<cartão>.png. A home usa o cartão cuidaty-e-midas.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Molde de og:image</title>
+    <style>
+      @font-face {
+        font-family: 'Bricolage';
+        src: url('/node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-opsz-normal.woff2')
+          format('woff2');
+        font-weight: 200 800;
+      }
+      @font-face {
+        font-family: 'Geist';
+        src: url('/node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2')
+          format('woff2');
+        font-weight: 100 900;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #fcfaf6;
+        font-family: 'Geist', sans-serif;
+        color: #0c202f;
+        -webkit-font-smoothing: antialiased;
+      }
+      .card {
+        position: relative;
+        display: flex;
+        width: 1200px;
+        height: 630px;
+        padding: 64px 72px;
+        gap: 56px;
+      }
+      .text {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+      .brand img {
+        height: 60px;
+      }
+      .brand .rule {
+        width: 2px;
+        height: 44px;
+        background: rgb(12 32 47 / 0.2);
+      }
+      h1 {
+        margin-top: auto;
+        padding-top: 36px;
+        font-family: 'Bricolage', sans-serif;
+        font-size: 68px;
+        font-weight: 800;
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+      }
+      h1 .ink {
+        color: #356588;
+      }
+      h1 .gold {
+        color: #8f5d0d;
+      }
+      .sub {
+        margin-top: 22px;
+        font-size: 27px;
+        line-height: 1.35;
+        color: rgb(12 32 47 / 0.72);
+      }
+      .url {
+        margin-top: auto;
+        padding-top: 28px;
+        font-size: 22px;
+        font-weight: 600;
+        color: #356588;
+      }
+
+      /* Bloco da direita: a marca sobre uma cor da paleta. */
+      .art {
+        display: flex;
+        width: 380px;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+      }
+      .art img.mark {
+        height: 350px;
+      }
+      .art--teal {
+        background: #ceede8;
+      }
+      .art--areia {
+        background: #ebe7dd;
+      }
+      .art--azul {
+        background: #e3edf4;
+      }
+
+      /* Time: as três fotos empilhadas. */
+      .faces {
+        display: flex;
+        width: 380px;
+        flex-shrink: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        background: #e3edf4;
+      }
+      .faces img {
+        width: 172px;
+        height: 172px;
+        border: 6px solid #e3edf4;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .faces img + img {
+        margin-top: -34px;
+      }
+      .faces img:nth-child(2) {
+        margin-left: 120px;
+      }
+      .faces img:nth-child(1),
+      .faces img:nth-child(3) {
+        margin-right: 120px;
+      }
+
+      /* Cuidaty + MIDAS: o caminho do paciente, metade de cada cor. */
+      .card--duo {
+        flex-direction: column;
+        gap: 0;
+      }
+      .card--duo h1 {
+        margin-top: 44px;
+        font-size: 72px;
+      }
+      .midas {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .midas svg.mark {
+        height: 60px;
+      }
+      .midas .word {
+        display: inline-flex;
+        align-items: baseline;
+        font-family: 'Bricolage', sans-serif;
+        font-size: 38px;
+        font-weight: 800;
+        line-height: 1;
+        color: #17344d;
+      }
+      .midas .word .as {
+        display: inline-flex;
+        align-items: baseline;
+        color: #2d6389;
+      }
+      .midas .word svg {
+        width: 0.7em;
+        height: 0.66em;
+        margin: 0 0.02em 0 0.01em;
+      }
+      .path {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: grid;
+        height: 176px;
+        grid-template-columns: 1fr 1fr;
+      }
+      .half {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        justify-items: center;
+      }
+      .half--midas {
+        --line: #e9a93a;
+        --node: #fbf0d2;
+        --ink: #8f5d0d;
+        background: #fdf3da;
+      }
+      .half--cuidaty {
+        --line: #356588;
+        --node: #cfe0ec;
+        --ink: #2d6389;
+        background: #e3edf4;
+      }
+      .half::before {
+        content: '';
+        position: absolute;
+        top: calc(50% - 16px - 2px);
+        height: 4px;
+        background: var(--line);
+      }
+      .half--midas::before {
+        left: calc(100% / 6);
+        right: 0;
+      }
+      .half--cuidaty::before {
+        left: 0;
+        right: calc(100% / 6);
+      }
+      .stop {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .stop i {
+        display: block;
+        width: 36px;
+        height: 36px;
+        border: 4px solid var(--line);
+        border-radius: 50%;
+        background: var(--node);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <template id="midas-logo">
+      <span class="midas">
+        <svg class="mark" viewBox="0 -12 100 132" aria-hidden="true">
+          <defs>
+            <clipPath id="arch"><path d="M8 118 V52 A42 42 0 0 1 92 52 V118 Z" /></clipPath>
+          </defs>
+          <path d="M8 118 V52 A42 42 0 0 1 92 52 V118 Z" fill="#2D6389" />
+          <g clip-path="url(#arch)">
+            <path
+              d="M-40 100 C-24 88 -12 88 0 98 S24 108 38 96 S62 84 76 96 S100 108 114 96 S134 86 146 96 V130 H-40Z"
+              fill="#E9A93A"
+            />
+            <path
+              d="M-40 112 C-26 104 -10 104 4 111 S30 118 44 110 S66 102 82 110 S106 118 120 110 S138 104 146 110 V130 H-40Z"
+              fill="#F6D98A"
+            />
+          </g>
+          <path
+            d="M40 98 C34 80 62 74 54 54 C50 43 56 32 66 24"
+            fill="none"
+            stroke="#F7F3EA"
+            stroke-width="6.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M0 0 C6 -9 19 -10 27 -3 C19 7 7 8 0 0Z"
+            transform="translate(46.5 79) rotate(200) scale(1.15)"
+            fill="#5EC4AE"
+          />
+          <path
+            d="M0 0 C6 -9 19 -10 27 -3 C19 7 7 8 0 0Z"
+            transform="translate(55 62) rotate(-20) scale(1.25)"
+            fill="#A7E9A5"
+          />
+          <path
+            d="M0 0 C6 -9 19 -10 27 -3 C19 7 7 8 0 0Z"
+            transform="translate(65 25) rotate(-58) scale(1.45)"
+            fill="#E9A93A"
+          />
+          <path
+            d="M26 38 l2.4 5.6 5.6 2.4 -5.6 2.4 -2.4 5.6 -2.4 -5.6 -5.6 -2.4 5.6 -2.4z"
+            fill="#F6D98A"
+          />
+        </svg>
+        <span class="word"
+          >MID<span class="as"
+            ><svg viewBox="0 0 100 100">
+              <path d="M0 100 36 0H64L100 100H69L50 40 31 100Z" fill="currentColor" /></svg
+            >S</span
+          ></span
+        >
+      </span>
+    </template>
+
+    <script>
+      const LOGO = '/src/assets/logo-written.webp';
+      const MARK = '/public/logo-mark.png';
+
+      // title aceita HTML: <span class="ink"> destaca a segunda parte.
+      // size (px) diminui o título quando ele é longo; o padrão é 68.
+      const CARDS = {
+        default: {
+          title: 'Menos burocracia. <span class="ink">Mais escuta.</span>',
+          sub: 'Sistema de gestão para psicólogos, consultórios e clínicas.',
+          url: 'cuidaty.com',
+          art: 'teal',
+        },
+        blog: {
+          title: 'Blog da <span class="ink">Cuidaty</span>',
+          sub: 'Psicologia, gestão de consultório e saúde mental, para quem atende.',
+          url: 'cuidaty.com/blog',
+          art: 'areia',
+        },
+        clinicas: {
+          title: 'Clínicas que usam <span class="ink">a Cuidaty</span>',
+          sub: 'Encontre o site da clínica na sua cidade e agende online.',
+          url: 'cuidaty.com/clinicas',
+          art: 'azul',
+        },
+        time: {
+          title: 'Nosso <span class="ink">time</span>',
+          sub: 'As pessoas que constroem a Cuidaty.',
+          url: 'cuidaty.com/time',
+          faces: ['/public/team/pedro.jpeg', '/public/team/breno.png', '/public/team/ianca.png'],
+        },
+      };
+
+      const name = new URLSearchParams(location.search).get('card') || 'default';
+      const root = document.getElementById('root');
+
+      if (name === 'cuidaty-e-midas') {
+        const stop = (label) => `<span class="stop"><i></i>${label}</span>`;
+        root.innerHTML = `
+          <div class="card card--duo">
+            <div class="brand">
+              <img src="${LOGO}" alt="" />
+              <span class="rule"></span>
+              ${document.getElementById('midas-logo').innerHTML}
+            </div>
+            <h1>Cuidaty organiza a clínica.<br /><span class="gold">MIDAS cuida das vendas.</span></h1>
+            <div class="path">
+              <div class="half half--midas">
+                ${['Anúncio', 'Primeiro contato', 'Orçamento'].map(stop).join('')}
+              </div>
+              <div class="half half--cuidaty">
+                ${['Agendamento', 'Consulta', 'Financeiro'].map(stop).join('')}
+              </div>
+            </div>
+          </div>`;
+      } else {
+        const card = CARDS[name] || CARDS.default;
+        const art = card.faces
+          ? `<div class="faces">${card.faces.map((src) => `<img src="${src}" alt="" />`).join('')}</div>`
+          : `<div class="art art--${card.art}"><img class="mark" src="${MARK}" alt="" /></div>`;
+        root.innerHTML = `
+          <div class="card">
+            <div class="text">
+              <div class="brand"><img src="${LOGO}" alt="" /></div>
+              <h1 style="font-size:${card.size || 68}px">${card.title}</h1>
+              <p class="sub">${card.sub}</p>
+              <p class="url">${card.url}</p>
+            </div>
+            ${art}
+          </div>`;
+      }
+    </script>
+  </body>
+</html>

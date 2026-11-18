@@ -97,6 +97,6 @@ export const plans: Plan[] = [
       'Limites de usuários e módulos customizáveis',
     ],
     featuresNote: 'Tudo da Cuidaty, sem limites',
-    cta: { label: 'Falar com a gente', href: PROPOSAL_URL, event: 'contact_click' },
+    cta: { label: 'Agendar uma conversa', href: PROPOSAL_URL, event: 'contact_click' },
   },
 ];
