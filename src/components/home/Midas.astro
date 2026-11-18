@@ -1,7 +1,8 @@
 ---
-// MIDAS: o outro produto da casa (gestão comercial para clínicas), com site próprio.
-// Espelha a seção "Cuidaty" de midas.cuidaty.com: lá o fundo é o azul que as marcas
-// dividem, aqui é o ouro do MIDAS.
+// Cuidaty + MIDAS: os dois produtos do time, lado a lado no caminho do paciente.
+// O MIDAS (gestão comercial, site próprio) vai do anúncio ao orçamento fechado;
+// a Cuidaty assume do agendamento em diante. Ouro é MIDAS, azul é Cuidaty.
+import logoWritten from '../../assets/logo-written.webp';
 import MidasLogo from '../MidasLogo.astro';
 import { MIDAS_URL, whatsappUrl } from '../../lib/contact';
 
@@ -9,71 +10,194 @@ const WA_URL = whatsappUrl(
   'Olá! Quero entender como o MIDAS pode aumentar o faturamento da minha clínica.'
 );
 
-const fronts = [
-  'Roteiros de WhatsApp e telefone para a recepção',
-  'Orçamentos em aberto com responsável e prazo',
-  'Anúncios no Meta e no Google medidos pela venda',
-  'MIDAS Vision: CRM e funil da clínica',
+const halves = [
+  {
+    product: 'MIDAS',
+    caption: 'Até o paciente fechar',
+    tone: 'midas',
+    stops: [
+      { stage: 'Anúncio', text: 'Campanhas no Meta e no Google, medidas pela venda.' },
+      { stage: 'Primeiro contato', text: 'Roteiro de WhatsApp e telefone para a recepção.' },
+      { stage: 'Orçamento', text: 'Cada orçamento em aberto com responsável e prazo.' },
+    ],
+  },
+  {
+    product: 'Cuidaty',
+    caption: 'Do agendamento em diante',
+    tone: 'cuidaty',
+    stops: [
+      { stage: 'Agendamento', text: 'Agenda online, com confirmação e lembrete no WhatsApp.' },
+      { stage: 'Consulta', text: 'Prontuário eletrônico e transcrição com IA.' },
+      { stage: 'Financeiro', text: 'Faturas, caixa e guias de convênio.' },
+    ],
+  },
+] as const;
+
+const together = [
+  {
+    title: 'A venda não se perde depois do sim',
+    text: 'O paciente que o MIDAS ajudou a fechar ganha horário na agenda da Cuidaty, com confirmação e lembrete no WhatsApp. Menos falta na primeira consulta.',
+  },
+  {
+    title: 'A agenda organizada aguenta mais paciente',
+    text: 'Vender mais só ajuda se a clínica consegue atender. Com agenda, prontuário e financeiro em ordem, o movimento novo vira consulta feita e receita recebida.',
+  },
 ];
 ---
 
 <section id="midas" class="scroll-mt-24 bg-[#fdf8ec] py-20 md:py-28" aria-labelledby="midas-title">
   <div class="container mx-auto px-5 md:px-8">
-    <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:gap-24">
-      <header>
-        <MidasLogo size={52} />
-        <p class="mt-8 text-[0.95rem] font-semibold text-[#8f5d0d]">Do mesmo time da Cuidaty</p>
+    <div class="mx-auto max-w-7xl">
+      <header class="max-w-3xl">
+        <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+          <img
+            src={logoWritten.src}
+            alt="Cuidaty"
+            width="314"
+            height="82"
+            class="h-10 w-auto"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="h-8 w-px bg-cuidaty-dark/20" aria-hidden="true"></span>
+          <MidasLogo size={44} id="midas-home" />
+        </div>
+        <p class="mt-8 text-[0.95rem] font-semibold text-[#8f5d0d]">Dois produtos do mesmo time</p>
         <h2
           id="midas-title"
           class="mt-3 text-balance text-4xl leading-[1.05] text-cuidaty-dark md:text-5xl"
         >
-          Quer vender mais na clínica?
+          O MIDAS traz o paciente.
+          <span class="block text-primary-ink">A Cuidaty cuida do atendimento.</span>
         </h2>
+        <p class="mt-6 text-lg leading-relaxed text-cuidaty-dark/70">
+          A Cuidaty é o sistema do dia a dia: agenda, prontuário, WhatsApp e financeiro. O MIDAS é
+          um time nosso que trabalha dentro da clínica para ela vender mais, do anúncio ao orçamento
+          fechado. Cada um funciona sozinho. Juntos, cobrem o caminho inteiro do paciente.
+        </p>
       </header>
 
-      <div>
-        <p class="text-lg leading-relaxed text-cuidaty-dark/70">
-          A Cuidaty cuida do atendimento, do prontuário ao financeiro. Para as vendas existe o
-          MIDAS: um time nosso que trabalha dentro da clínica, do primeiro contato no WhatsApp ao
-          orçamento fechado.
-        </p>
-        <ul class="mb-8 mt-6 border-b border-cuidaty-dark/15">
-          {
-            fronts.map((f) => (
-              <li class="border-t border-cuidaty-dark/15 py-3.5 font-medium text-cuidaty-dark">
-                {f}
-              </li>
-            ))
-          }
-        </ul>
-        <div class="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <a
-            href={MIDAS_URL}
-            target="_blank"
-            rel="noopener"
-            class="btn-solid"
-            data-ga-event="midas_click"
-            data-ga-location="midas_site"
-            >Conhecer o MIDAS <span class="ml-2" aria-hidden="true">→</span></a
-          >
-          <a
-            href={WA_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="font-semibold text-primary-ink underline underline-offset-4"
-            data-ga-event="contact_click"
-            data-ga-location="midas_whatsapp">Pedir diagnóstico no WhatsApp</a
-          >
-        </div>
-        <p class="mt-5 text-sm text-cuidaty-dark/70">
-          Mensalidade e comissão sobre as vendas novas. Os valores saem depois do diagnóstico.
-          <a
-            href="/cuidaty-e-midas"
-            class="font-semibold text-primary-ink underline underline-offset-4"
-            >Compare os dois produtos</a
-          >.
-        </p>
+      <!-- Caminho do paciente: metade de cada produto -->
+      <div
+        class="mt-12 grid overflow-hidden rounded-2xl border border-cuidaty-dark/10 lg:grid-cols-2"
+        data-demo
+      >
+        {
+          halves.map((half, h) => (
+            <div
+              class:list={[
+                'duo-half px-6 py-8 md:px-9 md:py-10',
+                half.tone === 'midas' ? 'duo-half--midas' : 'duo-half--cuidaty',
+              ]}
+            >
+              <p class="a duo-ink text-sm font-semibold" style={`--d:${h * 0.45}s`}>
+                {half.product}
+                <span class="font-normal text-cuidaty-dark/70"> · {half.caption}</span>
+              </p>
+              <ol class="mt-7 grid sm:grid-cols-3">
+                {half.stops.map((s, i) => (
+                  <li
+                    class="a duo-stop relative pb-7 pl-7 last:pb-0 sm:pb-0 sm:pl-0 sm:pr-5 sm:pt-7"
+                    style={`--d:${(0.15 + (h * 3 + i) * 0.15).toFixed(2)}s`}
+                  >
+                    <span class="duo-dot" aria-hidden="true" />
+                    <h3 class="font-sans text-base font-semibold leading-snug text-cuidaty-dark">
+                      {s.stage}
+                    </h3>
+                    <p class="mt-1.5 text-sm leading-relaxed text-cuidaty-dark/70">{s.text}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
       </div>
+
+      <!-- Como um ajuda o outro -->
+      <div class="mt-12 grid gap-x-16 gap-y-8 md:grid-cols-2">
+        {
+          together.map((t) => (
+            <div class="border-t border-cuidaty-dark/15 pt-6">
+              <h3 class="text-2xl leading-tight text-cuidaty-dark">{t.title}</h3>
+              <p class="mt-3 leading-relaxed text-cuidaty-dark/70">{t.text}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4">
+        <a
+          href={MIDAS_URL}
+          target="_blank"
+          rel="noopener"
+          class="btn-solid"
+          data-ga-event="midas_click"
+          data-ga-location="midas_site"
+          >Conhecer o MIDAS <span class="ml-2" aria-hidden="true">→</span></a
+        >
+        <a
+          href="/cuidaty-e-midas"
+          class="btn-line"
+          data-ga-event="midas_click"
+          data-ga-location="midas_compare">Ver os dois lado a lado</a
+        >
+        <a
+          href={WA_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-semibold text-primary-ink underline underline-offset-4"
+          data-ga-event="contact_click"
+          data-ga-location="midas_whatsapp">Pedir diagnóstico no WhatsApp</a
+        >
+      </div>
+      <p class="mt-5 max-w-2xl text-sm text-cuidaty-dark/70">
+        Cada produto é contratado à parte. A Cuidaty tem plano gratuito e planos mensais. O MIDAS
+        cobra mensalidade e comissão sobre as vendas novas, com valores definidos depois do
+        diagnóstico.
+      </p>
     </div>
   </div>
 </section>
+
+<style>
+  .duo-half--midas {
+    --line: #e9a93a;
+    --node: #fbf0d2;
+    --ink: #8f5d0d;
+    background: #fdf3da;
+  }
+  .duo-half--cuidaty {
+    --line: #356588;
+    --node: #cfe0ec;
+    --ink: #2d6389;
+    background: #e3edf4;
+  }
+  .duo-ink {
+    color: var(--ink);
+  }
+
+  /* A linha é a borda de cada etapa: à esquerda no celular, em cima a partir de 640px. */
+  .duo-stop {
+    border-left: 3px solid var(--line);
+  }
+  .duo-dot {
+    position: absolute;
+    top: 0;
+    left: -10.5px;
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--line);
+    border-radius: 50%;
+    background: var(--node);
+  }
+  @media (min-width: 640px) {
+    .duo-stop {
+      border-top: 3px solid var(--line);
+      border-left: 0;
+    }
+    .duo-dot {
+      top: -10.5px;
+      left: 0;
+    }
+  }
+</style>

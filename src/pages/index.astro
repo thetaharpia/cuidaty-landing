@@ -21,11 +21,18 @@ import Closing from '../components/home/Closing.astro';
 import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
 ---
 
-<Layout title={homeTitle} description={homeDescription} keywords={homeKeywords}>
+<Layout
+  title={homeTitle}
+  description={homeDescription}
+  keywords={homeKeywords}
+  image="/og/cuidaty-e-midas.png"
+>
   <Header />
   <main>
-    <!-- 1. Oferta: o que é, para quem, um CTA, e a sessão virando prontuário -->
+    <!-- 1. Oferta: os dois produtos do time, um CTA para cada, e a demo da Cuidaty -->
     <Hero />
+    <!-- 1b. Cuidaty + MIDAS: os dois produtos no caminho do paciente -->
+    <Midas />
     <!-- 2. A dor, curta -->
     <Pain />
     <!-- 3. Funcionalidades em pilha: uma abre por vez -->
@@ -42,8 +49,6 @@ import { homeDescription, homeKeywords, homeTitle } from '../lib/seo';
     <Plans />
     <!-- 8. Para clínicas: recursos em carrossel e implantação acompanhada -->
     <Clinics />
-    <!-- 8b. MIDAS: produto à parte de gestão comercial, leva para midas.cuidaty.com -->
-    <Midas />
     <!-- 9. FAQ indexável e visível -->
     <Faq />
     <!-- 10. Conteúdo: últimos artigos do blog -->

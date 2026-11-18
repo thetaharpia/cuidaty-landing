@@ -1,7 +1,7 @@
 export const homeTitle = 'Software para Psicólogos e Clínicas com IA | Cuidaty';
 
 export const homeDescription =
-  'Grave a consulta e receba o prontuário pronto. Agenda online, prontuário eletrônico, WhatsApp e IA para psicólogos e clínicas. Plano gratuito.';
+  'Cuidaty: agenda online, prontuário eletrônico, WhatsApp e IA para psicólogos e clínicas, com plano gratuito. MIDAS: gestão comercial para a clínica vender mais.';
 
 export const homeKeywords = [
   'software para psicologos',
@@ -126,6 +126,16 @@ export const homeFaqs = [
     question: 'O que é a Cuidaty?',
     answer:
       'A Cuidaty é um sistema completo de gestão para clínicas, consultórios e profissionais de saúde. Em um só lugar você organiza a agenda, envia confirmações por WhatsApp e registra o prontuário, que pode sair pronto a partir da gravação da consulta. Clínicas ainda têm financeiro, convênios e gestão de equipe. A proposta é simples: menos tempo no operacional, mais tempo com o paciente.',
+  },
+  {
+    question: 'Qual é a diferença entre a Cuidaty e o MIDAS?',
+    answer:
+      'São dois produtos do mesmo time. A Cuidaty é o sistema de gestão: agenda, prontuário eletrônico, WhatsApp, transcrição de consultas com IA e financeiro. O MIDAS é um serviço de gestão comercial: um time que trabalha dentro da clínica cuidando dos anúncios, do atendimento comercial e dos orçamentos em aberto. O MIDAS vai do anúncio ao orçamento fechado, e a Cuidaty assume do agendamento em diante.',
+  },
+  {
+    question: 'Preciso contratar a Cuidaty e o MIDAS juntos?',
+    answer:
+      'Não. Cada um é contratado à parte e funciona sozinho. Quem quer organizar o atendimento começa pela Cuidaty, que tem plano gratuito. Quem quer aumentar as vendas da clínica pede um diagnóstico do MIDAS. Clínicas que usam os dois cobrem o caminho inteiro do paciente, da primeira mensagem ao financeiro.',
   },
   {
     question: 'Quais profissionais podem usar a Cuidaty?',

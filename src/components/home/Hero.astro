@@ -8,26 +8,32 @@ import { REGISTER_URL } from '../../lib/plans';
   <div class="container mx-auto px-5 md:px-8">
     <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
       <div>
-        <p class="kicker">Software para psicólogos e clínicas</p>
+        <p class="kicker">Para psicólogos, consultórios e clínicas</p>
         <h1
-          class="mt-6 text-balance text-[2.5rem] leading-[1.05] text-cuidaty-dark sm:text-5xl lg:text-[3.4rem]"
+          class="mt-6 text-balance text-[2.5rem] leading-[1.05] text-cuidaty-dark sm:text-5xl lg:text-[3.1rem]"
         >
-          Suas consultas viram
-          <span class="mt-1 block text-primary-ink">registros clínicos organizados.</span>
+          Cuidaty organiza a clínica.
+          <span class="mt-1 block text-[#8f5d0d]">MIDAS cuida das vendas.</span>
         </h1>
         <p class="mt-6 max-w-[34rem] text-lg leading-relaxed text-cuidaty-dark/70 md:text-xl">
-          Grave a consulta e a IA transcreve e organiza o registro. Você revisa e aprova antes de
-          salvar. Com agenda, prontuário e WhatsApp no mesmo lugar.
+          Dois produtos do mesmo time. A Cuidaty é o sistema com agenda, prontuário, WhatsApp e
+          transcrição de consultas com IA. O MIDAS é o time que trabalha dentro da clínica para ela
+          vender mais.
         </p>
-        <div class="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+        <div class="mt-8 flex flex-wrap items-center gap-3">
           <a
             href={REGISTER_URL}
             class="btn-solid"
             data-ga-event="generate_lead"
-            data-ga-location="hero">Começar grátis</a
+            data-ga-location="hero">Começar grátis na Cuidaty</a
           >
-          <span class="text-sm text-cuidaty-dark/70">Plano gratuito até 10 pacientes</span>
+          <a href="#midas" class="btn-line" data-ga-event="midas_click" data-ga-location="hero"
+            >Conhecer o MIDAS</a
+          >
         </div>
+        <p class="mt-4 text-sm text-cuidaty-dark/70">
+          A Cuidaty tem plano gratuito até 10 pacientes. O MIDAS começa por um diagnóstico.
+        </p>
         <p class="mt-4 flex items-center gap-2 text-sm text-cuidaty-dark/70">
           <svg class="size-4 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
             <path
