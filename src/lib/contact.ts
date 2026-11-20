@@ -15,6 +15,6 @@ export function whatsappUrl(message: string = DEFAULT_MESSAGE): string {
 /** MIDAS: gestão comercial para clínicas, produto à parte com site próprio. */
 export const MIDAS_URL = 'https://midas.cuidaty.com/';
 
-/** Pessoa jurídica responsável pela Cuidaty e pelo MIDAS, conforme o cartão CNPJ. */
-export const COMPANY_LEGAL_NAME = 'Midas Consultoria em TI Ltda';
+/** Nome fantasia da pessoa jurídica responsável pela Cuidaty e pelo MIDAS, conforme o cartão CNPJ. */
+export const COMPANY_LEGAL_NAME = 'Midas Cuidaty Tecnologia e Publicidade';
 export const COMPANY_CNPJ = '70.173.181/0001-33';
